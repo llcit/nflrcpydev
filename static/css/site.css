@@ -1,0 +1,107 @@
+body { 
+    padding: 0 15px;
+}
+
+#logo {
+    height: 30px;
+}
+
+.jumbocaption {
+    background-color: black;
+    opacity: 0.7;
+    color: #fff;
+    width: 80%;
+    height: 100px;
+    margin-left: -230px;
+    margin-bottom: -50px;
+    text-align: left;
+}
+
+/* SOCIAL ICONS */
+
+ul#socialnav { 
+    /*width: 50px;*/
+    /*margin-left: 25px;*/
+    /*height: 222px; */
+    /*margin:0; */
+    /*padding: 0; */
+    /*position:relative; */
+    /*top: 50px; */
+    /*left: 10px; */
+    /*border:1px solid green; */
+    /*list-style:none;*/
+    /*background-image:url(http://clt.manoa.hawaii.edu/static/nflrc/img/logos/NFLRClogo-100.jpg) repeat:no-repeat top;*/
+} 
+
+ul#socialnav li { 
+    /*width: 100px; */
+    float:left; 
+} 
+
+ul#socialnav a { 
+    display: block; 
+    background: transparent url(http://clt.manoa.hawaii.edu/static/nflrc/img/logos/social-icons.png) 0 0 no-repeat;
+    width: 25px;
+    margin-left: 25px;
+}
+
+ul#socialnav #facebook a {background-position: 0px 0px; height: 30px;} 
+ul#socialnav #twitter a {background-position: -25px 0px; height: 30px;} 
+ul#socialnav #linkedin a {background-position: -50px 0px; height: 30px;} 
+ul#socialnav #youtube a {background-position: -75px 0px; height: 30px;} 
+
+
+.shadowboxed{
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #CCC;
+    font: 12px Arial;
+
+    box-shadow: 0 15px 20px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 15px 20px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 15px 20px rgba(0,0,0,0.3);
+
+    transition: transform 0.25s ease;
+    -moz-transition: -moz-transform 0.25s ease;
+    -webkit-transition: -webkit-transform 0.25s ease;
+    -o-transition: -o-transform 0.25s ease;
+    -ms-transition: -ms-transform 0.25s ease;
+
+    perspective: 1000;
+    -moz-perspective: 1000;
+    -webkit-perspective: 1000;
+
+    backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.listing {
+    width: 230px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid gray;
+    background: white;
+}
+
+.listing img {
+    width: 100%;
+}
+
+.listing object {
+    display: none;
+}
+
+.category {
+    /*position: relative;*/
+    height:50px;
+    /*overflow: hidden !important;*/
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+
+	
+@media screen and (max-width: 568px) {
+    /*.ezreader, h3 { font-size: 60px; }*/
+}

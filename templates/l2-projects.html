@@ -1,0 +1,25 @@
+{% extends "wrap-content.html" %}
+
+{% block jumbotron %}
+	{% if featured %}
+		<h1>{{featured.0.title}}</h1>
+		{% if featured.0.image %}<p><img src="{{STATIC_URL}}img/{{featured.0.classname}}/{{featured.0.image}}"></p>{% endif %}
+	{% endif %}
+{% endblock jumbotron %}
+
+{% block subheadlines %}
+	<div class="row">
+		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">A sub menu item here (points to LEVEL 3 page mostly)</div></a>
+	</div>
+{% endblock subheadlines %}
+
+{% block stories %}
+	{% for p in items %}
+		<a href="/{{p.classname}}/view/{{p.project_number}}">
+			<div class="listing shadowboxed">
+			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<p>{{ p.title|safe }}</p>
+			</div>
+		</a>	
+	{% endfor %}	
+{% endblock stories %}

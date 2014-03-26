@@ -1,0 +1,13 @@
+{% extends "wrap-content.html" %}
+
+{% block stories %}
+
+	{% for p in items %}
+		<div class="listing">
+			{% if p.image %} <img src="{{STATIC_URL}}img/{{item_type}}/{{p.image}}"> {% endif %}
+			<a href="/{{item_type}}/{{p.item_number}}{{p.institute_id}}{{p.project_number}}{{p.resource_number}}">{{p.title|safe}}</a>	
+		</div>
+	{% endfor %}
+
+{% endblock %}
+

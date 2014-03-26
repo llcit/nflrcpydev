@@ -1,0 +1,89 @@
+{% extends "wrap-content.html" %}
+
+{% block jumbotron %}<h1 id="top">Jumbotron content here.</h1>{% endblock jumbotron %}
+
+{% block subheadlines %}
+	<div class="row">
+		<a href="chinese"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Chinese</div></a>
+		<a href="japanese"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Japanese</div></a>
+		<a href="korean"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Korean</div></a>
+		<a href="khmer"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Khmer</div></a>
+		<a href="filipino"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Filipino</div></a>	
+		<a href="samoan"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Samoan</div></a>
+	</div>
+
+{% endblock subheadlines %}
+
+
+
+{% block stories %}
+{% if publications or prodevs or projects %}
+	<div class="row">
+		<div class="col-md-12">
+			<h2>{{ language_name|capfirst}} Language Resources </h2>
+			<span class="badge">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
+			<span> | </span>
+			<span class="badge">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
+			<span> | </span>
+			<span class="badge">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
+		</div>
+	</div>
+	
+
+	<p><h3 id="publications">{{ publications|length }} Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for p in publications %}	
+			<a href="/{{p.classname}}/view/{{p.item_number}}">
+				<div class="listing shadowboxed">
+					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p>{{p.title|safe}}</p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+
+	<p><h3 id="projects">{{ projects|length }} Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for p in projects %}	
+			<a href="/{{p.classname}}/view/{{p.item_number}}">
+				<div class="listing shadowboxed">
+					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p>{{p.title|safe}}</p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+
+	<p><h3 id="prodev">{{ prodevs|length }} Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for p in prodevs %}	
+			<a href="/{{p.classname}}/view/{{p.item_number}}">
+				<div class="listing shadowboxed">
+					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p>{{p.title|safe}}</p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+{% else %}
+<div class="row"><div class="col-md-12"><h2>Please select a language to filter by.</h2></div></div>
+{% endif %}
+{% endblock stories %}

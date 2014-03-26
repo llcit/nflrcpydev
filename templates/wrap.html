@@ -1,0 +1,83 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Title</title>
+    
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css' %}" >
+    <!-- Auto generate toc's using tocify -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/jquery.tocify.css' %}" />
+    <!-- Local Customizations -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/site.css' %}" media="all">
+
+    {% block local_css %} {% endblock local_css %}
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img id="logo" src="{{STATIC_URL}}img/logos/NFLRClogo-nflrcSQ.png" alt="NFLRC"></a>
+      
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <ul  id="socialnav" class="nav navbar-nav navbar-right">
+        <li id="facebook"><a href="facebook"> </a></li> 
+        <li id="twitter"><a href="twitter"> </a></li> 
+        <li id="linkedin"><a href="linkedin"> </a></li> 
+        <li id="youtube"><a href="youtube"> </a></li> 
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container"> {% block jumbotron %}  {% endblock jumbotron %}  </div>
+</div>
+
+<div> 
+  <!-- Main content -->
+  {% block content %} {% endblock content%}
+</div>
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Bootstrap -->
+<script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<!-- Tocify -->
+<script src="{% static 'js/jquery.tocify.min.js' %}"></script>
+<!-- Masonry for dynamic grid layout -->
+<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+
+{% block local_js %} {% endblock local_js %}
+
+<script type="text/javascript">
+  {% block customjavascript %}{% endblock customjavascript %}
+</script>
+
+</body>
+</html>
+

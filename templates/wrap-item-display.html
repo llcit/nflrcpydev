@@ -1,0 +1,13 @@
+{% extends "wrap.html" %}
+
+{% block content %}
+	<div class="row">
+		 <div id="sidebar-wrapper" class="col-md-2">
+		 	{% block item-menu %}{% endblock %}
+		 </div>
+
+		<div class="col-md-8">{% block item-content %}{% endblock %} </div>
+		
+		<div class="col-md-2">{% block item-meta %}{% endblock %} </div>
+	</div>
+{% endblock content %}

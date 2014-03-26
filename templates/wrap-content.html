@@ -1,0 +1,22 @@
+{% extends "wrap.html" %}
+
+{% block content %}
+	<div class="container-fluid"> 
+		<div class="row">		
+			<div class="col-md-12 col-md-offset-1">
+				{% block subheadlines %} {% endblock subheadlines %}
+			</div>		
+		</div>
+	</div>
+	
+	<!-- Dynamic Grid Layout with Masonry -->
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% block stories %} {% endblock stories %}
+	</div>
+	
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "wrap-results.html" %}
+
+{% block stories %}
+
+	<div class="subsection">
+	<p>{{publications|length}} Publication{{ publications|length|pluralize }}</p>
+	{% for p in publications %}	
+		<div class="listing shadowboxed">
+			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<a href="/publications/view/{{p.item_number}}">{{p.title|safe}}</a>	
+		</div>
+	{% endfor %}
+	</div>
+	
+	<div class="subsection">
+	<p>{{projects|length}} Project{{ projects|length|pluralize }}</p>
+	{% for p in projects %}
+		<div class="listing shadowboxed">
+			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<a href="/projects/view/{{p.project_number}}">{{p.title|safe}}</a>	
+		</div>
+	{% endfor %}
+	</div>
+
+	<div class="subsection">
+	<p>{{prodevs|length}} Professional Development Project{{ prodevs|length|pluralize }}</p>
+	{% for p in prodevs %}
+		<div class="listing shadowboxed">
+			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<a href="/prodev/view/{{p.id}}">{{p.title|safe}}</a>	
+		</div>
+	{% endfor %}
+	</div>
+
+{% endblock %}

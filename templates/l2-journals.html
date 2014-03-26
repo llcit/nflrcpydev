@@ -1,0 +1,16 @@
+{% extends "wrap-content.html" %}
+
+{% block jumbotron %}<h1>Jumbotron content here?</h1>{% endblock jumbotron %}
+
+{% block subheadlines %}{% endblock %}
+
+{% block stories %}
+	{% for p in journals %}
+		<a href="{{ p.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+				<p> {{ p.description | safe | truncatewords_html:20 }} </p>
+			</div>
+		</a>
+	{% endfor %}
+{% endblock %}

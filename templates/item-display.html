@@ -1,0 +1,40 @@
+{% extends "wrap-item-display.html" %}
+
+{% block jumbotron %}
+	<p>
+		<h1> {{ item.title }} </h1>
+		<img src="{{STATIC_URL}}img/{{item.classname}}/{{item.image}}">
+	</p>
+{% endblock jumbotron %}
+
+{% block item-menu %}
+ 	<div>
+        <ul id="sidebar" class="nav nav-stacked">
+        	<div id="toc"></div>
+        </ul>
+    </div>
+
+	
+{% endblock item-menu%}
+
+{% block item-content %}
+	<h1>{{ item.title | safe }}</h1>
+	<div id="item-content" class="ezreader">{{ item.description | safe }}</div>
+{% endblock item-content %}
+
+{% block item-meta %}
+	<p></p>
+	{% for name, value in item.customproperties %}
+		<p><i>{{ name }}</i></p>
+	  	<p>{{ value|safe }}</p>
+	  	<hr>
+	{% endfor %}		
+{% endblock item-meta %}
+
+{% block customjavascript %}	
+	
+	$(function() {
+		//Calls the tocify method on your HTML div.
+		$("#toc").tocify({ context: "#item-content", selectors: "h2", showEffect: "fadeIn", scrollTo: 40 });
+	});
+{% endblock customjavascript %}

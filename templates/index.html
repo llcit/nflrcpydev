@@ -1,0 +1,68 @@
+{% extends "wrap-content.html" %}
+{% load staticfiles %}
+
+{% block local_css %}
+	<!-- Start WOWSlider.com HEAD section -->
+	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
+	<!-- End WOWSlider.com HEAD section -->
+{% endblock local_css %}
+
+{% block jumbotron %}
+	<!-- Start WOWSlider.com -->
+	<div id="wowslider-container1">
+		<div class="ws_images">
+			<ul>
+				{% for headliner in headliners %} 
+					<li><a href="{{ headliner.get_absolute_url }}">
+						<img src="{% static 'img/jambotron/' %}{{ headliner.id }}.jpg" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
+					</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="ws_bullets">
+			<div>
+				{% for headliner in headliners %}
+					<a href="{{ headliner.get_absolute_url }}" title="{{ headliner.title }}">
+						<img src="{% static 'img/jambotron/' %}{{ headliner.id }}-sm.jpg" alt="{{ headliner.title }}"/>{{ forloop.counter }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- End WOWSlider.com -->
+{% endblock jumbotron %}
+
+
+{% block subheadlines %}
+
+	<div class="row">
+		<a href="/prodev"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">professional development</div></a> 
+		<a href="/publications"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">publications</div> </a> 
+		<a href="/projects"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">projects</div> </a> 
+		<a href="/journals"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">journals</div> </a> 
+		<a href="/workshops-conferences"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">workshops & conferences</div></a>
+		<a href="/languages"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">languages</div></a>
+		<a href="/publications/monographs"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">monographs</div></a>
+		<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">teaching materials</div></a>
+		<a href="#"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">collaborations</div></a>
+	</div>
+
+{% endblock subheadlines %}
+
+{% block stories %}
+	{% for feature in featured %}
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="listing shadowboxed">
+			{% if feature.image %}<p> <img src="{{STATIC_URL}}img/{{feature.classname}}/{{feature.image}}"> </p>{% endif %}
+			<p> {{ feature.title | safe }}</p>	
+			<p> {{ feature.description | safe | truncatewords_html:4 }} </p>
+			</div>
+		</a>
+	{% endfor %}
+{% endblock stories%}
+
+{% block local_js %}
+	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
+{% endblock local_js %}
+
+
