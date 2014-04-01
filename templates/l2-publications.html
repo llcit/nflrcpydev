@@ -30,7 +30,7 @@
 	{% for p in items %}
 		<a href="/{{p.classname}}/view/{{p.item_number}}">
 		<div class="listing shadowboxed">
-			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<p> <img src="{{STATIC_URL}}img/{{p.item_number}}sm.png"> </p>
 			<p> {{ p.title | safe }}</p>	
 			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
 		</div>

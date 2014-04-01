@@ -3,7 +3,7 @@
 {% block jumbotron %}
 	<p>
 		<h1> {{ item.title }} </h1>
-		<img src="{{STATIC_URL}}img/{{item.classname}}/{{item.image}}">
+		<img src="{{STATIC_URL}}img/{{ item.getuid }}sm.png">
 	</p>
 {% endblock jumbotron %}
 

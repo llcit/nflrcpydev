@@ -188,13 +188,13 @@
 	font-size: 3.2em;
 	line-height: 1.1em;
 }#wowslider-container1 .ws_images ul{
-	animation: wsBasic 13.1s infinite;
-	-moz-animation: wsBasic 13.1s infinite;
-	-webkit-animation: wsBasic 13.1s infinite;
+	animation: wsBasic 11.5s infinite;
+	-moz-animation: wsBasic 11.5s infinite;
+	-webkit-animation: wsBasic 11.5s infinite;
 }
-@keyframes wsBasic{0%{left:-0%} 69.47%{left:-0%} }
-@-moz-keyframes wsBasic{0%{left:-0%} 69.47%{left:-0%} }
-@-webkit-keyframes wsBasic{0%{left:-0%} 69.47%{left:-0%} }
+@keyframes wsBasic{0%{left:-0%} 53.04%{left:-0%} }
+@-moz-keyframes wsBasic{0%{left:-0%} 53.04%{left:-0%} }
+@-webkit-keyframes wsBasic{0%{left:-0%} 53.04%{left:-0%} }
 
 #wowslider-container1 .ws_bullets  a img{
 	text-indent:0;

@@ -14,18 +14,10 @@
 			<ul>
 				{% for headliner in headliners %} 
 					<li><a href="{{ headliner.get_absolute_url }}">
-						<img src="{% static 'img/jambotron/' %}{{ headliner.id }}.jpg" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
+						<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
 					</a></li>
 				{% endfor %}
 			</ul>
-		</div>
-		<div class="ws_bullets">
-			<div>
-				{% for headliner in headliners %}
-					<a href="{{ headliner.get_absolute_url }}" title="{{ headliner.title }}">
-						<img src="{% static 'img/jambotron/' %}{{ headliner.id }}-sm.jpg" alt="{{ headliner.title }}"/>{{ forloop.counter }}</a>
-				{% endfor %}
-			</div>
 		</div>
 	</div>
 	<!-- End WOWSlider.com -->

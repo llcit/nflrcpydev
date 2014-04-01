@@ -38,7 +38,8 @@ class Contact(models.Model):
     phone = models.CharField(max_length=40L, blank=True) 
     fax = models.CharField(max_length=40L, blank=True) 
     email = models.EmailField(blank=True) 
-    url = models.URLField(blank=True) 
+    url = models.URLField(blank=True)
+    image = models.CharField(max_length=100L, blank=True)
     current_project = models.CharField(max_length=255L, null=True, blank=True) 
     nflrc_staff = models.BooleanField(blank=True) 
     listing_rank = models.IntegerField(null=True, blank=True)
@@ -54,6 +55,7 @@ class Prodev(models.Model):
     related_publication = models.TextField(blank=True) 
     url = models.URLField() 
     skeywords = models.TextField(blank=True)
+    image = models.CharField(max_length=100L, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
 
@@ -95,6 +97,7 @@ class Project(models.Model):
     director = models.TextField(blank=True) 
     description = models.TextField(blank=True) 
     skeywords = models.TextField(blank=True)
+    image = models.CharField(max_length=100L, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
 
