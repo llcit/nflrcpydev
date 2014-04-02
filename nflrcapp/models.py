@@ -44,6 +44,9 @@ class Contact(models.Model):
     nflrc_staff = models.BooleanField(blank=True) 
     listing_rank = models.IntegerField(null=True, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('contactview', args=[str(self.id)])
+
 class Prodev(models.Model):
     title = models.CharField(max_length=200L, blank=True) 
     language = models.CharField(max_length=100L, blank=True) 

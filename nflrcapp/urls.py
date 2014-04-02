@@ -15,6 +15,7 @@ urlpatterns += patterns('nflrcapp.views',
     # LEVEL 2 PAGES (/level-2-pages)
     url(r'^about/$', 'about', name='about'),
     url(r'^contact/$', 'contact', name='contact'),
+    url(r'^contact/view/(.*)$', 'contactview', name='contactview'),
     url(r'^journals/$', 'journals', name='journals'),
     url(r'^languages/(.*)$', 'languages', name='languages'),
     url(r'^outreach/$', 'home', name='home'),

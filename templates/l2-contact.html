@@ -1,6 +1,6 @@
 {% extends "wrap-content.html" %}
 
-{% block jumbotron %}{% endblock jumbotron %}
+{% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
 
 {% block subheadlines %}
 	<div class="row">
@@ -13,34 +13,12 @@
 {% endblock %}
 
 {% block stories %}
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Julio Rodriguez </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Jim Yoshioka </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Stephen Tschudi </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Deborah Masterson </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Richard Medina </p>
-		</div>
-	</a>
+	{% for contact in contacts %}
+		<a href="{{ contact.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				{% if contact.image %}<p> <img src="{{STATIC_URL}}img/{{contact.classname}}/{{contact.image}}"> </p>{% endif %}
+				<p> {{ contact.title }} {{ contact.first_name }} {{ contact.last_name }} </p>	
+			</div>
+		</a>
+	{% endfor %}
 {% endblock %}

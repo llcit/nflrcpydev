@@ -24,7 +24,16 @@ def about(request):
 	return render_to_response('l2-about.html', {}, context_instance=RequestContext(request))
 
 def contact(request):
-	return render_to_response('l2-contact.html', {}, context_instance=RequestContext(request))
+	contacts = Contact.objects.all()
+	return render_to_response('l2-contact.html', {
+		'contacts' : contacts
+		}, context_instance=RequestContext(request))
+
+def contactview(request, person):
+	person_obj = Contact.objects.get(pk=person)
+	return render_to_response('person-display.html', {
+		'person' : person_obj
+		}, context_instance=RequestContext(request))
 
 def journals(request):
 	journals = []

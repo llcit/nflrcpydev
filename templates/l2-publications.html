@@ -3,8 +3,10 @@
 {% block jumbotron %}
 
 	{% if featured %}
+	<div class="container-fluid jumbotron">
 		<h1>{{featured.0.title}}</h1>
 		<p><img src="{{STATIC_URL}}img/{{featured.0.classname}}/{{featured.0.image}}"></p>
+	</div>
 	{% endif %}	
 
 {% endblock jumbotron %}

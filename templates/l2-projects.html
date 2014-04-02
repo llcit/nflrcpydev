@@ -1,10 +1,12 @@
 {% extends "wrap-content.html" %}
 
 {% block jumbotron %}
+	<div class="container-fluid jumbotron">
 	{% if featured %}
 		<h1>{{featured.0.title}}</h1>
 		{% if featured.0.image %}<p><img src="{{STATIC_URL}}img/{{featured.0.classname}}/{{featured.0.image}}"></p>{% endif %}
 	{% endif %}
+	</div>
 {% endblock jumbotron %}
 
 {% block subheadlines %}

@@ -1,13 +1,12 @@
 {% extends "wrap.html" %}
 
 {% block content %}
+	<h1></h1>
 	<div class="row">
-		 <div id="sidebar-wrapper" class="col-md-2">
-		 	{% block item-menu %}{% endblock %}
-		 </div>
+		<div id="sidebar-wrapper" class="col-md-2"> {% block item-menu %}{% endblock %}	 </div>
 
-		<div class="col-md-8">{% block item-content %}{% endblock %} </div>
+		<div id="content-wrapper" class="col-md-8"> {% block item-content %}{% endblock %} </div>
 		
-		<div class="col-md-2">{% block item-meta %}{% endblock %} </div>
+		<div id="meta-wrapper" class="col-md-2"> {% block item-meta %}{% endblock %} </div>
 	</div>
 {% endblock content %}
