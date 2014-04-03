@@ -7,11 +7,15 @@ body {
 }
 
 .jumbotron {
-  background-color: white;
+    background-color: white;
 }
 
 .navbar {
     background-color: #fff;
+}
+
+.navbar-header {
+    /*height: 100px;*/
 }
 
 /* SOCIAL ICONS */
