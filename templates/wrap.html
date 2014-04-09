@@ -30,30 +30,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><img id="logo" src="{{STATIC_URL}}img/logos/NFLRC_name_UH_banner.png" alt="NFLRC"></a>
-      
+      <a href="/">
+      <div class="navbar-brand"></div>
+      </a> 
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/contact">Contact</a></li>
-      </ul>
+    
+    <div class="navbar-collapse collapse navpanel">
       <ul  id="socialnav" class="nav navbar-nav navbar-right">
-        <li id="facebook"><a href="facebook"> </a></li> 
-        <li id="twitter"><a href="twitter"> </a></li> 
-        <li id="linkedin"><a href="linkedin"> </a></li> 
-        <li id="youtube"><a href="youtube"> </a></li> 
+        <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
+        <li id="facebook"><a href="facebook"><img src="{% static 'img/logos/facebook_logo_blue.png' %}"> </a></li> 
+        <li id="twitter"><a href="twitter"><img src="{% static 'img/logos/twitter_logo_blue.png' %}"> </a></li> 
+        <li id="linkedin"><a href="linkedin"><img src="{% static 'img/logos/linkedin_logo.png' %}"> </a></li> 
+        <li id="youtube"><a href="youtube"><img src="{% static 'img/logos/youtube_logo_color.png' %}"> </a></li> 
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div>
 </div>
-<div class="container-fluid"><div class="row"><h1></h1><h1></h1></div></div>
+
+
+<!-- <div class="container-fluid" style="margin-top: 120px"><div class="row"><h1></h1><h1></h1></div></div> -->
 {% block jumbotron %}  {% endblock jumbotron %}  
+<!-- <div class="container-fluid" style="margin-top: 10px"><div class="row"><h1></h1><h1></h1></div></div> -->
 
 <div class="container-fluid"><!-- Main content -->{% block content %} {% endblock content%}</div>
-
-
-
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery.js"></script>

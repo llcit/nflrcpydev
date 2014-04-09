@@ -1,57 +1,34 @@
 body { 
-    padding: 0 15px;
-}
-
-#logo {
-    height: 30px;
-}
-
-.jumbotron {
-    background-color: white;
+    padding: 135px 15px;
+    min-height: 2000px;
+    /*padding-top: 135px;*/
 }
 
 .navbar {
+    height: 120px;
+    background: url(http://localhost:8000/static/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
+    background-size: contain; 
     background-color: #fff;
 }
 
-.navbar-header {
-    /*height: 100px;*/
+.navbar-brand {}
+
+.navbar-header {}
+
+.navpanel {
+    background: #fff;
+    float: right;
 }
 
-/* SOCIAL ICONS */
-ul#socialnav { 
-    /*width: 50px;*/
-    /*margin-left: 25px;*/
-    /*height: 222px; */
-    /*margin:0; */
-    /*padding: 0; */
-    /*position:relative; */
-    /*top: 50px; */
-    /*left: 10px; */
-    /*border:1px solid green; */
-    /*list-style:none;*/
-    /*background-image:url(http://clt.manoa.hawaii.edu/static/nflrc/img/logos/NFLRClogo-100.jpg) repeat:no-repeat top;*/
-} 
+ul#socialnav img { height: 30px }
 
-ul#socialnav li { 
-    /*width: 100px; */
-    float:left; 
-} 
+.jumbotron { background-color: #fff; }
 
-ul#socialnav a { 
-    display: block; 
-    background: transparent url(http://clt.manoa.hawaii.edu/static/nflrc/img/logos/social-icons.png) 0 0 no-repeat;
-    width: 25px;
-    margin-left: 25px;
+.submenu div {
+    font-size: 1.0em;
 }
 
-ul#socialnav #facebook a {background-position: 0px 0px; height: 30px;} 
-ul#socialnav #twitter a {background-position: -23px 0px; height: 30px;} 
-ul#socialnav #linkedin a {background-position: -48px 0px; height: 30px;} 
-ul#socialnav #youtube a {background-position: -74px 0px; height: 30px;} 
-
-
-.shadowboxed{
+.shadowboxed {
     border-radius: 5px;
     background-color: #fff;
     border: 1px solid #CCC;
@@ -105,6 +82,14 @@ ul#socialnav #youtube a {background-position: -74px 0px; height: 30px;}
 }
 
 	
-@media screen and (max-width: 568px) {
-    /*.ezreader, h3 { font-size: 60px; }*/
+/*@media screen and (max-width: 325px) {
+    .logo { height: 40px; }
 }
+
+@media (max-width: 1010px) {
+    .logo { height: 40px; }
+}
+
+@media (min-width: 1011px) {
+    .logo { height: 100px; }
+}*/

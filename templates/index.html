@@ -8,10 +8,9 @@
 {% endblock local_css %}
 
 {% block jumbotron %}
-<div class="container-fluid jumbotron">   
-
+<div class="jumbotron">	
 	<!-- Start WOWSlider.com -->
-	<div id="wowslider-container1">
+	<div id="wowslider-container1" class="container">
 		<div class="ws_images">
 			<ul>
 				{% for headliner in headliners %} 
@@ -23,13 +22,13 @@
 		</div>
 	</div>
 	<!-- End WOWSlider.com -->
-</div>
+</div>	
 {% endblock jumbotron %}
 
 
 {% block subheadlines %}
 
-	<div class="row">
+	<div class="row submenu">
 		<a href="/prodev"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">professional development</div></a> 
 		<a href="/publications"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">publications</div> </a> 
 		<a href="/projects"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">projects</div> </a> 
