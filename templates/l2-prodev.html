@@ -11,10 +11,10 @@
 {% endblock jumbotron %}
 
 {% block subheadlines %}
-
-	<div class="row">
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">A sub menu item here (points to LEVEL 3 page mostly)</div></a>
-	</div>{% endblock subheadlines %}
+<ul class="nav nav-pills nav-justified"> 
+	<a href="" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">sub menu item</li></div></a>
+</ul>
+{% endblock subheadlines %}
 
 {% block stories %}
 	{% for p in items %}

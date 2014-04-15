@@ -1,4 +1,5 @@
 {% extends "wrap-content.html" %}
+{% load staticfiles %}
 
 {% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
 
@@ -8,7 +9,7 @@
 	{% for p in journals %}
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
-				{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+				<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 				<p> {{ p.description | safe | truncatewords_html:20 }} </p>
 			</div>
 		</a>

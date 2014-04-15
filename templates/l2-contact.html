@@ -1,24 +1,42 @@
 {% extends "wrap-content.html" %}
+{% load staticfiles %}
 
-{% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
-
-{% block subheadlines %}
-	<div class="row">
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">people</div></a>
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">center staff</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">history</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">our kuleana</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">advisory board</div></a>  
-	</div>
-{% endblock %}
+{% block subheadlines %}{% endblock %}
 
 {% block stories %}
-	{% for contact in contacts %}
-		<a href="{{ contact.get_absolute_url }}">
-			<div class="listing shadowboxed">
-				{% if contact.image %}<p> <img src="{{STATIC_URL}}img/{{contact.classname}}/{{contact.image}}"> </p>{% endif %}
-				<p> {{ contact.title }} {{ contact.first_name }} {{ contact.last_name }} </p>	
-			</div>
-		</a>
-	{% endfor %}
+	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for i in staff %}	
+			<a href="{{ i.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+
+	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for i in collabs %}	
+			<a href="{{ i.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
 {% endblock %}

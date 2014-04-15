@@ -22,6 +22,7 @@
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,14 +31,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/">
-      <div class="navbar-brand"></div>
-      </a> 
+      <a href="/"><div class="navbar-brand">&nbsp;</div></a> 
     </div>
     
     <div class="navbar-collapse collapse navpanel">
       <ul  id="socialnav" class="nav navbar-nav navbar-right">
         <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
+        <li><a href="/about"><button type="button" class="btn btn-default">About</button></a></li>
         <li id="facebook"><a href="facebook"><img src="{% static 'img/logos/facebook_logo_blue.png' %}"> </a></li> 
         <li id="twitter"><a href="twitter"><img src="{% static 'img/logos/twitter_logo_blue.png' %}"> </a></li> 
         <li id="linkedin"><a href="linkedin"><img src="{% static 'img/logos/linkedin_logo.png' %}"> </a></li> 
@@ -47,7 +47,6 @@
     </div><!--/.nav-collapse -->
   </div>
 </div>
-
 
 <!-- <div class="container-fluid" style="margin-top: 120px"><div class="row"><h1></h1><h1></h1></div></div> -->
 {% block jumbotron %}  {% endblock jumbotron %}  

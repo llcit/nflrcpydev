@@ -10,13 +10,13 @@
 {% block jumbotron %}
 <div class="jumbotron">	
 	<!-- Start WOWSlider.com -->
-	<div id="wowslider-container1" class="container">
+	<div id="wowslider-container1">
 		<div class="ws_images">
 			<ul>
 				{% for headliner in headliners %} 
-					<li><a href="{{ headliner.get_absolute_url }}">
-						<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
-					</a></li>
+				<li><a href="{{ headliner.get_absolute_url }}">
+					<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
+				</a></li>
 				{% endfor %}
 			</ul>
 		</div>
@@ -27,19 +27,17 @@
 
 
 {% block subheadlines %}
-
-	<div class="row submenu">
-		<a href="/prodev"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">professional development</div></a> 
-		<a href="/publications"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">publications</div> </a> 
-		<a href="/projects"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">projects</div> </a> 
-		<a href="/journals"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">journals</div> </a> 
-		<a href="/workshops-conferences"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">workshops & conferences</div></a>
-		<a href="/languages"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">languages</div></a>
-		<a href="/publications/monographs"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">monographs</div></a>
-		<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">teaching materials</div></a>
-		<a href="#"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">collaborations</div></a>
-	</div>
-
+<ul class="nav nav-pills nav-justified"> 
+	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">publications</li></div></a>
+	<a href="/prodev"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">professional<br>development</li></div></a>
+	<a href="/projects"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">projects</li></div></a>
+	<a href="/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">journals</li></div></a>
+	<a href="/workshops-conferences"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">workshops /<br> conferences</li></div></a>
+	<a href="/languages"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">languages</li></div></a>
+	<a href="/publications/monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">monographs</li></div></a>
+	<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">teaching<br>materials</li></div></a>
+	<a href="#"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">collaborations</li></div></a>
+</ul>
 {% endblock subheadlines %}
 
 {% block stories %}
@@ -60,3 +58,12 @@
 {% endblock local_js %}
 
 
+<!-- 	<a href="/prodev"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">professional<br>development</div></a> 
+	<a href="/publications"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">publications</div> </a> 
+	<a href="/projects"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">projects</div> </a> 
+	<a href="/journals"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">journals</div> </a> 
+	<a href="/workshops-conferences"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">workshops /<br> conferences</div></a>
+	<a href="/languages"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">languages</div></a>
+	<a href="/publications/monographs"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">monographs</div></a>
+	<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">teaching<br>materials</div></a>
+	<a href="#"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">collaborations</div></a> -->

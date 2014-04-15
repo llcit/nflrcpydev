@@ -1,7 +1,7 @@
 body { 
-    padding: 135px 15px;
-    min-height: 2000px;
-    /*padding-top: 135px;*/
+    padding: 0 15px;
+    /*min-height: 2000px;*/
+    padding-top: 135px;
 }
 
 .navbar {
@@ -11,7 +11,15 @@ body {
     background-color: #fff;
 }
 
-.navbar-brand {}
+
+.navbar-brand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 100%;
+    z-index: -10
+}
 
 .navbar-header {}
 
@@ -24,15 +32,18 @@ ul#socialnav img { height: 30px }
 
 .jumbotron { background-color: #fff; }
 
+.submenu {
+    /*text-align: center;*/
+}
 .submenu div {
-    font-size: 1.0em;
+    font-size: 1.2em;
 }
 
 .shadowboxed {
-    border-radius: 5px;
+/*    border-radius: 5px;
     background-color: #fff;
     border: 1px solid #CCC;
-    font: 12px Arial;
+    font: 12px Arial;*/
 
     box-shadow: 0 15px 20px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 15px 20px rgba(0,0,0,0.3);
@@ -53,11 +64,28 @@ ul#socialnav img { height: 30px }
     -webkit-backface-visibility: hidden;
 }
 
+.category {
+    /*position: relative;*/
+    height: 80px;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: black;
+    /*border: 1px solid gray;*/
+    /*width: 160px;*/
+    /*overflow: hidden !important;*/
+    text-align: center;
+    margin-bottom: 15px;
+    /*margin-left: 5px;*/
+    /*padding-right: 5px;*/
+}
+
 .listing {
     width: 230px;
     margin-bottom: 4px;
     border-bottom: 1px solid gray;
     background: white;
+    text-decoration: none;
+    color: black;
 }
 
 .listing img {
@@ -68,17 +96,8 @@ ul#socialnav img { height: 30px }
     display: none;
 }
 
-.category {
-    /*position: relative;*/
-    height:50px;
-    /*overflow: hidden !important;*/
-    text-align: center;
-    margin-bottom: 10px;
-    margin-left: 5px;
-}
-
 .item-thumbnail {
-    width: 100px;
+    width: 180px;
 }
 
 	

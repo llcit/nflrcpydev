@@ -1,7 +1,8 @@
 {% extends "wrap-item-display.html" %}
+{% load staticfiles %}
 
 {% block item-menu %}
-	<h2><img class="item-thumbnail" src="{{STATIC_URL}}img/{{ item.getuid }}sm.png"></h2>
+	<h2><img class="item-thumbnail" src="{% static 'img/logos/default.png' %}"></h2>
     <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
 {% endblock item-menu%}
 
@@ -25,6 +26,6 @@
 {% block customjavascript %}
 	$(function() {
 		/* dynamically create side menu based on h2 elements in div#item-content */
-		$("#toc").tocify({ context: "#item-content", selectors: "h2", showEffect: "fadeIn", scrollTo: 40 });
+		$("#toc").tocify({ context: "#item-content", selectors: "h2", showEffect: "fadeIn", scrollTo: 120 });
 	});
 {% endblock customjavascript %}

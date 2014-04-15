@@ -1,23 +1,25 @@
 <!-- sample-page.html : use as template for LEVEL 2 PAGES -->
-
 {% extends "wrap-content.html" %}
+{% load staticfiles %}
 
 {% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
 
 {% block subheadlines %}
-
-	<div class="row">
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">BUTTON_TEXT</div></a>
-	</div>
-		
+	<ul class="nav nav-pills nav-justified"> 
+		<a href=""><div class="col-xs-12 col-md-3"><li class="shadowboxed category">submenu item</li></div></a>
+	</ul>
 {% endblock %}
 
 {% block stories %}
-	<a href="LINK_TO_THE_STORY">
-	<div class="listing shadowboxed">
-		{% if p.image %}<p> <img src="{{STATIC_URL}}img/STORY_IMG_HERE"> </p>{% endif %}
-		<p> {{ STORY_TITLE_HERE | safe }}</p>	
-		<p> {{ STORY_DESCRIPTION_HERE | safe | truncatewords_html:4 }} </p>
-	</div>
-	</a>	
-{% endblock %}
+
+	{% for p in items %}
+		<a href="/{{ p.classname }}/view/{{ p.getuid }}">
+		<div class="listing shadowboxed">
+			<p> <img src="{% static 'img/'|add:p.getuid|add:'sm.png' %}"> </p>
+			<p> {{ p.title | safe }}</p>	
+			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
+		</div>
+		</a>
+	{% endfor %}
+		
+{% endblock stories %}

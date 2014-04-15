@@ -1,19 +1,20 @@
 {% extends "wrap-item-display.html" %}
+{% load staticfiles %}
 
 {% block item-menu %}
-	<h2><img class="item-thumbnail" src="{{STATIC_URL}}img/{{ item.getuid }}sm.png"></h2>
+	<h2><img class="item-thumbnail" src="{% static 'img/logos/default.png' %}"></h2>
     <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
 {% endblock item-menu%}
 
 {% block item-content %}
-	<h2>{{ person.first_name | safe }}</h2>
-	<div id="item-content" >{{ person.title | safe }}</div>
+	<h2>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h2>
+	<div id="item-content" >{{ thehuman.description | safe }}</div>
 {% endblock item-content %}
 
 {% block item-meta %}
 	<h2></h2>
 	<ul id="right-sidebar" class="nav nav-stacked">
-	 	{% for name, value in item.customproperties %}
+	 	{% for name, value in thehuman.customproperties %}
 			<li>
 				<div><span class="label label-default">{{ name }}</span></div>
 		  		<div>{{ value|safe }}</div>
@@ -25,6 +26,6 @@
 {% block customjavascript %}
 	$(function() {
 		/* dynamically create side menu based on h2 elements in div#item-content */
-		$("#toc").tocify({ context: "#item-content", selectors: "h2", showEffect: "fadeIn", scrollTo: 40 });
+		$("#toc").tocify({ context: "#item-content", selectors: "h2", showEffect: "fadeIn", scrollTo: 120 });
 	});
 {% endblock customjavascript %}

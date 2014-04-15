@@ -1,22 +1,21 @@
 {% extends "wrap-content.html" %}
+{% load staticfiles %}
 
 {% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
 
 {% block subheadlines %}
-	<div class="row">
-		<a href="chinese"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Chinese</div></a>
-		<a href="japanese"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Japanese</div></a>
-		<a href="korean"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Korean</div></a>
-		<a href="khmer"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Khmer</div></a>
-		<a href="filipino"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Filipino</div></a>	
-		<a href="samoan"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">Samoan</div></a>
-	</div>
-
+<ul class="nav nav-pills nav-justified"> 
+	<a href="chinese#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Chinese</li></div></a>
+	<a href="japanese#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Japanese</li></div></a>
+	<a href="korean#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Korean</li></div></a>
+	<a href="khmer#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Khmer</li></div></a>
+	<a href="filipino#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Filipino</li></div></a>
+	<a href="samoan#results-section" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Samoan</li></div></a>
+</ul>
 {% endblock subheadlines %}
 
-
-
 {% block stories %}
+
 {% if publications or prodevs or projects %}
 	<div class="row">
 		<div class="col-md-12">
@@ -41,7 +40,7 @@
 		{% for p in publications %}	
 			<a href="/{{p.classname}}/view/{{p.item_number}}">
 				<div class="listing shadowboxed">
-					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 					<p>{{p.title|safe}}</p>	
 				</div>
 			</a>
@@ -59,7 +58,7 @@
 		{% for p in projects %}	
 			<a href="/{{p.classname}}/view/{{p.item_number}}">
 				<div class="listing shadowboxed">
-					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 					<p>{{p.title|safe}}</p>	
 				</div>
 			</a>
@@ -77,7 +76,7 @@
 		{% for p in prodevs %}	
 			<a href="/{{p.classname}}/view/{{p.item_number}}">
 				<div class="listing shadowboxed">
-					{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 					<p>{{p.title|safe}}</p>	
 				</div>
 			</a>

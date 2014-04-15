@@ -1,46 +1,78 @@
 {% extends "wrap-content.html" %}
-
-{% block jumbotron %}<div class="container-fluid jumbotron"></div>{% endblock jumbotron %}
+{% load staticfiles %}
 
 {% block subheadlines %}
-	<div class="row">
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">people</div></a>
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">center staff</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">history</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">our kuleana</div></a>  
-		<a href=""><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">advisory board</div></a>  
-	</div>
+<ul class="nav nav-pills nav-justified"> 
+	<!-- <a href="/story"><div class="col-xs-12 col-md-4"><li class="shadowboxed category">people</li></div></a> -->
+	<a href="/story/1"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">history</li></div></a>
+	<a href="/story/2"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">our kuleana</li></div></a>
+</ul>
 {% endblock %}
 
 {% block stories %}
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Julio Rodriguez </p>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2></h2>
+			<span class="badge">{{staff|length}}</span><span><a href="#staff"> Staff </a></span>
+			<span> | </span>
+			<span class="badge">{{collabs|length}}</span><span><a href="#collaborators"> Collaborator{{ collabs|length|pluralize }}</a></span>
+			<span> | </span>
+			<span class="badge">{{advboard|length}}</span><span><a href="#advboard"> Advisory Board</a></span>
 		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Jim Yoshioka </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Stephen Tschudi </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Deborah Masterson </p>
-		</div>
-	</a>
-	<a href="">
-		<div class="listing shadowboxed">
-			<!-- <p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p> -->
-			<p> Richard Medina </p>
-		</div>
-	</a>
+	</div>
+
+	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for i in staff %}	
+			<a href="{{ i.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+
+	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for i in collabs %}	
+			<a href="{{ i.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>
+
+	<p><h3 id="advboard">Advisory Board <small><a href="#top"> back to top</a></small></h3></p>
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for i in advboard %}	
+			<a href="{{ i.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				</div>
+			</a>
+		{% endfor %}			
+	</div>
 {% endblock %}
