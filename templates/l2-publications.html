@@ -5,7 +5,7 @@
 
 	{% if featured %}
 	<div class="jumbotron"><div class="container">
-		<p><img src="{{STATIC_URL}}img/{{featured.0.classname}}/{{featured.0.image}}"></p>
+		<p><img src="{% static 'img/' %}{{featured.0.getuid}}lg.png"></p>
 	</div></div>
 	{% endif %}	
 
@@ -31,7 +31,7 @@
 	{% for p in items %}
 		<a href="/{{ p.classname }}/view/{{ p.getuid }}">
 		<div class="listing shadowboxed thumbnail">
-			<p> <img data-src="holder.js/230x300"> </p>
+			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 			<p> {{ p.title | safe }}</p>	
 			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
 		</div>
@@ -39,5 +39,3 @@
 	{% endfor %}
 		
 {% endblock stories %}
-
-http://localhost:8000/static/img/publications/WEBLDC.gif

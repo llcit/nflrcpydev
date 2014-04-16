@@ -33,9 +33,9 @@ class ProdevAdmin(admin.ModelAdmin):
 	
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
-admin.site.register(PersonProject)
+# admin.site.register(PersonProject)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
-admin.site.register(PersonPublication)
+# admin.site.register(PersonPublication)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
 admin.site.register(Resource, Media = ExtraMedia)
 admin.site.register(Software, Media = ExtraMedia)

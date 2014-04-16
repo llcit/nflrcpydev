@@ -44,7 +44,7 @@
 	{% for feature in featured %}
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="listing shadowboxed">
-			{% if feature.image %}<p> <img src="{{STATIC_URL}}img/{{feature.classname}}/{{feature.image}}"> </p>{% endif %}
+			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 			<p> {{ feature.title | safe }}</p>	
 			<p> {{ feature.description | safe | truncatewords_html:4 }} </p>
 			</div>

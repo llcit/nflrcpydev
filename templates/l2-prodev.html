@@ -1,4 +1,5 @@
 {% extends "wrap-content.html" %}
+{% load staticfiles %}
 
 {% block jumbotron %}
 	{% if featured %}
@@ -20,7 +21,7 @@
 	{% for p in items %}
 		<a href="/{{p.classname}}/view/{{p.id}}">
 			<div class="listing shadowboxed">
-			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
+			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 			<p>{{ p.title|safe }}</p>
 			</div>
 		</a>	
