@@ -40,7 +40,7 @@ PUBLICATION_MEDIA_TYPES = (
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
-    title = models.CharField(max_length=50, choices=HUMAN_PREFIXES, default='', blank=True)
+    title = models.CharField(max_length=50, choices=HUMAN_PREFIXES, blank=True, null=True)
     last_name = models.CharField(max_length=20L, blank=True)
     department = models.CharField(max_length=256L, blank=True)
     university = models.CharField(max_length=60L, blank=True)
@@ -147,9 +147,9 @@ class Project(models.Model):
     director = models.TextField(blank=True)
     description = models.TextField(blank=True)
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True)
-    featured = models.BooleanField(default=False)
-    headline = models.BooleanField(default=False)
+    image = models.CharField(max_length=100L, null=True)
+    featured = models.NullBooleanField(default=False, null=True)
+    headline = models.NullBooleanField(default=False, null=True)
 
     def classname(self):
         name = self.__class__.__name__

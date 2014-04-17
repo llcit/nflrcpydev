@@ -8,16 +8,14 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Contact.role'
-        db.add_column(u'nflrcapp_contact', 'role',
-                      self.gf('django.db.models.fields.CharField')(max_length=30, null=True, blank=True),
-                      keep_default=False)
 
+        # Changing field 'Project.image'
+        db.alter_column(u'nflrcapp_project', 'image', self.gf('django.db.models.fields.CharField')(max_length=100L, null=True))
 
     def backwards(self, orm):
-        # Deleting field 'Contact.role'
-        db.delete_column(u'nflrcapp_contact', 'role')
 
+        # Changing field 'Project.image'
+        db.alter_column(u'nflrcapp_project', 'image', self.gf('django.db.models.fields.CharField')(default='', max_length=100L))
 
     models = {
         u'nflrcapp.contact': {
@@ -37,7 +35,7 @@ class Migration(SchemaMigration):
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
             'role': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'university': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'})
@@ -80,7 +78,7 @@ class Migration(SchemaMigration):
             'grant_cycle': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'null': 'True', 'blank': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '80L', 'blank': 'True'}),
             'project_number': ('django.db.models.fields.CharField', [], {'max_length': '10L'}),
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -147,6 +145,16 @@ class Migration(SchemaMigration):
             'telephone': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200L'}),
             'www': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
+        },
+        u'nflrcapp.storypage': {
+            'Meta': {'object_name': 'StoryPage'},
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
         }
     }
 

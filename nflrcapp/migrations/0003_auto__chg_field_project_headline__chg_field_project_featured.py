@@ -8,19 +8,20 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'StoryPage'
-        db.create_table(u'nflrcapp_storypage', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['StoryPage'])
 
+        # Changing field 'Project.headline'
+        db.alter_column(u'nflrcapp_project', 'headline', self.gf('django.db.models.fields.NullBooleanField')(null=True))
+
+        # Changing field 'Project.featured'
+        db.alter_column(u'nflrcapp_project', 'featured', self.gf('django.db.models.fields.NullBooleanField')(null=True))
 
     def backwards(self, orm):
-        # Deleting model 'StoryPage'
-        db.delete_table(u'nflrcapp_storypage')
 
+        # Changing field 'Project.headline'
+        db.alter_column(u'nflrcapp_project', 'headline', self.gf('django.db.models.fields.BooleanField')())
+
+        # Changing field 'Project.featured'
+        db.alter_column(u'nflrcapp_project', 'featured', self.gf('django.db.models.fields.BooleanField')())
 
     models = {
         u'nflrcapp.contact': {
@@ -40,7 +41,7 @@ class Migration(SchemaMigration):
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
             'role': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'university': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'})
@@ -79,11 +80,11 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Project'},
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'director': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'featured': ('django.db.models.fields.NullBooleanField', [], {'default': 'False', 'null': 'True', 'blank': 'True'}),
             'grant_cycle': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
-            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline': ('django.db.models.fields.NullBooleanField', [], {'default': 'False', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'null': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '80L', 'blank': 'True'}),
             'project_number': ('django.db.models.fields.CharField', [], {'max_length': '10L'}),
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -154,7 +155,11 @@ class Migration(SchemaMigration):
         u'nflrcapp.storypage': {
             'Meta': {'object_name': 'StoryPage'},
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
         }
     }
