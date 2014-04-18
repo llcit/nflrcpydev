@@ -4,7 +4,7 @@
 {% block jumbotron %}
 	{% if featured %}
 	<div class="jumbotron">
-		<p> <img src="{% static 'img/logos/default.png' %}">  </p>	
+		<p> <img src="{% static 'img/'|add:featured.0.getuid|add:'lg.png' %}">  </p>	
 		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
 	</div>
 	{% endif %}
@@ -34,7 +34,7 @@
 	{% for p in items %}
 		<a href="/{{ p.classname }}/view/{{ p.getuid }}">
 		<div class="listing shadowboxed thumbnail">
-			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+			<p> <img src="{% static 'img/'|add:p.getuid|add:'icon.png' %}"> </p>
 			<p> {{ p.title | safe }}</p>	
 			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
 		</div>

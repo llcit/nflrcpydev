@@ -53,7 +53,7 @@ def contactview(request, person):
 
 
 def journals(request):
-    journals = Publication.objects.filter(item_number__in=['LDC','LLT','RFL'])
+    journals = Publication.objects.filter(item_number__in=['OJ01','OJ02','OJ03'])
     featured = journals.filter(featured=1)
 
     return render_to_response('l2-journals.html', {

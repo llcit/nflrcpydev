@@ -172,7 +172,7 @@ class Project(models.Model):
         return self.project_number
 
     def get_absolute_url(self):
-        return reverse('projectview', args=[str(self.project_number)])
+        return reverse('projectview', args=[str(self.id)])
 
     def __unicode__(self):
         return self.title
