@@ -2,16 +2,20 @@
 {% load staticfiles %}
 
 {% block jumbotron %}
-
 	{% if featured %}
-	<div class="jumbotron"><div class="container">
-		<p><img src="{% static 'img/' %}{{featured.0.getuid}}lg.png"></p>
-	</div></div>
-	{% endif %}	
-
+	<div class="jumbotron">
+		<p> <img src="{% static 'img/logos/default.png' %}">  </p>	
+		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
+	</div>
+	{% endif %}
 {% endblock jumbotron %}
 
+{% block pageheading %}
+	Publications <small> {% if subpage %} {{ subpage|title }} {% else %}Full List{% endif %} <span class="badge">{{ items|length }}</span></small>
+{% endblock pageheading %}
+
 {% block subheadlines %}
+  
 <ul class="nav nav-pills nav-justified"> 
 	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">View All</li></div></a>
 	<a href="/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Journals</li></div></a>
@@ -23,7 +27,6 @@
 	<a href="cd"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">CDs</li></div></a>
 	<a href="videotape"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Videotapes</li></div></a>
 </ul>
-
 {% endblock subheadlines %}
 
 {% block stories %}

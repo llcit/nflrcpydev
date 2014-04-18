@@ -27,9 +27,9 @@ class PublicationAdmin(admin.ModelAdmin):
 	list_editable = ['featured', 'headline']
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'featured', 'headline')
-	list_filter = ['featured', 'headline']
-	list_editable = ['featured', 'headline']
+	list_display = ('id', 'title', 'featured', 'headline', 'pdtype',)
+	list_filter = ['featured', 'headline', 'pdtype']
+	list_editable = ['featured', 'headline', 'pdtype']
 	
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)

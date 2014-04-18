@@ -5,6 +5,8 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from itertools import chain
 
+from django.db.models import Q
+
 
 from nflrcapp.models import *
 
@@ -51,16 +53,12 @@ def contactview(request, person):
 
 
 def journals(request):
-    journals = []
-    ldc = Publication.objects.get(item_number='LDC')
-    llt = Publication.objects.get(item_number='LLT')
-    rfl = Publication.objects.get(item_number='RFL')
-    journals.append(ldc)
-    journals.append(llt)
-    journals.append(rfl)
+    journals = Publication.objects.filter(item_number__in=['LDC','LLT','RFL'])
+    featured = journals.filter(featured=1)
 
     return render_to_response('l2-journals.html', {
-        'journals': journals
+        'journals': journals,
+        'featured': featured
     }, context_instance=RequestContext(request))
 
 
@@ -94,7 +92,8 @@ def prodev(request, tag):
     featured = listing.filter(featured=1)
     return render_to_response('l2-prodev.html', {
         'items': listing,
-        'featured': featured
+        'featured': featured,
+        'subpage' : tag
     }, context_instance=RequestContext(request))
 
 
@@ -116,7 +115,8 @@ def projects(request, tag):
     featured = listing.filter(featured=True)
     return render_to_response('l2-projects.html', {
         'items': listing,
-        'featured': featured
+        'featured': featured,
+        'subpage' : tag
     }, context_instance=RequestContext(request))
 
 
@@ -165,6 +165,7 @@ def publications(request, tag):
     return render_to_response('l2-publications.html', {
         'items': listing,
         'featured': featured,
+        'subpage' : tag
     }, context_instance=RequestContext(request))
 
 
@@ -245,4 +246,9 @@ def storyview(request, item):
 
 
 def workshop_conf(request):
-    return render_to_response('index.html', {}, context_instance=RequestContext(request))
+    listing = Prodev.objects.filter().order_by('pdtype', 'date')
+    featured = listing.filter(featured=True)
+    return render_to_response('l2-workshop-confs.html', {
+        'events': listing,
+        'featured': featured
+        }, context_instance=RequestContext(request))

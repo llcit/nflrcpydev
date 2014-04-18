@@ -11,13 +11,25 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-	Journals <small></small>
+	Workshops and Conferences <small></small>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}
 
 {% block stories %}
-	{% for p in journals %}
+	{% for p in events %}
+		{% ifchanged p.pdtype %}
+			{% if not forloop.first%}</div>{% endif %}	
+			<p><h3 id="prodev">{{ p.pdtype }}<small><a href="#top"> back to top</a></small></h3></p>
+			<div class="container js-masonry" 
+				data-masonry-options='{ 
+					"columnWidth": 230, 
+					"itemSelector": ".listing",
+					"gutter": 10,
+					"isFitWidth": true
+				}'>
+		{% endifchanged %}
+	
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
 				<p> <img src="{% static 'img/logos/default.png' %}"> </p>
@@ -25,4 +37,5 @@
 			</div>
 		</a>
 	{% endfor %}
+</div>
 {% endblock stories %}

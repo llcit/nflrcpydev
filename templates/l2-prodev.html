@@ -3,19 +3,18 @@
 
 {% block jumbotron %}
 	{% if featured %}
-	<div class="container-fluid jumbotron">
-		<h1>{{featured.0.title}}</h1>
-		{% if featured.0.image %}<p><img src="{{STATIC_URL}}img/{{featured.0.classname}}/{{featured.0.image}}"></p>{% endif %}
+	<div class="jumbotron">
+		<p> <img src="{% static 'img/logos/default.png' %}">  </p>	
+		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
 	</div>
 	{% endif %}
-	
 {% endblock jumbotron %}
 
-{% block subheadlines %}
-<ul class="nav nav-pills nav-justified"> 
-	<a href="" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">sub menu item</li></div></a>
-</ul>
-{% endblock subheadlines %}
+{% block pageheading %}
+	Professional Development <small></small>
+{% endblock pageheading %}
+
+{% block subheadlines %}{% endblock subheadlines %}
 
 {% block stories %}
 	{% for p in items %}

@@ -31,7 +31,7 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^search/(.*)$', 'search', name='search'),
     url(r'^software/(.*)$', 'software', name='software'),
     url(r'^story/(.*)$', 'storyview', name='story'),
-    url(r'^workshops-conferences/$', 'home', name='home'),
+    url(r'^workshops-conferences/$', 'workshop_conf', name='confs'),
     
     # LEVEL 1 (root)
     url(r'^$', 'home'),

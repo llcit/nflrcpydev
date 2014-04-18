@@ -1,7 +1,11 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block subheadlines %}{% endblock %}
+{% block pageheading %}
+	Contact <small><a href="#staff"><span class="badge">staff</span></a> <a href="#collaborators"><span class="badge">collaborators</span></a> </small>
+{% endblock pageheading %}
+
+{% block subheadlines %}{% endblock subheadlines%}
 
 {% block stories %}
 	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
@@ -39,4 +43,4 @@
 			</a>
 		{% endfor %}		
 	</div>
-{% endblock %}
+{% endblock stories%}

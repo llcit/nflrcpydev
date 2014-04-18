@@ -1,13 +1,16 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
+{% block pageheading %}
+	About Us <small></small>
+{% endblock pageheading %}
+
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
-	<!-- <a href="/story"><div class="col-xs-12 col-md-4"><li class="shadowboxed category">people</li></div></a> -->
 	<a href="/story/1"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">history</li></div></a>
 	<a href="/story/2"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">our kuleana</li></div></a>
 </ul>
-{% endblock %}
+{% endblock subheadlines %}
 
 {% block stories %}
 
@@ -75,4 +78,4 @@
 			</a>
 		{% endfor %}			
 	</div>
-{% endblock %}
+{% endblock stories %}
