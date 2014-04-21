@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from collections import OrderedDict
 from django.core.urlresolvers import reverse
+from itertools import chain
 from django.db import models
 
 HUMAN_PREFIXES = {
@@ -28,6 +29,7 @@ PRODEV_TYPES = (
 PUBLICATION_MEDIA_TYPES = (
     ('CD', 'CD'),
     ('DVD', 'DVD'),
+    ('Journal', 'Journal'),
     ('Language Teaching Material', 'Language Teaching Material'),
     ('Network', 'Network'),
     ('NFLRC Monograph', 'NFLRC Monograph'),
@@ -37,6 +39,14 @@ PUBLICATION_MEDIA_TYPES = (
     ('Videotape', 'Videotape'),
 )
 
+class ItemsManager(models.Manager):
+    def allfeatured(self, **kwargs):
+        featured_publications = Publication.objects.filter(featured=1)
+        featured_prodevs = Prodev.objects.filter(featured=1)
+        featured_projects = Project.objects.filter(featured=1)
+        featured_stories = StoryPage.objects.filter(featured=1)
+        featured_items = list(chain(featured_publications, featured_prodevs, featured_projects, featured_stories))
+        return featured_items
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
@@ -82,6 +92,8 @@ class StoryPage(models.Model):
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
 
+    objects = ItemsManager()
+
     def getuid(self):
         return self.id
 
@@ -106,6 +118,8 @@ class Prodev(models.Model):
     image = models.CharField(max_length=100L, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
+
+    objects = ItemsManager()
 
     def classname(self):
         name = self.__class__.__name__
@@ -150,6 +164,8 @@ class Project(models.Model):
     image = models.CharField(max_length=100L, null=True)
     featured = models.NullBooleanField(default=False, null=True)
     headline = models.NullBooleanField(default=False, null=True)
+
+    objects = ItemsManager()
 
     def classname(self):
         name = self.__class__.__name__
@@ -202,6 +218,8 @@ class Publication(models.Model):
     isbn = models.CharField(max_length=20L, null=True, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
+
+    # objects = ItemsManager()
 
     def classname(self):
         name = self.__class__.__name__

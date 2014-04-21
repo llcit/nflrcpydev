@@ -10,7 +10,6 @@ from django.db.models import Q
 
 from nflrcapp.models import *
 
-
 def home(request):
     featured1 = Publication.objects.filter(featured=True)
     featured2 = Project.objects.filter(featured=True)
@@ -52,16 +51,6 @@ def contactview(request, person):
     }, context_instance=RequestContext(request))
 
 
-def journals(request):
-    journals = Publication.objects.filter(item_number__in=['OJ01','OJ02','OJ03'])
-    featured = journals.filter(featured=1)
-
-    return render_to_response('l2-journals.html', {
-        'journals': journals,
-        'featured': featured
-    }, context_instance=RequestContext(request))
-
-
 def languages(request, tag):
     if tag:
         publications = Publication.objects.filter(
@@ -71,6 +60,8 @@ def languages(request, tag):
         prodevs = Prodev.objects.filter(
             language__icontains=tag).order_by('-id')
 
+        
+
         return render_to_response('l2-languages.html', {
             'language_name': tag,
             'publications': publications,
@@ -78,9 +69,11 @@ def languages(request, tag):
             'prodevs': prodevs,
         }, context_instance=RequestContext(request))
 
+    featured = Publication.objects.allfeatured()
+    
     # Faster if request is language specific.
     return render_to_response('l2-languages.html',
-                              {}, context_instance=RequestContext(request))
+                              {'featured': featured}, context_instance=RequestContext(request))
 
 
 def outreach(request):
@@ -138,8 +131,11 @@ def projectview(request, item):
 def publications(request, tag):
     listing = ""
     # Built-in queries on publication categories
+    print tag
     if tag == 'monographs':
         listing = Publication.objects.filter(category='NFLRC Monograph')
+    elif tag == 'journals':
+        listing = Publication.objects.filter(category='Journal')
     elif tag == 'teaching-materials':
         listing = Publication.objects.filter(
             category='Language Teaching Material')
@@ -160,7 +156,7 @@ def publications(request, tag):
 
     listing = listing.order_by('-year')
 
-    featured = Publication.objects.filter(featured=True)
+    featured = Publication.objects.filter(featured=1)
 
     return render_to_response('l2-publications.html', {
         'items': listing,

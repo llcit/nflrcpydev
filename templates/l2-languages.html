@@ -11,7 +11,8 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-	Languages <small> {% if language_name %} {{ language_name|title }} {% else %} choose a language {% endif %} </small>
+	{% if language_name %}<a href="/languages"><span class="glyphicon glyphicon-arrow-left"></span></a> {% endif %}Languages 
+	<small> {% if language_name %} {{ language_name|title }} {% else %} choose a language {% endif %} </small>
 {% endblock pageheading %}
 
 {% block subheadlines %}
@@ -26,6 +27,26 @@
 {% endblock subheadlines %}
 
 {% block stories %}
+
+<!-- Default listing if language is not selected -->
+{% if featured %}
+	<div class="container js-masonry" 
+		data-masonry-options='{ 
+			"columnWidth": 230, 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
+		{% for p in featured %}	
+			<a href="{{ p.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
+					<p>{{p.title|safe}}</p>	
+				</div>
+			</a>
+		{% endfor %}		
+	</div>	
+{% endif %}
 
 {% if publications or prodevs or projects %}
 	<div class="row">
@@ -49,9 +70,9 @@
 			"isFitWidth": true
 		}'>
 		{% for p in publications %}	
-			<a href="/{{p.classname}}/view/{{p.item_number}}">
+			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
 					<p>{{p.title|safe}}</p>	
 				</div>
 			</a>
@@ -67,7 +88,7 @@
 			"isFitWidth": true
 		}'>
 		{% for p in projects %}	
-			<a href="/{{p.classname}}/view/{{p.item_number}}">
+			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 					<p>{{p.title|safe}}</p>	
@@ -85,7 +106,7 @@
 			"isFitWidth": true
 		}'>
 		{% for p in prodevs %}	
-			<a href="/{{p.classname}}/view/{{p.item_number}}">
+			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
 					<p>{{p.title|safe}}</p>	
@@ -93,7 +114,5 @@
 			</a>
 		{% endfor %}		
 	</div>
-{% else %}
-<div class="row"><div class="col-md-12"><h2>Please select a language to filter by.</h2></div></div>
 {% endif %}
 {% endblock stories %}

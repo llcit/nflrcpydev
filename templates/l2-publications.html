@@ -3,22 +3,31 @@
 
 {% block jumbotron %}
 	{% if featured %}
+	<a href="{{ featured.0.get_absolute_url }}">
 	<div class="jumbotron">
-		<p> <img src="{% static 'img/'|add:featured.0.getuid|add:'lg.png' %}">  </p>	
+		<p> <img src="{% static 'img/icon.png' %}">  </p>	
 		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
 	</div>
+	</a>
 	{% endif %}
 {% endblock jumbotron %}
 
 {% block pageheading %}
-	Publications <small> {% if subpage %} {{ subpage|title }} {% else %}Full List{% endif %} <span class="badge">{{ items|length }}</span></small>
+	{% if subpage %}<a href="/publications"><span class="glyphicon glyphicon-arrow-left"></span></a> {% endif %} Publications
+	<small> 
+		{% if subpage %}			
+			{{ subpage|title }} 
+		{% else %}
+			Full List
+		{% endif %} 
+		<span class="badge">{{ items|length }}</span>
+	</small>
 {% endblock pageheading %}
 
-{% block subheadlines %}
-  
+{% block subheadlines %}  
 <ul class="nav nav-pills nav-justified"> 
-	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">View All</li></div></a>
-	<a href="/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Journals</li></div></a>
+	<!-- <a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">View All</li></div></a> -->
+	<a href="journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Journals</li></div></a>
 	<a href="monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Monographs</li></div></a>
 	<a href="teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Teaching<br>Materials</li></div></a>
 	<a href="pragmatics"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Pragmatics</li></div></a>
@@ -32,9 +41,9 @@
 {% block stories %}
 
 	{% for p in items %}
-		<a href="/{{ p.classname }}/view/{{ p.getuid }}">
+		<a href="{{ p.get_absolute_url }}">
 		<div class="listing shadowboxed thumbnail">
-			<p> <img src="{% static 'img/'|add:p.getuid|add:'icon.png' %}"> </p>
+			<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
 			<p> {{ p.title | safe }}</p>	
 			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
 		</div>
