@@ -8,6 +8,22 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'ImageFile'
+        db.create_table(u'nflrcapp_imagefile', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('caption', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'nflrcapp', ['ImageFile'])
+
+        # Adding model 'DocumentFile'
+        db.create_table(u'nflrcapp_documentfile', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('document', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
+            ('extrainfo', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'nflrcapp', ['DocumentFile'])
+
         # Adding model 'Contact'
         db.create_table(u'nflrcapp_contact', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -41,6 +57,7 @@ class Migration(SchemaMigration):
             ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
             ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
         ))
         db.send_create_signal(u'nflrcapp', ['StoryPage'])
 
@@ -60,6 +77,7 @@ class Migration(SchemaMigration):
             ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
             ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
         ))
         db.send_create_signal(u'nflrcapp', ['Prodev'])
 
@@ -74,9 +92,10 @@ class Migration(SchemaMigration):
             ('director', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('skeywords', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
+            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, null=True)),
             ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
         ))
         db.send_create_signal(u'nflrcapp', ['Project'])
 
@@ -108,6 +127,7 @@ class Migration(SchemaMigration):
             ('isbn', self.gf('django.db.models.fields.CharField')(max_length=20L, null=True, blank=True)),
             ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
         ))
         db.send_create_signal(u'nflrcapp', ['Publication'])
 
@@ -166,6 +186,12 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Deleting model 'ImageFile'
+        db.delete_table(u'nflrcapp_imagefile')
+
+        # Deleting model 'DocumentFile'
+        db.delete_table(u'nflrcapp_documentfile')
+
         # Deleting model 'Contact'
         db.delete_table(u'nflrcapp_contact')
 
@@ -217,6 +243,18 @@ class Migration(SchemaMigration):
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'})
         },
+        u'nflrcapp.documentfile': {
+            'Meta': {'object_name': 'DocumentFile'},
+            'document': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
+            'extrainfo': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
+        u'nflrcapp.imagefile': {
+            'Meta': {'object_name': 'ImageFile'},
+            'caption': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'})
+        },
         u'nflrcapp.personproject': {
             'Meta': {'object_name': 'PersonProject'},
             'contact_id': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['nflrcapp.Contact']"}),
@@ -238,6 +276,7 @@ class Migration(SchemaMigration):
             'facilitator': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
@@ -254,8 +293,9 @@ class Migration(SchemaMigration):
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'grant_cycle': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'null': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '80L', 'blank': 'True'}),
             'project_number': ('django.db.models.fields.CharField', [], {'max_length': '10L'}),
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -269,6 +309,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
             'isbn': ('django.db.models.fields.CharField', [], {'max_length': '20L', 'null': 'True', 'blank': 'True'}),
@@ -328,6 +369,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),

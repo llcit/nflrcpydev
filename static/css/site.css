@@ -4,9 +4,23 @@ body {
     padding-top: 135px;
 }
 
+/*Default anchor colores*/
+a:link {color: #4343A6;}
+a:visited {color: #4343A6;}
+a:hover {color: #333;}
+a:active {color: #4343A6;}
+
+/*Default bootstrap class: label color*/
+.label, .badge {
+    background-color: #C7C7E4;
+    color: #4343A6;
+}
+
+
+
 .navbar {
     height: 120px;
-    background: url(http://localhost:8000/static/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
+    background: url(/media/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
     background-size: contain; 
     background-color: #fff;
 }
@@ -40,9 +54,9 @@ ul#socialnav img { height: 30px }
 }
 
 .shadowboxed {
+    border: 1px solid #CCC;
 /*    border-radius: 5px;
     background-color: #fff;
-    border: 1px solid #CCC;
     font: 12px Arial;*/
 
     box-shadow: 0 15px 20px rgba(0,0,0,0.3);
@@ -66,7 +80,7 @@ ul#socialnav img { height: 30px }
 
 .category {
     /*position: relative;*/
-    height: 80px;
+    height: 60px;
     font-size: 1.5em;
     text-decoration: none;
     color: black;
@@ -82,7 +96,7 @@ ul#socialnav img { height: 30px }
 .listing {
     width: 230px;
     margin-bottom: 4px;
-    border-bottom: 1px solid gray;
+    /*border-bottom: 1px solid gray;*/
     background: white;
     text-decoration: none;
     color: black;
@@ -112,3 +126,35 @@ ul#socialnav img { height: 30px }
 @media (min-width: 1011px) {
     .logo { height: 100px; }
 }*/
+
+/*@media (min-width: 768px)
+    #sidebar-wrapper {
+        padding-right: 20px;
+    }*/
+
+/*.affix-top {
+    top:60px;
+    position:fixed;
+}*/
+/*
+#sidebar-wrapper {
+     position:fixed;
+     top:60px;
+     width:21.97%;
+ }
+
+ @media (max-width: 767px) {
+     #sidebar-wrapper {
+        width:auto;
+     }
+ }
+
+ @media (max-width: 979px) {
+     #sidebar-wrapper {
+        position:static;
+        width: auto;
+     }
+ }*/
+
+
+

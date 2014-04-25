@@ -5,6 +5,9 @@ Django BASE settings for nflrcsite project.
 import os
 from unipath import Path
 
+# Secret key stored in environment variable not here.
+SECRET_KEY = os.environ['SECRET_KEY']
+
 PROJECT_DIR = Path(__file__).ancestor(3) # Points to top level directory
 DOC_ROOT = ''
 
@@ -41,7 +44,7 @@ STATICFILES_FINDERS = (
 
 MEDIA_ROOT = '/media/'
 
-MEDIA_URL = '/media/nflrc/'
+MEDIA_URL = '/media/'
 
 
 # List of callables that know how to import templates from various sources.
@@ -89,13 +92,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'django.contrib.webdesign',
+    'grappelli.dashboard',
     'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     # 'django.contrib.admindocs',
 
     'nflrcapp',
+
     'south',
 )
+
+GRAPPELLI_ADMIN_TITLE = 'NFLRC Site Administration'
+GRAPPELLI_INDEX_DASHBOARD = 'nflrcsite.dashboard.CustomIndexDashboard'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -125,3 +134,5 @@ LOGGING = {
         },
     }
 }
+
+

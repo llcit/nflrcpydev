@@ -1,18 +1,55 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
+{% block local_css %}
+	<!-- Start WOWSlider.com HEAD section -->
+	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
+	<!-- End WOWSlider.com HEAD section -->
+{% endblock local_css %}
+
+
 {% block jumbotron %}
-	{% if featured %}
-	<div class="jumbotron">
-		<p> <img src="{% static 'img/logos/default.png' %}">  </p>	
-		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
-	</div>
+	{% if not subpage %}
+		{% if featured %}	
+		<div class="jumbotron">
+			<!-- Start WOWSlider.com -->
+			<div id="wowslider-container1">
+				<div class="ws_images">
+					<ul>
+						{% for f in featured %} 
+						<li><a href="{{ f.get_absolute_url }}">
+							<img src="{% static 'img/'%}{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+						</li></a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<!-- End WOWSlider.com -->
+		</div>
+		{% endif %}
 	{% endif %}
 {% endblock jumbotron %}
 
 {% block pageheading %}
-	{% if language_name %}<a href="/languages"><span class="glyphicon glyphicon-arrow-left"></span></a> {% endif %}Languages 
-	<small> {% if language_name %} {{ language_name|title }} {% else %} choose a language {% endif %} </small>
+<h2>
+	{% if language_name %}
+		<a href="/languages"><span class="glyphicon glyphicon-arrow-left"></span></a>
+	{% endif %}Languages 
+	<small> 
+		{% if language_name %} 
+			{{ language_name|title }}<small>
+			<span class="badge">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
+			<span> | </span>
+			<span class="badge">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
+			<span> | </span>
+			<span class="badge">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
+			</small>
+		{% else %} 
+			choose a language 
+		{% endif %}
+	</small>
+	</h2>
+	
 {% endblock pageheading %}
 
 {% block subheadlines %}
@@ -49,70 +86,71 @@
 {% endif %}
 
 {% if publications or prodevs or projects %}
-	<div class="row">
-		<div class="col-md-12">
-			<h2>{{ language_name|capfirst }} Language Resources </h2>
-			<span class="badge">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
-			<span> | </span>
-			<span class="badge">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
-			<span> | </span>
-			<span class="badge">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
-		</div>
-	</div>
+<div class="row">
+	<!-- right side content display -->
+	<div id="item-listing" class="col-md-12">
 	
+		<p><h3 id="publications">Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<div class="container js-masonry" 
+			data-masonry-options='{ 
+				"columnWidth": 230, 
+				"itemSelector": ".listing",
+				"gutter": 10,
+				"isFitWidth": true
+			}'>
+			{% for p in publications %}	
+				<a href="{{ p.get_absolute_url }}">
+					<div class="listing shadowboxed">
+						<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
+						<p>{{p.title|safe}}</p>	
+					</div>
+				</a>
+			{% endfor %}		
+		</div>
 
-	<p><h3 id="publications">Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
-		{% for p in publications %}	
-			<a href="{{ p.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
-					<p>{{p.title|safe}}</p>	
-				</div>
-			</a>
-		{% endfor %}		
-	</div>
+	
+		<p><h3 id="projects">Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<div class="container js-masonry" 
+			data-masonry-options='{ 
+				"columnWidth": 230, 
+				"itemSelector": ".listing",
+				"gutter": 10,
+				"isFitWidth": true
+			}'>
+			{% for p in projects %}	
+				<a href="{{ p.get_absolute_url }}">
+					<div class="listing shadowboxed">
+						<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+						<p>{{p.title|safe}}</p>	
+					</div>
+				</a>
+			{% endfor %}		
+		</div>
 
-	<p><h3 id="projects">Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
-		{% for p in projects %}	
-			<a href="{{ p.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
-					<p>{{p.title|safe}}</p>	
-				</div>
-			</a>
-		{% endfor %}		
-	</div>
 
-	<p><h3 id="prodev">Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
-		{% for p in prodevs %}	
-			<a href="{{ p.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
-					<p>{{p.title|safe}}</p>	
-				</div>
-			</a>
-		{% endfor %}		
-	</div>
+		<p><h3 id="prodev">Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<div class="container js-masonry" 
+			data-masonry-options='{ 
+				"columnWidth": 230, 
+				"itemSelector": ".listing",
+				"gutter": 10,
+				"isFitWidth": true
+			}'>
+			{% for p in prodevs %}	
+				<a href="{{ p.get_absolute_url }}">
+					<div class="listing shadowboxed">
+						<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+						<p>{{p.title|safe}}</p>	
+					</div>
+				</a>
+			{% endfor %}		
+		</div>
+
+</div></div>
 {% endif %}
 {% endblock stories %}
+
+{% block local_js %}
+	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
+{% endblock local_js %}

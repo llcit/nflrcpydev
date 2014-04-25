@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+from filebrowser.sites import site
+
 urlpatterns = patterns('django.contrib.flatpages.views',
     # FLATPAGES Experiment
     url(r'^publications/khmer/$', 'flatpage', {'url': '/publications/khmer/'}, name='Khmer'),
@@ -21,7 +23,6 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^languages/(.*)$', 'languages', name='languages'),
     url(r'^outreach/$', 'home', name='home'),
     url(r'^prodev/view/(.*)$', 'prodevview', name='prodevview'),
-    url(r'^prodev/(.*)$', 'prodev', name='prodev'),
     url(r'^projects/view/(.*)$', 'projectview', name='projectview'),
     url(r'^projects/(.*)$', 'projects', name='projects'),
     url(r'^publications/view/(.*)$', 'pubview', name='pubview'),
@@ -38,12 +39,10 @@ urlpatterns += patterns('nflrcapp.views',
     
     # Uncomment the admin/doc line below to enable admin documentation:
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-)
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

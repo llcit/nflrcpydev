@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from nflrcapp.models import *
-
-
-# list_display = ('section', 'rank', 'text', 'getOptionTexts', 'guide')
+from nflrcapp.models import Contact, Project, Publication, Prodev, StoryPage
 
 class ExtraMedia:
     js = [
@@ -17,7 +14,7 @@ class ContactAdmin(admin.ModelAdmin):
 	list_editable = ['role', 'title', 'listing_rank']	
 
 class ProjectAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'featured', 'headline')
+	list_display = ('project_number', 'title', 'featured', 'headline')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'headline']
 
@@ -30,13 +27,9 @@ class ProdevAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'featured', 'headline', 'pdtype',)
 	list_filter = ['featured', 'headline', 'pdtype']
 	list_editable = ['featured', 'headline', 'pdtype']
-	
+
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
-# admin.site.register(PersonProject)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
-# admin.site.register(PersonPublication)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
-admin.site.register(Resource, Media = ExtraMedia)
-admin.site.register(Software, Media = ExtraMedia)
 admin.site.register(StoryPage, Media = ExtraMedia)

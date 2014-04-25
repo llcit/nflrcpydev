@@ -2,8 +2,20 @@
 {% load staticfiles %}
 
 {% block item-menu %}
-	<h2><img class="item-thumbnail" src="{% static 'img/'%}{{ item.getuid }}icon.png"></h2>
+	
+	<h2>
+		{% if item.classname == 'storypage' %}
+			<img class="item-thumbnail" src="{{MEDIA_URL}}img/logos/default.png">
+		{% elif item.classname == 'prodev' %}
+			<img class="item-thumbnail" src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png">
+		{% elif item.classname == 'projects' %}
+			<img class="item-thumbnail" src="{{MEDIA_URL}}img/PROJECTSplaceholderIcon.png">
+		{% else %}
+			<img class="item-thumbnail" src="{{MEDIA_URL}}img/{{item.getuid}}icon.png">
+		{% endif %}
+	</h2>
     <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
+
 {% endblock item-menu%}
 
 {% block item-content %}
@@ -13,6 +25,7 @@
 
 {% block item-meta %}
 	<h2></h2>
+	<!-- <div data-spy="affix" data-offset-top="60" data-offset-bottom="10"> -->
 	<ul id="right-sidebar" class="nav nav-stacked">
 	 	{% for name, value in item.customproperties %}
 			<li>
@@ -21,6 +34,7 @@
 		  	</li>
 		{% endfor %}   	
     </ul>
+    <!-- </div> -->
 {% endblock item-meta %}
 
 {% block customjavascript %}

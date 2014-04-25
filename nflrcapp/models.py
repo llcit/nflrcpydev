@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from itertools import chain
 from django.db import models
 
+
+
 HUMAN_PREFIXES = {
     ('DR', 'PhD.'),
     ('MR', 'Mr.'),
@@ -91,8 +93,13 @@ class StoryPage(models.Model):
     image = models.CharField(max_length=100L, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
+    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
+
+    def classname(self):
+        name = self.__class__.__name__
+        return name.lower()
 
     def getuid(self):
         return self.id
@@ -118,6 +125,7 @@ class Prodev(models.Model):
     image = models.CharField(max_length=100L, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
+    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
 
@@ -162,8 +170,9 @@ class Project(models.Model):
     description = models.TextField(blank=True)
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, null=True)
-    featured = models.NullBooleanField(default=False, null=True)
-    headline = models.NullBooleanField(default=False, null=True)
+    featured = models.BooleanField(default=False)
+    headline = models.BooleanField(default=False)
+    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
 
@@ -188,7 +197,7 @@ class Project(models.Model):
         return self.project_number
 
     def get_absolute_url(self):
-        return reverse('projectview', args=[str(self.id)])
+        return reverse('projectview', args=[str(self.project_number)])
 
     def __unicode__(self):
         return self.title
@@ -218,8 +227,9 @@ class Publication(models.Model):
     isbn = models.CharField(max_length=20L, null=True, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
+    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
 
-    # objects = ItemsManager()
+    objects = ItemsManager()
 
     def classname(self):
         name = self.__class__.__name__

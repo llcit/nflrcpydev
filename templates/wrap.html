@@ -34,14 +34,14 @@
       <a href="/"><div class="navbar-brand">&nbsp;</div></a> 
     </div>
     
-    <div class="navbar-collapse collapse navpanel">
+    <div class="navbar-collapse collapse navpanel"> 
       <ul  id="socialnav" class="nav navbar-nav navbar-right">
         <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
         <li><a href="/about"><button type="button" class="btn btn-default">About</button></a></li>
-        <li id="facebook"><a href="facebook"><img src="{% static 'img/logos/facebook_logo_blue.png' %}"> </a></li> 
-        <li id="twitter"><a href="twitter"><img src="{% static 'img/logos/twitter_logo_blue.png' %}"> </a></li> 
-        <li id="linkedin"><a href="linkedin"><img src="{% static 'img/logos/linkedin_logo.png' %}"> </a></li> 
-        <li id="youtube"><a href="youtube"><img src="{% static 'img/logos/youtube_logo_color.png' %}"> </a></li> 
+        <li id="facebook"><a href="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </a></li> 
+        <li id="twitter"><a href="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </a></li> 
+        <li id="linkedin"><a href="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </a></li> 
+        <li id="youtube"><a href="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </a></li> 
       </ul>
       
     </div><!--/.nav-collapse -->

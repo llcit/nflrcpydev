@@ -1,14 +1,31 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
+{% block local_css %}
+	<!-- Start WOWSlider.com HEAD section -->
+	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
+	<!-- End WOWSlider.com HEAD section -->
+{% endblock local_css %}
+
 {% block jumbotron %}
-	{% if featured %}
-	<a href="{{ featured.0.get_absolute_url }}">
-	<div class="jumbotron">
-		<p> <img src="{% static 'img/icon.png' %}">  </p>	
-		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
-	</div>
-	</a>
+	{% if not subpage %}
+		{% if featured %}	
+		<div class="jumbotron">
+			<!-- Start WOWSlider.com -->
+			<div id="wowslider-container1">
+				<div class="ws_images">
+					<ul>
+						{% for f in featured %} 
+						<li><a href="{{ f.get_absolute_url }}">
+							<img src="{{MEDIA_URL}}img/{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+						</li></a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<!-- End WOWSlider.com -->
+		</div>
+		{% endif %}
 	{% endif %}
 {% endblock jumbotron %}
 
@@ -39,15 +56,26 @@
 {% endblock subheadlines %}
 
 {% block stories %}
-
+<div class="container js-masonry" 
+			data-masonry-options='{ 
+				"columnWidth": 230, 
+				"itemSelector": ".listing",
+				"gutter": 10,
+				"isFitWidth": true
+			}'>
 	{% for p in items %}
 		<a href="{{ p.get_absolute_url }}">
-		<div class="listing shadowboxed thumbnail">
-			<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
+		<div class="listing shadowboxed">
+			<p> <img src="{{MEDIA_URL}}img/{{p.getuid}}icon.png"> </p>
 			<p> {{ p.title | safe }}</p>	
 			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
 		</div>
 		</a>
 	{% endfor %}
-		
+</div>
 {% endblock stories %}
+
+{% block local_js %}
+	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
+{% endblock local_js %}

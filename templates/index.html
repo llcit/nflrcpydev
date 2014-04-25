@@ -15,7 +15,7 @@
 			<ul>
 				{% for headliner in headliners %} 
 				<li><a href="{{ headliner.get_absolute_url }}">
-					<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.title }}" id="wows1_{{ forloop.counter0 }}"/>
+					<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
 				</a></li>
 				{% endfor %}
 			</ul>
@@ -28,8 +28,8 @@
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
+	<img src="{{MEDIA_URL}}img/plains-cropped.jpg">
 	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">publications</li></div></a>
-	<a href="/prodev"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">professional<br>development</li></div></a>
 	<a href="/projects"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">projects</li></div></a>
 	<a href="/publications/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">journals</li></div></a>
 	<a href="/workshops-conferences"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">workshops /<br> conferences</li></div></a>
@@ -41,7 +41,14 @@
 {% endblock subheadlines %}
 
 {% block stories %}
+<div class="container-fluid js-masonry" 
+		data-masonry-options='{ 
+			"itemSelector": ".listing",
+			"gutter": 10,
+			"isFitWidth": true
+		}'>
 	{% for feature in featured %}
+	
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="listing shadowboxed">
 			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
@@ -49,21 +56,12 @@
 			<p> {{ feature.description | safe | truncatewords_html:4 }} </p>
 			</div>
 		</a>
+	
 	{% endfor %}
+</div>
 {% endblock stories%}
 
 {% block local_js %}
 	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
 	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
 {% endblock local_js %}
-
-
-<!-- 	<a href="/prodev"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">professional<br>development</div></a> 
-	<a href="/publications"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">publications</div> </a> 
-	<a href="/projects"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">projects</div> </a> 
-	<a href="/journals"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">journals</div> </a> 
-	<a href="/workshops-conferences"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">workshops /<br> conferences</div></a>
-	<a href="/languages"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">languages</div></a>
-	<a href="/publications/monographs"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">monographs</div></a>
-	<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">teaching<br>materials</div></a>
-	<a href="#"><div class="col-xs-12 col-md-2 btn btn-default btn-lg category shadowboxed">collaborations</div></a> -->
