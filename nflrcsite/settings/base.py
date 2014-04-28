@@ -5,9 +5,6 @@ Django BASE settings for nflrcsite project.
 import os
 from unipath import Path
 
-# Secret key stored in environment variable not here.
-SECRET_KEY = os.environ['SECRET_KEY']
-
 PROJECT_DIR = Path(__file__).ancestor(3) # Points to top level directory
 DOC_ROOT = ''
 
@@ -42,9 +39,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
 )
 
-MEDIA_ROOT = '/media/'
+# MEDIA_ROOT = '/media/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/nflrc/'
 
 
 # List of callables that know how to import templates from various sources.

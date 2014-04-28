@@ -19,7 +19,7 @@
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p> <img src="{{MEDIA_URL}}img/logos/default.png"> </p>
 					<p>{{ i.first_name }} {{ i.last_name }} </p>	
 				</div>
 			</a>
@@ -37,7 +37,7 @@
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+					<p> <img src="{{MEDIA_URL}}img/logos/default.png"> </p>
 					<p>{{ i.first_name }} {{ i.last_name }} </p>	
 				</div>
 			</a>

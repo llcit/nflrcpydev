@@ -18,7 +18,7 @@
 					<ul>
 						{% for f in featured %} 
 						<li><a href="{{ f.get_absolute_url }}">
-							<img src="{% static 'img/'%}{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+							<img src="{{MEDIA_URL}}img/{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
 						</li></a>
 						{% endfor %}
 					</ul>
@@ -77,7 +77,7 @@
 		{% for p in featured %}	
 			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
+					<p> <img src="{{MEDIA_URL}}img/{{ p.getuid }}icon.png"> </p>
 					<p>{{p.title|safe}}</p>	
 				</div>
 			</a>
@@ -101,7 +101,7 @@
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{% static 'img/'%}{{ p.getuid }}icon.png"> </p>
+						<p> <img src="{{MEDIA_URL}}img/{{ p.getuid }}icon.png"> </p>
 						<p>{{p.title|safe}}</p>	
 					</div>
 				</a>
@@ -120,7 +120,7 @@
 			{% for p in projects %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+						<p> <img src="{{MEDIA_URL}}img/PROJECTSplaceholderIcon.png"> </p>
 						<p>{{p.title|safe}}</p>	
 					</div>
 				</a>
@@ -128,7 +128,7 @@
 		</div>
 
 
-		<p><h3 id="prodev">Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3 id="prodev">Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div class="container js-masonry" 
 			data-masonry-options='{ 
 				"columnWidth": 230, 
@@ -139,7 +139,7 @@
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+						<p> <img src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png"> </p>
 						<p>{{p.title|safe}}</p>	
 					</div>
 				</a>

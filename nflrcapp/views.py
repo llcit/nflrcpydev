@@ -129,9 +129,9 @@ def projectview(request, item):
 
 
 def publications(request, tag):
+    featured = Publication.objects.filter(featured=1)
     listing = ""
     # Built-in queries on publication categories
-    print tag
     if tag == 'monographs':
         listing = Publication.objects.filter(category='NFLRC Monograph')
     elif tag == 'journals':
@@ -145,18 +145,14 @@ def publications(request, tag):
         listing = Publication.objects.filter(category__startswith='Pragmatics')
     elif tag == 'networks':
         listing = Publication.objects.filter(category='Network')
-    elif tag == 'cd':
-        listing = Publication.objects.filter(category='CD')
-    elif tag == 'dvd':
-        listing = Publication.objects.filter(category='DVD')
-    elif tag == 'videotape':
-        listing = Publication.objects.filter(category='Videotape')
-    else:
+    elif tag == 'media':
+        listing = Publication.objects.filter(Q(category='DVD') | Q(category='Videotape') | Q(category='CD'))
+    elif tag == 'listing':
         listing = Publication.objects.all()
+    else:
+        listing = featured
 
-    listing = listing.order_by('-year')
-
-    featured = Publication.objects.filter(featured=1)
+    listing = listing.order_by('category','-year')
 
     return render_to_response('l2-publications.html', {
         'items': listing,

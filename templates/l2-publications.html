@@ -35,7 +35,7 @@
 		{% if subpage %}			
 			{{ subpage|title }} 
 		{% else %}
-			Full List
+			Featured
 		{% endif %} 
 		<span class="badge">{{ items|length }}</span>
 	</small>
@@ -43,39 +43,68 @@
 
 {% block subheadlines %}  
 <ul class="nav nav-pills nav-justified"> 
-	<!-- <a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">View All</li></div></a> -->
 	<a href="journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Journals</li></div></a>
 	<a href="monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Monographs</li></div></a>
 	<a href="teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Teaching<br>Materials</li></div></a>
 	<a href="pragmatics"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Pragmatics</li></div></a>
 	<a href="networks"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Networks</li></div></a>
-	<a href="dvd"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">DVDs</li></div></a>
-	<a href="cd"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">CDs</li></div></a>
-	<a href="videotape"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Videotapes</li></div></a>
+	<a href="media"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Physical<br>Media</li></div></a>
+	<a href="listing"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Full<br>Listing</li></div></a>
 </ul>
 {% endblock subheadlines %}
 
 {% block stories %}
-<div class="container js-masonry" 
-			data-masonry-options='{ 
-				"columnWidth": 230, 
-				"itemSelector": ".listing",
-				"gutter": 10,
-				"isFitWidth": true
-			}'>
+
+{% if subpage|title != "Listing" %}
+	<div id="dyno" class="container">
+		{% for p in items %}
+
+			<a href="{{ p.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{p.getuid}}icon.png"> </p>
+				<p> {{ p.title | safe }}</p>	
+				<p> {{ p.description | safe | truncatewords_html:4 }} </p>
+			</div>
+			</a>
+		{% endfor %}
+	</div>
+{% else %}
 	{% for p in items %}
-		<a href="{{ p.get_absolute_url }}">
-		<div class="listing shadowboxed">
-			<p> <img src="{{MEDIA_URL}}img/{{p.getuid}}icon.png"> </p>
-			<p> {{ p.title | safe }}</p>	
-			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
+		{% ifchanged p.category %} <div class="row"><h3><small>{{ p.category }}</small> </h3></div> {% endifchanged %}
+		<div class="row enchilada {% cycle 'shade' 'noshade' %}">
+			<a href="{{ p.get_absolute_url }}">
+			<div class="col-md-1">
+				{{ p.year }}
+			</div>
+			<div class="col-md-3">
+				{{ p.title | safe }}
+			</div>
+			<div class="col-md-8">
+				{{ p.description | safe | truncatewords_html:20 }} 
+			</div>
+			</a>
 		</div>
-		</a>
-	{% endfor %}
-</div>
+	{% endfor %}	
+{% endif %}
+
 {% endblock stories %}
 
 {% block local_js %}
 	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
 	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
 {% endblock local_js %}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){ 
+	var $ = jQuery;
+	var container = document.querySelector('#dyno');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 10,
+	  isFitWidth: 'true'
+	});
+})
+{% endblock customjavascript %}
+

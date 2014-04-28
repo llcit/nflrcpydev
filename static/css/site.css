@@ -20,7 +20,7 @@ a:active {color: #4343A6;}
 
 .navbar {
     height: 120px;
-    background: url(/media/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
+    background: url(http://localhost:8000/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
     background-size: contain; 
     background-color: #fff;
 }
@@ -110,9 +110,24 @@ ul#socialnav img { height: 30px }
     display: none;
 }
 
-.item-thumbnail {
-    width: 180px;
+.shade {
+    background-color: #D1D1E0;
 }
+.noshade {
+    background-color: white;    
+}
+
+.enchilada object, iframe {
+    display: none;
+}
+
+.item-thumbnail {
+    width: 150px;
+}
+
+/*#meta-wrapper img {
+    width: 150px;
+}*/
 
 	
 /*@media screen and (max-width: 325px) {

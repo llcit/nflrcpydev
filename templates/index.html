@@ -15,7 +15,7 @@
 			<ul>
 				{% for headliner in headliners %} 
 				<li><a href="{{ headliner.get_absolute_url }}">
-					<img src="{% static 'img/' %}{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+					<img src="{{MEDIA_URL}}img/{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
 				</a></li>
 				{% endfor %}
 			</ul>
@@ -28,7 +28,6 @@
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
-	<img src="{{MEDIA_URL}}img/plains-cropped.jpg">
 	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">publications</li></div></a>
 	<a href="/projects"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">projects</li></div></a>
 	<a href="/publications/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">journals</li></div></a>
@@ -51,7 +50,7 @@
 	
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="listing shadowboxed">
-			<p> <img src="{% static 'img/logos/default.png' %}"> </p>
+			<p> <img src="{{MEDIA_URL}}img/{{feature.getuid}}icon.png"> </p>
 			<p> {{ feature.title | safe }}</p>	
 			<p> {{ feature.description | safe | truncatewords_html:4 }} </p>
 			</div>
@@ -64,4 +63,6 @@
 {% block local_js %}
 	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
 	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
+	<!-- Masonry for dynamic grid layout -->
+	<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
 {% endblock local_js %}

@@ -1,8 +1,35 @@
 # dev.py
 from .base import *
-from django.conf import settings
+
+# Secret key stored in environment variable not here.
+SECRET_KEY = os.environ['SECRET_KEY']
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'nflrc_pg', 
+        'USER': 'djangodbuser',
+        'PASSWORD': '1',
+        'HOST': 'localhost', 
+        'PORT': '5432', 
+    }
+}
+
+# Append apps used in development not production.
+INSTALLED_APPS += (
+    'debug_toolbar',
+)
+
+MEDIA_ROOT = '/pythonweb/nflrc-dev-py/media/nflrc'
 
 # FILEBROWSER SETTINGS
+from django.conf import settings
+
 FILEBROWSER_DIRECTORY = ''
 FILEBROWSER_VERSIONS_BASEDIR = getattr(settings, 'FILEBROWSER_VERSIONS_BASEDIR', '_versions')
 FILEBROWSER_ADMIN_VERSIONS = getattr(settings, 'FILEBROWSER_ADMIN_VERSIONS', ['thumbnail', 'small', 'medium', 'big', 'large'])
@@ -31,30 +58,6 @@ FILEBROWSER_VERSIONS = getattr(settings, "FILEBROWSER_VERSIONS", {
     'big': {'verbose_name': 'Big (6 col)', 'width': 460, 'height': '', 'opts': ''},
     'large': {'verbose_name': 'Large (8 col)', 'width': 680, 'height': '', 'opts': ''},
 })
-
-
-
+FILEBROWSER_CONVERT_FILENAME = getattr(settings, "FILEBROWSER_CONVERT_FILENAME", False)
 # END FILEBROWSER SETTINGS
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ALLOWED_HOSTS = ['*']
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'nflrc_pg', 
-        'USER': 'djangodbuser',
-        'PASSWORD': '1',
-        'HOST': 'localhost', 
-        'PORT': '5432', 
-    }
-}
-
-# Append apps used in development not production.
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
-
-MEDIA_ROOT = '/pythonweb/nflrc-dev-py/media/'
