@@ -16,12 +16,14 @@ urlpatterns = patterns('django.contrib.flatpages.views',
 )
 
 urlpatterns += patterns('nflrcapp.views',
+    # url(r'^util/$', 'dev_utility', name='utility'),
     # LEVEL 2 PAGES (/level-2-pages)
     url(r'^about/$', 'about', name='about'),
     url(r'^contact/$', 'contact', name='contact'),
     url(r'^contact/view/(.*)$', 'contactview', name='contactview'),
     url(r'^languages/(.*)$', 'languages', name='languages'),
     url(r'^outreach/$', 'home', name='home'),
+    url(r'^prodev/$', 'prodev', name='confs'),
     url(r'^prodev/view/(.*)$', 'prodevview', name='prodevview'),
     url(r'^projects/view/(.*)$', 'projectview', name='projectview'),
     url(r'^projects/(.*)$', 'projects', name='projects'),
@@ -30,8 +32,9 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^resources/(.*)$', 'resources', name='resources'),
     url(r'^search/(.*)$', 'search', name='search'),
     url(r'^software/(.*)$', 'software', name='software'),
+    url(r'^stories/$', 'stories', name='stories'),
     url(r'^story/(.*)$', 'storyview', name='story'),
-    url(r'^workshops-conferences/$', 'workshop_conf', name='confs'),
+    
     
     # LEVEL 1 (root)
     url(r'^$', 'home'),

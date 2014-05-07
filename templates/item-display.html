@@ -7,6 +7,7 @@
 {% endblock item-menu%}
 
 {% block item-content %}
+	<h2><a href="/{{ item.classname }}/{{ shortcut }}"><span class="glyphicon glyphicon-arrow-left"></span></a> {{ item.displayname | title}}<small> {{ shortcut | title }}</small></h2>
 	<h2>{{ item.title | safe }}</h2>
 	<div id="item-content" >{{ item.description | safe }}</div>
 {% endblock item-content %}
@@ -15,12 +16,8 @@
 	<h2>
 		{% if item.classname == 'storypage' %}
 			<img class="item-thumbnail" src="{{MEDIA_URL}}img/logos/default.png">
-		{% elif item.classname == 'prodev' %}
-			<img class="item-thumbnail" src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png">
-		{% elif item.classname == 'projects' %}
-			<img class="item-thumbnail" src="{{MEDIA_URL}}img/PROJECTSplaceholderIcon.png">
 		{% else %}
-			<img class="item-thumbnail" src="{{MEDIA_URL}}img/{{item.getuid}}icon.png">
+			<img class="item-thumbnail" src="{{MEDIA_URL}}img/{{ item.image }}">
 		{% endif %}
 	</h2>
     <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
@@ -30,7 +27,19 @@
 	 	{% for name, value in item.customproperties %}
 			<li>
 				<div><span class="label label-default">{{ name }}</span></div>
-		  		<div>{{ value|safe }}</div>
+				<div>
+					{% if name == 'category' %} 
+						<a href="/{{ item.classname }}/{{ shortcut }}">
+							{{ item.category }}s
+						</a>
+					
+					{% elif name == 'url' %}
+						{{ value|safe|urlizetrunc:30 }}
+					{% else %}
+						{{ value|safe }}	
+					{% endif %}
+				</div>
+		  		
 		  	</li>
 		{% endfor %}   	
     </ul>

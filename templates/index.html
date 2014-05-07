@@ -28,31 +28,26 @@
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
-	<a href="/publications"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">publications</li></div></a>
-	<a href="/projects"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">projects</li></div></a>
-	<a href="/publications/journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">journals</li></div></a>
-	<a href="/workshops-conferences"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">workshops /<br> conferences</li></div></a>
-	<a href="/languages"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">languages</li></div></a>
-	<a href="/publications/monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">monographs</li></div></a>
-	<a href="/publications/teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">teaching<br>materials</li></div></a>
-	<a href="#"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">collaborations</li></div></a>
+	<a href="/publications"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>publications</h3></li></div></a>
+	<a href="/projects"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>projects</h3></li></div></a>
+	<a href="/publications/journals"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>journals</h3></li></div></a>
+	<a href="/prodev"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>workshops & conferences</h3></li></div></a>
+	<a href="/languages"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>languages</h3></li></div></a>
+	<a href="/publications/monographs"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>monographs</h3></li></div></a>
+	<a href="/publications/teaching-materials"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>teaching materials</h3></li></div></a>
+	<a href="/stories"><div class="col-xs-6 col-md-3"><li class="shadowboxed category"><h3>news</h3></li></div></a>
 </ul>
 {% endblock subheadlines %}
 
 {% block stories %}
-<div class="container-fluid js-masonry" 
-		data-masonry-options='{ 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+<div id="dyno" class="container-fluid">
 	{% for feature in featured %}
 	
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="listing shadowboxed">
-			<p> <img src="{{MEDIA_URL}}img/{{feature.getuid}}icon.png"> </p>
-			<p> {{ feature.title | safe }}</p>	
-			<p> {{ feature.description | safe | truncatewords_html:4 }} </p>
+			<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+			<p> {{ feature.title | safe | truncatewords:8 }}</p>	
+			<p> {{ feature.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 			</div>
 		</a>
 	
@@ -63,6 +58,18 @@
 {% block local_js %}
 	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
 	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
-	<!-- Masonry for dynamic grid layout -->
-	<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
 {% endblock local_js %}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){ 
+	var $ = jQuery;
+	var container = document.querySelector('#dyno');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 40,
+	  isFitWidth: 'true'
+	});
+})
+{% endblock customjavascript %}

@@ -9,7 +9,7 @@
 
 
 {% block jumbotron %}
-	{% if not subpage %}
+	{% if false %}
 		{% if featured %}	
 		<div class="jumbotron">
 			<!-- Start WOWSlider.com -->
@@ -31,7 +31,7 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-<h2>
+<div class="page-header"><h1>
 	{% if language_name %}
 		<a href="/languages"><span class="glyphicon glyphicon-arrow-left"></span></a>
 	{% endif %}Languages 
@@ -48,18 +48,18 @@
 			choose a language 
 		{% endif %}
 	</small>
-	</h2>
+</h1></div>
 	
 {% endblock pageheading %}
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
-	<a href="chinese" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Chinese</li></div></a>
-	<a href="japanese" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Japanese</li></div></a>
-	<a href="korean" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Korean</li></div></a>
-	<a href="khmer" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Khmer</li></div></a>
-	<a href="filipino" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Filipino</li></div></a>
-	<a href="samoan" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Samoan</li></div></a>
+	<a href="chinese" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Chinese</h3></li></div></a>
+	<a href="japanese" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Japanese</h3></li></div></a>
+	<a href="korean" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Korean</h3></li></div></a>
+	<a href="khmer" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Khmer</h3></li></div></a>
+	<a href="filipino" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Filipino</h3></li></div></a>
+	<a href="samoan" class="navbar-link"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Samoan</h3></li></div></a>
 </ul>
 {% endblock subheadlines %}
 
@@ -67,18 +67,13 @@
 
 <!-- Default listing if language is not selected -->
 {% if featured %}
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno0" class="container">
 		{% for p in featured %}	
 			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/{{ p.getuid }}icon.png"> </p>
-					<p>{{p.title|safe}}</p>	
+					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+					<p> {{ p.title | safe | truncatewords:8 }}</p>	
+					<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 				</div>
 			</a>
 		{% endfor %}		
@@ -86,23 +81,18 @@
 {% endif %}
 
 {% if publications or prodevs or projects %}
-<div class="row">
+
 	<!-- right side content display -->
 	<div id="item-listing" class="col-md-12">
 	
 		<p><h3 id="publications">Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-		<div class="container js-masonry" 
-			data-masonry-options='{ 
-				"columnWidth": 230, 
-				"itemSelector": ".listing",
-				"gutter": 10,
-				"isFitWidth": true
-			}'>
+		<div id="dyno1" class="container">
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{{MEDIA_URL}}img/{{ p.getuid }}icon.png"> </p>
-						<p>{{p.title|safe}}</p>	
+						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+						<p> {{ p.title | safe | truncatewords:8 }}</p>	
+						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 					</div>
 				</a>
 			{% endfor %}		
@@ -110,18 +100,13 @@
 
 	
 		<p><h3 id="projects">Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-		<div class="container js-masonry" 
-			data-masonry-options='{ 
-				"columnWidth": 230, 
-				"itemSelector": ".listing",
-				"gutter": 10,
-				"isFitWidth": true
-			}'>
+		<div id="dyno2" class="container">
 			{% for p in projects %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{{MEDIA_URL}}img/PROJECTSplaceholderIcon.png"> </p>
-						<p>{{p.title|safe}}</p>	
+						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+						<p> {{ p.title | safe | truncatewords:8 }}</p>	
+						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 					</div>
 				</a>
 			{% endfor %}		
@@ -129,28 +114,45 @@
 
 
 		<p><h3 id="prodev">Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-		<div class="container js-masonry" 
-			data-masonry-options='{ 
-				"columnWidth": 230, 
-				"itemSelector": ".listing",
-				"gutter": 10,
-				"isFitWidth": true
-			}'>
+		<div id="dyno3" class="container">
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
-						<p> <img src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png"> </p>
-						<p>{{p.title|safe}}</p>	
+						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+						<p> {{ p.title | safe | truncatewords:8 }}</p>	
+						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 					</div>
 				</a>
 			{% endfor %}		
 		</div>
 
-</div></div>
+	</div>
+
 {% endif %}
 {% endblock stories %}
 
+{% comment %}
 {% block local_js %}
 	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
 	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
 {% endblock local_js %}
+{% endcomment %}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){
+	var $ = jQuery;
+	var containers = ['#dyno0', '#dyno1', '#dyno2', '#dyno3'];	
+	for (i in containers) {
+		containers[i] = document.querySelector(containers[i]);
+		if(containers[i]) {			
+			msnry = new Masonry( containers[i], {
+			  // options
+			  columnWidth: 230,
+			  itemSelector: '.listing',
+			  gutter: 40,
+			  isFitWidth: 'true'
+			});
+		}
+	}
+})
+{% endblock customjavascript %}

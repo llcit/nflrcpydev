@@ -41,6 +41,20 @@ PUBLICATION_MEDIA_TYPES = (
     ('Videotape', 'Videotape'),
 )
 
+ITEM_TYPE_SHORTCUTS = {
+     'CD': 'media',
+     'DVD': 'media',
+     'Videotape': 'media',
+     'NFLRC Monograph': 'monographs',
+     'Network': 'networks',
+     'Journal': 'journals',
+     'Language Teaching Material': 'teaching-materials',
+     'PragmaticsLL': 'pragmatics',
+     'PragmaticsI' : 'pragmatics',
+     'Research Note': 'research-notes',
+     'Workshop & Conferences': 'prodev',
+}
+
 class ItemsManager(models.Manager):
     def allfeatured(self, **kwargs):
         featured_publications = Publication.objects.filter(featured=1)
@@ -89,8 +103,9 @@ class Contact(models.Model):
 class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
+    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
@@ -98,11 +113,15 @@ class StoryPage(models.Model):
     objects = ItemsManager()
 
     def classname(self):
-        name = self.__class__.__name__
-        return name.lower()
-
+        name = 'stories'
+        return name
+    
+    def displayname(self):
+        name = 'Stories'
+        return name
+    
     def getuid(self):
-        return self.id
+        return 'story%s' % self.id 
 
     def get_absolute_url(self):
         return reverse('story', args=[str(self.id)])
@@ -119,10 +138,11 @@ class Prodev(models.Model):
     director = models.CharField(max_length=200L)
     facilitator = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
     related_publication = models.TextField(blank=True)
     url = models.URLField()
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
@@ -132,6 +152,10 @@ class Prodev(models.Model):
     def classname(self):
         name = self.__class__.__name__
         return name.lower()
+
+    def displayname(self):
+        name = 'Workshop & Conferences'
+        return name
 
     def properties(self):
         properties = [(field.name, field.value_to_string(self))
@@ -151,7 +175,7 @@ class Prodev(models.Model):
         return properties
 
     def getuid(self):
-        return self.id
+        return 'PD%s' % self.id
 
     def get_absolute_url(self):
         return reverse('prodevview', args=[str(self.id)])
@@ -168,8 +192,9 @@ class Project(models.Model):
     status = models.CharField(max_length=30L, blank=True)
     director = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, null=True)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
@@ -179,6 +204,10 @@ class Project(models.Model):
     def classname(self):
         name = self.__class__.__name__
         return name.lower() + 's'
+
+    def displayname(self):
+        name = 'Projects'
+        return name
 
     def properties(self):
         properties = [(field.name, field.value_to_string(self))
@@ -219,17 +248,25 @@ class Publication(models.Model):
     year = models.CharField(max_length=12L, blank=True)
     price = models.FloatField(null=True, blank=True)
     description = models.TextField(blank=True)
+    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
     size = models.CharField(max_length=40L, blank=True)
     url = models.CharField(max_length=250L, blank=True)
     order_from = models.CharField(max_length=10L, blank=True)
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     isbn = models.CharField(max_length=20L, null=True, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
+
+    class Meta:
+        ordering = ['-year', 'item_number']
+    
+    def displayname(self):
+        name = 'Publications'
+        return name
 
     def classname(self):
         name = self.__class__.__name__
@@ -247,7 +284,7 @@ class Publication(models.Model):
             ('category', self.category),
             ('author', self.author),
             ('year', self.year),
-            ('url', '<a href=\"' + self.url + '\"/>vendors</a>'),
+            ('url', self.url),
             ('order info', self.order_from),
             ('isbn', self.isbn)
         ]

@@ -6,9 +6,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from itertools import chain
 
 from django.db.models import Q
-
+from django.utils.html import strip_tags
 
 from nflrcapp.models import *
+
 
 def home(request):
     featured1 = Publication.objects.filter(featured=True)
@@ -38,7 +39,6 @@ def about(request):
 def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by('listing_rank')
-
     return render_to_response('l2-contact.html', {
         'staff': staff, 'collabs': collabs
     }, context_instance=RequestContext(request))
@@ -60,8 +60,6 @@ def languages(request, tag):
         prodevs = Prodev.objects.filter(
             language__icontains=tag).order_by('-id')
 
-        
-
         return render_to_response('l2-languages.html', {
             'language_name': tag,
             'publications': publications,
@@ -70,7 +68,7 @@ def languages(request, tag):
         }, context_instance=RequestContext(request))
 
     featured = Publication.objects.allfeatured()
-    
+
     # Faster if request is language specific.
     return render_to_response('l2-languages.html',
                               {'featured': featured}, context_instance=RequestContext(request))
@@ -80,13 +78,21 @@ def outreach(request):
     return render_to_response('index.html', {}, context_instance=RequestContext(request))
 
 
-def prodev(request, tag):
-    listing = Prodev.objects.all().order_by('-id')
-    featured = listing.filter(featured=1)
-    return render_to_response('l2-prodev.html', {
-        'items': listing,
-        'featured': featured,
-        'subpage' : tag
+def prodev(request):
+    listing = Prodev.objects.filter().order_by('pdtype', '-date')
+    featured = listing.filter(featured=True)
+    return render_to_response('l2-workshop-confs.html', {
+        'events': listing,
+        'featured': featured
+    }, context_instance=RequestContext(request))
+
+
+def workshop_conf(request):
+    listing = Prodev.objects.filter().order_by('pdtype', '-date')
+    featured = listing.filter(featured=True)
+    return render_to_response('l2-workshop-confs.html', {
+        'events': listing,
+        'featured': featured
     }, context_instance=RequestContext(request))
 
 
@@ -99,7 +105,8 @@ def prodevview(request, item):
         raise Http404
 
     return render_to_response('item-display.html', {
-        'item': displayitem
+        'item': displayitem,
+        'shortcuts': ITEM_TYPE_SHORTCUTS
     }, context_instance=RequestContext(request))
 
 
@@ -109,7 +116,7 @@ def projects(request, tag):
     return render_to_response('l2-projects.html', {
         'items': listing,
         'featured': featured,
-        'subpage' : tag
+        'subpage': tag
     }, context_instance=RequestContext(request))
 
 
@@ -124,7 +131,8 @@ def projectview(request, item):
         raise Http404
 
     return render_to_response('item-display.html', {
-        'item': displayitem
+        'item': displayitem,
+        'shortcuts': ITEM_TYPE_SHORTCUTS
     }, context_instance=RequestContext(request))
 
 
@@ -146,18 +154,19 @@ def publications(request, tag):
     elif tag == 'networks':
         listing = Publication.objects.filter(category='Network')
     elif tag == 'media':
-        listing = Publication.objects.filter(Q(category='DVD') | Q(category='Videotape') | Q(category='CD'))
+        listing = Publication.objects.filter(
+            Q(category='DVD') | Q(category='Videotape') | Q(category='CD'))
     elif tag == 'listing':
         listing = Publication.objects.all()
     else:
         listing = featured
 
-    listing = listing.order_by('category','-year')
+    listing = listing.order_by('category', '-year')
 
     return render_to_response('l2-publications.html', {
         'items': listing,
         'featured': featured,
-        'subpage' : tag
+        'subpage': tag
     }, context_instance=RequestContext(request))
 
 
@@ -167,12 +176,13 @@ def pubview(request, item):
     # try:
     #
     # except ObjectDoesNotExist:
-    # 	raise Http404
+    #   raise Http404
     # except ValueError:
-    # 	raise Http404
+    #   raise Http404
 
     return render_to_response('item-display.html', {
-        'item': displayitem
+        'item': displayitem,
+        'shortcut': ITEM_TYPE_SHORTCUTS[displayitem.category]
     }, context_instance=RequestContext(request))
 
 
@@ -221,6 +231,14 @@ def software(request, tag):
         'item_type': 'software'
     }, context_instance=RequestContext(request))
 
+def stories(request):
+    listing = StoryPage.objects.all().order_by('title')
+    featured = listing.filter(featured=1)
+
+    return render_to_response('l2-stories.html', {
+        'items': listing,
+        'featured': featured,
+    }, context_instance=RequestContext(request))
 
 def storyview(request, item):
     # listing = Publication.objects.filter(item_number=item)
@@ -228,19 +246,62 @@ def storyview(request, item):
     # try:
     #
     # except ObjectDoesNotExist:
-    # 	raise Http404
+    #   raise Http404
     # except ValueError:
-    # 	raise Http404
+    #   raise Http404
 
     return render_to_response('item-display.html', {
         'item': displayitem
     }, context_instance=RequestContext(request))
 
 
-def workshop_conf(request):
-    listing = Prodev.objects.filter().order_by('pdtype', 'date')
-    featured = listing.filter(featured=True)
-    return render_to_response('l2-workshop-confs.html', {
-        'events': listing,
-        'featured': featured
-        }, context_instance=RequestContext(request))
+
+
+
+
+
+# Use this stub to run development changes...
+def dev_utility(request):
+#     imgs = ["CD02","CD07","CD08","DVD01","DVD02","DVD03","KP01","KPiconTEMPLATE.png","LT03","LT09","LT25","LT25r","LT25t","LT26","LT28","LT29icon.jpg","LT30","LT31","LT31r","LT31t","LT33","LT34","LT34lg.png","LT34sm.png","LT35","LT36icon.jpg","LT36","LT38","LT3icon.jpg","LT40icon.jpg","LT40","LT41icon.jpg","LT41","MG00icon.jpg","MG00","MG01","MG02","MG03","MG04","MG05","MG06","MG07","MG09","MG09lg.png","MG0x","MI07icon.jpg","MI08","NW00","OJ01","OJ01lg.png","OJ01sm.png","OJ02","OJ03","PI01","PI02","PI03","PLL11","PLL12","PLL13","PROJECTSplaceholder","RN14","RN21","RN33","RN34","RN35","RN36","RN37","RN38","RN39","RN40","RN41","RN42","RN43","RN44","RN46","RN47","RN48","RN49","RN50x","RN51","TR05","TR06","TR07","TR08","TR09","TR10","TR11","TR12","TR13","TR14","TR15","TR16","TR17","TR18","TR19","TR20","TR21","TR22","TR23","TR24","TR25","TR26","VD03","VD04","VD05","VD06","VD07","VD08","VD09","VD10","VD11","VD12","VD14","VD15","VD16.png","VD17","VD18","VD19","VD20","VD21","VD22","VD23","VD24","VD25","WORKSHOPS-CONFERENCESplaceholder","XLT03-2icon.jpg","XLT03-2","XLT03icon.jpg","XLT03"
+#     ]
+
+    objs = Publication.objects.all()
+    for i in objs:
+        data = strip_tags(i.description)
+        trimmed = (data[:137] + '...') if len(data) > 137 else data
+        i.thumbnail_desc = trimmed
+        i.save()
+
+    objs = Prodev.objects.all()
+    for i in objs:
+        data = strip_tags(i.description)
+        trimmed = (data[:137] + '...') if len(data) > 137 else data
+        i.thumbnail_desc = trimmed
+        i.save()
+
+    objs = Project.objects.all()
+    for i in objs:
+        data = strip_tags(i.description)
+        trimmed = (data[:137] + '...') if len(data) > 137 else data
+        i.thumbnail_desc = trimmed
+        i.save()
+#     for i in objs:
+#         if i.getuid() in imgs:
+#             i.image = i.getuid() + 'icon.png'
+#         else:
+#             i.image = 'icon.png'
+        
+#         i.save()
+
+#     objs = Project.objects.all()
+#     for i in objs:
+#         i.image = 'PROJECTSplaceholderIcon.png'
+#         i.save()
+
+#     objs = Prodev.objects.all()
+#     for i in objs:
+#         i.image = 'WORKSHOPS-CONFERENCESplaceholderIcon.png'
+#         i.save()
+
+
+    return render_to_response('index.html', {}, context_instance=RequestContext(request))

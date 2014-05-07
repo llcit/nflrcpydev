@@ -3,27 +3,21 @@
 
 {% block jumbotron %}
 	{% if featured %}
-	<div class="jumbotron">
-		<p> <img src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png">  </p>	
+	<div class="jumbotron container">
+		<div class="row"><img src="{{MEDIA_URL}}img/{{ featured.0.getuid }}lg.png"></div>
 		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
 	</div>
 	{% endif %}
 {% endblock jumbotron %}
 
 {% block pageheading %}
-	Workshops and Conferences <small></small>
+<div class="page-header"><h1>Workshops and Conferences <small></small></h1></div>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}
 
 {% block stories %}
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno" class="container">
 	{% for p in events %}
 		{% ifchanged p.pdtype %}
 			<p><h3 id="prodev">{{ p.pdtype }}<small><a href="#top"> back to top</a></small></h3></p>
@@ -32,10 +26,24 @@
 	
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
-				<p> <img src="{{MEDIA_URL}}img/WORKSHOPS-CONFERENCESplaceholderIcon.png"> </p>
-				<p> {{ p.description | safe | truncatewords_html:20 }} </p>
+				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+				<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
 			</div>
 		</a>
 	{% endfor %}
 	</div>
 {% endblock stories %}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){ 
+	var $ = jQuery;
+	var container = document.querySelector('#dyno');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 40,
+	  isFitWidth: 'true'
+	});
+})
+{% endblock customjavascript %}

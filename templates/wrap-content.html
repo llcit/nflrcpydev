@@ -3,9 +3,8 @@
 {% block content %}
 
 <!-- Page header row -->
-	<div class="page-header">
-		<h1>{% block pageheading %}{% endblock pageheading %}</h1>
-	</div>
+	{% block pageheading %}{% endblock pageheading %}
+
 <!-- Submenu row -->
 	<div class="row">{% block subheadlines %}{% endblock subheadlines %}</div> 
 

@@ -1,14 +1,12 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block pageheading %}
-	About Us <small></small>
-{% endblock pageheading %}
+{% block pageheading %}<div class="page-header"><h1>About Us<small></small></h1></div> {% endblock pageheading %}
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified"> 
-	<a href="/story/1"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">history</li></div></a>
-	<a href="/story/2"><div class="col-xs-12 col-md-6"><li class="shadowboxed category">our kuleana</li></div></a>
+	<a href="/story/1"><div class="col-xs-12 col-md-6"><li class="shadowboxed category"><h3>History</h3></li></div></a>
+	<a href="/story/2"><div class="col-xs-12 col-md-6"><li class="shadowboxed category"><h3>Our Kuleana</h3></li></div></a>
 </ul>
 {% endblock subheadlines %}
 
@@ -26,13 +24,7 @@
 	</div>
 
 	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno0" class="container">
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
@@ -44,13 +36,7 @@
 	</div>
 
 	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno1" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
@@ -62,13 +48,7 @@
 	</div>
 
 	<p><h3 id="advboard">Advisory Board <small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno2" class="container">
 		{% for i in advboard %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
@@ -79,3 +59,22 @@
 		{% endfor %}			
 	</div>
 {% endblock stories %}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){
+	var $ = jQuery;
+	var containers = ['#dyno0', '#dyno1', '#dyno2'];	
+	for (i in containers) {
+		containers[i] = document.querySelector(containers[i]);
+		if(containers[i]) {			
+			msnry = new Masonry( containers[i], {
+			  // options
+			  columnWidth: 230,
+			  itemSelector: '.listing',
+			  gutter: 40,
+			  isFitWidth: 'true'
+			});
+		}
+	}
+})
+{% endblock customjavascript %}

@@ -12,24 +12,44 @@ class ContactAdmin(admin.ModelAdmin):
 	list_display = ('last_name', 'first_name', 'title', 'role', 'listing_rank')
 	list_filter = ['role',]
 	list_editable = ['role', 'title', 'listing_rank']	
+	list_per_page = 200
+	search_fields = ['last_name', 'first_name', 'role']
+	ordering = ['listing_rank']
 
 class ProjectAdmin(admin.ModelAdmin):
-	list_display = ('project_number', 'title', 'featured', 'headline')
+	list_display = ('getuid', 'project_number', 'title', 'featured', 'headline', 'image')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'headline']
+	list_per_page = 200
+	search_fields = ['project_number', 'title']
+	ordering = ['-project_number']
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('item_number', 'title', 'featured', 'headline')
-	list_filter = ['featured', 'headline']
+	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'headline', 'image',)
+	list_filter = ['featured', 'headline', 'category']
 	list_editable = ['featured', 'headline']
+	list_per_page = 200
+	search_fields = ['item_number', 'title']
+	ordering = ['item_number', '-year']
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'featured', 'headline', 'pdtype',)
+	list_display = ('getuid', 'id', 'title', 'featured', 'headline', 'pdtype', 'image',)
 	list_filter = ['featured', 'headline', 'pdtype']
 	list_editable = ['featured', 'headline', 'pdtype']
+	list_per_page = 200
+	search_fields = ['id', 'title']
+	ordering = ['-id', 'title']
+
+class StoryPageAdmin(admin.ModelAdmin):
+	list_display = ('getuid', 'id', 'title', 'featured', 'headline', 'image')
+	list_filter = ['featured', 'headline',]
+	list_editable = ['featured', 'headline']
+	list_per_page = 200
+	search_fields = ['id', 'title']
+	ordering = ['id', 'title',]
 
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
-admin.site.register(StoryPage, Media = ExtraMedia)
+admin.site.register(StoryPage, StoryPageAdmin, Media = ExtraMedia)

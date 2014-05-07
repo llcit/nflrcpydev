@@ -2,20 +2,19 @@
 {% load staticfiles %}
 
 {% block pageheading %}
-	Contact <small><a href="#staff"><span class="badge">staff</span></a> <a href="#collaborators"><span class="badge">collaborators</span></a> </small>
+<div class="page-header">
+	<h1>Contact <small>
+		<a href="#staff"><span class="badge">staff</span></a> 
+		<a href="#collaborators"><span class="badge">collaborators</span></a>
+	</h1>
+</div>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines%}
 
 {% block stories %}
 	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno1" class="container">
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
@@ -27,13 +26,7 @@
 	</div>
 
 	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
-	<div class="container js-masonry" 
-		data-masonry-options='{ 
-			"columnWidth": 230, 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'>
+	<div id="dyno2" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
@@ -44,3 +37,25 @@
 		{% endfor %}		
 	</div>
 {% endblock stories%}
+{% block customjavascript %}
+jQuery(window).on('load', function(){ 
+	var $ = jQuery;
+	var container1 = document.querySelector('#dyno1');
+	var msnry = new Masonry( container1, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 10,
+	  isFitWidth: 'true'
+	});
+
+	var container2 = document.querySelector('#dyno2');
+	var msnry = new Masonry( container2, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 40,
+	  isFitWidth: 'true'
+	});
+})
+{% endblock customjavascript %}

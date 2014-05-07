@@ -10,26 +10,13 @@
 {% block jumbotron %}
 	{% if not subpage %}
 		{% if featured %}	
-		<div class="jumbotron">
-			<!-- Start WOWSlider.com -->
-			<div id="wowslider-container1">
-				<div class="ws_images">
-					<ul>
-						{% for f in featured %} 
-						<li><a href="{{ f.get_absolute_url }}">
-							<img src="{{MEDIA_URL}}img/{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-						</li></a>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-			<!-- End WOWSlider.com -->
-		</div>
 		{% endif %}
 	{% endif %}
 {% endblock jumbotron %}
 
 {% block pageheading %}
+<div class="page-header">		
+	<h1>
 	{% if subpage %}<a href="/publications"><span class="glyphicon glyphicon-arrow-left"></span></a> {% endif %} Publications
 	<small> 
 		{% if subpage %}			
@@ -39,17 +26,20 @@
 		{% endif %} 
 		<span class="badge">{{ items|length }}</span>
 	</small>
+	</h1>
+</div>
 {% endblock pageheading %}
 
 {% block subheadlines %}  
 <ul class="nav nav-pills nav-justified"> 
-	<a href="journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Journals</li></div></a>
-	<a href="monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Monographs</li></div></a>
-	<a href="teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Teaching<br>Materials</li></div></a>
-	<a href="pragmatics"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Pragmatics</li></div></a>
-	<a href="networks"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Networks</li></div></a>
-	<a href="media"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Physical<br>Media</li></div></a>
-	<a href="listing"><div class="col-xs-12 col-md-3"><li class="shadowboxed category">Full<br>Listing</li></div></a>
+	<a href="journals"><div class="col-xs-12 col-md-3"><li class="shadowboxed category {% if subpage == 'journals' %}active{% endif %}"><h3>Journals</h3></li></div></a>
+	<a href="monographs"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Monographs</h3></li></div></a>
+	<a href="teaching-materials"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Teaching Materials</h3></li></div></a>
+	<a href="pragmatics"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Pragmatics</h3></li></div></a>
+	<a href="networks"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Networks</h3></li></div></a>
+	<a href="media"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Physical Media</h3></li></div></a>
+	<a href="research-notes"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Research Notes</h3></li></div></a>
+	<a href="listing"><div class="col-xs-12 col-md-3"><li class="shadowboxed category"><h3>Full Listing</h3></li></div></a>
 </ul>
 {% endblock subheadlines %}
 
@@ -61,14 +51,15 @@
 
 			<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
-				<p> <img src="{{MEDIA_URL}}img/{{p.getuid}}icon.png"> </p>
-				<p> {{ p.title | safe }}</p>	
-				<p> {{ p.description | safe | truncatewords_html:4 }} </p>
+				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+				<h4><small>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</small></h4>	
 			</div>
 			</a>
 		{% endfor %}
 	</div>
-{% else %}
+{% else %} <!-- FULL LISTING -- NO ICONS -->
+	<div class="container">
 	{% for p in items %}
 		{% ifchanged p.category %} <div class="row"><h3><small>{{ p.category }}</small> </h3></div> {% endifchanged %}
 		<div class="row enchilada {% cycle 'shade' 'noshade' %}">
@@ -80,19 +71,16 @@
 				{{ p.title | safe }}
 			</div>
 			<div class="col-md-8">
-				{{ p.description | safe | truncatewords_html:20 }} 
+				{{ p.thumbnail_desc | safe | truncatewords_html:140 }}
 			</div>
 			</a>
 		</div>
-	{% endfor %}	
+	{% endfor %}
+	</div>	
 {% endif %}
 
 {% endblock stories %}
 
-{% block local_js %}
-	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
-	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
-{% endblock local_js %}
 
 {% block customjavascript %}
 jQuery(window).on('load', function(){ 
@@ -102,7 +90,15 @@ jQuery(window).on('load', function(){
 	  // options
 	  columnWidth: 230,
 	  itemSelector: '.listing',
-	  gutter: 10,
+	  gutter: 40,
+	  isFitWidth: 'true'
+	});
+	var container2 = document.querySelector('#jumbo');
+	var msnry = new Masonry( container2, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 40,
 	  isFitWidth: 'true'
 	});
 })
