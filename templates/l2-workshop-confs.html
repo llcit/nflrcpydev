@@ -3,7 +3,7 @@
 
 {% block jumbotron %}
 	{% if featured %}
-	<div class="jumbotron container">
+	<div class="jumbotron">
 		<div class="row"><img src="{{MEDIA_URL}}img/{{ featured.0.getuid }}lg.png"></div>
 		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
 	</div>
@@ -11,25 +11,44 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-<div class="page-header"><h1>Workshops and Conferences <small></small></h1></div>
+<div class="page-header">
+	<h1>
+		Workshops and Conferences 
+		<small><small>
+		<span><a href="#Conference"> Conferences</a></span>
+		<span> | </span>
+		<span><a href="#Summer Institute"> Summer Institutes</a></span>
+		<span> | </span>
+		<span><a href="#Workshop"> Workshops</a></span>
+		<span> | </span>
+		<span><a href="#Symposium"> Symposiums</a></span>
+		<span> | </span>
+		<span><a href="#Other"> Others</a></span>
+		</small></small>
+	</h1>
+</div>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}
 
 {% block stories %}
-	<div id="dyno" class="container">
+	
 	{% for p in events %}
 		{% ifchanged p.pdtype %}
-			<p><h3 id="prodev">{{ p.pdtype }}<small><a href="#top"> back to top</a></small></h3></p>
-
+			{% if not forloop.first %}</div>{% endif %}
+			<span id="{{ p.pdtype }}" class="adjusted-anchor"></span>
+			<p><h3>{{ p.pdtype }}s<small><a href="#top"> back to top</a></small></h3></p>
+			<div id="" class="container dyno">				
 		{% endifchanged %}
 	
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-				<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
 			</div>
 		</a>
+		{% if forloop.last %}</div>{% endif %}
 	{% endfor %}
 	</div>
 {% endblock stories %}
@@ -37,13 +56,17 @@
 {% block customjavascript %}
 jQuery(window).on('load', function(){ 
 	var $ = jQuery;
-	var container = document.querySelector('#dyno');
-	var msnry = new Masonry( container, {
-	  // options
-	  columnWidth: 230,
-	  itemSelector: '.listing',
-	  gutter: 40,
-	  isFitWidth: 'true'
-	});
-})
+	var containers = $('.dyno');	
+	for (i in containers) {
+		if(containers[i]) {			
+			msnry = new Masonry( containers[i], {
+			  // options
+			  columnWidth: 230,
+			  itemSelector: '.listing',
+			  gutter: 40,
+			  isFitWidth: 'true'
+			});
+		}
+	}
+});
 {% endblock customjavascript %}

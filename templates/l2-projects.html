@@ -38,9 +38,9 @@
 	{% for p in items %}
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
-			<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-			<p> {{ p.title | safe | truncatewords:8 }}</p>	
-			<p>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</p>
+				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>	
 			</div>
 		</a>	
 	{% endfor %}

@@ -1,12 +1,6 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block local_css %}
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
-	<!-- End WOWSlider.com HEAD section -->
-{% endblock local_css %}
-
 {% block jumbotron %}
 <div class="jumbotron">	
 	<!-- Start WOWSlider.com -->
@@ -45,9 +39,9 @@
 	
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="listing shadowboxed">
-			<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
-			<p> {{ feature.title | safe | truncatewords:8 }}</p>	
-			<p> {{ feature.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
 			</div>
 		</a>
 	

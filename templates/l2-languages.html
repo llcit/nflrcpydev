@@ -37,7 +37,8 @@
 	{% endif %}Languages 
 	<small> 
 		{% if language_name %} 
-			{{ language_name|title }}<small>
+			{{ language_name|title }}
+			<small>
 			<span class="badge">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
 			<span> | </span>
 			<span class="badge">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
@@ -72,8 +73,8 @@
 			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-					<p> {{ p.title | safe | truncatewords:8 }}</p>	
-					<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+					<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+					<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
 				</div>
 			</a>
 		{% endfor %}		
@@ -82,45 +83,46 @@
 
 {% if publications or prodevs or projects %}
 
-	<!-- right side content display -->
-	<div id="item-listing" class="col-md-12">
 	
+	<div id="item-listing" class="col-md-12">
+		<span id="publications" class="adjusted-anchor"></span>
 		<p><h3 id="publications">Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno1" class="container">
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
 						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-						<p> {{ p.title | safe | truncatewords:8 }}</p>	
-						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+						<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+						<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>	
 					</div>
 				</a>
 			{% endfor %}		
 		</div>
 
 	
+		<span id="projects" class="adjusted-anchor"></span>
 		<p><h3 id="projects">Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno2" class="container">
 			{% for p in projects %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
 						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-						<p> {{ p.title | safe | truncatewords:8 }}</p>	
-						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+						<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+						<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>	
 					</div>
 				</a>
 			{% endfor %}		
 		</div>
 
-
+		<span id="prodev" class="adjusted-anchor"></span>
 		<p><h3 id="prodev">Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno3" class="container">
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
 					<div class="listing shadowboxed">
 						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-						<p> {{ p.title | safe | truncatewords:8 }}</p>	
-						<p> {{ p.thumbnail_desc | safe | truncatewords_html:140 }} </p>
+						<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+						<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
 					</div>
 				</a>
 			{% endfor %}		

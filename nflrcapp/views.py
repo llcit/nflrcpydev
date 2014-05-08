@@ -79,7 +79,7 @@ def outreach(request):
 
 
 def prodev(request):
-    listing = Prodev.objects.filter().order_by('pdtype', '-date')
+    listing = Prodev.objects.filter().order_by('pdtype', '-id')
     featured = listing.filter(featured=True)
     return render_to_response('l2-workshop-confs.html', {
         'events': listing,
@@ -88,7 +88,7 @@ def prodev(request):
 
 
 def workshop_conf(request):
-    listing = Prodev.objects.filter().order_by('pdtype', '-date')
+    listing = Prodev.objects.filter().order_by('-id', 'pdtype')
     featured = listing.filter(featured=True)
     return render_to_response('l2-workshop-confs.html', {
         'events': listing,
