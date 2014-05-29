@@ -36,29 +36,37 @@
       <a href="/"><div class="navbar-brand">&nbsp;</div></a> 
     </div>
     
-    <div class="navbar-collapse collapse navpanel"> 
-      <ul  id="socialnav" class="nav navbar-nav navbar-right">
-        <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
-        <li><a href="/about"><button type="button" class="btn btn-default">About</button></a></li>
-        <li id="facebook"><a href="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </a></li> 
-        <li id="twitter"><a href="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </a></li> 
-        <li id="linkedin"><a href="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </a></li> 
-        <li id="youtube"><a href="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </a></li> 
-      </ul>
+    <div class="navbar-collapse collapse navpanel">
+        <ul  id="socialnav" class="nav navbar-nav navbar-right">
+            <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
+            <li><a href="/about"><button type="button" class="btn btn-default">About</button></a></li>
+            <li id="facebook"><a href="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </a></li> 
+            <li id="twitter"><a href="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </a></li> 
+            <li id="linkedin"><a href="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </a></li> 
+            <li id="youtube"><a href="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </a></li> 
+        </ul>
+
       
     </div><!--/.nav-collapse -->
+        <div class="row">
+            <div class="col-md-offset-8 col-md-2" style="text-align: right">
+                    <span><button type="button" class="btn btn-default">Search</button></span>
+            </div>
+            <div class="col-md-2" style="text-align: left"><span><input type="text" class="form-control"></span></div>
+        </div>
   </div>
-</div>
 
+</div>
 {% block jumbotron %}  {% endblock jumbotron %}  
 
-<div class="container-fluid"><!-- Main content -->{% block content %} {% endblock content%}</div>
+<!-- Main content -->
+<div class="container-fluid">{% block content %} {% endblock content%}</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Include all compiled plugins (below), -->
 <!-- Bootstrap -->
 <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 <!-- Tocify -->
@@ -66,11 +74,11 @@
 <!-- Masonry for dynamic grid layout -->
 <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
 
+<!-- Or include individual files as needed with this placeholder  -->
 {% block local_js %} {% endblock local_js %}
 
-<script type="text/javascript">
-  {% block customjavascript %}{% endblock customjavascript %}
-</script>
+<!-- Inline javascript placeholder -->
+<script type="text/javascript">{% block customjavascript %}{% endblock customjavascript %}</script>
 
 </body>
 </html>

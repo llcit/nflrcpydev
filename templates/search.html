@@ -1,35 +1,54 @@
 {% extends "wrap-results.html" %}
 
 {% block stories %}
-
-	<div class="subsection">
 	<p>{{publications|length}} Publication{{ publications|length|pluralize }}</p>
+	<div id="subsection0">
 	{% for p in publications %}	
 		<div class="listing shadowboxed">
-			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
-			<a href="/publications/view/{{p.item_number}}">{{p.title|safe}}</a>	
-		</div>
-	{% endfor %}
-	</div>
-	
-	<div class="subsection">
-	<p>{{projects|length}} Project{{ projects|length|pluralize }}</p>
-	{% for p in projects %}
-		<div class="listing shadowboxed">
-			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
-			<a href="/projects/view/{{p.project_number}}">{{p.title|safe}}</a>	
+			{% if p.image %}<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>{% endif %}
+			<a href="{{ p.get_absolute_url }}">{{p.title|safe}}</a>	
 		</div>
 	{% endfor %}
 	</div>
 
-	<div class="subsection">
+	<p>{{projects|length}} Project{{ projects|length|pluralize }}</p>	
+	<div id="subsection1">
+	{% for p in projects %}
+		<div class="listing shadowboxed">
+			{% if p.image %}<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>{% endif %}
+			<a href="{{ p.get_absolute_url }}">{{p.title|safe}}</a>	
+		</div>
+	{% endfor %}
+	</div>
+
 	<p>{{prodevs|length}} Professional Development Project{{ prodevs|length|pluralize }}</p>
+	<div id="subsection2">
 	{% for p in prodevs %}
 		<div class="listing shadowboxed">
-			{% if p.image %}<p> <img src="{{STATIC_URL}}img/{{p.classname}}/{{p.image}}"> </p>{% endif %}
-			<a href="/prodev/view/{{p.id}}">{{p.title|safe}}</a>	
+			{% if p.image %}<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>{% endif %}
+			<a href="{{ p.get_absolute_url }}">{{p.title|safe}}</a>	
 		</div>
 	{% endfor %}
 	</div>
 
 {% endblock %}
+
+{% block customjavascript %}
+
+jQuery(window).on('load', function(){
+	var $ = jQuery;
+	var containers = ['#subsection0', '#subsection1', '#subsection2'];	
+	for (i in containers) {
+		containers[i] = document.querySelector(containers[i]);
+		if(containers[i]) {			
+			msnry = new Masonry( containers[i], {
+			  // options
+			  columnWidth: 230,
+			  itemSelector: '.listing',
+			  gutter: 40,
+			  isFitWidth: 'true'
+			});
+		}
+	}
+})
+{% endblock customjavascript %}

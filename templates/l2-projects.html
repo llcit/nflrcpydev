@@ -1,15 +1,10 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block local_css %}
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
-	<!-- End WOWSlider.com HEAD section -->
-{% endblock local_css %}
 
 {% block jumbotron %}
-	{% if false %}
-	<div class="jumbotron">
+{% comment %}
+	<div class="container-fluid">
 		<!-- Start WOWSlider.com -->
 		<div id="wowslider-container1">
 			<div class="ws_images">
@@ -24,7 +19,7 @@
 		</div>
 		<!-- End WOWSlider.com -->
 	</div>
-	{% endif %}
+{% endcomment %}
 {% endblock jumbotron %}
 
 {% block pageheading %}

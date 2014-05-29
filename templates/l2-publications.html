@@ -46,6 +46,7 @@
 {% block stories %}
 
 {% if subpage|title != "Listing" %}
+
 	<div id="dyno" class="container">
 		{% for p in items %}
 
@@ -58,7 +59,9 @@
 			</a>
 		{% endfor %}
 	</div>
+
 {% else %} <!-- FULL LISTING -- NO ICONS -->
+
 	<div class="container">
 	{% for p in items %}
 		{% ifchanged p.category %} <div class="row"><h3><small>{{ p.category }}</small> </h3></div> {% endifchanged %}
@@ -76,25 +79,19 @@
 			</a>
 		</div>
 	{% endfor %}
-	</div>	
+	</div>
+
 {% endif %}
 
 {% endblock stories %}
 
 
 {% block customjavascript %}
+
 jQuery(window).on('load', function(){ 
 	var $ = jQuery;
 	var container = document.querySelector('#dyno');
 	var msnry = new Masonry( container, {
-	  // options
-	  columnWidth: 230,
-	  itemSelector: '.listing',
-	  gutter: 40,
-	  isFitWidth: 'true'
-	});
-	var container2 = document.querySelector('#jumbo');
-	var msnry = new Masonry( container2, {
 	  // options
 	  columnWidth: 230,
 	  itemSelector: '.listing',

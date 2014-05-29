@@ -1,50 +1,53 @@
 {% extends "wrap-item-display.html" %}
 {% load staticfiles %}
 
-{% block item-menu %}
-	
-
-{% endblock item-menu%}
-
-{% block item-content %}
-	<h2><a href="/{{ item.classname }}/{{ shortcut }}"><span class="glyphicon glyphicon-arrow-left"></span></a> {{ item.displayname | title}}<small> {{ shortcut | title }}</small></h2>
-	<h2>{{ item.title | safe }}</h2>
-	<div id="item-content" >{{ item.description | safe }}</div>
-{% endblock item-content %}
-
 {% block item-meta %}
-	<h2>
-		{% if item.classname == 'storypage' %}
-			<img class="item-thumbnail" src="{{MEDIA_URL}}img/logos/default.png">
-		{% else %}
-			<img class="item-thumbnail" src="{{MEDIA_URL}}img/{{ item.image }}">
-		{% endif %}
-	</h2>
-    <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
-    <hr>
-	<!-- <div data-spy="affix" data-offset-top="60" data-offset-bottom="10"> -->
-	<ul id="right-sidebar" class="nav nav-stacked">
+
+	<!-- Icon -->
+	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/{{ item.image }}"></h2>
+
+	<!-- Dynamic menu -->
+	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
+
+	<!-- Metadata items -->
+	<ul class="nav nav-stacked">
 	 	{% for name, value in item.customproperties %}
 			<li>
 				<div><span class="label label-default">{{ name }}</span></div>
 				<div>
-					{% if name == 'category' %} 
+
+					{% if name == 'category' %}						
 						<a href="/{{ item.classname }}/{{ shortcut }}">
 							{{ item.category }}s
-						</a>
-					
+						</a>					
 					{% elif name == 'url' %}
 						{{ value|safe|urlizetrunc:30 }}
 					{% else %}
 						{{ value|safe }}	
 					{% endif %}
+
 				</div>
 		  		
 		  	</li>
 		{% endfor %}   	
     </ul>
-    <!-- </div> -->
+
 {% endblock item-meta %}
+
+{% block item-content %}
+
+	<h2>
+		<a href="/{{ item.classname }}/{{ shortcut }}"><span class="glyphicon glyphicon-arrow-left"></span></a> {{ item.displayname | title}}
+		<small> {{ shortcut | title }}</small>
+	</h2>
+	
+	<h2>{{ item.title | safe }}</h2>
+	
+	<div id="item-content" >{{ item.description | safe }}</div>
+
+{% endblock item-content %}
+
+
 
 {% block customjavascript %}
 	$(function() {

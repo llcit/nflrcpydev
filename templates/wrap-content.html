@@ -3,19 +3,11 @@
 {% block content %}
 
 <!-- Page header row -->
-	{% block pageheading %}{% endblock pageheading %}
+	<div class="row">{% block pageheading %}{% endblock pageheading %}</div>
 
 <!-- Submenu row -->
 	<div class="row">{% block subheadlines %}{% endblock subheadlines %}</div> 
 
-<!-- Dynamic Grid Layout with Masonry -->
-	<!-- <div class="container-fluid js-masonry" 
-		data-masonry-options='{ 
-			"itemSelector": ".listing",
-			"gutter": 10,
-			"isFitWidth": true
-		}'> -->
-		<div class="row">{% block stories %} {% endblock stories %}</div>
-	<!-- </div> -->
+	<div class="row">{% block stories %} {% endblock stories %}</div>
 	
 {% endblock content %}

@@ -86,7 +86,7 @@
 	
 	<div id="item-listing" class="col-md-12">
 		<span id="publications" class="adjusted-anchor"></span>
-		<p><h3 id="publications">Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno1" class="container">
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -101,7 +101,7 @@
 
 	
 		<span id="projects" class="adjusted-anchor"></span>
-		<p><h3 id="projects">Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno2" class="container">
 			{% for p in projects %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -115,7 +115,7 @@
 		</div>
 
 		<span id="prodev" class="adjusted-anchor"></span>
-		<p><h3 id="prodev">Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
 		<div id="dyno3" class="container">
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
