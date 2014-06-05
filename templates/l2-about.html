@@ -4,10 +4,23 @@
 {% block pageheading %}<div class="page-header"><h1>About Us<small></small></h1></div> {% endblock pageheading %}
 
 {% block subheadlines %}
-<ul class="nav nav-pills nav-justified"> 
+<div id="dyno-menu" class="container">
+	{% for i in menu_items %}
+		<a href="{{ i.get_absolute_url }}">
+			<div class="listing shadowboxed col-md-6">
+				<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
+				<h4>{{ i.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ i.thumbnail_desc | safe | truncatewords_html:140 }}</h5>	
+			</div>
+		</a>
+	{% endfor %}
+</div>
+
+
+<!-- <ul class="nav nav-pills nav-justified"> 
 	<a href="/story/1"><div class="col-xs-12 col-md-6"><li class="shadowboxed category"><h3>History</h3></li></div></a>
 	<a href="/story/2"><div class="col-xs-12 col-md-6"><li class="shadowboxed category"><h3>Our Kuleana</h3></li></div></a>
-</ul>
+</ul> -->
 {% endblock subheadlines %}
 
 {% block stories %}
@@ -63,7 +76,7 @@
 {% block customjavascript %}
 jQuery(window).on('load', function(){
 	var $ = jQuery;
-	var containers = ['#dyno0', '#dyno1', '#dyno2'];	
+	var containers = ['#dyno-menu', '#dyno0', '#dyno1', '#dyno2'];	
 	for (i in containers) {
 		containers[i] = document.querySelector(containers[i]);
 		if(containers[i]) {			

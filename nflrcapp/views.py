@@ -27,12 +27,20 @@ def home(request):
 
 
 def about(request):
+    kuleana_item = StoryPage.objects.filter(pk=1)
+    history_item = StoryPage.objects.filter(pk=2)
+    menu_items = []
+    menu_items.append(history_item[0])
+    menu_items.append(kuleana_item[0])
+
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by('listing_rank')
     advboard = Contact.objects.filter(role='ADVBOARD').order_by('listing_rank')
     return render_to_response('l2-about.html',
-                              {'staff': staff, 'collabs':
-                               collabs, 'advboard': advboard},
+                              {'staff': staff, 
+                              'collabs': collabs, 
+                              'advboard': advboard,
+                              'menu_items': menu_items},
                               context_instance=RequestContext(request))
 
 
@@ -200,7 +208,9 @@ def resources(request, tag):
     }, context_instance=RequestContext(request))
 
 
-def search(request, query):
+def search(request):
+    print 'incoming query->', request.GET
+    query = request.GET['q']
     if query:
         publications = Publication.objects.filter(
             skeywords__icontains=query).order_by('-year')
@@ -208,14 +218,18 @@ def search(request, query):
             skeywords__icontains=query).order_by('-id')
         prodevs = Prodev.objects.filter(
             skeywords__icontains=query).order_by('-id')
+        contacts = Contact.objects.filter(
+            last_name__icontains=query).order_by('last_name')
 
-        return render_to_response('search.html', {
+        return render_to_response('search-results.html', {
+            'query': query,
             'publications': publications,
             'projects': projects,
             'prodevs': prodevs,
+            'people': contacts,
         }, context_instance=RequestContext(request))
 
-    return render_to_response('search.html', {}, context_instance=RequestContext(request))
+    return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
 
 
 def software(request, tag):

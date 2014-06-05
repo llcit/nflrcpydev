@@ -31,7 +31,7 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^publications/view/(.*)$', 'pubview', name='pubview'),
     url(r'^publications/(.*)$', 'publications', name='publications'),
     url(r'^resources/(.*)$', 'resources', name='resources'),
-    url(r'^find/(.*)$', 'search', name='search'),
+    url(r'^find/$', 'search', name='search'),
     url(r'^software/(.*)$', 'software', name='software'),
     url(r'^stories/$', 'stories', name='stories'),
     url(r'^story/(.*)$', 'storyview', name='story'),
@@ -41,7 +41,7 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^$', 'home'),
     
     
-    url(r'^search/', include('haystack.urls')),
+    # url(r'^search/', include('haystack.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

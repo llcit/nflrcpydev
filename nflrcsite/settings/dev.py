@@ -1,4 +1,9 @@
-# dev.py
+# settings/dev.py
+
+# Example use with manage.py:
+# $ python manage.py runserver --settings=nflrcsite .settings.dev
+
+
 from .base import *
 
 # Secret key stored in environment variable not here.

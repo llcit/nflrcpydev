@@ -41,9 +41,9 @@ a:active {color: #4343A6;}
 }
 
 .navbar {
-    height: 120px;
+    height: 100px;
     background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
-    background-size: contain; 
+    /*background-size: contain; */
     background-color: #fff;
 }
 

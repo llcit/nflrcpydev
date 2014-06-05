@@ -11,6 +11,7 @@ class PublicationIndex(indexes.SearchIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='title')
     author = indexes.CharField(model_attr='author')
     description = indexes.CharField(model_attr='description')
+    skeywords = indexes.CharField(model_attr='skeywords')
     language = indexes.CharField(model_attr='language')
     year = indexes.CharField(model_attr='year')
 

@@ -3,10 +3,25 @@
 
 {% block jumbotron %}
 	{% if featured %}
-	<div class="jumbotron">
+	<div class="container-fluid">
+	<!-- Start WOWSlider.com -->
+	<div id="wowslider-container1">
+		<div class="ws_images">
+			<ul>
+				{% for feature in featured %} 
+				<li><a href="{{ feature.get_absolute_url }}">
+					<img src="{{MEDIA_URL}}img/{{ feature.getuid }}lg.png" alt="{{ feature.title }}" title="{{ feature.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+				</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	</div>
+	<!-- End WOWSlider.com -->
+	<!-- 
 		<div class="row"><img src="{{MEDIA_URL}}img/{{ featured.0.getuid }}lg.png"></div>
 		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
-	</div>
+	 -->
 	{% endif %}
 {% endblock jumbotron %}
 
