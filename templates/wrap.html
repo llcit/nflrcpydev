@@ -33,29 +33,36 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/"><div class="navbar-brand">&nbsp;</div></a> 
+      <div class="navbar-brand"><img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"></div> 
     </div>
     
     <div class="navbar-collapse collapse navpanel">
-
-        <ul  id="socialnav" class="nav navbar-nav navbar-right">
-            <li id="search">
-                <form method="get" action="/find">
-                    <div class="col-md-8" style="text-align: left; padding-top: 15px"><span><input type="text" class="form-control" name="q"></span></div>
-
-                    <div class="col-md-4" style="text-align: right; padding-top: 15px">
-                            <span><button type="submit" class="btn btn-default">Search</button></span>
+        <ul  id="searchnav" class="nav navbar-nav navbar-right">
+            <li id="searchform">
+                <form method="get" action="/find" class="navbar-form navbar-left" role="search">
+                    <div class="form-group" style="">
+                        <input type="text" class="form-control" name="q">    
                     </div>
+                    <button type="submit" class="btn btn-default" style="">
+                            <span class="glyphicon glyphicon-search"></span>
+                    </button>
                 </form>
             </li> 
-
-            <li><a href="/contact"><button type="button" class="btn btn-default">Contact</button></a></li>
-            <li><a href="/about"><button type="button" class="btn btn-default">About</button></a></li>
-            <li id="facebook"><a href="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </a></li> 
-            <li id="twitter"><a href="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </a></li> 
-            <li id="linkedin"><a href="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </a></li> 
-            <li id="youtube"><a href="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </a></li>
         </ul>
+
+        <ul  id="socialnav" class="nav navbar-nav navbar-right">
+            <li id="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </li> 
+            <li id="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </li> 
+            <li id="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </li> 
+            <li id="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </li>
+        </ul>
+        
+<!--         <ul  id="buttonnav" class="nav navbar-nav navbar-right">
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about">About</a></li>
+        </ul> -->
+
+
 
       
     </div><!--/.nav-collapse -->
