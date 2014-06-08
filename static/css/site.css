@@ -84,9 +84,21 @@ ul#socialnav li img {
     height: auto;
     background-color: #4343A6;
     z-index: 1000;
-    /*opacity: 0.95;*/
+    opacity: 0.95;
     color: #fff;
 }
+
+#sitemap_panel a        { color: #fff; }
+
+#sitemap_panel a:link   { text-decoration: none; }
+
+#sitemap_panel a:visited{ text-decoration: none; }
+
+#sitemap_panel a:hover  { text-decoration: none; cursor: pointer }
+
+#sitemap_panel a:active { text-decoration: none; }
+
+#sitemap_panel h4  a { color: #4343A6; }
 
 #sitemap_panel p {
     padding-left: 0.6em
@@ -97,10 +109,6 @@ ul#socialnav li img {
     background-color: #C7C7E4;
     color: #4343A6;
     padding: 0.5em;
-}
-
-#sitemap_panel a {
-    text-decoration: none
 }
 
 .jumbotron { 
