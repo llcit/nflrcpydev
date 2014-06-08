@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Title</title>
+    <title>{% block page_title %}national foreign language resource center{% endblock page_title %}</title>
     
     <!-- WOWSlider -->
     <link type="text/css" rel="stylesheet" href="{% static 'wowslider/engine1/style.css' %}" /> 
@@ -27,17 +27,19 @@
 
   <div class="container-fluid">
     <div class="navbar-header">
+    
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="navbar-brand"><img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"></div> 
+      <div class="navbar-brand"><!-- <img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"> --></div> 
     </div>
     
     <div class="navbar-collapse collapse navpanel">
         <ul  id="searchnav" class="nav navbar-nav navbar-right">
+
             <li id="searchform">
                 <form method="get" action="/find" class="navbar-form navbar-left" role="search">
                     <div class="form-group" style="">
@@ -56,29 +58,67 @@
             <li id="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </li> 
             <li id="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </li>
         </ul>
+
+    </div><!--/.nav-collapse -->
+    
         
 <!--         <ul  id="buttonnav" class="nav navbar-nav navbar-right">
             <li><a href="/contact">Contact</a></li>
             <li><a href="/about">About</a></li>
         </ul> -->
-
-
-
-      
-    </div><!--/.nav-collapse -->
-    {% comment %}
-        <div class="row">
-            <form method="get" action="/find">
-                <div class="col-md-offset-8 col-md-2" style="text-align: right">
-                        <span><button type="submit" class="btn btn-default">Search</button></span>
-                </div>
-                <div class="col-md-2" style="text-align: left"><span><input type="text" class="form-control" name="q"></span></div>
-            </form>
-        </div>
-    {% endcomment %}
   </div>
 
 </div>
+
+<div class="container-fluid">
+    <div id="sitemap_btn_panel" class="row">
+        <div class="col-md-1 col-md-offset-6">
+            <button id="sitemap_btn" class="btn btn-default">explore</button>
+        </div>
+    </div>
+    <div id="sitemap_panel" class="row" style="display: none">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <h4><a href"">about</a></h4>
+            <p><a href"">history</a></p>
+            <p><a href"">kuleana (mission)</a></p>
+        </div>
+        <div class="col-md-2">
+            <h4>projects</h4>
+            <p>assessment</p>
+            <p>online learning</p>
+            <p>PBL project-based learning*</p>
+            <p>pragmatics</p>
+        </div>
+        <div class="col-md-2">
+            <h4>publications</h4>
+            <p>journals</p>
+            <p>digital archive*</p>
+            <p>monographs</p>
+            <p>non-print media</p>
+            <p>pragmatics</p>
+        </div>
+        <div class="col-md-2">
+            <h4>professional development</h4>
+            <p>conferences</p>
+            <p>summer institutes</p>
+            <p>symposiums</p>
+            <p>workshops</p>
+            <p>others</p>
+        </div>
+        <div class="col-md-2">
+            <h4>contact</h4>
+            <p>address & map</p>
+            <p>people</p>
+            <p>web admin</p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+
+
 {% block jumbotron %}  {% endblock jumbotron %}  
 
 <!-- Main content -->
@@ -95,6 +135,8 @@
 <script src="{% static 'js/jquery.tocify.min.js' %}"></script>
 <!-- Masonry for dynamic grid layout -->
 <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<!-- NFLRC site javascript -->
+<script src="{% static 'js/site.js' %}"></script>
 
 <!-- Or include individual files as needed with this placeholder  -->
 {% block local_js %} {% endblock local_js %}

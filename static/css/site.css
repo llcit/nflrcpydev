@@ -42,15 +42,17 @@ a:active {color: #4343A6;}
 
 .navbar {
     height: 93px;
+    background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
     /*background-size: contain; */
     background-color: #fff;
 }
 
 .navbar-brand img {
-    width: 500px;
-    /*position: absolute;
+    width: 700px;
+    /*height: 100px;*/
+    position: absolute;
     top: 0;
-    left: 0;*/
+    left: 0;
     /*background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;*/
     /*background-size: contain;*/
     /*width: 100%;*/
@@ -69,6 +71,36 @@ ul#socialnav li img {
     padding-right: 10px;
     padding-top: 10px;
     
+}
+
+#sitemap_btn_panel {
+    margin-top: -50px;
+}
+
+#sitemap_panel {
+    position: absolute;
+    top: 122px;
+    width: 98%;
+    height: auto;
+    background-color: #4343A6;
+    z-index: 1000;
+    /*opacity: 0.95;*/
+    color: #fff;
+}
+
+#sitemap_panel p {
+    padding-left: 0.6em
+}
+
+#sitemap_panel h4 {
+    border-bottom: 1px solid #C7C7E4;
+    background-color: #C7C7E4;
+    color: #4343A6;
+    padding: 0.5em;
+}
+
+#sitemap_panel a {
+    text-decoration: none
 }
 
 .jumbotron { 
