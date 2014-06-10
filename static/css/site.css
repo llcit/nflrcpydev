@@ -41,24 +41,55 @@ a:active {color: #4343A6;}
 }
 
 .navbar {
-    height: 93px;
-    background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;
-    /*background-size: contain; */
+    height: 60px;
     background-color: #fff;
 }
 
-.navbar-brand img {
-    width: 700px;
-    /*height: 100px;*/
+#logo {
+    /*width: 780px;*/
+    /*height: 100%;*/
+    /*float: left;*/
+    /*background-color: gray;*/
+    /*background: contain;*/
     position: absolute;
     top: 0;
     left: 0;
     /*background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;*/
-    /*background-size: contain;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*z-index: -10*/
+
 }
+
+#logo img {
+    width: 500px;
+    /*margin-right: 50px;*/
+}
+
+/*@media screen and (max-width: 300px) {
+    #logo img { width: 100px; }
+}
+
+@media screen and (max-width: 765px) {
+    #logo img { width: 765px; }
+}
+
+@media screen and (min-width: 1200px) {
+    #logo img { width: 765px; }
+}*/
+
+@media (max-width: 765px) {    
+    /*#logo img { width: 600px; }*/
+}
+
+/*@media (max-width: 765px) {    
+    #logo { width: 685px; }
+}
+
+@media (min-width: 767px) {    
+    #logo { width: 500px; }
+}
+
+@media (min-width: 1200px) {    
+    #logo { width: 763px; }
+}*/
 
 
 .navpanel {
@@ -74,7 +105,7 @@ ul#socialnav li img {
 }
 
 #sitemap_btn_panel {
-    margin-top: -50px;
+    margin-top: -80px;
 }
 
 #sitemap_panel {
@@ -82,9 +113,9 @@ ul#socialnav li img {
     top: 122px;
     width: 98%;
     height: auto;
-    background-color: #4343A6;
+    background-color: #000;
     z-index: 1000;
-    opacity: 0.95;
+    opacity: 0.8;
     color: #fff;
 }
 
@@ -195,22 +226,10 @@ ul#socialnav li img {
     width: 150px;
 }
 
-/*#meta-wrapper img {
-    width: 150px;
-}*/
+
 
 	
-/*@media screen and (max-width: 325px) {
-    .logo { height: 40px; }
-}
 
-@media (max-width: 1010px) {
-    .logo { height: 40px; }
-}
-
-@media (min-width: 1011px) {
-    .logo { height: 100px; }
-}*/
 
 /*@media (min-width: 768px)
     #sidebar-wrapper {

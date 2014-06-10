@@ -27,17 +27,20 @@
 
   <div class="container-fluid">
     <div class="navbar-header">
-    
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand"><!-- <img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"> --></div> 
+        </button>
+        <div id="logo">
+            <a href="/"><img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"></a>
+        </div>
+      <!-- <div class="navbar-brand"></div> -->
     </div>
-    
+
     <div class="navbar-collapse collapse navpanel">
+        
         <ul  id="searchnav" class="nav navbar-nav navbar-right">
 
             <li id="searchform">
@@ -71,46 +74,46 @@
 </div>
 
 <div class="container-fluid">
-    <div id="sitemap_btn_panel" class="row">
-        <div class="col-md-1 col-md-offset-6">
+    <div id="sitemap_btn_panel" class="row" style="text-align: center">
+        <!-- <div class="col-md-1 col-md-offset-6"> -->
             <button id="sitemap_btn" class="btn btn-default">explore</button>
-        </div>
+        <!-- </div> -->
     </div>
     <div id="sitemap_panel" class="row" style="display: none">
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <h4><a href"">about</a></h4>
-            <p><a href"">history</a></p>
-            <p><a href"">kuleana (mission)</a></p>
+            <h4><a href="/about">about</a></h4>
+            <p><a href="story/1">history</a></p>
+            <p><a href="story/2">kuleana (mission)</a></p>
         </div>
         <div class="col-md-2">
             <h4>projects</h4>
-            <p><a href"">assessment</a></p>
-            <p><a href"">online learning</a></p>
-            <p><a href"">PBL project-based learning*</a></p>
-            <p><a href"">pragmatics</a></p>
+            <p><a href="">assessment</a></p>
+            <p><a href="">online learning</a></p>
+            <p><a href="">PBL project-based learning*</a></p>
+            <p><a href="/publications/pragmatics">pragmatics</a></p>
         </div>
         <div class="col-md-2">
-            <h4>publications</h4>
-            <p><a href"">journals</a></p>
-            <p><a href"">digital archive*</a></p>
-            <p><a href"">monographs</a></p>
-            <p><a href"">non-print media</a></p>
-            <p><a href"">pragmatics</a></p>
+            <h4><a href="/publications">publications</a></h4>
+            <p><a href="/publications/journals">journals</a></p>
+            <p><a href="">digital archive*</a></p>
+            <p><a href="/publications/monographs">monographs</a></p>
+            <p><a href="/publications/media">non-print media</a></p>
+            <p><a href="/publications/pragmatics">pragmatics</a></p>
         </div>
         <div class="col-md-2">
-            <h4>professional development</a></h4>
-            <p><a href"">conferences</a></p>
-            <p><a href"">summer institutes</a></p>
-            <p><a href"">symposiums</a></p>
-            <p><a href"">workshops</a></p>
-            <p><a href"">others</a></p>
+            <h4><a href="/prodev">professional development</a></h4>
+            <p><a href="/prodev/#Conference">conferences</a></p>
+            <p><a href="/prodev/#Summer Institute">summer institutes</a></p>
+            <p><a href="/prodev/#Symposium">symposiums</a></p>
+            <p><a href="/prodev/#Workshop">workshops</a></p>
+            <p><a href="/prodev/#Other">others</a></p>
         </div>
         <div class="col-md-2">
-            <h4>contact</a></h4>
-            <p><a href"">address & map</a></p>
-            <p><a href"">people</a></p>
-            <p><a href"">web admin</a></p>
+            <h4><a href="/contact">contact</a></h4>
+            <p><a href="">address & map</a></p>
+            <p><a href="/contact">people</a></p>
+            <p><a href="">web admin</a></p>
         </div>
         <div class="col-md-1"></div>
     </div>

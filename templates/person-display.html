@@ -1,19 +1,16 @@
 {% extends "wrap-item-display.html" %}
 {% load staticfiles %}
 
-{% block item-menu %}
-	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/logos/default.png"></h2>
-    <ul id="left-sidebar" class="nav nav-stacked"> <div id="toc"></div> </ul>
-{% endblock item-menu%}
 
-{% block item-content %}
-	<h2>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h2>
-	<div id="item-content" >{{ thehuman.description | safe }}</div>
-{% endblock item-content %}
 
 {% block item-meta %}
-	<h2></h2>
-	<ul id="right-sidebar" class="nav nav-stacked">
+	<!-- Icon -->
+	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{{ thehuman.image }}"></h2>
+
+	<!-- Dynamic menu -->
+	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
+
+	<ul class="nav nav-stacked">
 	 	{% for name, value in thehuman.customproperties %}
 			<li>
 				<div><span class="label label-default">{{ name }}</span></div>
@@ -22,6 +19,11 @@
 		{% endfor %}   	
     </ul>
 {% endblock item-meta %}
+
+{% block item-content %}
+	<h2>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h2>
+	<div id="item-content" >{{ thehuman.description | safe }}</div>
+{% endblock item-content %}
 
 {% block customjavascript %}
 	$(function() {
