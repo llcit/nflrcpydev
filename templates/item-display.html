@@ -5,31 +5,41 @@
 
 	<!-- Icon -->
 	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/{{ item.image }}"></h2>
-
+	
 	<!-- Dynamic menu -->
 	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
 
 	<!-- Metadata items -->
-	<ul class="nav nav-stacked">
-	 	{% for name, value in item.customproperties %}
+
+	<ul id="meta-list" class="nav nav-stacked">
+		
+		{% if item.classname == 'publications' %}
+			<li> <small><i>Author(s)</i></small> </li>
+			<li> {{ item.author }} </li>
+			<li> <small><i>Date</i></small></li>
+			<li> {{ item.year }} </li>
+			<li></li>
+			<li> <small><i>Access</i></small></li>
+			<li> {{ item.url|urlizetrunc:15 }} </li>
 			<li>
-				<div><span class="label label-default">{{ name }}</span></div>
-				<div>
-
-					{% if name == 'category' %}						
-						<a href="/{{ item.classname }}/{{ shortcut }}">
-							{{ item.category }}s
-						</a>					
-					{% elif name == 'url' %}
-						{{ value|safe|urlizetrunc:30 }}
-					{% else %}
-						{{ value|safe }}	
-					{% endif %}
-
-				</div>
-		  		
-		  	</li>
-		{% endfor %}   	
+				{% if item.oclc_url %} 
+				<a href="{{ item.oclc_url }}"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a>
+				{% endif %}
+			</li>
+			<li> <small><i>Website</i></small></li>
+			<li> {{ item.ext_url|urlizetrunc:15 }} </li>
+		{% elif item.classname == 'prodev' %}
+			<li> {{ item.date }} </li>
+			<li> {{ item.pdtype }} </li>
+			<li> {{ item.director|safe }} </li>
+			<li> {{ item.facilitator|safe }} </li>
+			<li> {{ item.related_publication|safe }} </li>
+			<li> {{ item.url|urlizetrunc:15 }} </li>
+		
+		{% elif item.classname == 'projects' %}
+			<li> {{ item.grant_cycle }} </li>
+			<li> {{ item.director|safe|urlizetrunc:15 }} </li>		
+		{% endif %}		 	
     </ul>
 
 {% endblock item-meta %}
@@ -37,11 +47,18 @@
 {% block item-content %}
 
 	<h2>
-		<a href="/{{ item.classname }}/{{ shortcut }}"><span class="glyphicon glyphicon-arrow-left"></span></a> {{ item.displayname | title}}
-		<small> {{ shortcut | title }}</small>
+		<a href="/{{ item.classname }}/">
+			<small>{{ item.displayname | title}}</small>
+		</a> 
+		<small> <i>>></i> </small>
+		<a href="/{{ item.classname }}/{{ shortcut }}">
+			<small>{{ shortcut | title }}</small>
+		</a>
+
 	</h2>
 	
 	<h2>{{ item.title | safe }}</h2>
+	{% if item.oclc_url %}<h4><span><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" height="30px"/></span></h4>{% endif %}
 	
 	<div id="item-content" >{{ item.description | safe }}</div>
 

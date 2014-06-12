@@ -103,7 +103,7 @@ class Contact(models.Model):
 class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
-    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
+    thumbnail_desc = models.CharField(max_length=160, default='more...', null=True, blank=True, )
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     featured = models.BooleanField(default=False)
@@ -250,14 +250,18 @@ class Publication(models.Model):
     description = models.TextField(blank=True)
     thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
     size = models.CharField(max_length=40L, blank=True)
+    is_oer = models.BooleanField(default=False)
     url = models.CharField(max_length=250L, blank=True)
-    order_from = models.CharField(max_length=10L, blank=True)
+    ext_url = models.CharField(max_length=250L, blank=True)
+    oclc_url = models.CharField(max_length=250L, blank=True)
+    order_from = models.CharField(max_length=10L, blank=True) # deprecate
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
     isbn = models.CharField(max_length=20L, null=True, blank=True)
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
+    hidden = models.BooleanField(default=False)
 
     objects = ItemsManager()
 
@@ -279,15 +283,21 @@ class Publication(models.Model):
 
     # method to return dictionary with meta information to display
     def customproperties(self):
-        properties = [
-            # 'uid' : self.item_number,
-            ('category', self.category),
-            ('author', self.author),
-            ('year', self.year),
-            ('url', self.url),
-            ('order info', self.order_from),
-            ('isbn', self.isbn)
-        ]
+        properties = {}
+        access_list = {}
+        access_list['access'] = self.url 
+        
+        if self.ext_url:
+            access_list['ext_url'] = self.ext_url
+        if self.oclc_url:
+            access_list['oclc'] = self.oclc_url
+
+        access_list['oer'] = self.is_oer
+
+        properties['author(s)'] = self.author
+        properties['year'] = self.year
+        properties['access_list'] = access_list
+
         return properties
 
     def getuid(self):
