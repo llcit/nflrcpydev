@@ -179,14 +179,13 @@ def publications(request, tag):
 
 
 def pubview(request, item):
-    # listing = Publication.objects.filter(item_number=item)
-    displayitem = Publication.objects.get(item_number=item)
-    # try:
-    #
-    # except ObjectDoesNotExist:
-    #   raise Http404
-    # except ValueError:
-    #   raise Http404
+    
+    try:
+        displayitem = Publication.objects.get(item_number=item)
+    except ObjectDoesNotExist:
+      raise Http404
+    except ValueError:
+      raise Http404
 
     return render_to_response('item-display.html', {
         'item': displayitem,

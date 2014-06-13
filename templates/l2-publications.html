@@ -7,20 +7,22 @@
 	<!-- End WOWSlider.com HEAD section -->
 {% endblock local_css %}
 
+{% comment %}
 {% block jumbotron %}
 	{% if not subpage %}
 		{% if featured %}	
 		{% endif %}
 	{% endif %}
 {% endblock jumbotron %}
+{% endcomment %}
 
 {% block pageheading %}
 <div class="page-header">		
 	<h1>
-	{% if subpage %}<a href="/publications"><span class="glyphicon glyphicon-arrow-left"></span></a> {% endif %} Publications
 	<small> 
+		<a href="/publications/">Publications</a> >>
 		{% if subpage %}			
-			{{ subpage|title }} 
+			{{ subpage|title }}
 		{% else %}
 			Featured
 		{% endif %} 
