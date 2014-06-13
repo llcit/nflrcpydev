@@ -14,31 +14,42 @@
 	<ul id="meta-list" class="nav nav-stacked">
 		
 		{% if item.classname == 'publications' %}
-			<li> <small><i>Author(s)</i></small> </li>
-			<li> {{ item.author }} </li>
-			<li> <small><i>Date</i></small></li>
-			<li> {{ item.year }} </li>
-			<li></li>
-			<li> <small><i>Access</i></small></li>
-			<li> {{ item.url|urlizetrunc:15 }} </li>
+			<li><div><i>Author(s)</i></div> </li>
+			<li><div>{{ item.author }}</div></li>
+			<li><div><i>Date</i></div></li>
+			<li><div>{{ item.year }}</div> </li>
+			<li><div><i>Access</i></div></li>
+			<li><div>{{ item.url|urlizetrunc:25 }}</div></li>
+			{% if item.oclc_url %}
 			<li>
-				{% if item.oclc_url %} 
-				<a href="{{ item.oclc_url }}"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a>
-				{% endif %}
+				<div><a href="{{ item.oclc_url }}"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a></div>
 			</li>
-			<li> <small><i>Website</i></small></li>
-			<li> {{ item.ext_url|urlizetrunc:15 }} </li>
+			{% endif %}
+
+			{% if item.ext_url %}
+			<li><div><i>Website</i></div></li>
+			<li><div>{{ item.ext_url|urlizetrunc:25 }}</div> </li>
+			{% endif %}
+		
 		{% elif item.classname == 'prodev' %}
-			<li> {{ item.date }} </li>
-			<li> {{ item.pdtype }} </li>
-			<li> {{ item.director|safe }} </li>
-			<li> {{ item.facilitator|safe }} </li>
-			<li> {{ item.related_publication|safe }} </li>
-			<li> {{ item.url|urlizetrunc:15 }} </li>
+			<li><div><i>Date</i></div></li>
+			<li><div>{{ item.date }}</div> </li>
+			<li><div><i>Type</i></div></li>
+			<li><div>{{ item.pdtype }}</div> </li>
+			<li><div><i>Director</i></div></li>
+			<li><div>{{ item.director|safe }}</div> </li>
+			<li><div><i>Facilitator(s)</i></div></li>
+			<li><div>{{ item.facilitator|safe }}</div> </li>
+			<li><div><i>Publications</i></div></li>
+			<li><div>{{ item.related_publication|safe }}</div> </li>
+			<li><div><i>Web</i></div></li>
+			<li><div>{{ item.url|urlizetrunc:25 }}</div> </li>
 		
 		{% elif item.classname == 'projects' %}
-			<li> {{ item.grant_cycle }} </li>
-			<li> {{ item.director|safe|urlizetrunc:15 }} </li>		
+			<li><div><i>Grant Period</i></div></li>
+			<li><div>{{ item.grant_cycle }}</div> </li>
+			<li><div><i>Director</i></div></li>
+			<li><div>{{ item.director|safe|urlizetrunc:25 }}</div> </li>		
 		{% endif %}		 	
     </ul>
 
@@ -49,11 +60,13 @@
 	<h2>
 		<a href="/{{ item.classname }}/">
 			<small>{{ item.displayname | title}}</small>
-		</a> 
+		</a>
+		{% if shortcut %}
 		<small> <i>>></i> </small>
 		<a href="/{{ item.classname }}/{{ shortcut }}">
 			<small>{{ shortcut | title }}</small>
 		</a>
+		{% endif %}
 
 	</h2>
 	

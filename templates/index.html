@@ -1,5 +1,6 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
+{% load webdesign %}
 
 
 {% block jumbotron %}
@@ -22,21 +23,76 @@
 
 {% block subheadlines %}
 
+<ul class="nav nav-pills nav-justified submenu">
+ 
+	<a href="/publications">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Publications
+			</li>
+		</div>
+	</a>
+ 
+	<a href="/projects">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Projects
+			</li>
+		</div>
+	</a>
+ 
+	<a href="/publications/journals">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Journals
+			</li>
+		</div>
+	</a>
+ 
+	<a href="/prodev">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Workshops & Conferences
+			</li>
+		</div>
+	</a>
+ 
+	<a href="/languages">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Languages
+			</li>
+		</div>
+	</a>
+ 
+	<a href="/publications/teaching-materials">
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<li class="category">
+				Teaching Materials
+			</li>
+		</div>
+	</a>
 
-<ul class="nav nav-pills nav-justified"> 
-	<li class="shadowboxed category"><a href="/publications">publications</a></li>
-	<li class="shadowboxed"><a href="/projects">projects</a></li>
-	<li class="shadowboxed"><a href="/publications/journals">journals</a></li>
-	<li class="shadowboxed "><a href="/prodev">workshops & conferences</a></li>
-	<li class="shadowboxed "><a href="/languages">languages</a></li>
-	<li class="shadowboxed "><a href="/publications/monographs">monographs</a></li>
-	<li class="shadowboxed "><a href="/publications/teaching-materials">teaching materials</a></li>
-	<li class="shadowboxed "><a href="/stories">news</a></li>
 </ul>
 
 
 
+
+{% comment %}
+<ul class="nav nav-pills nav-justified"> 
+	<li class=""><a class="category shadowboxed" href="/publications">publications</a></li>
+	<li class=""><a class="category" href="/projects">projects</a></li>
+	<li class=""><a class="category" href="/publications/journals">journals</a></li>
+	<li class=""><a class="category" href="/prodev">workshops & conferences</a></li>
+	<li class=""><a class="category" href="/languages">languages</a></li>
+	<li class=""><a class="category" href="/publications/monographs">monographs</a></li>
+	<li class=""><a class="category" href="/publications/teaching-materials">teaching materials</a></li>
+	<li class=""><a class="category" href="/stories">news</a></li>
+</ul>
+{% endcomment %}
 {% endblock subheadlines %}
+
+
 
 {% block stories %}
 <div id="dyno" class="container-fluid">

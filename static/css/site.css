@@ -150,20 +150,16 @@ ul#socialnav li img {
 }
 
 .submenu {
-    font-size: 0.8em;
-}
-
-.submenu div {
-    font-size: 0.8em;
+    margin-top: 50px;
 }
 
 .shadowboxed {
     border-radius: 5px;
 
-    /*box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 5px 0px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-*/
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+
     transition: transform 0.25s ease;
     -moz-transition: -moz-transform 0.25s ease;
     -webkit-transition: -webkit-transform 0.25s ease;
@@ -180,15 +176,17 @@ ul#socialnav li img {
 }
 
 .category {
-    /*height: 50px;*/
-    /*font-size: 1.2em;*/
+    /*width: 180px;*/
+    height: 70px;
+    line-height: 20px;
+    font-size: 1.5em;
+    font-weight: 200;
     text-decoration: none;
     color: #464646;
     text-align: center;
-    margin-bottom: 15px;
-    /*margin-top: 5px;*/
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding-top: 15px;
+    border: 1px solid #f0f0f0;
 }
 
 .listing {
