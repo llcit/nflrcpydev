@@ -30,7 +30,7 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
-MEDIA_ROOT = '/pythonweb/nflrc-dev-py/media/nflrc'
+MEDIA_ROOT = PROJECT_DIR.child('media', 'nflrc')
 
 # FILEBROWSER SETTINGS
 from django.conf import settings
