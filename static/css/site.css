@@ -41,25 +41,25 @@ a:active {color: #4343A6;}
 }
 
 .navbar {
-    height: 60px;
+    height: 130px;
     background-color: #fff;
 }
 
 #logo {
-    /*width: 780px;*/
+    /*width: 100%;*/
     /*height: 100%;*/
     /*float: left;*/
     /*background-color: gray;*/
     /*background: contain;*/
-    position: absolute;
-    top: 0;
-    left: 0;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
     /*background: url(/media/nflrc/img/logos/NFLRC_name_UH_banner.png) top left no-repeat;*/
 
 }
 
 #logo img {
-    width: 500px;
+    width: 100%;
     /*margin-right: 50px;*/
 }
 
@@ -75,9 +75,9 @@ a:active {color: #4343A6;}
     #logo img { width: 765px; }
 }*/
 
-@media (max-width: 765px) {    
-    /*#logo img { width: 600px; }*/
-}
+/*@media (max-width: 765px) {    
+    #logo img { width: 600px; }
+}*/
 
 /*@media (max-width: 765px) {    
     #logo { width: 685px; }
@@ -96,21 +96,34 @@ a:active {color: #4343A6;}
     background: #fff;
     float: right;
 }
+ul#socialnav {
+    margin-right: 10px;
+}
 
 ul#socialnav li img {
-    height: 40px;
-    padding-right: 10px;
+    height: 32px;
+    padding-right: 2px;
     padding-top: 10px;
     
 }
 
-#sitemap_btn_panel {
-    margin-top: -80px;
+#sitemap_btn {
+    /*position: absolute;
+    top: 34px;
+    left: 50%;*/
+    /*width: 50px;*/
+    /*height: 20px;*/
+    background-color: #f0f0f0;
+    border: thin;
+    border-bottom: hidden;
+    font-size: 1.1em;
+    font-weight: 200;
+    /*margin-top: -80px;*/
 }
 
 #sitemap_panel {
     position: absolute;
-    top: 90px;
+    top: 120px;
     left: 0px;
     width: 102%;
     height: auto;
