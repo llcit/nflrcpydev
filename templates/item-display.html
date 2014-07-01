@@ -58,16 +58,12 @@
 {% block item-content %}
 
 	<h2>
-		<a href="/{{ item.classname }}/">
-			<small>{{ item.displayname | title}}</small>
-		</a>
+		<a href="/{{ item.classname }}/"><small>{{ item.displayname | title}}</small></a>
+		
 		{% if shortcut %}
-		<small> <i>>></i> </small>
-		<a href="/{{ item.classname }}/{{ shortcut }}">
-			<small>{{ shortcut | title }}</small>
-		</a>
+		<small><i>>></i></small>
+		<a href="/{{ item.classname }}/{{ shortcut }}"><small>{{ shortcut | title }}</small></a>
 		{% endif %}
-
 	</h2>
 	
 	<h2>{{ item.title | safe }}</h2>

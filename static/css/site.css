@@ -242,6 +242,26 @@ ul#socialnav li img {
     width: 60px;
 }
 
+.badge_container {
+    
+    padding: 5px;
+    margin: 5px;
+    color: #000;
+    font-weight: 300;
+    border-bottom: 4px solid #808080;
+}
+
+.flair_publications { background-color: #52A3CC; }
+.flair_projects { background-color: #FFCC99; }
+.flair_prodev { background-color: #33CC33; }
+.flair_stories { background-color: #EBC633; }
+
+
+.badge_publications { border-bottom: 4px solid #52A3CC; }
+.badge_projects { border-bottom: 4px solid #FFCC99; }
+.badge_prodev { border-bottom: 4px solid #33CC33; }
+.badge_stories { border-bottom: 4px solid #EBC633;}
+
 
 
 	

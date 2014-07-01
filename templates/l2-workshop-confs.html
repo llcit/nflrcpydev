@@ -26,22 +26,21 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-<div class="page-header">
-	<h1>
-		Workshops and Conferences 
-		<small><small>
-		<span><a href="#Conference"> Conferences</a></span>
-		<span> | </span>
-		<span><a href="#Summer Institute"> Summer Institutes</a></span>
-		<span> | </span>
-		<span><a href="#Workshop"> Workshops</a></span>
-		<span> | </span>
-		<span><a href="#Symposium"> Symposiums</a></span>
-		<span> | </span>
-		<span><a href="#Other"> Others</a></span>
-		</small></small>
-	</h1>
-</div>
+<h2>
+	
+	<small>Workshops and Conferences<small>
+	<span><a href="#Conference"> Conferences</a></span>
+	<span> | </span>
+	<span><a href="#Summer Institute"> Summer Institutes</a></span>
+	<span> | </span>
+	<span><a href="#Workshop"> Workshops</a></span>
+	<span> | </span>
+	<span><a href="#Symposium"> Symposiums</a></span>
+	<span> | </span>
+	<span><a href="#Other"> Others</a></span>
+	</small></small>
+</h2>
+
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}
@@ -51,7 +50,7 @@
 	{% for p in events %}
 		{% ifchanged p.pdtype %}
 			{% if not forloop.first %}</div>{% endif %}
-			<span id="{{ p.pdtype }}" class="adjusted-anchor"></span>
+			<h3><span id="{{ p.pdtype }}" class="adjusted-anchor"></span></h3>
 			<p><h3>{{ p.pdtype }}s<small><a href="#top"> back to top</a></small></h3></p>
 			<div id="" class="container dyno">				
 		{% endifchanged %}
