@@ -23,10 +23,21 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-<h2><small>Projects</small></h2>
+<h2 class="l2_crumbs">	
+	<a href="/projects">Research and Development Projects</a>
+	<small> <span class="badge badge_projects_fill">{{ items|length }}</span></small>
+</h2>
 {% endblock pageheading %}
 
-{% block subheadlines %}{% endblock subheadlines %}
+{% block subheadlines %}
+<ul class="nav nav-pills nav-justified submenu"> 
+	<a href="2010 - 2014"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'conference' %}badge_projects shadowboxed{% endif %}">2010 - 2014</li></div></a>
+	<a href="2006 - 2010"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'institute' %}badge_projects shadowboxed{% endif %}">2006 - 2010</li></div></a>
+	<a href="2002 - 2006"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'workshop' %}badge_projects shadowboxed{% endif %}">2002 - 2006</li></div></a>
+	<a href="1998 - 2002"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'symposium' %}badge_projects shadowboxed{% endif %}">1998 - 2002</li></div></a>
+	<a href="1994 - 1998"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'online' %}badge_projects shadowboxed{% endif %}">1994 - 1998</li></div></a>
+</ul>
+{% endblock subheadlines %}
 
 {% block stories %}
 	<div id="dyno" class="container">
@@ -42,10 +53,7 @@
 	</div>
 {% endblock stories %}
 
-{% block local_js %}
-	<script type="text/javascript" src="{% static 'wowslider/engine1/wowslider.js' %}"></script>
-	<script type="text/javascript" src="{% static 'wowslider/engine1/script.js' %}"></script>
-{% endblock local_js %}
+{% block local_js %}{% endblock local_js %}
 
 {% block customjavascript %}
 jQuery(window).on('load', function(){ 

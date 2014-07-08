@@ -19,13 +19,13 @@ ROLE_TYPES = {
 }
 
 PRODEV_TYPES = (
-    ('Conference', 'Conference'),
-    ('Online Course', 'Online Course'),
-    ('Summer Institute', 'Summer Institute'),
-    ('Symposium', 'Symposium'),
-    ('Workshop', 'Workshop'),
-    ('Workshop/Symposium', 'Workshop/Symposium'),
-    ('Other', 'Other'),
+    ('conference', 'Conference'),
+    ('online', 'Online Course'),
+    ('institute', 'Summer Institute'),
+    ('symposium', 'Symposium'),
+    ('workshop', 'Workshop'),
+    ('workshop_symposium', 'Workshop/Symposium'),
+    ('other', 'Other'),
 )
 
 PUBLICATION_MEDIA_TYPES = (

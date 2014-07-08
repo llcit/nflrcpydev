@@ -3,9 +3,9 @@
 
 {% block pageheading %}
 <div class="page-header">
-	<h1>Contact <small>
-		<a href="#staff"><span class="badge">staff</span></a> 
-		<a href="#collaborators"><span class="badge">collaborators</span></a>
+	<h1>
+		<a href="#staff"><span class="badge badge_other_fill">staff</span></a> 
+		<a href="#collaborators"><span class="badge badge_other_fill">collaborators</span></a>
 	</h1>
 	<div>
 		<div>National Foreign Language Resource Center</div>
@@ -21,7 +21,7 @@
 
 {% block stories %}
 	<span id="staff" class="adjusted-anchor"></span>
-	<p><h3>Core Staff <small><a href="#top">back to top</a></small></h3></p>
+	<p><h3>Core Staff <small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span></a></small></h3></p>
 	<div id="dyno1" class="container">
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
@@ -34,7 +34,7 @@
 	</div>
 
 	<span id="collaborators" class="adjusted-anchor"></span>
-	<p><h3>Collaborator{{ collabs|length|pluralize }} <small><a href="#top">back to top</a></small></h3></p>
+	<p><h3>Collaborator{{ collabs|length|pluralize }} <small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span></a></small></h3></p>
 	<div id="dyno2" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">

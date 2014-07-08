@@ -86,12 +86,21 @@ def outreach(request):
     return render_to_response('index.html', {}, context_instance=RequestContext(request))
 
 
-def prodev(request):
-    listing = Prodev.objects.filter().order_by('pdtype', '-id')
-    featured = listing.filter(featured=True)
+def prodev(request, tag):
+    if tag:
+        listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-id')
+        if not listing:
+            tag = ''
+    else:
+        listing= None
+
+    featured = Prodev.objects.filter(featured=True)
+        # listing = Prodev.objects.filter().order_by('pdtype', '-id')
+    
     return render_to_response('l2-workshop-confs.html', {
         'events': listing,
-        'featured': featured
+        'featured': featured,
+        'pdtype_tag': tag
     }, context_instance=RequestContext(request))
 
 

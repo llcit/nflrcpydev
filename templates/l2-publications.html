@@ -1,50 +1,59 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block local_css %}
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
-	<!-- End WOWSlider.com HEAD section -->
-{% endblock local_css %}
-
-{% comment %}
-{% block jumbotron %}
-	{% if not subpage %}
-		{% if featured %}	
+{% comment %} UNCOMMENT TO INSERT JUMBOTRON
+	{% block jumbotron %}
+		{% if not subpage %}
+			{% if featured %}	
+				<div class="container-fluid">
+				<!-- Start WOWSlider.com -->
+				<div id="wowslider-container1">
+					<div class="ws_images">
+						<ul>
+							{% for feature in featured %} 
+							<li><a href="{{ feature.get_absolute_url }}">
+								<img src="{{MEDIA_URL}}img/{{ feature.getuid }}lg.png" alt="{{ feature.title }}" title="{{ feature.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
+							</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				</div>
+			{% endif %}
 		{% endif %}
-	{% endif %}
-{% endblock jumbotron %}
+	{% endblock jumbotron %}
 {% endcomment %}
 
+
 {% block pageheading %}
-<h2>
-	<a href="/publications/"><small class="badge_publications">Publications</small></a> 
-	<small>>>{% if subpage %}			
+<h2 class="l2_crumbs">
+	<a href="/publications/">Publications</a>
+	<small>>{% if subpage %}			
 			{{ subpage|title }}
 		{% else %}
 			Featured
 		{% endif %} 
-		<span class="badge">{{ items|length }}</span>
+		<span class="badge badge_publications_fill">{{ items|length }}</span>
 	</small>
 </h2>
-
 {% endblock pageheading %}
 
 {% block subheadlines %}  
-<ul class="nav nav-pills nav-justified submenu">
-	<a href="journals"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'journals' %}active{% endif %}">Journals</li></div></a>
-	<a href="monographs"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Monographs</li></div></a>
-	<a href="teaching-materials"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Teaching Materials</li></div></a>
-	<a href="pragmatics"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Pragmatics</li></div></a>
-	<a href="networks"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Networks</li></div></a>
-	<a href="media"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Physical Media</li></div></a>
-	<a href="research-notes"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Research Notes</li></div></a>
-	<a href="listing"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Full Listing</li></div></a>
+<ul class="nav nav-pills nav-justified submenu"> 
+	<a href="journals"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'journals' %}badge_publications shadowboxed{% endif %}">Journals</li></div></a>
+	<a href="monographs"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'monographs' %}badge_publications shadowboxed{% endif %}">Monographs</li></div></a>
+	<a href="teaching-materials"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'teaching-materials' %}badge_publications shadowboxed{% endif %}">Teaching Materials</li></div></a>
+	<a href="pragmatics"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'pragmatics' %}badge_publications shadowboxed{% endif %}">Pragmatics</li></div></a>
+	<a href="networks"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'networks' %}badge_publications shadowboxed{% endif %}">Networks</li></div></a>
+	<a href="media"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'media' %}badge_publications shadowboxed{% endif %}">Physical Media</li></div></a>
+	<a href="research-notes"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'research-notes' %}badge_publications shadowboxed{% endif %}">Research Notes</li></div></a>
+	<a href="listing"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'listing' %}badge_publications shadowboxed{% endif %}">Full Listing</li></div></a>
 </ul>
 {% endblock subheadlines %}
 
-{% block stories %}
 
+
+{% block stories %}
 {% if subpage|title != "Listing" %}
 
 	<div id="dyno" class="container">
@@ -61,7 +70,7 @@
 		{% endfor %}
 	</div>
 
-{% else %} <!-- FULL LISTING -- NO ICONS -->
+{% else %} <!-- FULL LIST WITH NO ICONS -->
 
 	<div class="container">
 	{% for p in items %}
@@ -83,7 +92,6 @@
 	</div>
 
 {% endif %}
-
 {% endblock stories %}
 
 

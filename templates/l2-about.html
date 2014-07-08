@@ -1,7 +1,9 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block pageheading %}<div class="page-header"><h1>About Us<small></small></h1></div> {% endblock pageheading %}
+{% block pageheading %}
+<h2><a href="/about">About Us</a><small></small></h2>
+{% endblock pageheading %}
 
 {% block subheadlines %}
 <div id="dyno-menu" class="container">
@@ -36,7 +38,7 @@
 		</div>
 	</div>
 
-	<p><h3 id="staff">Core Staff<small><a href="#top"> back to top</a></small></h3></p>
+	<p><h3 id="staff">Core Staff</h3></p>
 	<div id="dyno0" class="container">
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
@@ -48,7 +50,7 @@
 		{% endfor %}		
 	</div>
 
-	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+	<p><h3 id="collaborators">Collaborator{{ collabs|length|pluralize }}<small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span></a></small></h3></p>
 	<div id="dyno1" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
@@ -60,7 +62,7 @@
 		{% endfor %}		
 	</div>
 
-	<p><h3 id="advboard">Advisory Board <small><a href="#top"> back to top</a></small></h3></p>
+	<p><h3 id="advboard">Advisory Board <small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span></a></small></h3></p>
 	<div id="dyno2" class="container">
 		{% for i in advboard %}	
 			<a href="{{ i.get_absolute_url }}">

@@ -31,36 +31,34 @@
 {% endblock jumbotron %}
 
 {% block pageheading %}
-<div class="page-header"><h1>
-	{% if language_name %}
-		<a href="/languages"><span class="glyphicon glyphicon-arrow-left"></span></a>
-	{% endif %}Languages 
-	<small> 
+<h2 class="l2_crumbs">
+	<a href="/languages">Languages</a>
+	<small>>
 		{% if language_name %} 
 			{{ language_name|title }}
 			<small>
-			<span class="badge">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
+			<span class="badge badge_other_fill">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
 			<span> | </span>
-			<span class="badge">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
+			<span class="badge badge_other_fill">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
 			<span> | </span>
-			<span class="badge">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
+			<span class="badge badge_other_fill">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
 			</small>
 		{% else %} 
 			choose a language 
 		{% endif %}
 	</small>
-</h1></div>
+</h2>
 	
 {% endblock pageheading %}
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified submenu"> 
-	<a href="chinese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Chinese</li></div></a>
-	<a href="japanese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Japanese</li></div></a>
-	<a href="korean"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Korean</li></div></a>
-	<a href="khmer"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Khmer</li></div></a>
-	<a href="filipino"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Filipino</li></div></a>
-	<a href="samoan"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category">Samoan</li></div></a>
+	<a href="chinese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'chinese' %}badge_other shadowboxed{% endif %}">Chinese</li></div></a>
+	<a href="japanese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'japanese' %}badge_other shadowboxed{% endif %}">Japanese</li></div></a>
+	<a href="korean"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'korean' %}badge_other shadowboxed{% endif %}">Korean</li></div></a>
+	<a href="khmer"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'khmer' %}badge_other shadowboxed{% endif %}">Khmer</li></div></a>
+	<a href="filipino"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'filipino' %}badge_other shadowboxed{% endif %}">Filipino</li></div></a>
+	<a href="samoan"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'samoan' %}badge_other shadowboxed{% endif %}">Samoan</li></div></a>
 </ul>
 {% endblock subheadlines %}
 
@@ -86,7 +84,7 @@
 	
 	<div id="item-listing" class="col-md-12">
 		<span id="publications" class="adjusted-anchor"></span>
-		<p><h3>Publication{{ publications|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>{{ language_name|title }} Publication{{ publications|length|pluralize }}<small> <a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a> </small></h3></p>
 		<div id="dyno1" class="container">
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -101,7 +99,7 @@
 
 	
 		<span id="projects" class="adjusted-anchor"></span>
-		<p><h3>Project{{ projects|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>{{ language_name|title }} Project{{ projects|length|pluralize }}<small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a></small></h3></p>
 		<div id="dyno2" class="container">
 			{% for p in projects %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -115,7 +113,7 @@
 		</div>
 
 		<span id="prodev" class="adjusted-anchor"></span>
-		<p><h3>Workshops and Conference{{ prodevs|length|pluralize }}<small><a href="#top"> back to top</a></small></h3></p>
+		<p><h3>{{ language_name|title }} Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a></small></h3></p>
 		<div id="dyno3" class="container">
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -143,7 +141,8 @@
 {% block customjavascript %}
 jQuery(window).on('load', function(){
 	var $ = jQuery;
-	var containers = ['#dyno0', '#dyno1', '#dyno2', '#dyno3'];	
+	var containers = ['#dyno0', '#dyno1', '#dyno2', '#dyno3'];
+	console.log("Containers -> " + containers);
 	for (i in containers) {
 		containers[i] = document.querySelector(containers[i]);
 		if(containers[i]) {			

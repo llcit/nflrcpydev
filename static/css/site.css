@@ -154,6 +154,8 @@ ul#socialnav li img {
 
 #sitemap_panel h4 {
     padding: 0.5em 0.5em 0.5em 0;
+    /*margin-bottom: 60px;*/
+    height: 60px;
 }
 
 .jumbotron { 
@@ -203,6 +205,10 @@ ul#socialnav li img {
     border: 1px solid #f0f0f0;
 }
 
+.category.active {
+    /*background-color: #808080;*/
+}
+
 .listing {
     width: 230px;
     margin-bottom: 20px;
@@ -222,6 +228,10 @@ ul#socialnav li img {
 
 .listing object {
     display: none;
+}
+
+.l2_crumbs a:link, a:visited, a:hover, a:active {
+    color: #808080;
 }
 
 .shade {
@@ -256,17 +266,20 @@ ul#socialnav li img {
 .flair_projects { background-color: #FFCC99; }
 .flair_prodev { background-color: #66FF99; }
 .flair_stories { background-color: #FFCC00; }
+.flair_other { background-color: #C7C7E4; }
 
 
 .badge_publications { border-bottom: 4px solid #52A3CC; }
 .badge_projects { border-bottom: 4px solid #FFCC99; }
 .badge_prodev { border-bottom: 4px solid #66FF99; }
 .badge_stories { border-bottom: 4px solid #FFCC00;}
+.badge_other { border-bottom: 4px solid #C7C7E4;}
 
-.badge_publications_fill { background-color: #52A3CC; }
-.badge_projects_fill{ background-color: #FFCC99; }
-.badge_prodev_fill { background-color: #66FF99; }
-.badge_stories_fill { background-color: #FFCC00;}
+.badge_publications_fill { background-color: #52A3CC; color: #fff; }
+.badge_projects_fill{ background-color: #FFCC99; color: #000; }
+.badge_prodev_fill { background-color: #66FF99; color: #000; }
+.badge_stories_fill { background-color: #FFCC00; color: #fff;}
+.badge_other_fill { background-color: #C7C7E4; color: #4343A6;}
 
 
 	
