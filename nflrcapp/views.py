@@ -257,6 +257,7 @@ def stories(request):
     listing = StoryPage.objects.all().order_by('title')
     featured = listing.filter(featured=1)
 
+
     return render_to_response('l2-stories.html', {
         'items': listing,
         'featured': featured,
@@ -265,6 +266,7 @@ def stories(request):
 def storyview(request, item):
     # listing = Publication.objects.filter(item_number=item)
     displayitem = StoryPage.objects.get(id=item)
+    tags = displayitem.tags.all()
     # try:
     #
     # except ObjectDoesNotExist:
@@ -273,7 +275,8 @@ def storyview(request, item):
     #   raise Http404
 
     return render_to_response('item-display.html', {
-        'item': displayitem
+        'item': displayitem,
+        'tags': tags
     }, context_instance=RequestContext(request))
 
 

@@ -50,7 +50,12 @@
 			<li><div>{{ item.grant_cycle }}</div> </li>
 			<li><div><i>Director</i></div></li>
 			<li><div>{{ item.director|safe|urlizetrunc:25 }}</div> </li>		
-		{% endif %}		 	
+		
+		{% elif item.classname == 'stories' %}
+			<li><div><i>Tags</i></div></li>
+			<li><div> {% for i in tags %} {{ i }} {% endfor %}</div> </li>		
+		{% endif %}
+
     </ul>
 
 {% endblock item-meta %}

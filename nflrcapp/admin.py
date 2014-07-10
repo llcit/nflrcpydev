@@ -1,12 +1,15 @@
 from django.contrib import admin
-
-from nflrcapp.models import Contact, Project, Publication, Prodev, StoryPage
+from django.contrib.contenttypes import generic
+from nflrcapp.models import Contact, Project, Publication, Prodev, StoryPage#, TaggedItem
 
 class ExtraMedia:
     js = [
         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/js/tinymce_setup.js',
     ]
+
+# class TaggedItemInline(generic.GenericTabularInline):
+#     model = TaggedItem
 
 class ContactAdmin(admin.ModelAdmin):
 	list_display = ('last_name', 'first_name', 'title', 'role', 'listing_rank')
@@ -47,9 +50,13 @@ class StoryPageAdmin(admin.ModelAdmin):
 	list_per_page = 200
 	search_fields = ['id', 'title']
 	ordering = ['id', 'title',]
+	# inlines = [
+ #        TaggedItemInline,
+ #    ]
 
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
 admin.site.register(StoryPage, StoryPageAdmin, Media = ExtraMedia)
+# admin.site.register(TaggedItem)

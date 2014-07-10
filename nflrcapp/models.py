@@ -3,7 +3,8 @@ from collections import OrderedDict
 from django.core.urlresolvers import reverse
 from itertools import chain
 from django.db import models
-
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 
 
 HUMAN_PREFIXES = {
@@ -64,6 +65,22 @@ class ItemsManager(models.Manager):
         featured_items = list(chain(featured_publications, featured_prodevs, featured_projects, featured_stories))
         return featured_items
 
+# class ItemTag(models.Model):
+#     tag = models.SlugField()
+
+#     def __unicode__(self):
+#         return self.tag    
+
+# class TaggedItem(models.Model):
+#     tag = models.ForeignKey(ItemTag)
+#     content_type = models.ForeignKey(ContentType)
+#     object_id = models.PositiveIntegerField()
+#     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+#     def __unicode__(self):
+#         return self.tag
+
+
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
     title = models.CharField(max_length=50, choices=HUMAN_PREFIXES, blank=True, null=True)
@@ -109,6 +126,7 @@ class StoryPage(models.Model):
     featured = models.BooleanField(default=False)
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
+    # tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
 
@@ -359,167 +377,3 @@ class Software(models.Model):
     def classname(self):
         return self.__class__.__name__
 
-# UNUSED FOR NOW ###########################################################
-
-# UNKNOWN #
-# class Spinstruction(models.Model):
-# id = models.IntegerField(db_column='ID', primary_key=True) # Field name made lowercase.
-# classid = models.CharField(max_length=50L, db_column='ClassID', blank=True) # Field name made lowercase.
-# activid = models.CharField(max_length=50L, db_column='ActivID', blank=True) # Field name made lowercase.
-# specinstrucation = models.TextField(db_column='SpecInstrucation', blank=True) # Field name made lowercase.
-# specinstrucsound = models.CharField(max_length=50L, db_column='SpecInstrucSound', blank=True) # Field name made lowercase.
-# activtitle = models.CharField(max_length=200L, db_column='ActivTitle', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'spinstruction'
-
-# class Table05Sp(models.Model):
-# id = models.IntegerField(primary_key=True, db_column='Id') # Field name made lowercase.
-# classid = models.CharField(max_length=50L, db_column='ClassID', blank=True) # Field name made lowercase.
-# activid = models.CharField(max_length=10L, db_column='ActivID', blank=True) # Field name made lowercase.
-# quesid = models.IntegerField(null=True, db_column='QuesID', blank=True) # Field name made lowercase.
-# aenglish = models.CharField(max_length=500L, db_column='AEnglish', blank=True) # Field name made lowercase.
-# apinyin = models.TextField(db_column='APinyin', blank=True) # Field name made lowercase.
-# acorrectid = models.IntegerField(null=True, db_column='ACorrectID', blank=True) # Field name made lowercase.
-# acorrectsound = models.CharField(max_length=50L, db_column='ACorrectSound', blank=True) # Field name made lowercase.
-# awrongsound = models.CharField(max_length=50L, db_column='AWrongSound', blank=True) # Field name made lowercase.
-# benglish = models.CharField(max_length=500L, db_column='BEnglish', blank=True) # Field name made lowercase.
-# bpinyin = models.TextField(db_column='BPinyin', blank=True) # Field name made lowercase.
-# bcorrectid = models.IntegerField(null=True, db_column='BCorrectID', blank=True) # Field name made lowercase.
-# bcorrectsound = models.CharField(max_length=50L, db_column='BCorrectSound', blank=True) # Field name made lowercase.
-# bwrongsound = models.CharField(max_length=50L, db_column='BWrongSound', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'table05sp'
-
-# UNKNOWN #
-
-# class Mmactivities(models.Model):
-# id = models.DecimalField(decimal_places=0, primary_key=True, db_column='ID', max_digits=19) # Field name made lowercase.
-# courseid = models.CharField(max_length=50L, db_column='CourseID', blank=True) # Field name made lowercase.
-# code = models.CharField(max_length=50L, db_column='Code') # Field name made lowercase.
-# name = models.CharField(max_length=100L, db_column='Name', blank=True) # Field name made lowercase.
-# type = models.CharField(max_length=100L, db_column='Type', blank=True) # Field name made lowercase.
-# instructions = models.CharField(max_length=4000L, db_column='Instructions', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'mmactivities'
-
-# class Mmactivity1(models.Model):
-# quesid = models.DecimalField(decimal_places=0, primary_key=True, db_column='QuesID', max_digits=19) # Field name made lowercase.
-# questype = models.CharField(max_length=50L, db_column='QuesType', blank=True) # Field name made lowercase.
-# quesname = models.CharField(max_length=50L, db_column='QuesName', blank=True) # Field name made lowercase.
-# activityid = models.CharField(max_length=50L, db_column='ActivityID', blank=True) # Field name made lowercase.
-# groupno = models.DecimalField(decimal_places=0, null=True, max_digits=19, db_column='GroupNO', blank=True) # Field name made lowercase.
-# audiofile = models.CharField(max_length=50L, db_column='AudioFile', blank=True) # Field name made lowercase.
-# imagelists = models.CharField(max_length=2000L, db_column='ImageLists', blank=True) # Field name made lowercase.
-# captionlists = models.CharField(max_length=2000L, db_column='CaptionLists', blank=True) # Field name made lowercase.
-# imagekey = models.CharField(max_length=50L, db_column='ImageKey', blank=True) # Field name made lowercase.
-# answer = models.IntegerField(null=True, db_column='Answer', blank=True) # Field name made lowercase.
-# imageshow = models.CharField(max_length=2000L, db_column='ImageShow', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'mmactivity1'
-
-
-# class Personnel(models.Model):
-# contact_id = models.IntegerField(primary_key=True, db_column='Contact_ID', blank=True) # Field name made lowercase.
-# last_name = models.CharField(max_length=20L, db_column='Last_Name', blank=True) # Field name made lowercase.
-# middle_name = models.CharField(max_length=20L, db_column='Middle_Name', blank=True) # Field name made lowercase.
-# first_name = models.CharField(max_length=20L, db_column='First_Name', blank=True) # Field name made lowercase.
-# personal_title = models.CharField(max_length=60L, db_column='Personal_Title', blank=True) # Field name made lowercase.
-# business_name = models.CharField(max_length=50L, db_column='Business_Name', blank=True) # Field name made lowercase.
-# business_street = models.CharField(max_length=30L, db_column='Business_Street', blank=True) # Field name made lowercase.
-# business_city = models.CharField(max_length=25L, db_column='Business_City', blank=True) # Field name made lowercase.
-# business_state = models.CharField(max_length=15L, db_column='Business_State', blank=True) # Field name made lowercase.
-# business_zipcode = models.CharField(max_length=15L, db_column='Business_ZipCode', blank=True) # Field name made lowercase.
-# business_title = models.CharField(max_length=60L, db_column='Business_Title', blank=True) # Field name made lowercase.
-# home_street = models.CharField(max_length=80L, db_column='Home_Street', blank=True) # Field name made lowercase.
-# home_city = models.CharField(max_length=25L, db_column='Home_City', blank=True) # Field name made lowercase.
-# home_state = models.CharField(max_length=15L, db_column='Home_State', blank=True) # Field name made lowercase.
-# home_zipcode = models.CharField(max_length=15L, db_column='Home_ZipCode', blank=True) # Field name made lowercase.
-# notes = models.TextField(db_column='Notes', blank=True) # Field name made lowercase.
-# phone_type = models.CharField(max_length=50L, db_column='Phone_Type', blank=True) # Field name made lowercase.
-# phone_number = models.CharField(max_length=50L, db_column='Phone_Number', blank=True) # Field name made lowercase.
-# email_address = models.CharField(max_length=60L, db_column='Email_Address', blank=True) # Field name made lowercase.
-# date_created = models.DateTimeField(null=True, db_column='Date_Created', blank=True) # Field name made lowercase.
-# date_modified = models.DateTimeField(null=True, db_column='Date_Modified', blank=True) # Field name made lowercase.
-# country = models.CharField(max_length=50L, db_column='Country', blank=True) # Field name made lowercase.
-# url = models.CharField(max_length=80L, db_column='URL', blank=True) # Field name made lowercase.
-# info = models.CharField(max_length=50L, db_column='Info', blank=True) # Field name made lowercase.
-# title = models.CharField(max_length=60L, db_column='Title', blank=True) # Field name made lowercase.
-# role = models.CharField(max_length=25L, db_column='Role', blank=True) # Field name made lowercase.
-# current_project = models.CharField(max_length=250L, db_column='Current_Project', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'personnel'
-
-# ONLINE ORDERING #
-
-# class Customer(models.Model):
-# customer_number = models.IntegerField(primary_key=True, db_column='Customer_Number') # Field name made lowercase.
-# full_name = models.CharField(max_length=50L, db_column='Full_Name') # Field name made lowercase.
-# last_name = models.CharField(max_length=20L, db_column='Last_Name', blank=True) # Field name made lowercase.
-# department = models.CharField(max_length=75L, db_column='Department', blank=True) # Field name made lowercase.
-# institution = models.CharField(max_length=50L, db_column='Institution', blank=True) # Field name made lowercase.
-# address = models.CharField(max_length=80L, db_column='Address') # Field name made lowercase.
-# city = models.CharField(max_length=20L, db_column='City') # Field name made lowercase.
-# state = models.CharField(max_length=15L, db_column='State') # Field name made lowercase.
-# zip = models.CharField(max_length=15L, db_column='Zip') # Field name made lowercase.
-# country = models.CharField(max_length=20L, db_column='Country', blank=True) # Field name made lowercase.
-# phone = models.CharField(max_length=50L, db_column='Phone', blank=True) # Field name made lowercase.
-# fax = models.CharField(max_length=50L, db_column='Fax', blank=True) # Field name made lowercase.
-# email = models.CharField(max_length=50L, db_column='Email') # Field name made lowercase.
-# homepage_url = models.CharField(max_length=80L, db_column='Homepage_URL', blank=True) # Field name made lowercase.
-# billing_name = models.CharField(max_length=40L, db_column='Billing_Name', blank=True) # Field name made lowercase.
-# billing_address = models.CharField(max_length=60L, db_column='Billing_Address', blank=True) # Field name made lowercase.
-# billing_city = models.CharField(max_length=20L, db_column='Billing_City', blank=True) # Field name made lowercase.
-# billing_state = models.CharField(max_length=15L, db_column='Billing_State', blank=True) # Field name made lowercase.
-# billing_zip = models.CharField(max_length=15L, db_column='Billing_Zip', blank=True) # Field name made lowercase.
-# billing_country = models.CharField(max_length=20L, db_column='Billing_Country', blank=True) # Field name made lowercase.
-# password = models.CharField(max_length=10L, db_column='Password', blank=True) # Field name made lowercase.
-# comment = models.TextField(db_column='Comment', blank=True) # Field name made lowercase.
-# po_number = models.CharField(max_length=15L, db_column='PO_Number', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'customer'
-
-# class OrderItem(models.Model):
-# order_number = models.IntegerField(db_column='Order_Number') # Field name made lowercase.
-# item_number = models.CharField(max_length=10L, db_column='Item_Number') # Field name made lowercase.
-# item_title = models.CharField(max_length=200L, db_column='Item_Title', blank=True) # Field name made lowercase.
-# quantity = models.IntegerField(null=True, db_column='Quantity', blank=True) # Field name made lowercase.
-# unit_price = models.FloatField(null=True, db_column='Unit_Price', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'order_item'
-
-# class PublicationOrder(models.Model):
-# order_number = models.IntegerField(primary_key=True, db_column='Order_Number') # Field name made lowercase.
-# customer_number = models.IntegerField(null=True, db_column='Customer_Number', blank=True) # Field name made lowercase.
-# total_due = models.FloatField(null=True, db_column='Total_Due', blank=True) # Field name made lowercase.
-# author_discount = models.FloatField(null=True, db_column='Author_Discount', blank=True) # Field name made lowercase.
-# order_date = models.DateTimeField(null=True, db_column='Order_Date', blank=True) # Field name made lowercase.
-# po_number = models.CharField(max_length=30L, db_column='PO_Number', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'publication_order'
-
-# class TempOrder(models.Model):
-# temp_order_number = models.IntegerField(null=True, db_column='Temp_Order_Number', blank=True) # Field name made lowercase.
-# item_number = models.CharField(max_length=10L, db_column='Item_Number', blank=True) # Field name made lowercase.
-# item_title = models.CharField(max_length=200L, db_column='Item_Title', blank=True) # Field name made lowercase.
-# quantity = models.IntegerField(null=True, db_column='Quantity', blank=True) # Field name made lowercase.
-# unit_price = models.FloatField(null=True, db_column='Unit_Price', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'temp_order'
-
-
-# UNKNOWN #
-# class Userinfo(models.Model):
-# userid = models.IntegerField(db_column='UserID') # Field name made lowercase.
-# loginname = models.CharField(max_length=50L, db_column='LoginName') # Field name made lowercase.
-# password = models.TextField(db_column='Password', blank=True) # Field name made lowercase.
-# test = models.CharField(max_length=64L, unique=True, db_column='Test', blank=True) # Field name made lowercase.
-#     class Meta:
-#         db_table = 'userinfo'
-
-# UNKNOWN #
-# class Counter(models.Model):
-#     count_no = models.IntegerField()
-#     category = models.IntegerField()
-#     category_name = models.CharField(max_length=20L, blank=True)
-#     class Meta:
-#         db_table = 'counter'
