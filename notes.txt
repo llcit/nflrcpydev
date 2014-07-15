@@ -4,7 +4,7 @@ Notes:
 -- address and map
 -- fix default images for collaborators
 -- add footer --
--- don't show slider  -- REMOVE slider
+**-- don't show slider  -- REMOVE slider
 -- button bar buttons smaller -- text size is like story blocks
--- remove horizontal line under header move after button bar.
+**-- remove horizontal line under header move after button bar.
 -- make text in story pages 300 width

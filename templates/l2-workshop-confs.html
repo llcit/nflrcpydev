@@ -1,30 +1,6 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block jumbotron %}
-	{% if featured %}
-	<div class="container-fluid">
-	<!-- Start WOWSlider.com -->
-	<div id="wowslider-container1">
-		<div class="ws_images">
-			<ul>
-				{% for feature in featured %} 
-				<li><a href="{{ feature.get_absolute_url }}">
-					<img src="{{MEDIA_URL}}img/{{ feature.getuid }}lg.png" alt="{{ feature.title }}" title="{{ feature.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-				</a></li>
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
-	</div>
-	<!-- End WOWSlider.com -->
-	<!-- 
-		<div class="row"><img src="{{MEDIA_URL}}img/{{ featured.0.getuid }}lg.png"></div>
-		<div class="row"><p> Featured: <span>{{ featured.0.title }}</span></p></div>
-	 -->
-	{% endif %}
-{% endblock jumbotron %}
-
 {% block pageheading %}
 <h2 class="l2_crumbs">	
 	<a href="/prodev">Professional Development</a>
@@ -36,12 +12,12 @@
 
 {% block subheadlines %}
 <ul class="nav nav-pills nav-justified submenu"> 
-	<a href="conference"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'conference' %}badge_prodev shadowboxed{% endif %}">Conferences</li></div></a>
-	<a href="institute"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'institute' %}badge_prodev shadowboxed{% endif %}">Summer Institutes</li></div></a>
-	<a href="workshop"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'workshop' %}badge_prodev shadowboxed{% endif %}">Workshops</li></div></a>
-	<a href="symposium"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'symposium' %}badge_prodev shadowboxed{% endif %}">Symposia</li></div></a>
-	<a href="online"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'online' %}badge_prodev shadowboxed{% endif %}">Online</li></div></a>
-	<a href="other"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'other' %}badge_prodev shadowboxed{% endif %}">Others</li></div></a>
+	<a href="conference"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'conference' %}badge_prodev shadowboxed active{% endif %}">Conferences</li></div></a>
+	<a href="institute"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'institute' %}badge_prodev shadowboxed active{% endif %}">Summer Institutes</li></div></a>
+	<a href="workshop"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'workshop' %}badge_prodev shadowboxed active{% endif %}">Workshops</li></div></a>
+	<a href="symposium"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'symposium' %}badge_prodev shadowboxed active{% endif %}">Symposia</li></div></a>
+	<a href="online"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'online' %}badge_prodev shadowboxed active{% endif %}">Online</li></div></a>
+	<a href="other"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'other' %}badge_prodev shadowboxed active{% endif %}">Others</li></div></a>
 </ul>
 {% endblock subheadlines %}
 

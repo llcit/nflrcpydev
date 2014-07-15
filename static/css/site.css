@@ -2,8 +2,43 @@ body {
     padding: 0 15px;
     /*min-height: 2000px;*/
     padding-top: 135px;
-    font-family: Open Sans;
+    font-family: 'Open Sans', sans-serif;
 }
+/*Sticky footer adds*/
+
+    /* Wrapper for page content to push down footer */
+ /*   #wrap {
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+       Negative indent footer by its height 
+      margin: 0 auto -60px;
+       Pad bottom by footer height 
+      padding: 0 0 60px;
+    }*/
+
+    /* Set the fixed height of the footer here */
+/*    #footer {
+    height: 60px;
+    background-color: #808080;
+    }*/
+    
+
+    /* Lastly, apply responsive CSS fixes as necessary */
+ /*   @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+    }
+    
+    #wrap > .container {
+        padding-top: 60px;
+    }*/
+
+/*End Sticky footer adds*/
 
 /*Default anchor colores*/
 a:link {color: #4343A6;}
@@ -44,6 +79,7 @@ a:active {color: #4343A6;}
 .navbar {
     height: 130px;
     background-color: #fff;
+    border: none;
 }
 
 #logo {
@@ -196,8 +232,8 @@ ul#socialnav li img {
     /*width: 180px;*/
     height: 70px;
     line-height: 20px;
-    font-size: 1.5em;
-    font-weight: 200;
+    font-size: 1em;
+    font-weight: 300;
     text-decoration: none;
     color: #464646;
     text-align: center;
@@ -208,6 +244,7 @@ ul#socialnav li img {
 
 .category.active {
     /*background-color: #808080;*/
+    font-weight: 600;
 }
 
 .listing {
@@ -259,7 +296,7 @@ ul#socialnav li img {
     padding: 5px;
     margin: 5px;
     color: #000;
-    font-weight: 300;
+    font-weight: 400;
     border-bottom: 4px solid #808080;
 }
 

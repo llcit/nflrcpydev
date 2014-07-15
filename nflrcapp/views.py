@@ -266,7 +266,7 @@ def stories(request):
 def storyview(request, item):
     # listing = Publication.objects.filter(item_number=item)
     displayitem = StoryPage.objects.get(id=item)
-    tags = displayitem.tags.all()
+    # tags = displayitem.tags.all()
     # try:
     #
     # except ObjectDoesNotExist:
@@ -276,7 +276,6 @@ def storyview(request, item):
 
     return render_to_response('item-display.html', {
         'item': displayitem,
-        'tags': tags
     }, context_instance=RequestContext(request))
 
 

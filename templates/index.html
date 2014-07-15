@@ -3,26 +3,12 @@
 {% load webdesign %}
 
 
-{% block jumbotron %}
-<div class="container-fluid">	
-	<!-- Start WOWSlider.com -->
-	<div id="wowslider-container1">
-		<div class="ws_images">
-			<ul>
-				{% for headliner in headliners %} 
-				<li><a href="{{ headliner.get_absolute_url }}">
-					<img src="{{MEDIA_URL}}img/{{ headliner.getuid }}lg.png" alt="{{ headliner.title }}" title="{{ headliner.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-				</a></li>
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
-	<!-- End WOWSlider.com -->
-</div>	
-{% endblock jumbotron %}
+{% block header_row %}
+	{{ block.super }}
+
+{% endblock header_row %}
 
 {% block subheadlines %}
-
 <ul class="nav nav-pills nav-justified submenu">
  
 	<a href="/publications">
@@ -73,7 +59,8 @@
 		</div>
 	</a>
 
-</ul>
+</ul>	
+
 {% endblock subheadlines %}
 
 
