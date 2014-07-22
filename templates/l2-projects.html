@@ -2,29 +2,9 @@
 {% load staticfiles %}
 
 
-{% block jumbotron %}
-{% comment %}
-	<div class="container-fluid">
-		<!-- Start WOWSlider.com -->
-		<div id="wowslider-container1">
-			<div class="ws_images">
-				<ul>
-					{% for f in featured %} 
-					<a href="{{ f.get_absolute_url }}"><li>
-						<img src="{{MEDIA_URL}}img/{{ f.image }}" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-					</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<!-- End WOWSlider.com -->
-	</div>
-{% endcomment %}
-{% endblock jumbotron %}
-
 {% block pageheading %}
 <h2 class="l2_crumbs">	
-	<a href="/projects">Research and Development Projects</a>
+	<a href="/projects" class="badge_projects">Projects</a>
 	<small> <span class="badge badge_projects_fill">{{ items|length }}</span></small>
 </h2>
 {% endblock pageheading %}

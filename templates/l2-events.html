@@ -3,7 +3,7 @@
 
 {% block pageheading %}
 <h2 class="l2_crumbs">	
-	<a href="/prodev">Professional Development</a>
+	<a href="/events" class="badge_prodev">Events</a>
 	{% if pdtype_tag %}
 		<small> > {% if events.0.pdtype == 'Symposium' %}Symposia{% else %}{{ events.0.pdtype|title }}s{% endif %} <span class="badge badge_prodev_fill">{{events|length}}</span></small>
 	{% endif %}	

@@ -172,7 +172,7 @@ class Prodev(models.Model):
         return name.lower()
 
     def displayname(self):
-        name = 'Workshop & Conferences'
+        name = 'Events'
         return name
 
     def properties(self):

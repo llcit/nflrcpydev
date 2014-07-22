@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block pageheading %}
-<h2><a href="/about">About Us</a><small></small></h2>
+<h2><a href="/about" class="badge_about">About Us</a></h2>
 {% endblock pageheading %}
 
 {% block subheadlines %}
@@ -30,11 +30,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2></h2>
-			<span class="badge">{{staff|length}}</span><span><a href="#staff"> Staff </a></span>
+			<span class="badge badge_other_fill">{{staff|length}}</span><span><a href="#staff"> Staff </a></span>
 			<span> | </span>
-			<span class="badge">{{collabs|length}}</span><span><a href="#collaborators"> Collaborator{{ collabs|length|pluralize }}</a></span>
+			<span class="badge badge_other_fill">{{collabs|length}}</span><span><a href="#collaborators"> Collaborator{{ collabs|length|pluralize }}</a></span>
 			<span> | </span>
-			<span class="badge">{{advboard|length}}</span><span><a href="#advboard"> Advisory Board</a></span>
+			<span class="badge badge_other_fill">{{advboard|length}}</span><span><a href="#advboard"> Advisory Board</a></span>
 		</div>
 	</div>
 

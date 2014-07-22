@@ -35,10 +35,10 @@
 		</div>
 	</a>
  
-	<a href="/prodev">
+	<a href="/events">
 		<div class="col-xs-12 col-sm-6 col-md-2">
 			<li class="category badge_container badge_prodev">
-				Workshops & Conferences 
+				Events 
 			</li>
 		</div>
 	</a>
@@ -54,7 +54,7 @@
 	<a href="/publications/teaching-materials">
 		<div class="col-xs-12 col-sm-6 col-md-2">
 			<li class="category badge_container">
-				Teaching Materials 
+				Materials 
 			</li>
 		</div>
 	</a>
@@ -74,7 +74,7 @@
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
 				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
-				<p><span class="badge_container badge_{{ feature.classname }}"> {{ feature.classname }} </span></p>
+				<p><span class="badge_container badge_{{ feature.classname }}"> {{ feature.displayname }} </span></p>
 			</div>
 		</a>
 	

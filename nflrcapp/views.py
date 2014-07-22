@@ -97,7 +97,7 @@ def prodev(request, tag):
     featured = Prodev.objects.filter(featured=True)
         # listing = Prodev.objects.filter().order_by('pdtype', '-id')
     
-    return render_to_response('l2-workshop-confs.html', {
+    return render_to_response('l2-events.html', {
         'events': listing,
         'featured': featured,
         'pdtype_tag': tag
@@ -217,7 +217,6 @@ def resources(request, tag):
 
 
 def search(request):
-    print 'incoming query->', request.GET
     query = request.GET['q']
     if query:
         publications = Publication.objects.filter(

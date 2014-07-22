@@ -16,6 +16,8 @@
     <link type="text/css" rel="stylesheet" href="{% static 'wowslider/engine1/style.css' %}" /> 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css' %}" >
+    <!-- Font Awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Auto generate toc's using tocify -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/jquery.tocify.css' %}" />
     <!-- Local Customizations -->
@@ -67,13 +69,6 @@
                         </form>
                     </li> 
                 </ul>
-
-                <ul  id="socialnav" class="nav navbar-nav navbar-right">
-                    <li id="facebook"><img src="{{MEDIA_URL}}img/logos/facebook_logo_blue.png"> </li> 
-                    <li id="twitter"><img src="{{MEDIA_URL}}img/logos/twitter_logo_blue.png"> </li> 
-                    <li id="linkedin"><img src="{{MEDIA_URL}}img/logos/linkedin_logo.png"> </li> 
-                    <li id="youtube"><img src="{{MEDIA_URL}}img/logos/youtube_logo_color.png"> </li>
-                </ul>
             </div><!-- .nav-collapse -->
         </div>
     </div> <!-- end row 2 -->
@@ -86,7 +81,7 @@
     <div id="sitemap_panel" class="row shadowboxed" style="display: none">
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <h4 class="badge_container badge_other"><a href="/about">About</a></h4>
+            <h4 class="badge_container badge_about"><a href="/about">About</a></h4>
             <p><a href="/story/1">History</a></p>
             <p><a href="/story/2">Kuleana (mission)</a></p>
         </div>
@@ -105,15 +100,15 @@
             <p><a href="/publications/pragmatics">Pragmatics</a></p>
         </div>
         <div class="col-md-2">
-            <h4 class="badge_container badge_prodev"><a href="/prodev">Professional Development</a></h4>
-            <p><a href="/prodev/conference">Conferences</a></p>
-            <p><a href="/prodev/institute">Summer Institutes</a></p>
-            <p><a href="/prodev/symposium">Symposiums</a></p>
-            <p><a href="/prodev/workshop">Workshops</a></p>
-            <p><a href="/prodev/other">Others</a></p>
+            <h4 class="badge_container badge_prodev"><a href="/events">Events</a></h4>
+            <p><a href="/events/conference">Conferences</a></p>
+            <p><a href="/events/institute">Summer Institutes</a></p>
+            <p><a href="/events/symposium">Symposiums</a></p>
+            <p><a href="/events/workshop">Workshops</a></p>
+            <p><a href="/events/other">Others</a></p>
         </div>
         <div class="col-md-2">
-            <h4 class="badge_container badge_other"><a href="/contact">Contact</a></h4>
+            <h4 class="badge_container badge_contact"><a href="/contact">Contact</a></h4>
             <p><a href="">Address & map</a></p>
             <p><a href="/contact">People</a></p>
             <p><a href="">Web Admin</a></p>
@@ -127,23 +122,34 @@
 {% endblock header_row %}
 </div> <!-- end .navbar -->
 
-
-
-
-
-{% block jumbotron %}  {% endblock jumbotron %}  
-
 <!-- Main content -->
 <div class="container-fluid">
     {% block content %} {% endblock content%}
 </div>
 </div> <!-- End content wrap -->
 
-<!-- <div id="footer">
-  <div class="container">
-    <p class="muted credit">Footer</p>
+<div id="footer" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="socialnav col-md-12">
+            <h3 style="text-align: center">               
+                    <a href="https://www.facebook.com/NFLRC"><i class="fa fa-facebook fa-6"></i></a>
+                    <a href="http://www.youtube.com/user/nflrchawaii"><i class="fa fa-youtube fa-6"></i></a>
+                    <a href="https://www.linkedin.com/company/national-foreign-language-resource-center-nflrc-"><i class="fa fa-linkedin fa-6"></i></a>              
+                    <a href="http://www.twitter.com/NFLRC"><i class="fa fa-twitter fa-6"></i></a>          
+            </h3>
+        </div>
+        <div class="col-md-12">
+            <address style="text-align: center"><small>
+                <a href="/contact"><strong>National Foreign Language Resource Center</strong></a><br>
+                <a href="mailto:nflrc@hawaii.edu">nflrc@hawaii.edu</a>
+            </small></address>
+        </div>
+        
+
+    </div>   
   </div>
-</div> -->
+</div>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
