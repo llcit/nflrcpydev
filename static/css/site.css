@@ -24,7 +24,6 @@ a:active {color: #4343A6;}
 
 .adjusted-anchor{display: block; position: relative; top: -135px; visibility: hidden;}
 
-
 /*Default bootstrap class: label color*/
 .label, .badge {
     background-color: #C7C7E4;
