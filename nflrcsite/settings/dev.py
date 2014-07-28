@@ -19,7 +19,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'nflrcpydb',
         'USER': 'nflrcpydbuser',
-        'PASSWORD': 'uN05inco3',
+        'PASSWORD': '1',
         'HOST': 'localhost', 
         'PORT': '5432', 
     }
