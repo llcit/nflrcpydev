@@ -7,13 +7,13 @@
 		<a href="#staff"><span class="badge badge_other_fill">staff</span></a> 
 		<a href="#collaborators"><span class="badge badge_other_fill">collaborators</span></a>
 	</h1>
-	<div>
-		<div>National Foreign Language Resource Center</div>
+	<address>
+		<div><strong>National Foreign Language Resource Center</strong></div>
 		<div>University of Hawaiʻi at Mānoa</div>
 		<div>1859 East-West Road #106</div>
 		<div>Honolulu HI 96822-2322 </div>
 		<div>Phone: 808.956.9424; Fax: 808.956.5983 </div>
-	</div>
+	</address>
 </div>
 {% endblock pageheading %}
 
@@ -39,7 +39,7 @@
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
+					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>	
 				</div>
 			</a>

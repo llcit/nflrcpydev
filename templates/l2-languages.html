@@ -1,35 +1,6 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block local_css %}
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
-	<!-- End WOWSlider.com HEAD section -->
-{% endblock local_css %}
-
-
-{% block jumbotron %}
-	{% comment %}
-		{% if featured %}	
-		<div class="jumbotron">
-			<!-- Start WOWSlider.com -->
-			<div id="wowslider-container1">
-				<div class="ws_images">
-					<ul>
-						{% for f in featured %} 
-						<li><a href="{{ f.get_absolute_url }}">
-							<img src="{{MEDIA_URL}}img/{{ f.getuid }}lg.png" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-						</li></a>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-			<!-- End WOWSlider.com -->
-		</div>
-		{% endif %}
-	{% endcomment %}
-{% endblock jumbotron %}
-
 {% block pageheading %}
 <h2 class="l2_crumbs">
 	<a href="/languages">Languages</a>

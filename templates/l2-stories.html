@@ -2,34 +2,17 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block local_css %}
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="{% static 'wowslider/engine1/style.css' %}" />	
-	<!-- End WOWSlider.com HEAD section -->
-{% endblock local_css %}
-
-{% block jumbotron %}
-	{% if false %}
-	<div class="jumbotron">
-		<!-- Start WOWSlider.com -->
-		<div id="wowslider-container1">
-			<div class="ws_images">
-				<ul>
-					{% for f in featured %} 
-					<a href="{{ f.get_absolute_url }}"><li>
-						<img src="{{MEDIA_URL}}img/{{ f.image }}" alt="{{ f.title }}" title="{{ f.headline_tag }}" id="wows1_{{ forloop.counter0 }}"/>
-					</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<!-- End WOWSlider.com -->
-	</div>
-	{% endif %}
-{% endblock jumbotron %}
-
 {% block pageheading %}
-	<h2><small>Stories</small></h2>
+	<h2 class="l2_crumbs">
+		<a href="/stories" class="badge_stories">Stories</a>
+		<small>>{% if subpage %}			
+				{{ subpage|title }}
+			{% else %}
+				Featured
+			{% endif %} 
+			<span class="badge badge_stories_fill">{{ items|length }}</span>
+		</small>
+	</h2>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}
