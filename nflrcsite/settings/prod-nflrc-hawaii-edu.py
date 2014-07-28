@@ -1,22 +1,24 @@
 # prod.py
 from .base import *
 
-DOC_ROOT = '<ABS PATH TO WEB DOCUMENT ROOT HERE>'
+SECRET_KEY = 'su!r1r&_kq+03a8(y3*@z23=7zi@j!-w8gpv!&79xl7jql17q+'
+
+DOC_ROOT = '/web'
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-# ! SACRED DO NOT EDIT THESE IN DEVELOPMENT!
-ALLOWED_HOSTS = []
+# ! DO NOT EDIT THESE IN DEVELOPMENT!
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'NAME': 'nflrcpydb',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': 'nflrcpydbuser',
+        'PASSWORD': 'uN05inco3',
+        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',                      # Set to empty string for default.
     }
 }
@@ -25,7 +27,7 @@ DATABASES = {
 # #INSTALLED_APPS += (,)
 
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(DOC_ROOT, 'media/nflrc/')
