@@ -22,6 +22,19 @@
 {% endblock subheadlines %}
 
 {% block stories %}
+	{%if not pdtype_tag %}
+		<div id="dyno_0" class="container dyno">
+		{% for p in featured %}
+			<a href="{{ p.get_absolute_url }}">
+				<div class="listing shadowboxed">
+					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+					<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+					<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				</div>
+			</a>		
+		{% endfor %}
+		</div>
+	{% else %}
 	
 		{% for p in events %}
 			{% ifchanged p.pdtype %}
@@ -42,7 +55,7 @@
 			{% if forloop.last %}</div>{% endif %}
 		{% endfor %}
 	
-	
+	{% endif %}
 {% endblock stories %}
 
 {% block customjavascript %}

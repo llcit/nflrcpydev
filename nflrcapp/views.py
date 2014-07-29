@@ -94,7 +94,8 @@ def prodev(request, tag):
     else:
         listing= None
 
-    featured = Prodev.objects.filter(featured=True)
+    featured = Prodev.objects.filter(featured=True).order_by('featured_rank')
+    print featured
         # listing = Prodev.objects.filter().order_by('pdtype', '-id')
     
     return render_to_response('l2-events.html', {
