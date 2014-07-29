@@ -46,7 +46,6 @@ def deploy(proj_dir, python_home, deploy_setting):
         with cd(deploy_dir):
             run("git pull origin master")
             run('python manage.py collectstatic --settings=nflrcsite.settings.%s' % deploy_setting)
-            run("touch app.wsgi")
 
 def prompt():
     if not confirm("You are about to push changes to the repository to a production environment. Are you sure you want to do this?"):

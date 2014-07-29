@@ -16,19 +16,25 @@
 		{% if item.classname == 'publications' %}
 			<li><div><i>Author(s)</i></div> </li>
 			<li><div>{{ item.author }}</div></li>
-			<li><div><i>Date</i></div></li>
+			
+			<li><div><i>Date</i></div> </li>
 			<li><div>{{ item.year }}</div> </li>
-			<li><div><i>Access</i></div></li>
-			<li><div>{{ item.url|urlizetrunc:25 }}</div></li>
-			{% if item.oclc_url %}
-			<li>
-				<div style="height: 50px"><a href="{{ item.oclc_url }}"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a></div>
-			</li>
+
+			<li><div><i>Language(s)</i></div> </li>
+			<li><div>{{ item.language }}</div> </li>
+
+			{% if item.url %}
+			<li><div><a href="{{ item.url }}" target="_blank">View Item</a></div></li>
 			{% endif %}
 
 			{% if item.ext_url %}
-			<li><div><i>Website</i></div></li>
-			<li><div>{{ item.ext_url|urlizetrunc:25 }}</div> </li>
+			<li><div><a href="{{ item.ext_url }}" target="_blank">Visit Website</a></div> </li>
+			{% endif %}
+			
+			{% if item.oclc_url %}
+			<li>
+				<div style="height: 50px"><a href="{{ item.oclc_url }}" target="_blank"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a></div>
+			</li>
 			{% endif %}
 		
 		{% elif item.classname == 'prodev' %}
@@ -40,17 +46,25 @@
 			<li><div>{{ item.director|safe }}</div> </li>
 			<li><div><i>Facilitator(s)</i></div></li>
 			<li><div>{{ item.facilitator|safe }}</div> </li>
+			{% if item.language %}
+			<li><div><i>Language(s)</i></div> </li>
+			<li><div>{{ item.language }}</div> </li>
+			{% endif %}
+			{% if item.related_publication %}
 			<li><div><i>Publications</i></div></li>
 			<li><div>{{ item.related_publication|safe }}</div> </li>
-			<li><div><i>Web</i></div></li>
-			<li><div>{{ item.url|urlizetrunc:25 }}</div> </li>
+			{% endif %}
+			<li><div><a href="{{ item.url }}" target="_blank">Web</a></div> </li>
 		
 		{% elif item.classname == 'projects' %}
 			<li><div><i>Grant Period</i></div></li>
 			<li><div>{{ item.grant_cycle }}</div> </li>
 			<li><div><i>Director</i></div></li>
 			<li><div>{{ item.director|safe|urlizetrunc:25 }}</div> </li>		
-		
+			{% if item.language %}
+			<li><div><i>Language(s)</i></div> </li>
+			<li><div>{{ item.language }}</div> </li>
+			{% endif %}
 		{% elif item.classname == 'stories' %}
 			<li><div><i>Tags</i></div></li>
 					
@@ -72,7 +86,7 @@
 	</h2>
 	
 	<h2>{{ item.title | safe }}</h2>
-	{% if item.oclc_url %}<h4><span><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" height="30px"/></span></h4>{% endif %}
+	{% if item.is_oer %}<h4><span><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" height="30px"/></span></h4>{% endif %}
 	
 	<div id="item-content" >{{ item.description | safe }}</div>
 

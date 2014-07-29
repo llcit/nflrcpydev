@@ -43,47 +43,52 @@ PUBLICATION_MEDIA_TYPES = (
 )
 
 ITEM_TYPE_SHORTCUTS = {
-     'CD': 'media',
-     'DVD': 'media',
-     'Videotape': 'media',
-     'NFLRC Monograph': 'monographs',
-     'Network': 'networks',
-     'Journal': 'journals',
-     'Language Teaching Material': 'teaching-materials',
-     'PragmaticsLL': 'pragmatics',
-     'PragmaticsI' : 'pragmatics',
-     'Research Note': 'research-notes',
-     'Workshop & Conferences': 'prodev',
+    'CD': 'media',
+    'DVD': 'media',
+    'Videotape': 'media',
+    'NFLRC Monograph': 'monographs',
+    'Network': 'networks',
+    'Journal': 'journals',
+    'Language Teaching Material': 'teaching-materials',
+    'PragmaticsLL': 'pragmatics',
+    'PragmaticsI': 'pragmatics',
+    'Research Note': 'research-notes',
+    'Workshop & Conferences': 'prodev',
 }
 
+
 class ItemsManager(models.Manager):
+
     def allfeatured(self, **kwargs):
         featured_publications = Publication.objects.filter(featured=1)
         featured_prodevs = Prodev.objects.filter(featured=1)
         featured_projects = Project.objects.filter(featured=1)
         featured_stories = StoryPage.objects.filter(featured=1)
-        featured_items = list(chain(featured_publications, featured_prodevs, featured_projects, featured_stories))
+        featured_items = sorted(
+            chain(featured_publications, featured_prodevs, featured_projects, featured_stories), key=attrgetter('featured_rank'))
+        
         return featured_items
 
 # class ItemTag(models.Model):
 #     tag = models.SlugField()
 
 #     def __unicode__(self):
-#         return self.tag    
+#         return self.tag
 
 # class TaggedItem(models.Model):
 #     tag = models.ForeignKey(ItemTag)
 #     content_type = models.ForeignKey(ContentType)
 #     object_id = models.PositiveIntegerField()
 #     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    
+
 #     def __unicode__(self):
 #         return self.tag
 
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
-    title = models.CharField(max_length=50, choices=HUMAN_PREFIXES, blank=True, null=True)
+    title = models.CharField(
+        max_length=50, choices=HUMAN_PREFIXES, blank=True, null=True)
     last_name = models.CharField(max_length=20L, blank=True)
     department = models.CharField(max_length=256L, blank=True)
     university = models.CharField(max_length=60L, blank=True)
@@ -120,12 +125,16 @@ class Contact(models.Model):
 class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
-    thumbnail_desc = models.CharField(max_length=160, default='more...', null=True, blank=True, )
+    thumbnail_desc = models.CharField(
+        max_length=160, default='more...', null=True, blank=True, )
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
-    featured = models.BooleanField(default=False)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png',
+                             verbose_name='Icon image name (jumbotron images are not specified here.)')
+    featured = models.BooleanField(blank=True, default=False)
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
-    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
+    headline_tag = models.CharField(
+        max_length=512, blank=True, null=True, default='')
     # tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
@@ -133,13 +142,13 @@ class StoryPage(models.Model):
     def classname(self):
         name = 'stories'
         return name
-    
+
     def displayname(self):
         name = 'Stories'
         return name
-    
+
     def getuid(self):
-        return 'story%s' % self.id 
+        return 'story%s' % self.id
 
     def get_absolute_url(self):
         return reverse('story', args=[str(self.id)])
@@ -156,14 +165,18 @@ class Prodev(models.Model):
     director = models.CharField(max_length=200L)
     facilitator = models.TextField(blank=True)
     description = models.TextField(blank=True)
-    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
+    thumbnail_desc = models.CharField(
+        max_length=160, null=True, blank=True, default='more...')
     related_publication = models.TextField(blank=True)
     url = models.URLField()
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
-    featured = models.BooleanField(default=False)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png',
+                             verbose_name='Icon image name (jumbotron images are not specified here.)')
+    featured = models.BooleanField(blank=True, default=False)
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
-    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
+    headline_tag = models.CharField(
+        max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
 
@@ -210,12 +223,16 @@ class Project(models.Model):
     status = models.CharField(max_length=30L, blank=True)
     director = models.TextField(blank=True)
     description = models.TextField(blank=True)
-    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
+    thumbnail_desc = models.CharField(
+        max_length=160, null=True, blank=True, default='more...')
     skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
-    featured = models.BooleanField(default=False)
+    image = models.CharField(max_length=100L, blank=True, default='icon.png',
+                             verbose_name='Icon image name (jumbotron images are not specified here.)')
+    featured = models.BooleanField(blank=True, default=False)
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
-    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
+    headline_tag = models.CharField(
+        max_length=512, blank=True, null=True, default='')
 
     objects = ItemsManager()
 
@@ -257,35 +274,47 @@ class PersonProject(models.Model):
 
 
 class Publication(models.Model):
-    item_number = models.CharField(max_length=10L, blank=True)
-    title = models.CharField(max_length=200L, blank=True)
-    language = models.CharField(max_length=255L, blank=True)
+    item_number = models.CharField(max_length=10L, help_text='Follows coding/id system in place for other publications. Example: MGnn is a Monograph with id nn.')
+    title = models.CharField(max_length=200L)
+    author = models.CharField(
+        max_length=100L, help_text='Enter one or more authors.')
+    description = models.TextField(help_text='A description of the resource.')
     category = models.CharField(
-        max_length=128, choices=PUBLICATION_MEDIA_TYPES)
-    author = models.CharField(max_length=100L, blank=True)
+        max_length=128, choices=PUBLICATION_MEDIA_TYPES, help_text='Category for this publication.')
+    image = models.CharField('icon', max_length=100L, default='icon.png', help_text='Icon for this item. <br>Format = ITEM_NUMBERicon.png . Default is icon.png')
+    language = models.CharField(
+        max_length=255L, blank=True, help_text='(Optional)')
     year = models.CharField(max_length=12L, blank=True)
-    price = models.FloatField(null=True, blank=True)
-    description = models.TextField(blank=True)
-    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True, default='more...')
-    size = models.CharField(max_length=40L, blank=True)
-    is_oer = models.BooleanField(default=False)
-    url = models.CharField(max_length=250L, blank=True)
-    ext_url = models.CharField(max_length=250L, blank=True)
-    oclc_url = models.CharField(max_length=250L, blank=True)
-    order_from = models.CharField(max_length=10L, blank=True) # deprecate
-    skeywords = models.TextField(blank=True)
-    image = models.CharField(max_length=100L, blank=True, default='icon.png', verbose_name='Icon image name (jumbotron images are not specified here.)')
-    isbn = models.CharField(max_length=20L, null=True, blank=True)
-    featured = models.BooleanField(default=False)
-    headline = models.BooleanField(default=False)
-    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
-    hidden = models.BooleanField(default=False)
+    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True,
+                                      default='more...', help_text='140 characters or less. Appears on the item blocks.')
+    is_oer = models.BooleanField(
+        'is this an Open Educational Resource?', default=False, blank=True,
+        help_text='Check this ON if the publication is an Open Educational Resource')
+    url = models.CharField(max_length=250L, blank=True,
+                           help_text='(Optional) Specify the address at which the resource can be accessed.')
+    ext_url = models.CharField(
+        max_length=250L, blank=True, help_text='(Optional) Specify the address at which additional information about the resource is located.')
+    oclc_url = models.CharField(
+        max_length=250L, blank=True, help_text='(Optional) Specify the OCLC url if it exists.')
+    order_from = models.CharField(
+        max_length=250L, blank=True, help_text='(Optional) Specify URL where item may be purchased.')
+    size = models.CharField(
+        max_length=40L, blank=True, help_text='(Optional) Number of pages.')
+    skeywords = models.TextField(
+        blank=True, help_text='(Optional) List keywords for this item separated by commas.')
+    featured = models.BooleanField('feature this item?', blank=True, default=False, help_text='(Optional) Check this ON to force the item to display in featured lists.')
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
+    hidden = models.BooleanField(default=False, help_text='Prevent this item from displaying on the site. Currently not implemented.')
+    isbn = models.CharField(max_length=20L, null=True, blank=True, editable=False) # no longer used.
+    price = models.FloatField(editable=False, null=True, blank=True)  # no longer used.
+    headline = models.BooleanField(editable=False, default=False, help_text='(Optional) Check this ON to force the item to display as headline. Currently not implemented.' )
+    headline_tag = models.CharField(editable=False, max_length=512, blank=True, null=True, default='', help_text='(Optional) Show tagline in headline. Currently not implemented.')
 
     objects = ItemsManager()
 
     class Meta:
         ordering = ['-year', 'item_number']
-    
+
     def displayname(self):
         name = 'Publications'
         return name
@@ -303,12 +332,14 @@ class Publication(models.Model):
     def customproperties(self):
         properties = {}
         access_list = {}
-        access_list['access'] = self.url 
-        
+        access_list['access'] = self.url
+
         if self.ext_url:
             access_list['ext_url'] = self.ext_url
         if self.oclc_url:
             access_list['oclc'] = self.oclc_url
+        if self.order_from:
+            access_list['order_from'] = self.oclc_url
 
         access_list['oer'] = self.is_oer
 
@@ -376,4 +407,3 @@ class Software(models.Model):
 
     def classname(self):
         return self.__class__.__name__
-

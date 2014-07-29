@@ -8,29 +8,42 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'TaggedItem'
-        db.create_table(u'nflrcapp_taggeditem', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('tag', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal(u'nflrcapp', ['TaggedItem'])
+        # Adding field 'Project.featured_rank'
+        db.add_column(u'nflrcapp_project', 'featured_rank',
+                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      keep_default=False)
+
+        # Adding field 'Prodev.featured_rank'
+        db.add_column(u'nflrcapp_prodev', 'featured_rank',
+                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      keep_default=False)
+
+        # Adding field 'Publication.featured_rank'
+        db.add_column(u'nflrcapp_publication', 'featured_rank',
+                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      keep_default=False)
+
+        # Adding field 'StoryPage.featured_rank'
+        db.add_column(u'nflrcapp_storypage', 'featured_rank',
+                      self.gf('django.db.models.fields.IntegerField')(default=0),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'TaggedItem'
-        db.delete_table(u'nflrcapp_taggeditem')
+        # Deleting field 'Project.featured_rank'
+        db.delete_column(u'nflrcapp_project', 'featured_rank')
+
+        # Deleting field 'Prodev.featured_rank'
+        db.delete_column(u'nflrcapp_prodev', 'featured_rank')
+
+        # Deleting field 'Publication.featured_rank'
+        db.delete_column(u'nflrcapp_publication', 'featured_rank')
+
+        # Deleting field 'StoryPage.featured_rank'
+        db.delete_column(u'nflrcapp_storypage', 'featured_rank')
 
 
     models = {
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
         u'nflrcapp.contact': {
             'Meta': {'object_name': 'Contact'},
             'address': ('django.db.models.fields.CharField', [], {'max_length': '128L', 'blank': 'True'}),
@@ -73,6 +86,7 @@ class Migration(SchemaMigration):
             'director': ('django.db.models.fields.CharField', [], {'max_length': '200L'}),
             'facilitator': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'featured_rank': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -90,6 +104,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'director': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'featured_rank': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'grant_cycle': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
@@ -104,27 +119,28 @@ class Migration(SchemaMigration):
         },
         u'nflrcapp.publication': {
             'Meta': {'ordering': "[u'-year', u'item_number']", 'object_name': 'Publication'},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
+            'author': ('django.db.models.fields.CharField', [], {'max_length': '100L'}),
             'category': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {}),
             'ext_url': ('django.db.models.fields.CharField', [], {'max_length': '250L', 'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'featured_rank': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             'hidden': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'default': "u'icon.png'", 'max_length': '100L', 'blank': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'default': "u'icon.png'", 'max_length': '100L'}),
             'is_oer': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'isbn': ('django.db.models.fields.CharField', [], {'max_length': '20L', 'null': 'True', 'blank': 'True'}),
-            'item_number': ('django.db.models.fields.CharField', [], {'max_length': '10L', 'blank': 'True'}),
+            'item_number': ('django.db.models.fields.CharField', [], {'max_length': '10L'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '255L', 'blank': 'True'}),
             'oclc_url': ('django.db.models.fields.CharField', [], {'max_length': '250L', 'blank': 'True'}),
-            'order_from': ('django.db.models.fields.CharField', [], {'max_length': '10L', 'blank': 'True'}),
+            'order_from': ('django.db.models.fields.CharField', [], {'max_length': '250L', 'blank': 'True'}),
             'price': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
             'size': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'thumbnail_desc': ('django.db.models.fields.CharField', [], {'default': "u'more...'", 'max_length': '160', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '200L'}),
             'url': ('django.db.models.fields.CharField', [], {'max_length': '250L', 'blank': 'True'}),
             'year': ('django.db.models.fields.CharField', [], {'max_length': '12L', 'blank': 'True'})
         },
@@ -173,6 +189,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'StoryPage'},
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'featured_rank': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -180,13 +197,6 @@ class Migration(SchemaMigration):
             'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'thumbnail_desc': ('django.db.models.fields.CharField', [], {'default': "u'more...'", 'max_length': '160', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
-        },
-        u'nflrcapp.taggeditem': {
-            'Meta': {'object_name': 'TaggedItem'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'tag': ('django.db.models.fields.SlugField', [], {'max_length': '50'})
         }
     }
 

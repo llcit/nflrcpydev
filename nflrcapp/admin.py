@@ -28,9 +28,9 @@ class ProjectAdmin(admin.ModelAdmin):
 	ordering = ['-project_number']
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'headline', 'image',)
-	list_filter = ['featured', 'headline', 'category']
-	list_editable = ['featured', 'headline']
+	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'image',)
+	list_filter = ['featured', 'category']
+	list_editable = ['featured', 'image']
 	list_per_page = 200
 	search_fields = ['item_number', 'title']
 	ordering = ['item_number', '-year']
