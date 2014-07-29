@@ -20,33 +20,33 @@ class ContactAdmin(admin.ModelAdmin):
 	ordering = ['listing_rank']
 
 class ProjectAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'project_number', 'title', 'featured', 'headline', 'image')
+	list_display = ('getuid', 'project_number', 'title', 'featured', 'featured_rank', 'headline', 'image')
 	list_filter = ['featured', 'headline']
-	list_editable = ['featured', 'headline']
+	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
 	search_fields = ['project_number', 'title']
 	ordering = ['-project_number']
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'image',)
+	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'featured_rank', 'image',)
 	list_filter = ['featured', 'category']
-	list_editable = ['featured', 'image']
+	list_editable = ['featured', 'featured_rank', 'image']
 	list_per_page = 200
 	search_fields = ['item_number', 'title']
 	ordering = ['item_number', '-year']
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'headline', 'pdtype', 'image',)
+	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
 	list_filter = ['featured', 'headline', 'pdtype']
-	list_editable = ['featured', 'headline', 'pdtype']
+	list_editable = ['featured', 'featured_rank', 'headline', 'pdtype']
 	list_per_page = 200
 	search_fields = ['id', 'title']
 	ordering = ['-id', 'title']
 
 class StoryPageAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'headline', 'image')
+	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image')
 	list_filter = ['featured', 'headline',]
-	list_editable = ['featured', 'headline']
+	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
 	search_fields = ['id', 'title']
 	ordering = ['id', 'title',]

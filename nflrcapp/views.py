@@ -1,9 +1,12 @@
 # views.py
+from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from collections import OrderedDict
 from itertools import chain
+from operator import attrgetter
 
 from django.db.models import Q
 from django.utils.html import strip_tags
@@ -16,14 +19,10 @@ def home(request):
     featured2 = Project.objects.filter(featured=True)
     featured3 = Prodev.objects.filter(featured=True)
     featured4 = StoryPage.objects.filter(featured=True)
-    featured = list(chain(featured1, featured2, featured3, featured4))
+    featured = sorted(
+        chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
 
-    headliner1 = Publication.objects.filter(headline=True)
-    headliner2 = Project.objects.filter(headline=True)
-    headliner3 = Prodev.objects.filter(headline=True)
-    headliner4 = StoryPage.objects.filter(headline=True)
-    headliners = list(chain(headliner1, headliner2, headliner3, headliner4))
-    return render_to_response('index.html', {'headliners': headliners, 'featured': featured}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
 
 def about(request):
@@ -95,8 +94,7 @@ def prodev(request, tag):
         listing= None
 
     featured = Prodev.objects.filter(featured=True).order_by('featured_rank')
-    print featured
-        # listing = Prodev.objects.filter().order_by('pdtype', '-id')
+            # listing = Prodev.objects.filter().order_by('pdtype', '-id')
     
     return render_to_response('l2-events.html', {
         'events': listing,
