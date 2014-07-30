@@ -23,14 +23,17 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
-<ul class="nav nav-pills nav-justified submenu"> 
-	<a href="chinese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'chinese' %}badge_other shadowboxed{% endif %}">Chinese</li></div></a>
-	<a href="japanese"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'japanese' %}badge_other shadowboxed{% endif %}">Japanese</li></div></a>
-	<a href="korean"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'korean' %}badge_other shadowboxed{% endif %}">Korean</li></div></a>
-	<a href="khmer"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'khmer' %}badge_other shadowboxed{% endif %}">Khmer</li></div></a>
-	<a href="filipino"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'filipino' %}badge_other shadowboxed{% endif %}">Filipino</li></div></a>
-	<a href="samoan"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if language_name == 'samoan' %}badge_other shadowboxed{% endif %}">Samoan</li></div></a>
-</ul>
+<div class="submenu"> 
+	<ul>		
+		<li><div class="category {% if language_name == 'chinese' %}badge_other shadowboxed{% endif %}"><a href="chinese">Chinese</a></div></li>
+		<li><div class="category {% if language_name == 'filipino' %}badge_other shadowboxed{% endif %}"><a href="filipino">Filipino</a></div></li>
+		<li><div class="category {% if language_name == 'japanese' %}badge_other shadowboxed{% endif %}"><a href="japanese">Japanese</a></div></li>
+		<li><div class="category {% if language_name == 'khmer' %}badge_other shadowboxed{% endif %}"><a href="khmer">Khmer</a></div></li>
+		<li><div class="category {% if language_name == 'korean' %}badge_other shadowboxed{% endif %}"><a href="korean">Korean</a></div></li>
+		<li><div class="category {% if language_name == 'samoan' %}badge_other shadowboxed{% endif %}"><a href="samoan">Samoan</a></div></li>
+		<li><div class="category {% if language_name == 'all' %}badge_other shadowboxed{% endif %}"><a href="all">All</a></div></li>
+	</ul>	
+</div>
 {% endblock subheadlines %}
 
 {% block stories %}

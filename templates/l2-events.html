@@ -11,14 +11,16 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
-<ul class="nav nav-pills nav-justified submenu"> 
-	<a href="conference"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'conference' %}badge_prodev shadowboxed active{% endif %}">Conferences</li></div></a>
-	<a href="institute"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'institute' %}badge_prodev shadowboxed active{% endif %}">Summer Institutes</li></div></a>
-	<a href="workshop"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'workshop' %}badge_prodev shadowboxed active{% endif %}">Workshops</li></div></a>
-	<a href="symposium"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'symposium' %}badge_prodev shadowboxed active{% endif %}">Symposia</li></div></a>
-	<a href="online"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'online' %}badge_prodev shadowboxed active{% endif %}">Online</li></div></a>
-	<a href="other"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'other' %}badge_prodev shadowboxed active{% endif %}">Others</li></div></a>
-</ul>
+<div class="submenu"> 
+	<ul>		
+		<li><div class="category {% if pdtype_tag == 'conference' %}badge_prodev shadowboxed active{% endif %}"><a href="conference">Conferences</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'institute' %}badge_prodev shadowboxed active{% endif %}"><a href="institute">Institutes</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'workshop' %}badge_prodev shadowboxed active{% endif %}"><a href="workshop">Workshops</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'symposium' %}badge_prodev shadowboxed active{% endif %}"><a href="symposium">Symposia</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'online' %}badge_prodev shadowboxed active{% endif %}"><a href="online">Online</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'other' %}badge_prodev shadowboxed active{% endif %}"><a href="other">Others</a></div></li>		
+	</ul>	
+</div>
 {% endblock subheadlines %}
 
 {% block stories %}

@@ -5,7 +5,7 @@ from itertools import chain
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-
+from operator import attrgetter
 
 HUMAN_PREFIXES = {
     ('DR', 'PhD.'),
@@ -17,6 +17,36 @@ ROLE_TYPES = {
     ('STAFF', 'NFLRC Staff'),
     ('ADVBOARD', 'Advisory Board'),
     ('COLLAB', 'Collaborator'),
+}
+
+STAFF_ROLES = {
+    ('NFLRC Director / CLT Director', 'NFLRC Director / CLT Director'),
+    ('NFLRC Associate Director', 'NFLRC Associate Director'),
+    ('NFLRC Senior Consultant', 'NFLRC Senior Consultant'),
+    ('NFLRC Publications Specialist', 'NFLRC Publications Specialist'),
+    ('NFLRC Asst Director Technology / CLT IT Specialist', 'NFLRC Asst Director Technology / CLT IT Specialist'),
+    ('NFLRC Program Coordinator / LLL Events Coordinator', 'NFLRC Program Coordinator / LLL Events Coordinator'),
+    ('NFLRC Specialist in Tech for Language Educ', 'NFLRC Specialist in Tech for Language Educ'),
+    ('NFLRC Advisory Board', 'NFLRC Advisory Board'),
+    ('NFLRC External Evaluator', 'NFLRC External Evaluator'),
+    ('NFLRC Project Director', 'NFLRC Project Director'),
+    ('NFLRC Project Team Member', 'NFLRC Project Team Member'),
+    ('NFLRC Graduate Assistant', 'NFLRC Graduate Assistant'),
+    ('NFLRC Web Development Assistant', 'NFLRC Web Development Assistant'),
+    ('NFLRC Student Assistant', 'NFLRC Student Assistant'),
+    ('Fiscal Officer', 'Fiscal Officer'),
+    ('CLT Program Coordinator', 'CLT Program Coordinator'),
+    ('CLT Information Technology Specialist', 'CLT Information Technology Specialist'),
+    ('CLT Media Specialist', 'CLT Media Specialist'),
+    ('CLT Graduate Assistant', 'CLT Graduate Assistant'),
+    ('LLT Editor / NFLRC Senior Consultant', 'LLT Editor / NFLRC Senior Consultant'),
+    ('LLT Editor','LLT Editor'),
+    ('LLT Associate Editor','LLT Associate Editor'),
+    ('LLT Managing Editor','LLT Managing Editor'),
+    ('RFL Editor','RFL Editor'),
+    ('RFL Managing Editor','RFL Managing Editor'),
+    ('LDC Editor','LDC Editor'),
+    ('LDC Web Production Editor','LDC Web Production Editor'),
 }
 
 PRODEV_TYPES = (
@@ -84,12 +114,20 @@ class ItemsManager(models.Manager):
 #     def __unicode__(self):
 #         return self.tag
 
+class ContactRole(models.Model):
+    title = models.CharField(max_length=128)
+    list_rank = models.IntegerField(blank=True, default=1000)
+
+    def __unicode__(self):
+        return self.title  
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
+    last_name = models.CharField(max_length=20L)
     title = models.CharField(
         max_length=50, choices=HUMAN_PREFIXES, blank=True, null=True)
-    last_name = models.CharField(max_length=20L, blank=True)
+    staff_role = models.ForeignKey(ContactRole, blank=True, null=True)
+    bio = models.TextField(blank=True)
     department = models.CharField(max_length=256L, blank=True)
     university = models.CharField(max_length=60L, blank=True)
     address = models.CharField(max_length=128L, blank=True)
@@ -115,12 +153,20 @@ class Contact(models.Model):
                       for field in Contact._meta.fields]
         return properties
 
+    # method to return dictionary with meta information to display
+    def customproperties(self):
+        properties = [
+            ('University', self.university),
+            ('Role', self.staff_role),
+            ('Current Project', self.current_project),
+        ]
+        return properties
+
     def get_absolute_url(self):
         return reverse('contactview', args=[str(self.id)])
 
     def __unicode__(self):
         return self.last_name
-
 
 class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)

@@ -5,24 +5,32 @@
 
 {% block item-meta %}
 	<!-- Icon -->
-	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{{ thehuman.image }}"></h2>
+	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{% if thehuman.image %}{{ thehuman.image }}{% else %}icon.png{% endif %}"></h2>
 
 	<!-- Dynamic menu -->
 	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
 
 	<ul class="nav nav-stacked">
-	 	{% for name, value in thehuman.customproperties %}
+	 	
 			<li>
-				<div><span class="label label-default">{{ name }}</span></div>
-		  		<div>{{ value|safe }}</div>
+				<li><div>{{ thehuman.get_role_display }}</div></li>
+				<li><div>{{ thehuman.staff_role }} </div></li>
 		  	</li>
-		{% endfor %}   	
+		
     </ul>
 {% endblock item-meta %}
 
 {% block item-content %}
 	<h2>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h2>
-	<div id="item-content" >{{ thehuman.description | safe }}</div>
+	<div id="item-content" >
+		<div>
+			<ul class="nav nav-stacked">
+				<li><div>{{ thehuman.university }} </div></li>
+				<li><div>...more coming soon! </div></li>		
+			</ul>
+		</div>
+		<div>{{ thehuman.bio | safe }}</div>
+	</div>
 {% endblock item-content %}
 
 {% block customjavascript %}

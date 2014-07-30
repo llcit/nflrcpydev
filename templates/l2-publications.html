@@ -14,17 +14,18 @@
 </h2>
 {% endblock pageheading %}
 
-{% block subheadlines %}  
-<ul class="nav nav-pills nav-justified submenu"> 
-	<a href="journals"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category  {% if subpage == 'journals' %}badge_publications shadowboxed active{% endif %}">Journals</li></div></a>
-	<a href="monographs"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'monographs' %}badge_publications shadowboxed active{% endif %}">Monographs</li></div></a>
-	<a href="teaching-materials"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'teaching-materials' %}badge_publications shadowboxed active{% endif %}">Teaching Materials</li></div></a>
-	<a href="pragmatics"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'pragmatics' %}badge_publications shadowboxed active{% endif %}">Pragmatics</li></div></a>
-	<a href="networks"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'networks' %}badge_publications shadowboxed active{% endif %}">Networks</li></div></a>
-	<a href="media"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'media' %}badge_publications shadowboxed active{% endif %}">Physical Media</li></div></a>
-	<a href="research-notes"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'research-notes' %}badge_publications shadowboxed active{% endif %}">Research Notes</li></div></a>
-	<a href="listing"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if subpage == 'listing' %}badge_other shadowboxed active{% endif %}">Full Listing</li></div></a>
-</ul>
+{% block subheadlines %}
+<div class="submenu"> 
+	<ul>		
+		<li><div class="category {% if subpage == 'journals' %}badge_publications shadowboxed active{% endif %}"><a href="journals">Journals </a></div></li>
+		<li><div class="category {% if subpage == 'monographs' %}badge_publications shadowboxed active{% endif %}"><a href="monographs">Monographs</a></div></li>
+		<li><div class="category {% if subpage == 'teaching-materials' %}badge_publications shadowboxed active{% endif %}"><a href="teaching-materials">Materials</a></div></li>
+		<li><div class="category {% if subpage == 'pragmatics' %}badge_publications shadowboxed active{% endif %}"><a href="pragmatics">Pragmatics </a></div></li>
+		<li><div class="category {% if subpage == 'networks' %}badge_publications shadowboxed active{% endif %}"><a href="digital-archives"> Archives </a></div></li>
+		<li><div class="category {% if subpage == 'media' %}badge_publications shadowboxed active{% endif %}"><a href="media">Media </a></div></li>
+		<li><div class="category {% if subpage == 'listing' %}badge_other shadowboxed active{% endif %}"><a href="listing">Full List </a></div></li>
+	</ul>	
+</div>
 {% endblock subheadlines %}
 
 

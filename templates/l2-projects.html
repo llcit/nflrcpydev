@@ -10,11 +10,18 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
-<ul class="nav nav-pills nav-justified submenu"> 
-	<a href="assessment"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'conference' %}badge_projects shadowboxed active{% endif %}">Assessment</li></div></a>
-	<a href="online-learning"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'institute' %}badge_projects shadowboxed active{% endif %}">Online Learning</li></div></a>
-	<a href="pbl"><div class="col-xs-12 col-sm-6 col-md-2"><li class="category {% if pdtype_tag == 'workshop' %}badge_projects shadowboxed active{% endif %}">PBL <small>Project-based Learning*</small></li></div></a>
-</ul>
+<div class="submenu"> 
+	<ul>		
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="current">Current</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'assessment' %}badge_projects shadowboxed active{% endif %}"><a href="assessment">Assessment </a></div></li>
+		<li><div class="category {% if pdtype_tag == 'online-learning' %}badge_projects shadowboxed active{% endif %}"><a href="online-learning">Online Learning</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2010-2014">2010-2014</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2006-2010">2006-2010</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2002-2006">2002-2006</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="1998-2002">1998-2002</a></div></li>
+		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="1992-1998">1992-1998</a></div></li>
+	</ul>	
+</div>
 {% endblock subheadlines %}
 
 {% block stories %}

@@ -27,7 +27,8 @@
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
-					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+					<p>{{ i.first_name }} {{ i.last_name }} </p>
+					<p>{{ i.staff_role }}</p>
 				</div>
 			</a>
 		{% endfor %}		
@@ -38,9 +39,10 @@
 	<div id="dyno2" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
-				<div class="listing shadowboxed">
+				<div class="listing listing-small shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
-					<h4>{{ i.first_name }} {{ i.last_name }} </h4>	
+					<p>{{ i.first_name }} {{ i.last_name }} </p>
+					{% if i.staff_role %}<p>{{ i.staff_role }}</p>{% endif %}
 				</div>
 			</a>
 		{% endfor %}		
@@ -62,7 +64,7 @@ jQuery(window).on('load', function(){
 	var container2 = document.querySelector('#dyno2');
 	var msnry = new Masonry( container2, {
 	  // options
-	  columnWidth: 230,
+	  //columnWidth: 115,
 	  itemSelector: '.listing',
 	  gutter: 40,
 	  isFitWidth: 'true'

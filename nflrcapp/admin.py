@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.contenttypes import generic
-from nflrcapp.models import Contact, Project, Publication, Prodev, StoryPage#, TaggedItem
+from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage#, TaggedItem
 
 class ExtraMedia:
     js = [
@@ -11,10 +11,17 @@ class ExtraMedia:
 # class TaggedItemInline(generic.GenericTabularInline):
 #     model = TaggedItem
 
+class ContactRoleAdmin(admin.ModelAdmin):
+	list_display = ('id', 'list_rank', 'title')
+	list_filter = ['title',]
+	list_editable = ['list_rank','title']	
+	list_per_page = 200	
+	ordering = ['list_rank']
+
 class ContactAdmin(admin.ModelAdmin):
-	list_display = ('last_name', 'first_name', 'title', 'role', 'listing_rank')
+	list_display = ('last_name', 'first_name', 'title', 'role', 'staff_role', 'listing_rank')
 	list_filter = ['role',]
-	list_editable = ['role', 'title', 'listing_rank']	
+	list_editable = ['role', 'staff_role', 'listing_rank']	
 	list_per_page = 200
 	search_fields = ['last_name', 'first_name', 'role']
 	ordering = ['listing_rank']
@@ -55,6 +62,7 @@ class StoryPageAdmin(admin.ModelAdmin):
  #    ]
 
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
+admin.site.register(ContactRole, ContactRoleAdmin)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
