@@ -14,7 +14,7 @@
 		<div>1859 East-West Road #106</div>
 		<div>Honolulu HI 96822-2322 </div>
 		<div>Phone: 808.956.9424; Fax: 808.956.5983 </div>
-		<div><a href="{{MEDIA_URL}}img/NFLRCmapWEB-small.jpg" target="_blank">Map</a></div>
+		<div><a href="{{MEDIA_URL}}img/NFLRCmapWEB-small.jpg" class="static_a_display" target="_blank">Map</a></div>
 	</address>
 	</div>
 {% endblock pageheading %}
@@ -27,8 +27,8 @@
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
-					<p>{{ i.first_name }} {{ i.last_name }} </p>
-					<p>{{ i.staff_role }}</p>
+					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+					<h5>{{ i.staff_role }}</h5>
 				</div>
 			</a>
 		{% endfor %}		
@@ -41,8 +41,8 @@
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
-					<p>{{ i.first_name }} {{ i.last_name }} </p>
-					{% if i.staff_role %}<p>{{ i.staff_role }}</p>{% endif %}
+					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
 			</a>
 		{% endfor %}		

@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.contrib.contenttypes import generic
-from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage#, TaggedItem
+from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage, ItemTag, TaggedItem
 
 class ExtraMedia:
     js = [
         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/js/tinymce_setup.js',
     ]
+# class ItemTagAdmin(admin.ModelAdmin):
 
-# class TaggedItemInline(generic.GenericTabularInline):
-#     model = TaggedItem
+
+class TaggedItemInline(generic.GenericTabularInline):
+    model = TaggedItem
 
 class ContactRoleAdmin(admin.ModelAdmin):
 	list_display = ('id', 'list_rank', 'title')
@@ -27,13 +29,15 @@ class ContactAdmin(admin.ModelAdmin):
 	ordering = ['listing_rank']
 
 class ProjectAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'project_number', 'title', 'featured', 'featured_rank', 'headline', 'image')
+	list_display = ('getuid', 'project_number', 'title', 'featured', 'featured_rank', 'headline', 'image', 'tags')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
 	search_fields = ['project_number', 'title']
 	ordering = ['-project_number']
-
+	inlines = [
+        TaggedItemInline,
+    ]
 class PublicationAdmin(admin.ModelAdmin):
 	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'featured_rank', 'image',)
 	list_filter = ['featured', 'category']
@@ -67,4 +71,5 @@ admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
 admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
 admin.site.register(StoryPage, StoryPageAdmin, Media = ExtraMedia)
-# admin.site.register(TaggedItem)
+admin.site.register(ItemTag)
+admin.site.register(TaggedItem)

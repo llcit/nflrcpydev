@@ -5,35 +5,40 @@
 {% block pageheading %}
 <h2 class="l2_crumbs">	
 	<a href="/projects" class="badge_projects">Projects</a>
-	<small> <span class="badge badge_projects_fill">{{ items|length }}</span></small>
+	<small>{% if subpage %}			
+				> {{ subpage|title }}
+			{% endif %}
+		<span class="badge badge_projects_fill">{{ items|length }}</span>
+	</small>
 </h2>
 {% endblock pageheading %}
 
 {% block subheadlines %}
 <div class="submenu"> 
 	<ul>		
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="current">Current</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'assessment' %}badge_projects shadowboxed active{% endif %}"><a href="assessment">Assessment </a></div></li>
-		<li><div class="category {% if pdtype_tag == 'online-learning' %}badge_projects shadowboxed active{% endif %}"><a href="online-learning">Online Learning</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2010-2014">2010-2014</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2006-2010">2006-2010</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="2002-2006">2002-2006</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="1998-2002">1998-2002</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'null' %}badge_projects shadowboxed active{% endif %}"><a href="1992-1998">1992-1998</a></div></li>
+		<li><div class="category {% if subpage == 'current' %}badge_projects shadowboxed active{% endif %}"><a href="current">Current</a></div></li>
+		<li><div class="category {% if subpage == 'assessment' %}badge_projects shadowboxed active{% endif %}"><a href="assessment">Assessment </a></div></li>
+		<li><div class="category {% if subpage == 'online-learning' %}badge_projects shadowboxed active{% endif %}"><a href="online-learning">Online Learning</a></div></li>
+		<li><div class="category {% if subpage == '2006-2010' %}badge_projects shadowboxed active{% endif %}"><a href="2006-2010">2006-2010</a></div></li>
+		<li><div class="category {% if subpage == '2002-2006' %}badge_projects shadowboxed active{% endif %}"><a href="2002-2006">2002-2006</a></div></li>
+		<li><div class="category {% if subpage == '1999-2002' %}badge_projects shadowboxed active{% endif %}"><a href="1999-2002">1999-2002</a></div></li>
+		<li><div class="category {% if subpage == '1996-1999' %}badge_projects shadowboxed active{% endif %}"><a href="1996-1999">1996-1999</a></div></li>
+		<li><div class="category {% if subpage == '1993-1996' %}badge_projects shadowboxed active{% endif %}"><a href="1993-1996">1993-1996</a></div></li>
 	</ul>	
 </div>
 {% endblock subheadlines %}
 
 {% block stories %}
 	<div id="dyno" class="container">
-	{% for p in items %}
+	{% for p in items %}		
 		<a href="{{ p.get_absolute_url }}">
-			<div class="listing shadowboxed">
+			<div class="listing shadowboxed">				
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
-				<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>	
-			</div>
-		</a>	
+				<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} <small>({{ subpage }})</small> </span> </p>
+			</div>		
+		</a>		
 	{% endfor %}
 	</div>
 {% endblock stories %}

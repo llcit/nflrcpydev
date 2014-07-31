@@ -19,36 +19,6 @@ ROLE_TYPES = {
     ('COLLAB', 'Collaborator'),
 }
 
-STAFF_ROLES = {
-    ('NFLRC Director / CLT Director', 'NFLRC Director / CLT Director'),
-    ('NFLRC Associate Director', 'NFLRC Associate Director'),
-    ('NFLRC Senior Consultant', 'NFLRC Senior Consultant'),
-    ('NFLRC Publications Specialist', 'NFLRC Publications Specialist'),
-    ('NFLRC Asst Director Technology / CLT IT Specialist', 'NFLRC Asst Director Technology / CLT IT Specialist'),
-    ('NFLRC Program Coordinator / LLL Events Coordinator', 'NFLRC Program Coordinator / LLL Events Coordinator'),
-    ('NFLRC Specialist in Tech for Language Educ', 'NFLRC Specialist in Tech for Language Educ'),
-    ('NFLRC Advisory Board', 'NFLRC Advisory Board'),
-    ('NFLRC External Evaluator', 'NFLRC External Evaluator'),
-    ('NFLRC Project Director', 'NFLRC Project Director'),
-    ('NFLRC Project Team Member', 'NFLRC Project Team Member'),
-    ('NFLRC Graduate Assistant', 'NFLRC Graduate Assistant'),
-    ('NFLRC Web Development Assistant', 'NFLRC Web Development Assistant'),
-    ('NFLRC Student Assistant', 'NFLRC Student Assistant'),
-    ('Fiscal Officer', 'Fiscal Officer'),
-    ('CLT Program Coordinator', 'CLT Program Coordinator'),
-    ('CLT Information Technology Specialist', 'CLT Information Technology Specialist'),
-    ('CLT Media Specialist', 'CLT Media Specialist'),
-    ('CLT Graduate Assistant', 'CLT Graduate Assistant'),
-    ('LLT Editor / NFLRC Senior Consultant', 'LLT Editor / NFLRC Senior Consultant'),
-    ('LLT Editor','LLT Editor'),
-    ('LLT Associate Editor','LLT Associate Editor'),
-    ('LLT Managing Editor','LLT Managing Editor'),
-    ('RFL Editor','RFL Editor'),
-    ('RFL Managing Editor','RFL Managing Editor'),
-    ('LDC Editor','LDC Editor'),
-    ('LDC Web Production Editor','LDC Web Production Editor'),
-}
-
 PRODEV_TYPES = (
     ('conference', 'Conference'),
     ('online', 'Online Course'),
@@ -99,20 +69,20 @@ class ItemsManager(models.Manager):
         
         return featured_items
 
-# class ItemTag(models.Model):
-#     tag = models.SlugField()
+class ItemTag(models.Model):
+    tag = models.CharField(max_length=140, unique=True)
 
-#     def __unicode__(self):
-#         return self.tag
+    def __unicode__(self):
+        return self.tag
 
-# class TaggedItem(models.Model):
-#     tag = models.ForeignKey(ItemTag)
-#     content_type = models.ForeignKey(ContentType)
-#     object_id = models.PositiveIntegerField()
-#     content_object = generic.GenericForeignKey('content_type', 'object_id')
+class TaggedItem(models.Model):
+    item_tag = models.ForeignKey(ItemTag)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-#     def __unicode__(self):
-#         return self.tag
+    def __unicode__(self):
+        return self.item_tag.tag
 
 class ContactRole(models.Model):
     title = models.CharField(max_length=128)
@@ -279,6 +249,8 @@ class Project(models.Model):
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
+    # keywords = models.CharField(max_length=512, blank=True, help_text="Enter keywords seperated by commas")
+    tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
 

@@ -74,15 +74,12 @@ def languages(request, tag):
             'prodevs': prodevs,
         }, context_instance=RequestContext(request))
 
+    # Even though the Publication class is listed here, the query produces featured items from all types.
     featured = Publication.objects.allfeatured()
 
     # Faster if request is language specific.
     return render_to_response('l2-languages.html',
                               {'featured': featured}, context_instance=RequestContext(request))
-
-
-def outreach(request):
-    return render_to_response('index.html', {}, context_instance=RequestContext(request))
 
 
 def prodev(request, tag):
@@ -127,11 +124,41 @@ def prodevview(request, item):
 
 
 def projects(request, tag):
-    listing = Project.objects.all().order_by('-id')
-    featured = listing.filter(featured=True)
+    prebuilt_filter = None
+    if tag:
+        if tag == 'current':
+            prebuilt_filter = '2010-2014'
+        elif tag == '2006-2010':
+            prebuilt_filter = tag
+        elif tag == '2002-2006':
+            prebuilt_filter = tag
+        elif tag == '1999-2002':
+            prebuilt_filter = tag
+        elif tag == '1996-1999':
+            prebuilt_filter = tag
+        elif tag == '1993-1996':
+            prebuilt_filter = tag
+
+        if prebuilt_filter:
+            listing = Project.objects.filter(grant_cycle=prebuilt_filter)
+
+
+        else:
+            if tag == 'online-learning':
+                tag = 'online learning'
+            
+            item_type = ContentType.objects.get_for_model(Project)
+            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(item_tag__tag=tag).order_by('-object_id')
+            listing = []
+            for i in tagged_items:
+                listing.append(i.content_object)
+    else:
+        # No tag -- show all projects
+        tag = None    
+        listing = Project.objects.all().order_by('-grant_cycle')
+    
     return render_to_response('l2-projects.html', {
         'items': listing,
-        'featured': featured,
         'subpage': tag
     }, context_instance=RequestContext(request))
 
@@ -148,15 +175,18 @@ def projectview(request, item):
 
     return render_to_response('item-display.html', {
         'item': displayitem,
-        'shortcuts': ITEM_TYPE_SHORTCUTS
+        'shortcuts': ITEM_TYPE_SHORTCUTS,
+        'tags': displayitem.tags.all()
     }, context_instance=RequestContext(request))
 
 
 def publications(request, tag):
     featured = Publication.objects.filter(featured=1)
-    listing = ""
-    # Built-in queries on publication categories
-    if tag == 'monographs':
+    
+    # Prebuilt queries on publication categories
+    if tag == 'digital-archives':
+        listing = Publication.objects.filter(Q(category='Research Note') | Q(category='Network')).order_by('-year')
+    elif tag == 'monographs':
         listing = Publication.objects.filter(category='NFLRC Monograph')
     elif tag == 'journals':
         listing = Publication.objects.filter(category='Journal')
@@ -175,6 +205,7 @@ def publications(request, tag):
     elif tag == 'listing':
         listing = Publication.objects.all()
     else:
+        tag = 'featured'
         listing = featured
 
     listing = listing.order_by('category', '-year')
@@ -201,20 +232,6 @@ def pubview(request, item):
     }, context_instance=RequestContext(request))
 
 
-def resources(request, tag):
-    if tag:
-        listing = Resource.objects.filter(resource_number=tag)
-        return render_to_response('item-view.html',
-                                  {'resources': listing},
-                                  context_instance=RequestContext(request))
-
-    listing = Resource.objects.all()
-    return render_to_response('item-listing.html', {
-        'items': listing,
-        'item_type': 'resources'
-    }, context_instance=RequestContext(request))
-
-
 def search(request):
     query = request.GET['q']
     if query:
@@ -236,20 +253,6 @@ def search(request):
         }, context_instance=RequestContext(request))
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
-
-
-def software(request, tag):
-    if tag:
-        listing = Software.objects.filter(pk=tag)
-        return render_to_response('item-view.html', {
-            'software': listing
-        }, context_instance=RequestContext(request))
-
-    listing = Software.objects.all()
-    return render_to_response('item-listing.html', {
-        'items': listing,
-        'item_type': 'software'
-    }, context_instance=RequestContext(request))
 
 def stories(request):
     listing = StoryPage.objects.all().order_by('title')
@@ -276,54 +279,3 @@ def storyview(request, item):
         'item': displayitem,
     }, context_instance=RequestContext(request))
 
-
-
-
-
-
-
-# Use this stub to run development changes...
-def dev_utility(request):
-#     imgs = ["CD02","CD07","CD08","DVD01","DVD02","DVD03","KP01","KPiconTEMPLATE.png","LT03","LT09","LT25","LT25r","LT25t","LT26","LT28","LT29icon.jpg","LT30","LT31","LT31r","LT31t","LT33","LT34","LT34lg.png","LT34sm.png","LT35","LT36icon.jpg","LT36","LT38","LT3icon.jpg","LT40icon.jpg","LT40","LT41icon.jpg","LT41","MG00icon.jpg","MG00","MG01","MG02","MG03","MG04","MG05","MG06","MG07","MG09","MG09lg.png","MG0x","MI07icon.jpg","MI08","NW00","OJ01","OJ01lg.png","OJ01sm.png","OJ02","OJ03","PI01","PI02","PI03","PLL11","PLL12","PLL13","PROJECTSplaceholder","RN14","RN21","RN33","RN34","RN35","RN36","RN37","RN38","RN39","RN40","RN41","RN42","RN43","RN44","RN46","RN47","RN48","RN49","RN50x","RN51","TR05","TR06","TR07","TR08","TR09","TR10","TR11","TR12","TR13","TR14","TR15","TR16","TR17","TR18","TR19","TR20","TR21","TR22","TR23","TR24","TR25","TR26","VD03","VD04","VD05","VD06","VD07","VD08","VD09","VD10","VD11","VD12","VD14","VD15","VD16.png","VD17","VD18","VD19","VD20","VD21","VD22","VD23","VD24","VD25","WORKSHOPS-CONFERENCESplaceholder","XLT03-2icon.jpg","XLT03-2","XLT03icon.jpg","XLT03"
-#     ]
-
-    objs = Publication.objects.all()
-    for i in objs:
-        data = strip_tags(i.description)
-        trimmed = (data[:137] + '...') if len(data) > 137 else data
-        i.thumbnail_desc = trimmed
-        i.save()
-
-    objs = Prodev.objects.all()
-    for i in objs:
-        data = strip_tags(i.description)
-        trimmed = (data[:137] + '...') if len(data) > 137 else data
-        i.thumbnail_desc = trimmed
-        i.save()
-
-    objs = Project.objects.all()
-    for i in objs:
-        data = strip_tags(i.description)
-        trimmed = (data[:137] + '...') if len(data) > 137 else data
-        i.thumbnail_desc = trimmed
-        i.save()
-#     for i in objs:
-#         if i.getuid() in imgs:
-#             i.image = i.getuid() + 'icon.png'
-#         else:
-#             i.image = 'icon.png'
-        
-#         i.save()
-
-#     objs = Project.objects.all()
-#     for i in objs:
-#         i.image = 'PROJECTSplaceholderIcon.png'
-#         i.save()
-
-#     objs = Prodev.objects.all()
-#     for i in objs:
-#         i.image = 'WORKSHOPS-CONFERENCESplaceholderIcon.png'
-#         i.save()
-
-
-    return render_to_response('index.html', {}, context_instance=RequestContext(request))

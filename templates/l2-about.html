@@ -38,7 +38,8 @@
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
-					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+					<h5>{{ i.staff_role }}</h5>
 				</div>
 			</a>
 		{% endfor %}		
@@ -48,9 +49,10 @@
 	<div id="dyno1" class="container">
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/logos/default.png"> </p>
-					<h4>{{ i.first_name }} {{ i.last_name }} </h4>	
+				<div class="listing listing-small shadowboxed">
+					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
+					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
 			</a>
 		{% endfor %}		
@@ -60,9 +62,10 @@
 	<div id="dyno2" class="container">
 		{% for i in advboard %}	
 			<a href="{{ i.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/logos/default.png"> </p>
-					<p>{{ i.first_name }} {{ i.last_name }} </p>	
+				<div class="listing listing-small shadowboxed">
+					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
+					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
 			</a>
 		{% endfor %}			

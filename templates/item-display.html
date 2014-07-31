@@ -65,6 +65,8 @@
 			<li><div><i>Language(s)</i></div> </li>
 			<li><div>{{ item.language }}</div> </li>
 			{% endif %}
+			<li><div><i>Tagged as</i></div></li>
+			<li><div>{% for t in tags %} <span class="badge badge_projects_fill">{{ t }}</span>{% endfor %}</div></li>
 		{% elif item.classname == 'stories' %}
 			<li><div><i>Tags</i></div></li>
 					
