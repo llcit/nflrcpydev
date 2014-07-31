@@ -21,6 +21,7 @@
     <!-- Local Customizations -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/site.css' %}" media="all">
 
+    {% block local_css %} {% endblock local_css %}
     <!-- Google analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,8 +33,6 @@
       ga('send', 'pageview');
 
     </script>
-
-    {% block local_css %} {% endblock local_css %}
 </head>
 <body>
 <div id="wrap">
