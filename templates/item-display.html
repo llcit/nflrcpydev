@@ -24,11 +24,12 @@
 			<li><div>{{ item.language }}</div> </li>
 
 			{% if item.url %}
-			<li><div><a href="{{ item.url }}" target="_blank">View Item</a></div></li>
+			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-sm btn-default">View</button></a>
+			
 			{% endif %}
 
 			{% if item.ext_url %}
-			<li><div><a href="{{ item.ext_url }}" target="_blank">Visit Website</a></div> </li>
+			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-sm btn-default" onclick="{{ item.ext_url }}">View</button></a>
 			{% endif %}
 			
 			{% if item.oclc_url %}
@@ -78,16 +79,16 @@
 
 {% block item-content %}
 
-	<h2>
-		<a href="/{{ item.displayname|lower }}/"><small>{{ item.displayname | title}}</small></a>
+	<h5>
+		<a href="/{{ item.displayname|lower }}/">{{ item.displayname | title}}</a>
 		
 		{% if shortcut %}
-		<small><i>>></i></small>
-		<a href="/{{ item.displayname|lower }}/{{ shortcut }}"><small>{{ shortcut | title }}</small></a>
+		<i class="fa fa-angle-double-right"></i>
+		<a href="/{{ item.displayname|lower }}/{{ shortcut }}">{{ shortcut | title }}</a>
 		{% endif %}
-	</h2>
+	</h5>
 	
-	<h2>{{ item.title | safe }}</h2>
+	<h1>{{ item.title | safe }}</h1>
 	{% if item.is_oer %}<h4><span><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" height="30px"/></span></h4>{% endif %}
 	
 	<div id="item-content" >{{ item.description | safe }}</div>

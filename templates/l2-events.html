@@ -4,8 +4,12 @@
 {% block pageheading %}
 <h2 class="l2_crumbs">	
 	<a href="/events" class="badge_prodev">Events</a>
-	{% if pdtype_tag %}
-		<small> > {% if events.0.pdtype == 'Symposium' %}Symposia{% else %}{{ events.0.pdtype|title }}s{% endif %} <span class="badge badge_prodev_fill">{{events|length}}</span></small>
+	{% if pdtype_tag %}: <span class="badge badge_prodev_fill">{{events|length}}</span> 
+		 {% if events.0.pdtype == 'Symposium' %}Symposia
+         	{% else %}
+         	{{ events.0.pdtype|title }}s
+         {% endif %} 
+        
 	{% endif %}	
 </h2>
 {% endblock pageheading %}
@@ -13,12 +17,12 @@
 {% block subheadlines %}
 <div class="submenu"> 
 	<ul>		
-		<li><div class="category {% if pdtype_tag == 'conference' %}badge_prodev shadowboxed active{% endif %}"><a href="conference">Conferences</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'institute' %}badge_prodev shadowboxed active{% endif %}"><a href="institute">Institutes</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'workshop' %}badge_prodev shadowboxed active{% endif %}"><a href="workshop">Workshops</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'symposium' %}badge_prodev shadowboxed active{% endif %}"><a href="symposium">Symposia</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'online' %}badge_prodev shadowboxed active{% endif %}"><a href="online">Online</a></div></li>
-		<li><div class="category {% if pdtype_tag == 'other' %}badge_prodev shadowboxed active{% endif %}"><a href="other">Others</a></div></li>		
+		<li><div class="buttonbox {% if pdtype_tag == 'conference' %}buttonbox_highlighted {% endif %}"><a href="conference">Conferences</a></div></li>
+		<li><div class="buttonbox {% if pdtype_tag == 'institute' %}buttonbox_highlighted {% endif %}"><a href="institute">Institutes</a></div></li>
+		<li><div class="buttonbox {% if pdtype_tag == 'workshop' %}buttonbox_highlighted {% endif %}"><a href="workshop">Workshops</a></div></li>
+		<li><div class="buttonbox {% if pdtype_tag == 'symposium' %}buttonbox_highlighted {% endif %}"><a href="symposium">Symposia</a></div></li>
+		<li><div class="buttonbox {% if pdtype_tag == 'online' %}buttonbox_highlighted {% endif %}"><a href="online">Online</a></div></li>
+		<li><div class="buttonbox {% if pdtype_tag == 'other' %}buttonbox_highlighted {% endif %}"><a href="other">Others</a></div></li>		
 	</ul>	
 </div>
 {% endblock subheadlines %}

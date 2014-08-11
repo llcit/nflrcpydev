@@ -1,39 +1,43 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
-{% block pageheading %}
+
+{% block subheadlines %}
 <h2 class="l2_crumbs">
-	<a href="/languages">Languages</a>
-	<small>>
 		{% if language_name %} 
-			{{ language_name|title }}
-			<small>
+			<h1>{{ language_name|title }}</h1>
+            <p></p>
+			<p>
 			<span class="badge badge_other_fill">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
 			<span> | </span>
 			<span class="badge badge_other_fill">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
 			<span> | </span>
 			<span class="badge badge_other_fill">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
-			</small>
-		{% else %} 
-			choose a language 
+			</p> 
+			
 		{% endif %}
-	</small>
+	
 </h2>
 	
-{% endblock pageheading %}
 
-{% block subheadlines %}
-<div class="submenu"> 
+{% endblock subheadlines %}
+
+
+{% block pageheading %}
+
+    
+    <div class="submenu"> 
 	<ul>		
-		<li><div class="category {% if language_name == 'chinese' %}badge_other shadowboxed{% endif %}"><a href="chinese">Chinese</a></div></li>
-		<li><div class="category {% if language_name == 'filipino' %}badge_other shadowboxed{% endif %}"><a href="filipino">Filipino</a></div></li>
-		<li><div class="category {% if language_name == 'japanese' %}badge_other shadowboxed{% endif %}"><a href="japanese">Japanese</a></div></li>
-		<li><div class="category {% if language_name == 'khmer' %}badge_other shadowboxed{% endif %}"><a href="khmer">Khmer</a></div></li>
-		<li><div class="category {% if language_name == 'korean' %}badge_other shadowboxed{% endif %}"><a href="korean">Korean</a></div></li>
-		<li><div class="category {% if language_name == 'samoan' %}badge_other shadowboxed{% endif %}"><a href="samoan">Samoan</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'chinese' %}buttonbox_highlighted{% endif %}"><a href="chinese">Chinese</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'filipino' %}buttonbox_highlighted{% endif %}"><a href="filipino">Filipino</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'japanese' %}buttonbox_highlighted{% endif %}"><a href="japanese">Japanese</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'khmer' %}buttonbox_highlighted{% endif %}"><a href="khmer">Khmer</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'korean' %}buttonbox_highlighted{% endif %}"><a href="korean">Korean</a></div></li>
+		<li><div class="buttonbox {% if language_name == 'samoan' %}buttonbox_highlighted{% endif %}"><a href="samoan">Samoan</a></div></li>
 	</ul>	
 </div>
-{% endblock subheadlines %}
+{% endblock pageheading %}
+
 
 {% block stories %}
 

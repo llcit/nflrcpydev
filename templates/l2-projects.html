@@ -3,27 +3,33 @@
 
 
 {% block pageheading %}
-<h2 class="l2_crumbs">	
-	<a href="/projects" class="badge_projects">Projects</a>
-	<small>{% if subpage %}			
-				> {{ subpage|title }}
-			{% endif %}
-		<span class="badge badge_projects_fill">{{ items|length }}</span>
-	</small>
+<p>	Projects by grant cycle: 
+		<a href="current">2010-2014</a> |
+        <a href="2006-2010">2006-2010</a> |
+		<a href="2002-2006">2002-2006</a> |
+		<a href="1999-2002">1999-2002</a> |
+		<a href="1996-1999">1996-1999</a> |
+		<a href="1993-1996">1993-1996</a>
+        </p>
+        
+ <h2 class="l2_crumbs">	
+<span class="badge badge_projects_fill">{{ items|length }}</span>	
+	{% if subpage %}			
+				{{ subpage|title }}
+			{% endif %} <a href="/projects" class="badge_projects">Projects</a>	
 </h2>
+
 {% endblock pageheading %}
 
 {% block subheadlines %}
 <div class="submenu"> 
-	<ul>		
-		<li><div class="category {% if subpage == 'current' %}badge_projects shadowboxed active{% endif %}"><a href="current">Current</a></div></li>
-		<li><div class="category {% if subpage == 'assessment' %}badge_projects shadowboxed active{% endif %}"><a href="assessment">Assessment </a></div></li>
-		<li><div class="category {% if subpage == 'online-learning' %}badge_projects shadowboxed active{% endif %}"><a href="online-learning">Online Learning</a></div></li>
-		<li><div class="category {% if subpage == '2006-2010' %}badge_projects shadowboxed active{% endif %}"><a href="2006-2010">2006-2010</a></div></li>
-		<li><div class="category {% if subpage == '2002-2006' %}badge_projects shadowboxed active{% endif %}"><a href="2002-2006">2002-2006</a></div></li>
-		<li><div class="category {% if subpage == '1999-2002' %}badge_projects shadowboxed active{% endif %}"><a href="1999-2002">1999-2002</a></div></li>
-		<li><div class="category {% if subpage == '1996-1999' %}badge_projects shadowboxed active{% endif %}"><a href="1996-1999">1996-1999</a></div></li>
-		<li><div class="category {% if subpage == '1993-1996' %}badge_projects shadowboxed active{% endif %}"><a href="1993-1996">1993-1996</a></div></li>
+	<ul>		 
+    	<li><div class="buttonbox {% if subpage == 'projects' %}buttonbox_highlighted {% endif %}"><a href="/projects">All Projects</a></div></li>
+		<li><div class="buttonbox {% if subpage == 'current' %}buttonbox_highlighted {% endif %}"><a href="current">Current</a></div></li>
+		<li><div class="buttonbox {% if subpage == 'assessment' %}buttonbox_highlighted {% endif %}"><a href="assessment">Assessment </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'online learning' %}buttonbox_highlighted {% endif %}"><a href="online-learning">Online Learning</a></div></li>
+       
+		
 	</ul>	
 </div>
 {% endblock subheadlines %}

@@ -1,29 +1,27 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
+
+
 {% block pageheading %}
-<h2 class="l2_crumbs">
+<h2 class="l2_crumbs">	
 	<a href="/publications" class="badge_publications">Publications</a>
-	<small>>{% if subpage %}			
-			{{ subpage|title }}
-		{% else %}
-			Featured
-		{% endif %} 
-		<span class="badge badge_publications_fill">{{ items|length }}</span>
-	</small>
+	{% if subpage %}:	<span class="badge badge_publications_fill">{{ items|length }}</span> 
+				{{ subpage|title }}
+			{% endif %} 
 </h2>
 {% endblock pageheading %}
 
 {% block subheadlines %}
 <div class="submenu"> 
 	<ul>		
-		<li><div class="category {% if subpage == 'journals' %}badge_publications shadowboxed active{% endif %}"><a href="journals">Journals </a></div></li>
-		<li><div class="category {% if subpage == 'monographs' %}badge_publications shadowboxed active{% endif %}"><a href="monographs">Monographs</a></div></li>
-		<li><div class="category {% if subpage == 'teaching-materials' %}badge_publications shadowboxed active{% endif %}"><a href="teaching-materials">Materials</a></div></li>
-		<li><div class="category {% if subpage == 'pragmatics' %}badge_publications shadowboxed active{% endif %}"><a href="pragmatics">Pragmatics </a></div></li>
-		<li><div class="category {% if subpage == 'networks' %}badge_publications shadowboxed active{% endif %}"><a href="digital-archives"> Archives </a></div></li>
-		<li><div class="category {% if subpage == 'media' %}badge_publications shadowboxed active{% endif %}"><a href="media">Media </a></div></li>
-		<li><div class="category {% if subpage == 'listing' %}badge_other shadowboxed active{% endif %}"><a href="listing">Full List </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'journals' %}buttonbox_highlighted{% endif %}"><a href="journals">Journals </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'monographs' %}buttonbox_highlighted{% endif %}"><a href="monographs">Monographs</a></div></li>
+		<li><div class="buttonbox {% if subpage == 'teaching-materials' %}buttonbox_highlighted{% endif %}"><a href="teaching-materials">Materials</a></div></li>
+		<li><div class="buttonbox {% if subpage == 'pragmatics' %}buttonbox_highlighted{% endif %}"><a href="pragmatics">Pragmatics </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'digital-archives' %}buttonbox_highlighted{% endif %}"><a href="digital-archives"> Archives </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'media' %}buttonbox_highlighted{% endif %}"><a href="media">Media </a></div></li>
+		<li><div class="buttonbox {% if subpage == 'listing' %}buttonbox_highlighted{% endif %}"><a href="listing">Full List </a></div></li>
 	</ul>	
 </div>
 {% endblock subheadlines %}
