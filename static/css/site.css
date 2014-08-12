@@ -306,3 +306,14 @@ a:active {color: #666;}
 }
 
 /*NFLRC STYLE ENDS*/
+
+
+@media print {
+    /*body, p, h3, span, div, i, b, a {
+        font-family: "Georgia", "Times New Roman", "serif";
+    }*/
+    .hide_from_printer {
+        display:none;
+    }
+}
+
