@@ -122,11 +122,11 @@ a:active {color: #666;}
     top: 128px;
     left: 0px;
     width: 100%;
-    height: auto;
+    height: 280px;
     background-color: #fff;
     color: #000;
     z-index: 1000;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 #sitemap_panel a        { color: #000; }
