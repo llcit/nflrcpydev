@@ -153,15 +153,18 @@ a:active {color: #666;}
 
 /* Shortcut or Category menu */
 .submenu ul{
-    margin-top: 10px;
+
+    margin:auto;
     width: 100%;
-    text-align: center;
+    text-align:center;
+  
 }
 
 .submenu li {
     display: inline-block;
     padding-left: 10px;
     padding-bottom: 15px;
+    
 }
 
 .category {    
@@ -207,7 +210,7 @@ a:active {color: #666;}
 
 .l2_crumbs a:link, a:visited, a:hover, a:active {
     
-    color: #333;
+    color: #666;
     
     
 }
@@ -268,3 +271,38 @@ a:active {color: #666;}
 
 
 
+/*NFLRC STYLE STARTS*/
+.nav-pills-red > li.active > a, .nav-pills-red > li.active > a:hover, .nav-pills-red > li.active > a:focus {
+    background-color: #ce5043;
+    color: #fff;
+}
+.nav-pills-blue > li.active > a, .nav-pills-blue > li.active > a:hover, .nav-pills-blue > li.active > a:focus {
+    background-color: #1aa1e1;
+    color: #fff;
+}
+
+.nav-pills-green > li.active > a, .nav-pills-green > li.active > a:hover, .nav-pills-green > li.active > a:focus {
+    background-color: #b3c833;
+    color: #fff;
+}
+
+.nav-pills-navy > li.active > a, .nav-pills-navy > li.active > a:hover, .nav-pills-navy > li.active > a:focus {
+    background-color: #3f5ca9;
+    color: #fff;
+}
+.nav-pills-silver > li.active > a, .nav-pills-silver > li.active > a:hover, .nav-pills-silver > li.active > a:focus {
+    background-color: #658092;
+    color: #fff;
+}
+
+.nav-pills-gray > li.active > a, .nav-pills-gray > li.active > a:hover, .nav-pills-gray > li.active > a:focus {
+    background-color: #CCCCCC;
+    color: #fff;
+}
+
+.nav-pills-orange > li.active > a, .nav-pills-orange > li.active > a:hover, .nav-pills-orange > li.active > a:focus {
+    background-color: #fb8521;
+    color: #fff;
+}
+
+/*NFLRC STYLE ENDS*/

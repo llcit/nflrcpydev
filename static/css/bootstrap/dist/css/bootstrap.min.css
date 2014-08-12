@@ -2991,10 +2991,10 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 }
 .nav-pills > li {
-    float: left;
+    float: none;
 }
 .nav-pills > li > a {
-    border-radius: 4px;
+    border-radius: 0px;
 }
 .nav-pills > li + li {
     margin-left: 2px;
@@ -3003,6 +3003,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     background-color: #428bca;
     color: #fff;
 }
+
+
 .nav-stacked > li {
     float: none;
 }
@@ -3671,7 +3673,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     text-align: center;
     vertical-align: baseline;
     white-space: nowrap;
-	}
+    }
 .badge:empty {
     display: none;
 }
