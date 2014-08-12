@@ -115,6 +115,8 @@ class Contact(models.Model):
     role = models.CharField(
         max_length=30, choices=ROLE_TYPES, null=True, blank=True)
 
+    tags = generic.GenericRelation(TaggedItem)
+    
     def getuid(self):
         return self.id
 
@@ -151,7 +153,8 @@ class StoryPage(models.Model):
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
-    # tags = generic.GenericRelation(TaggedItem)
+    
+    tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
 
@@ -194,6 +197,8 @@ class Prodev(models.Model):
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
 
+    tags = generic.GenericRelation(TaggedItem)
+    
     objects = ItemsManager()
 
     def classname(self):
@@ -249,7 +254,6 @@ class Project(models.Model):
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
-    # keywords = models.CharField(max_length=512, blank=True, help_text="Enter keywords seperated by commas")
     tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
@@ -328,6 +332,8 @@ class Publication(models.Model):
     headline = models.BooleanField(editable=False, default=False, help_text='(Optional) Check this ON to force the item to display as headline. Currently not implemented.' )
     headline_tag = models.CharField(editable=False, max_length=512, blank=True, null=True, default='', help_text='(Optional) Show tagline in headline. Currently not implemented.')
 
+    tags = generic.GenericRelation(TaggedItem)
+    
     objects = ItemsManager()
 
     class Meta:

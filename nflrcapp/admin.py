@@ -7,8 +7,6 @@ class ExtraMedia:
         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/js/tinymce_setup.js',
     ]
-# class ItemTagAdmin(admin.ModelAdmin):
-
 
 class TaggedItemInline(generic.GenericTabularInline):
     model = TaggedItem
@@ -27,6 +25,9 @@ class ContactAdmin(admin.ModelAdmin):
 	list_per_page = 200
 	search_fields = ['last_name', 'first_name', 'role']
 	ordering = ['listing_rank']
+	inlines = [
+        TaggedItemInline,
+    ]
 
 class ProjectAdmin(admin.ModelAdmin):
 	list_display = ('getuid', 'project_number', 'title', 'featured', 'featured_rank', 'headline', 'image', 'tags')
@@ -38,6 +39,7 @@ class ProjectAdmin(admin.ModelAdmin):
 	inlines = [
         TaggedItemInline,
     ]
+
 class PublicationAdmin(admin.ModelAdmin):
 	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'featured_rank', 'image',)
 	list_filter = ['featured', 'category']
@@ -45,6 +47,9 @@ class PublicationAdmin(admin.ModelAdmin):
 	list_per_page = 200
 	search_fields = ['item_number', 'title']
 	ordering = ['item_number', '-year']
+	inlines = [
+        TaggedItemInline,
+    ]
 
 class ProdevAdmin(admin.ModelAdmin):
 	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
@@ -53,6 +58,9 @@ class ProdevAdmin(admin.ModelAdmin):
 	list_per_page = 200
 	search_fields = ['id', 'title']
 	ordering = ['-id', 'title']
+	inlines = [
+        TaggedItemInline,
+    ]
 
 class StoryPageAdmin(admin.ModelAdmin):
 	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image')
@@ -61,9 +69,9 @@ class StoryPageAdmin(admin.ModelAdmin):
 	list_per_page = 200
 	search_fields = ['id', 'title']
 	ordering = ['id', 'title',]
-	# inlines = [
- #        TaggedItemInline,
- #    ]
+	inlines = [
+        TaggedItemInline,
+    ]
 
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(ContactRole, ContactRoleAdmin)
