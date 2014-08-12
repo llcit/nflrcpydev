@@ -28,9 +28,12 @@ def home(request):
 def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
     history_item = StoryPage.objects.filter(pk=2)
+    lrc_item = StoryPage.objects.filter(pk=3)
     menu_items = []
     menu_items.append(history_item[0])
     menu_items.append(kuleana_item[0])
+    menu_items.append(lrc_item[0])
+    
 
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by('listing_rank')
