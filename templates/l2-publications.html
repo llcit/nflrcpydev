@@ -41,7 +41,7 @@
 			<div class="listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
-				<h5>{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<h5>{{ p.thumbnail_desc | safe }}</h5>
 				<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} <small>({{ subpage }})</small> </span> </p>
 			</div>
 			</a>
@@ -66,7 +66,7 @@
 			<a href="{{ p.get_absolute_url }}">	{{ p.title | safe }}</a>
 			</td>
 			<td class="col-md-8">
-			<a href="{{ p.get_absolute_url }}">	{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</a>
+			<a href="{{ p.get_absolute_url }}">	{{ p.thumbnail_desc | safe }}</a>
 			</td>
 			</tr>
 		</tbody>

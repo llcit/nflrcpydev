@@ -17,7 +17,7 @@
 		<div class="listing shadowboxed">
 			<p> <img src="{{MEDIA_URL}}img/{{p.getuid}}sm.png"> </p>
 			<p> {{ p.title | safe }}</p>	
-			<p> {{ p.description | safe | truncatewords_html:4 }} </p>
+			<p> {{ p.description | safe }} </p>
 		</div>
 		</a>
 	{% endfor %}

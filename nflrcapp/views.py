@@ -237,6 +237,7 @@ def pubview(request, item):
 
 def search(request):
     query = request.GET['q']
+    # Q(category='Research Note') | Q(category='Network')
     if query:
         publications = Publication.objects.filter(
             skeywords__icontains=query).order_by('-year')
