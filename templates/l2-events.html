@@ -15,16 +15,20 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
+
 <div class="submenu"> 
-	<ul>		
-		<li><div class="buttonbox {% if pdtype_tag == 'conference' %}buttonbox_highlighted {% endif %}"><a href="conference">Conferences</a></div></li>
-		<li><div class="buttonbox {% if pdtype_tag == 'institute' %}buttonbox_highlighted {% endif %}"><a href="institute">Institutes</a></div></li>
-		<li><div class="buttonbox {% if pdtype_tag == 'workshop' %}buttonbox_highlighted {% endif %}"><a href="workshop">Workshops</a></div></li>
-		<li><div class="buttonbox {% if pdtype_tag == 'symposium' %}buttonbox_highlighted {% endif %}"><a href="symposium">Symposia</a></div></li>
-		<li><div class="buttonbox {% if pdtype_tag == 'online' %}buttonbox_highlighted {% endif %}"><a href="online">Online</a></div></li>
-		<li><div class="buttonbox {% if pdtype_tag == 'other' %}buttonbox_highlighted {% endif %}"><a href="other">Others</a></div></li>		
-	</ul>	
+    <ul class="nav nav-pills-green">
+    <li class="{% if pdtype_tag == 'conference' %}active{% endif %}"><a href="conference">Conferences</a></li>
+    <li class="{% if pdtype_tag == 'institute' %}active{% endif %}"><a href="institute">Institutes</a></li>
+    <li class="{% if pdtype_tag == 'workshop' %}active{% endif %}"><a href="workshop">Workshops</a></li>
+    <li class="{% if pdtype_tag == 'symposium' %}active{% endif %}"><a href="symposium">Symposia</a></li>
+    <li class="{% if pdtype_tag == 'online' %}active{% endif %}"><a href="online">Online</a></li>
+    <li class="{% if pdtype_tag == 'other' %}active{% endif %}"><a href="other">Other</a></li>
+	</ul>
 </div>
+
+
+
 {% endblock subheadlines %}
 
 {% block stories %}

@@ -13,17 +13,20 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
+
 <div class="submenu"> 
-	<ul>		
-		<li><div class="buttonbox {% if subpage == 'journals' %}buttonbox_highlighted{% endif %}"><a href="journals">Journals </a></div></li>
-		<li><div class="buttonbox {% if subpage == 'monographs' %}buttonbox_highlighted{% endif %}"><a href="monographs">Monographs</a></div></li>
-		<li><div class="buttonbox {% if subpage == 'teaching-materials' %}buttonbox_highlighted{% endif %}"><a href="teaching-materials">Materials</a></div></li>
-		<li><div class="buttonbox {% if subpage == 'pragmatics' %}buttonbox_highlighted{% endif %}"><a href="pragmatics">Pragmatics </a></div></li>
-		<li><div class="buttonbox {% if subpage == 'digital-archives' %}buttonbox_highlighted{% endif %}"><a href="digital-archives"> Archives </a></div></li>
-		<li><div class="buttonbox {% if subpage == 'media' %}buttonbox_highlighted{% endif %}"><a href="media">Media </a></div></li>
-		<li><div class="buttonbox {% if subpage == 'listing' %}buttonbox_highlighted{% endif %}"><a href="listing">Full List </a></div></li>
-	</ul>	
-</div>
+    <ul class="nav nav-pills-blue">
+    <li class="{% if subpage == 'journals' %}active{% endif %}"><a href="journals">Journals</a></li>
+    <li class="{% if subpage == 'monographs' %}active{% endif %}"><a href="monographs">Monographs</a></li>
+    <li class="{% if subpage == 'teaching-materials' %}active{% endif %}"><a href="teaching-materials">Materials</a></li>
+    <li class="{% if subpage == 'pragmatics' %}active{% endif %}"><a href="pragmatics">Pragmatics</a></li>
+    <li class="{% if subpage == 'digital-archives' %}active{% endif %}"><a href="digital-archives">Archives</a></li>
+    <li class="{% if subpage == 'media' %}active{% endif %}"><a href="media">Media</a></li>
+    <li class="{% if subpage == 'listing' %}active{% endif %}"><a href="listing">Full List</a></li>
+</ul>
+
+
+
 {% endblock subheadlines %}
 
 
@@ -50,22 +53,29 @@
 
 	<div class="container">
 	{% for p in items %}
-		{% ifchanged p.category %} <div class="row"><h3><small>{{ p.category }}</small> </h3></div> {% endifchanged %}
-		<div class="row enchilada {% cycle 'shade' 'noshade' %}">
-			<a href="{{ p.get_absolute_url }}">
-			<div class="col-md-1">
-				{{ p.year }}
-			</div>
-			<div class="col-md-3">
-				{{ p.title | safe }}
-			</div>
-			<div class="col-md-8">
-				{{ p.thumbnail_desc | safe | truncatewords_html:140 }}
-			</div>
-			</a>
-		</div>
+		{% ifchanged p.category %} <div class="row"><h3>{{ p.category }}</h3></div> {% endifchanged %}
+		
+		<table class="table">
+	
+		<tbody>		
+			<tr>
+			<td class="col-md-1">
+			<a href="{{ p.get_absolute_url }}">	{{ p.year }}</a>
+			</td>
+			<td class="col-md-3">
+			<a href="{{ p.get_absolute_url }}">	{{ p.title | safe }}</a>
+			</td>
+			<td class="col-md-8">
+			<a href="{{ p.get_absolute_url }}">	{{ p.thumbnail_desc | safe | truncatewords_html:140 }}</a>
+			</td>
+			</tr>
+		</tbody>
+		</table>
 	{% endfor %}
 	</div>
+
+	
+
 
 {% endif %}
 {% endblock stories %}

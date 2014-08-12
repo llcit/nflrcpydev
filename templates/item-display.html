@@ -23,20 +23,6 @@
 			<li><div><i>Language(s)</i></div> </li>
 			<li><div>{{ item.language }}</div> </li>
 
-			{% if item.url %}
-			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-sm btn-default">View</button></a>
-			
-			{% endif %}
-
-			{% if item.ext_url %}
-			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-sm btn-default" onclick="{{ item.ext_url }}">View</button></a>
-			{% endif %}
-			
-			{% if item.oclc_url %}
-			<li>
-				<div style="height: 50px"><a href="{{ item.oclc_url }}" target="_blank"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png"/></a></div>
-			</li>
-			{% endif %}
 		
 		{% elif item.classname == 'prodev' %}
 			<li><div><i>Date</i></div></li>
@@ -73,23 +59,46 @@
 					
 		{% endif %}
 
-    </ul>
+   
+    		
+ </ul>
+ 			{% if item.is_oer %}
+            <div style="margin: 5px 0px;"><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" style="width:50%;"/></div> 
+            {% endif %} 
 
+           {% if item.oclc_url %}
+			 <div style="margin: 5px 0px;"><a href="{{ item.oclc_url }}" target="_blank"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png" style="width: 50%"/></a></div>
+			
+			{% endif %}
+			{% if item.url %}
+			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-default" style="width:50%;"> View </button></a>
+			
+			{% endif %}
+
+			{% if item.ext_url %}
+			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-default"  style="width:50%;" onclick="{{ item.ext_url }}"> View </button></a>
+			{% endif %}
+			
+			
+            
+            
+            
 {% endblock item-meta %}
 
 {% block item-content %}
 
-	<h5>
+<h4><small>
 		<a href="/{{ item.displayname|lower }}/">{{ item.displayname | title}}</a>
 		
 		{% if shortcut %}
 		<i class="fa fa-angle-double-right"></i>
 		<a href="/{{ item.displayname|lower }}/{{ shortcut }}">{{ shortcut | title }}</a>
 		{% endif %}
-	</h5>
+        </small>
+</h4>
 	
 	<h1>{{ item.title | safe }}</h1>
-	{% if item.is_oer %}<h4><span><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" height="30px"/></span></h4>{% endif %}
+	
 	
 	<div id="item-content" >{{ item.description | safe }}</div>
 

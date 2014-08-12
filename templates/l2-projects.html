@@ -22,16 +22,17 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
+
 <div class="submenu"> 
-	<ul>		 
-    	<li><div class="buttonbox {% if subpage == 'projects' %}buttonbox_highlighted {% endif %}"><a href="/projects">All Projects</a></div></li>
-		<li><div class="buttonbox {% if subpage == 'current' %}buttonbox_highlighted {% endif %}"><a href="current">Current</a></div></li>
-		<li><div class="buttonbox {% if subpage == 'assessment' %}buttonbox_highlighted {% endif %}"><a href="assessment">Assessment </a></div></li>
-		<li><div class="buttonbox {% if subpage == 'online learning' %}buttonbox_highlighted {% endif %}"><a href="online-learning">Online Learning</a></div></li>
-       
-		
-	</ul>	
+    <ul class="nav nav-pills-red">
+    <li class="{% if subpage == 'projects' %}active{% endif %}"><a href="/projects">All Projects</a></li>
+    <li class="{% if subpage == 'current' %}active{% endif %}"><a href="current">Current</a></li>
+    <li class="{% if subpage == 'assessment' %}active{% endif %}"><a href="assessment">Assessment</a></li>
+    <li class="{% if subpage == 'online learning' %}active{% endif %}"><a href="online-learning">Online Learning</a></li>
+</ul>
+
 </div>
+
 {% endblock subheadlines %}
 
 {% block stories %}
