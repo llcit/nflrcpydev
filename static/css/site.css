@@ -309,9 +309,18 @@ a:active {color: #666;}
 
 
 @media print {
-    /*body, p, h3, span, div, i, b, a {
+    /*body, p, h3, span, div, i, b,  {
         font-family: "Georgia", "Times New Roman", "serif";
     }*/
+
+    #sitemap_panel {
+        top: 0px;
+    }
+    a:link:after,
+    a:visited:after {
+        content: "";
+    }
+
     .hide_from_printer {
         display:none;
     }
