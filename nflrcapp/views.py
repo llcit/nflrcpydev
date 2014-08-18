@@ -63,8 +63,8 @@ def contactview(request, person):
 
 def languages(request, tag):
     language_list = [
-        'Austronesian', 'Chinese', 'Czech', 'Danish', 'East Asian', 'English', 'Filipino', 'French', 'German', 'Hawaiian', 'HCE', 'Hindi', 'Icelandic', 'Ilokano', 'Indonesian', 'Italian', 'Japanese', 'Khmer', 'Kiswahili',
-        'Korean', 'Malay', 'Manchu', 'Maori', 'Middle East', 'Muang', 'Pacific Islands', 'Persian', 'Pingelapese', 'Russian', 'Russian', 'Samoan', 'Southeast Asian ', 'Spanish', 'Swahili', 'Tagalog', 'Thai', 'Tongan', 'Vietnamese']
+        'Austronesian', 'Czech', 'Danish', 'East Asian', 'English', 'French', 'German', 'Hawaiian', 'HCE', 'Hindi', 'Icelandic', 'Ilokano', 'Indonesian', 'Italian', 'Kiswahili',
+         'Malay', 'Manchu', 'Maori', 'Middle East', 'Muang', 'Pacific Islands', 'Persian', 'Pingelapese', 'Russian', 'Russian', 'Southeast Asian ', 'Spanish', 'Swahili', 'Tagalog', 'Thai', 'Tongan', 'Vietnamese']
     if tag:
         publications = Publication.objects.filter(
             language__icontains=tag).order_by('-year')
