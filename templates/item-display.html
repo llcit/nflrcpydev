@@ -58,8 +58,11 @@
 			{% if item.related_publication %}
 			<li><div>Project Publications: {{ item.related_publication|safe }}</div> </li>
 			{% endif %}
+
 			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
             <li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
+
+			<li class="hide_from_printer"><div><a href="{{ item.url }}" target="_blank">Web</a></div> </li>
 		
 		{% elif item.classname == 'projects' %}
         
@@ -94,7 +97,7 @@
 			</td>
 			{% endif %}
 			{% if item.url %}
-            
+
             <td style="padding-right:10px; vertical-align:middle;">
             <div class="btn-toolbar">
               <div class="btn-group">

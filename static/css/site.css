@@ -315,8 +315,31 @@ a:active {color: #1aa1e1; text-decoration: none;}
 .badge_contact { border-bottom: 2px solid #8b71bf; }
 .badge_other { border-bottom: 2px solid #3f5ca9; color: #fff;}
 
+<<<<<<< HEAD
 .badge_publications_fill { background-color: #1aa1e1; color: #fff; }
 .badge_projects_fill { background-color: #ce5043; color: #fff; }
 .badge_prodev_fill { background-color: #b3c833; color: #fff;}
 .badge_stories_fill { background-color: #CCCCCC;}
 .bad
+=======
+/*NFLRC STYLE ENDS*/
+
+
+@media print {
+    /*body, p, h3, span, div, i, b,  {
+        font-family: "Georgia", "Times New Roman", "serif";
+    }*/
+
+    #sitemap_panel {
+        top: 0px;
+    }
+    a:link:after,
+    a:visited:after {
+        content: "";
+    }
+
+    .hide_from_printer {
+        display:none;
+    }
+}
+
