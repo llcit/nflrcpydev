@@ -33,14 +33,13 @@ def about(request):
     menu_items.append(history_item[0])
     menu_items.append(kuleana_item[0])
     menu_items.append(lrc_item[0])
-    
 
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by('listing_rank')
     advboard = Contact.objects.filter(role='ADVBOARD').order_by('listing_rank')
     return render_to_response('l2-about.html',
-                              {'staff': staff, 
-                              'collabs': collabs, 
+                              {'staff': staff,
+                              'collabs': collabs,
                               'advboard': advboard,
                               'menu_items': menu_items},
                               context_instance=RequestContext(request))
@@ -48,7 +47,8 @@ def about(request):
 
 def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
-    collabs = Contact.objects.filter(role='COLLAB').order_by('last_name').order_by('staff_role__list_rank')
+    collabs = Contact.objects.filter(role='COLLAB').order_by(
+        'last_name').order_by('staff_role__list_rank')
     return render_to_response('l2-contact.html', {
         'staff': staff, 'collabs': collabs
     }, context_instance=RequestContext(request))
@@ -62,6 +62,9 @@ def contactview(request, person):
 
 
 def languages(request, tag):
+    language_list = [
+        'Austronesian', 'Chinese', 'Czech', 'Danish', 'East Asian', 'English', 'Filipino', 'French', 'German', 'Hawaiian', 'HCE', 'Hindi', 'Icelandic', 'Ilokano', 'Indonesian', 'Italian', 'Japanese', 'Khmer', 'Kiswahili',
+        'Korean', 'Malay', 'Manchu', 'Maori', 'Middle East', 'Muang', 'Pacific Islands', 'Persian', 'Pingelapese', 'Russian', 'Russian', 'Samoan', 'Southeast Asian ', 'Spanish', 'Swahili', 'Tagalog', 'Thai', 'Tongan', 'Vietnamese']
     if tag:
         publications = Publication.objects.filter(
             language__icontains=tag).order_by('-year')
@@ -75,14 +78,16 @@ def languages(request, tag):
             'publications': publications,
             'projects': projects,
             'prodevs': prodevs,
+            'language_list': language_list
         }, context_instance=RequestContext(request))
 
-    # Even though the Publication class is listed here, the query produces featured items from all types.
+    # Even though the Publication class is listed here, the query produces
+    # featured items from all types.
     featured = Publication.objects.allfeatured()
 
     # Faster if request is language specific.
     return render_to_response('l2-languages.html',
-                              {'featured': featured}, context_instance=RequestContext(request))
+                              {'featured': featured, 'language_list': language_list}, context_instance=RequestContext(request))
 
 
 def prodev(request, tag):
@@ -91,11 +96,11 @@ def prodev(request, tag):
         if not listing:
             tag = ''
     else:
-        listing= None
+        listing = None
 
     featured = Prodev.objects.filter(featured=True).order_by('featured_rank')
             # listing = Prodev.objects.filter().order_by('pdtype', '-id')
-    
+
     return render_to_response('l2-events.html', {
         'events': listing,
         'featured': featured,
@@ -145,21 +150,21 @@ def projects(request, tag):
         if prebuilt_filter:
             listing = Project.objects.filter(grant_cycle=prebuilt_filter)
 
-
         else:
             if tag == 'online-learning':
                 tag = 'online learning'
-            
+
             item_type = ContentType.objects.get_for_model(Project)
-            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(item_tag__tag=tag).order_by('-object_id')
+            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(
+                item_tag__tag=tag).order_by('-object_id')
             listing = []
             for i in tagged_items:
                 listing.append(i.content_object)
     else:
         # No tag -- show all projects
-        tag = None    
+        tag = None
         listing = Project.objects.all().order_by('-grant_cycle')
-    
+
     return render_to_response('l2-projects.html', {
         'items': listing,
         'subpage': tag
@@ -185,10 +190,11 @@ def projectview(request, item):
 
 def publications(request, tag):
     featured = Publication.objects.filter(featured=1)
-    
+
     # Prebuilt queries on publication categories
     if tag == 'digital-archives':
-        listing = Publication.objects.filter(Q(category='Research Note') | Q(category='Network')).order_by('-year')
+        listing = Publication.objects.filter(
+            Q(category='Research Note') | Q(category='Network')).order_by('-year')
     elif tag == 'monographs':
         listing = Publication.objects.filter(category='NFLRC Monograph')
     elif tag == 'journals':
@@ -221,13 +227,13 @@ def publications(request, tag):
 
 
 def pubview(request, item):
-    
+
     try:
         displayitem = Publication.objects.get(item_number=item)
     except ObjectDoesNotExist:
-      raise Http404
+        raise Http404
     except ValueError:
-      raise Http404
+        raise Http404
 
     return render_to_response('item-display.html', {
         'item': displayitem,
@@ -258,15 +264,16 @@ def search(request):
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
 
+
 def stories(request):
     listing = StoryPage.objects.all().order_by('title')
     featured = listing.filter(featured=1)
-
 
     return render_to_response('l2-stories.html', {
         'items': listing,
         'featured': featured,
     }, context_instance=RequestContext(request))
+
 
 def storyview(request, item):
     # listing = Publication.objects.filter(item_number=item)
@@ -282,4 +289,3 @@ def storyview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
-

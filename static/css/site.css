@@ -433,3 +433,21 @@ a:active {color: #1aa1e1; text-decoration: none;}
 	color:#222;
 
 }
+
+@media print {
+    /*body, p, h3, span, div, i, b,  {
+        font-family: "Georgia", "Times New Roman", "serif";
+    }*/
+
+    #sitemap_panel {
+        top: 0px;
+    }
+    a:link:after,
+    a:visited:after {
+        content: "";
+    }
+
+    .hide_from_printer {
+        display:none;
+    }
+}
