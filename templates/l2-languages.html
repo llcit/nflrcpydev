@@ -12,17 +12,17 @@
 		<li class="{% if language_name == 'korean' %}gray{% endif %}"><a href="korean">Korean</a></li>
 		<li class="{% if language_name == 'samoan' %}gray{% endif %}"><a href="samoan">Samoan</a></li>
 		<li class="gray">
-			<div class="dropdown">
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle static_a_display" data-toggle="dropdown" href="#">
 			    More Languages
 			    <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="text-align: left">
+			  </a>
+			  <ul class="dropdown-menu">
 				{% for i in language_list %}
-    			<li role="presentation"><a role="menuitem" tabindex="-1" href="{{ i }}" class="static_a_display">{{ i }}</a></li>
+    			<li><a href="{{ i|lower }}" class="static_a_display">{{ i }}</a></li>
     			{% endfor %}
-    		</ul>
-    		</div>			
+			  </ul>			  
+			</div>
 		</li>
 	</ul>	
 </div>
