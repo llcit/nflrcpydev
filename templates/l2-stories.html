@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block pageheading %}
-	<h2 class="l2_crumbs">
+	<h3 class="l2_crumbs">
 		<a href="/stories" class="badge_stories">Stories</a>
 		<small>>{% if subpage %}			
 				{{ subpage|title }}
@@ -12,7 +12,7 @@
 			{% endif %} 
 			<span class="badge badge_stories_fill">{{ items|length }}</span>
 		</small>
-	</h2>
+	</h3>
 {% endblock pageheading %}
 
 {% block subheadlines %}{% endblock subheadlines %}

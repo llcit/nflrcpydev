@@ -2,28 +2,34 @@
 {% load staticfiles %}
 
 {% block pageheading %}
-<h2 class="l2_crumbs">	
-	<a href="/events" class="badge_prodev">Events</a>
-	{% if pdtype_tag %}: <span class="badge badge_prodev_fill">{{events|length}}</span> 
-		 {% if events.0.pdtype == 'Symposium' %}Symposia
+
+<h4>
+		<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
+        <a href="/events" class="static_a_display">Events</a> </i>
+        
+       {% if pdtype_tag %}<i class="fa fa-angle-double-right"></i> <span class="badge badge_prodev_fill">{{events|length}}</span> 
+		 {% if events.0.pdtype == 'symposium' %} Symposia
          	{% else %}
          	{{ events.0.pdtype|title }}s
          {% endif %} 
         
 	{% endif %}	
-</h2>
+      
+        
+</h4>
+
 {% endblock pageheading %}
 
 {% block subheadlines %}
 
 <div class="submenu"> 
-    <ul class="nav nav-pills-green">
-    <li class="{% if pdtype_tag == 'conference' %}active{% endif %}"><a href="conference">Conferences</a></li>
-    <li class="{% if pdtype_tag == 'institute' %}active{% endif %}"><a href="institute">Institutes</a></li>
-    <li class="{% if pdtype_tag == 'workshop' %}active{% endif %}"><a href="workshop">Workshops</a></li>
-    <li class="{% if pdtype_tag == 'symposium' %}active{% endif %}"><a href="symposium">Symposia</a></li>
-    <li class="{% if pdtype_tag == 'online' %}active{% endif %}"><a href="online">Online</a></li>
-    <li class="{% if pdtype_tag == 'other' %}active{% endif %}"><a href="other">Other</a></li>
+    <ul class="nav nav-pills-flex">
+    <li class="{% if pdtype_tag == 'conference' %}green{% endif %}"><a href="conference">Conferences</a></li>
+    <li class="{% if pdtype_tag == 'institute' %}green{% endif %}"><a href="institute">Institutes</a></li>
+    <li class="{% if pdtype_tag == 'workshop' %}green{% endif %}"><a href="workshop">Workshops</a></li>
+    <li class="{% if pdtype_tag == 'symposium' %}green{% endif %}"><a href="symposium">Symposia</a></li>
+    <li class="{% if pdtype_tag == 'online' %}green{% endif %}"><a href="online">Online</a></li>
+    <li class="{% if pdtype_tag == 'other' %}green{% endif %}"><a href="other">Other</a></li>
 	</ul>
 </div>
 
@@ -40,6 +46,7 @@
 					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 					<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 					<h5>{{ p.thumbnail_desc | safe }}</h5>
+                    <p><a href="/events" class="badge_container badge_prodev static_a_display">More Events</a></p>
 				</div>
 			</a>		
 		{% endfor %}
@@ -60,6 +67,7 @@
 					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 					<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 					<h5>{{ p.thumbnail_desc | safe }}</h5>
+                    <p><a href="/events" class="badge_container badge_prodev static_a_display">More Events</a></p>
 				</div>
 			</a>
 			{% if forloop.last %}</div>{% endif %}

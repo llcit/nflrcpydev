@@ -10,14 +10,14 @@
 
 {% block subheadlines %}
 <div class="submenu"> 
-	<ul>		
-		<li><div class="category badge_container badge_publications"><a href="/publications" class="static_a_display">Publications </a></div></li>
-		<li><div class="category badge_container badge_projects"><a href="/projects" class="static_a_display">Projects</a></div></li>
-		<li><div class="category badge_container badge_publications"><a href="/publications/journals" class="static_a_display">Journals</a></div></li>
-		<li><div class="category badge_container badge_prodev"><a href="/events" class="static_a_display">Events </a></div></li>
-		<li><div class="category badge_container"><a href="/languages" class="static_a_display">Languages </a></div></li>
-		<li><div class="category badge_container"><a href="/publications/teaching-materials" class="static_a_display">Materials </a></div></li>
-	
+	<ul class="nav nav-pills-flex">		
+		<li class="blue"><a href="/publications" class="static_a_display">Publications </a></li>
+		<li class="red"><a href="/projects" class="static_a_display">Projects</a></li>
+		<li class="blue"><a href="/publications/journals" class="static_a_display">Journals</a></li>
+		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
+		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+		<li class="blue"><a href="/publications/teaching-materials" class="static_a_display">Materials </a></li>
+	</ul>
 </div>
 {% endblock subheadlines %}
 
@@ -32,12 +32,17 @@
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
 				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
-				<p><span class="badge_container badge_{{ feature.classname }}"> {{ feature.displayname }} </span></p>
+				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
 			</div>
 		</a>
 	
 	{% endfor %}
 </div>
+
+
+
 {% endblock stories%}
 
 {% block customjavascript %}

@@ -3,33 +3,47 @@
 
 
 {% block pageheading %}
-<p>	Projects by grant cycle: 
-		<a href="current">2010-2014</a> |
-        <a href="2006-2010">2006-2010</a> |
-		<a href="2002-2006">2002-2006</a> |
-		<a href="1999-2002">1999-2002</a> |
-		<a href="1996-1999">1996-1999</a> |
-		<a href="1993-1996">1993-1996</a>
-        </p>
-        
- <h2 class="l2_crumbs">	
+
+
+<h4>
 <span class="badge badge_projects_fill">{{ items|length }}</span>	
 	{% if subpage %}			
 				{{ subpage|title }}
 			{% endif %} <a href="/projects" class="badge_projects">Projects</a>	
-</h2>
+
+ | 
+
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    By grant cycle
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="static_a_display" href="current">2010-2014</a></li>
+    <li><a class="static_a_display" href="2006-2010">2006-2010</a></li>
+    <li><a class="static_a_display" href="1999-2002">1999-2002</a></li>
+	<li><a class="static_a_display" href="1996-1999">1996-1999</a></li>
+	<li><a class="static_a_display" href="1993-1996">1993-1996</a></li>
+  </ul>
+  
+</div>
+
+
+</h4>
 
 {% endblock pageheading %}
 
 {% block subheadlines %}
 
+
 <div class="submenu"> 
-    <ul class="nav nav-pills-red">
-    <li class="{% if subpage == 'projects' %}active{% endif %}"><a href="/projects">All Projects</a></li>
-    <li class="{% if subpage == 'current' %}active{% endif %}"><a href="current">Current</a></li>
-    <li class="{% if subpage == 'assessment' %}active{% endif %}"><a href="assessment">Assessment</a></li>
-    <li class="{% if subpage == 'online learning' %}active{% endif %}"><a href="online-learning">Online Learning</a></li>
+    <ul class="nav nav-pills-flex">
+    <li class="{% if not subpage %}red{% endif %}"><a href="/projects">All Projects</a></li>
+    <li class="{% if subpage == 'current' %}red{% endif %}"><a href="current">Current</a></li>
+    <li class="{% if subpage == 'assessment' %}red{% endif %}"><a href="assessment">Assessment</a></li>
+    <li class="{% if subpage == 'online learning' %}red{% endif %}"><a href="online-learning">Online Learning</a></li>
 </ul>
+
 
 </div>
 
@@ -43,7 +57,7 @@
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>
-				<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} {% if subpage %}<small>({{ subpage }})</small>{% endif %} </span> </p>
+				<p><a href="/projects" class="badge_container badge_project static_a_display">More Projects</a></p>
 			</div>		
 		</a>		
 	{% endfor %}

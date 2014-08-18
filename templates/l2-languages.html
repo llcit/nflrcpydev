@@ -1,42 +1,50 @@
 {% extends "wrap-content.html" %}
 {% load staticfiles %}
 
+{% block pageheading %}
+
+<div class="submenu"> 
+	<ul class="nav nav-pills-flex">	
+		<li class="{% if language_name == 'chinese' %}gray{% endif %}"><a href="chinese">Chinese</a></li>
+		<li class="{% if language_name == 'filipino' %}gray{% endif %}"><a href="filipino">Filipino</a></li>
+		<li class="{% if language_name == 'japanese' %}gray{% endif %}"><a href="japanese">Japanese</a></li>
+		<li class="{% if language_name == 'khmer' %}gray{% endif %}"><a href="khmer">Khmer</a></li>
+		<li class="{% if language_name == 'korean' %}gray{% endif %}"><a href="korean">Korean</a></li>
+		<li class="{% if language_name == 'samoan' %}gray{% endif %}"><a href="samoan">Samoan</a></li>
+	</ul>	
+</div>
+
+{% endblock pageheading %}
 
 {% block subheadlines %}
-<h2 class="l2_crumbs">
+<div class="l2_crumbs">
 		{% if language_name %} 
-			<h1>{{ language_name|title }}</h1>
-            <p></p>
-			<p>
-			<span class="badge badge_other_fill">{{publications|length}}</span><span><a href="#publications"> Publication{{ publications|length|pluralize }}</a></span>
-			<span> | </span>
-			<span class="badge badge_other_fill">{{projects|length}}</span><span><a href="#projects"> Project{{ projects|length|pluralize }}</a></span>
-			<span> | </span>
-			<span class="badge badge_other_fill">{{prodevs|length}}</span><span><a href="#prodev"> Professional Development Project{{ prodevs|length|pluralize }}</a></span>
-			</p> 
-			
+        
+	
+            
+<div class="submenu" style="float:left; margin-left:0px;">
+<h1>{{ language_name }}</h1>
+
+<ul class="nav nav-pills-flex">
+  
+  <li class="red"><a href="#projects">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li>
+  <li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li>
+  <li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
+  <li class="gray"><a href="#people">People</a></li>
+</ul>
+
+</div>
+
+            
 		{% endif %}
 	
-</h2>
+</div>
 	
 
 {% endblock subheadlines %}
 
 
-{% block pageheading %}
 
-    
-    <div class="submenu"> 
-	<ul>		
-		<li><div class="buttonbox {% if language_name == 'chinese' %}buttonbox_highlighted{% endif %}"><a href="chinese">Chinese</a></div></li>
-		<li><div class="buttonbox {% if language_name == 'filipino' %}buttonbox_highlighted{% endif %}"><a href="filipino">Filipino</a></div></li>
-		<li><div class="buttonbox {% if language_name == 'japanese' %}buttonbox_highlighted{% endif %}"><a href="japanese">Japanese</a></div></li>
-		<li><div class="buttonbox {% if language_name == 'khmer' %}buttonbox_highlighted{% endif %}"><a href="khmer">Khmer</a></div></li>
-		<li><div class="buttonbox {% if language_name == 'korean' %}buttonbox_highlighted{% endif %}"><a href="korean">Korean</a></div></li>
-		<li><div class="buttonbox {% if language_name == 'samoan' %}buttonbox_highlighted{% endif %}"><a href="samoan">Samoan</a></div></li>
-	</ul>	
-</div>
-{% endblock pageheading %}
 
 
 {% block stories %}
@@ -58,10 +66,25 @@
 
 {% if publications or prodevs or projects %}
 
-	
+	<span id="projects" class="adjusted-anchor"></span>
+		<p><h1>Project{{ projects|length|pluralize }} involving {{ language_name|title }} language</h1></p>
+		<div id="dyno2" class="container">
+			{% for p in projects %}	
+				<a href="{{ p.get_absolute_url }}">
+					<div class="listing shadowboxed">
+						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
+						<h4>{{ p.title | safe | truncatewords:8 }}</h4>
+						<h5>{{ p.thumbnail_desc | safe }}</h5>	
+					</div>
+				</a>
+			{% endfor %}		
+		</div>
+ 
+        
+<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 	<div id="item-listing" class="col-md-12">
 		<span id="publications" class="adjusted-anchor"></span>
-		<p><h3>{{ language_name|title }} Publication{{ publications|length|pluralize }}<small> <a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a> </small></h3></p>
+		<h1>Publication{{ publications|length|pluralize }} </a> related to {{ language_name|title }} language</h1>
 		<div id="dyno1" class="container">
 			{% for p in publications %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -75,22 +98,10 @@
 		</div>
 
 	
-		<span id="projects" class="adjusted-anchor"></span>
-		<p><h3>{{ language_name|title }} Project{{ projects|length|pluralize }}<small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a></small></h3></p>
-		<div id="dyno2" class="container">
-			{% for p in projects %}	
-				<a href="{{ p.get_absolute_url }}">
-					<div class="listing shadowboxed">
-						<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
-						<h4>{{ p.title | safe | truncatewords:8 }}</h4>
-						<h5>{{ p.thumbnail_desc | safe }}</h5>	
-					</div>
-				</a>
-			{% endfor %}		
-		</div>
-
+		
+<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 		<span id="prodev" class="adjusted-anchor"></span>
-		<p><h3>{{ language_name|title }} Professional Development Project{{ prodevs|length|pluralize }}<small><a href="#top"> <span class="glyphicon glyphicon-chevron-up"></span> </a></small></h3></p>
+		<h1>Event{{ prodevs|length|pluralize }} related to {{ language_name|title }} language</h1>
 		<div id="dyno3" class="container">
 			{% for p in prodevs %}	
 				<a href="{{ p.get_absolute_url }}">
@@ -103,6 +114,23 @@
 			{% endfor %}		
 		</div>
 
+	</div>
+    
+    
+    
+	<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+	<span id="people" class="adjusted-anchor"></span>
+	<h1>People associated with {{ language_name|title }} language</h1>
+	<div class="container">
+	{% for p in people %}
+		<a href="{{ p.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/icon.png"> </p>
+				<h4>{{ p.first_name }} {{ p.last_name }}</h4>
+				<h5></h5>	
+			</div>
+		</a>
+	{% endfor %}
 	</div>
 
 {% endif %}

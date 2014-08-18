@@ -4,25 +4,31 @@
 
 
 {% block pageheading %}
-<h2 class="l2_crumbs">	
-	<a href="/publications" class="badge_publications">Publications</a>
-	{% if subpage %}:	<span class="badge badge_publications_fill">{{ items|length }}</span> 
+
+<h4>
+		<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
+        <a href="/publications" class="static_a_display">Publications</a> </i>
+        
+        {% if subpage %}<i class="fa fa-angle-double-right"></i>	 <span class="badge badge_publications_fill">{{ items|length }}</span> 
 				{{ subpage|title }}
-			{% endif %} 
-</h2>
+		{% endif %} 
+      
+        
+</h4>
+
 {% endblock pageheading %}
 
 {% block subheadlines %}
 
 <div class="submenu"> 
-    <ul class="nav nav-pills-blue">
-    <li class="{% if subpage == 'journals' %}active{% endif %}"><a href="journals">Journals</a></li>
-    <li class="{% if subpage == 'monographs' %}active{% endif %}"><a href="monographs">Monographs</a></li>
-    <li class="{% if subpage == 'teaching-materials' %}active{% endif %}"><a href="teaching-materials">Materials</a></li>
-    <li class="{% if subpage == 'pragmatics' %}active{% endif %}"><a href="pragmatics">Pragmatics</a></li>
-    <li class="{% if subpage == 'digital-archives' %}active{% endif %}"><a href="digital-archives">Archives</a></li>
-    <li class="{% if subpage == 'media' %}active{% endif %}"><a href="media">Media</a></li>
-    <li class="{% if subpage == 'listing' %}active{% endif %}"><a href="listing">Full List</a></li>
+    <ul class="nav nav-pills-flex">
+    <li class="{% if subpage == 'journals' %}blue{% endif %}"><a href="journals">Journals</a></li>
+    <li class="{% if subpage == 'monographs' %}blue{% endif %}"><a href="monographs">Monographs</a></li>
+    <li class="{% if subpage == 'teaching-materials' %}blue{% endif %}"><a href="teaching-materials">Materials</a></li>
+    <li class="{% if subpage == 'pragmatics' %}blue{% endif %}"><a href="pragmatics">Pragmatics</a></li>
+    <li class="{% if subpage == 'digital-archives' %}blue{% endif %}"><a href="digital-archives">Archives</a></li>
+    <li class="{% if subpage == 'media' %}blue{% endif %}"><a href="media">Media</a></li>
+    <li class="{% if subpage == 'listing' %}blue{% endif %}"><a href="listing">Full List</a></li>
 </ul>
 
 
@@ -42,7 +48,8 @@
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>
-				<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} <small>({{ subpage }})</small> </span> </p>
+				<!--<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} <small>({{ subpage }})</small> </span> </p>-->
+                <p><a href="/publications" class="badge_container badge_publications static_a_display">More Publications</a></p>
 			</div>
 			</a>
 			

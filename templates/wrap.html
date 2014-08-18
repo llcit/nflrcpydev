@@ -8,10 +8,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block page_title %}NFLRCr{% endblock page_title %}</title>
+    <title>{% block page_title %}NFLRC{% endblock page_title %}</title>
     
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ MEDIA_URL }}img/NFLRCfavicon.ico"/>
+
     <!-- Google Fonts -->
-    <link href='https://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <!--  <link href='https://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400,300' rel='stylesheet' type='text/css'>-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css' %}" >
     <!-- Font Awesome -->
@@ -69,12 +75,16 @@
                 <ul  id="searchnav" class="nav navbar-nav navbar-right">
                     <li id="searchform">
                         <form method="get" action="/find" class="navbar-form navbar-left" role="search">
-                            <div class="form-group" style="">
-                                <input type="text" class="form-control" name="q">    
-                            </div>
-                            <button type="submit" class="btn btn-default" style="">
-                                    <i class="fa fa-search"></i></span>
+                            
+                            
+                            <div class="input-group">
+                            
+                              <input type="text" class="form-control" placeholder="Search" name="q">
+
+
+                            	
                             </button>
+                            </div>
                         </form>
                     </li> 
                 </ul>
@@ -141,22 +151,17 @@
   <div class="container-fluid">
     <div class="row">
         <div class="socialnav col-md-12">
-            <h3 style="text-align: center">               
-                    <a href="/contact" class="static_a_display" target="_self"><i class="fa fa-envelope-o fa-6"></i></a> 
-                    <a href="https://www.facebook.com/NFLRC" class="static_a_display" target="_blank"><i class="fa fa-facebook fa-6"></i></a>
-                    <a href="http://www.youtube.com/user/nflrchawaii" class="static_a_display" target="_blank"><i class="fa fa-youtube fa-6"></i></a>
-                    <a href="https://www.linkedin.com/company/national-foreign-language-resource-center-nflrc-" class="static_a_display" target="_blank"><i class="fa fa-linkedin fa-6"></i></a>
-                    <a href="http://www.twitter.com/NFLRC" class="static_a_display" target="_blank"><i class="fa fa-twitter fa-6"></i></a>   
-                    <a href="http://www.pinterest.com/NFLRC" class="static_a_display" target="_blank"><i class="fa fa-pinterest fa-6"></i></a>    
+            <div style="font-size: 180%; padding-top:5px; text-align:center;">               
+                    <a href="/contact" class="static_a_display separator" target="_self"><i class="fa fa-envelope-o fa-6"></i></a> 
+                    <a href="https://www.facebook.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-facebook fa-6"></i></a>
+                    <a href="http://www.youtube.com/user/nflrchawaii" class="static_a_display separator" target="_blank"><i class="fa fa-youtube fa-6"></i></a>
+                    <a href="https://www.linkedin.com/company/national-foreign-language-resource-center-nflrc-" class="static_a_display separator" target="_blank"><i class="fa fa-linkedin fa-6"></i></a>
+                    <a href="http://www.twitter.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-twitter fa-6"></i></a>   
+                    <a href="http://www.pinterest.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-pinterest fa-6"></i></a>    
                           
-            </h3>
+            </div>
         </div>
-        <div class="col-md-12">
-            <address style="text-align: center"><small>
-                <a href="/contact" class="static_a_display"><strong>National Foreign Language Resource Center</strong></a><br>
-                <a href="mailto:nflrc@hawaii.edu" class="static_a_display">Trouble using the site or have a comment? Email us! :)</a>
-            </small></address>
-        </div>
+        
         
 
     </div>   

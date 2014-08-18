@@ -1,12 +1,20 @@
 {% extends "wrap-item-display.html" %}
 {% load staticfiles %}
 
+{% block item-breadcrumbs %}{% endblock %}
 
+{% block item-image %}
+
+<div class="listing shadowboxed" style="margin-top:28px;">
+<img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{% if item.thehuman.image %}{{ thehuman.image }}{% else %}icon.png{% endif %}">
+</div>
+
+{% endblock %}
 
 {% block item-meta %}
 	<!-- Icon -->
-	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{% if thehuman.image %}{{ thehuman.image }}{% else %}icon.png{% endif %}"></h2>
-
+	
+<h1>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h1>
 	<!-- Dynamic menu -->
 	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
 
@@ -15,23 +23,20 @@
 			<li>
 				<li><div>{{ thehuman.get_role_display }}</div></li>
 				<li><div>{{ thehuman.staff_role }} </div></li>
+                <li><div>{{ thehuman.university }} </div></li>
 		  	</li>
 		
     </ul>
 {% endblock item-meta %}
 
 {% block item-content %}
-	<h2>{{ thehuman.first_name }}  {{ thehuman.last_name }}</h2>
-	<div id="item-content" >
-		<div>
-			<ul class="nav nav-stacked">
-				<li><div>{{ thehuman.university }} </div></li>
-				<li><div>...more coming soon! </div></li>		
-			</ul>
-		</div>
-		<div>{{ thehuman.bio | safe }}</div>
-	</div>
+	
+	
+		<div style="margin-top:15px;">{{ thehuman.bio | safe }}</div>
+
 {% endblock item-content %}
+
+
 
 {% block customjavascript %}
 	$(function() {

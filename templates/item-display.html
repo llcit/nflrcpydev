@@ -1,106 +1,136 @@
 {% extends "wrap-item-display.html" %}
 {% load staticfiles %}
+<!-- BREADCRUMBS -->
+
+{% block item-breadcrumbs %}
+<h4>
+		<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
+        <a href="/{{ item.displayname|lower }}/" class="static_a_display">{{ item.displayname | title}}</a>
+		
+		{% if shortcut %}
+		<i class="fa fa-angle-double-right"></i>
+		<a href="/{{ item.displayname|lower }}/{{ shortcut }}" class="static_a_display">{{ shortcut | title }}</a>
+		{% endif %}
+        
+	</h4>
+{% endblock item-breadcrumbs %}
+
+
+
+{% block item-image %}
+	<!-- Image -->
+    <div class="listing shadowboxed" style="margin-top:28px;">
+	<img src="{{MEDIA_URL}}img/{{ item.image }}" >
+    </div>
+    
+    <div class="listing shadowboxed" style="margin-top:10px;">
+	   <!-- Dynamic menu -->
+	<ul class="nav nav-stacked"> 
+    	<div id="toc">
+        
+        </div> 
+    </ul>
+    </div>
+{% endblock item-image %}
+
 
 {% block item-meta %}
-
-	<!-- Icon -->
-	<h2><img class="item-thumbnail" src="{{MEDIA_URL}}img/{{ item.image }}"></h2>
-	
-	<!-- Dynamic menu -->
-	<ul class="nav nav-stacked"> <div id="toc"></div> </ul>
-
 	<!-- Metadata items -->
+    <h1>{{ item.title | safe }}</h1>
 
 	<ul id="meta-list" class="nav nav-stacked">
 		
 		{% if item.classname == 'publications' %}
-			<li><div><i>Author(s)</i></div> </li>
-			<li><div>{{ item.author }}</div></li>
 			
-			<li><div><i>Date</i></div> </li>
-			<li><div>{{ item.year }}</div> </li>
-
-			<li><div><i>Language(s)</i></div> </li>
-			<li><div>{{ item.language }}</div> </li>
+			<li><div>{{ item.author }} {% if item.year == 'ongoing' %} | Ongoing Project{% elif item.year != '' %} ({{ item.year }}){% endif %}</div></li>
+			{% if item.language %}<li><div><i>Language(s): <a href="/languages/{{ item.language }}">{{ item.language }}</a></i></div> </li>{% endif %}
+            {% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
+			<li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
 
 		
 		{% elif item.classname == 'prodev' %}
-			<li><div><i>Date</i></div></li>
-			<li><div>{{ item.date }}</div> </li>
-			<li><div><i>Type</i></div></li>
-			<li><div>{{ item.pdtype }}</div> </li>
-			<li><div><i>Director</i></div></li>
-			<li><div>{{ item.director|safe }}</div> </li>
-			<li><div><i>Facilitator(s)</i></div></li>
-			<li><div>{{ item.facilitator|safe }}</div> </li>
-			{% if item.language %}
-			<li><div><i>Language(s)</i></div> </li>
-			<li><div>{{ item.language }}</div> </li>
-			{% endif %}
+			
+   
+			<li><div>{{ item.date }} {% if item.pdtype %} | Project type: {{ item.pdtype }} {% endif %}</div> </li>
+			<li><div><h4>Project Director: {{ item.director|safe|urlizetrunc:25 }}</h4></div></li>
+            {% if item.facilitator %}<li><div><h4>Facilitator(s): {{ item.facilitator|safe }}</h4></div></li>{% endif %}
+			{% if item.language %}<li><div><i>Language(s): <a href="/languages/{{ item.language }}">{{ item.language }}</a></i></div> </li>{% endif %}
 			{% if item.related_publication %}
-			<li><div><i>Publications</i></div></li>
-			<li><div>{{ item.related_publication|safe }}</div> </li>
+			<li><div>Project Publications: {{ item.related_publication|safe }}</div> </li>
 			{% endif %}
-			<li><div><a href="{{ item.url }}" target="_blank">Web</a></div> </li>
+			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
+            <li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
 		
 		{% elif item.classname == 'projects' %}
-			<li><div><i>Grant Period</i></div></li>
-			<li><div>{{ item.grant_cycle }}</div> </li>
-			<li><div><i>Director</i></div></li>
-			<li><div>{{ item.director|safe|urlizetrunc:25 }}</div> </li>		
-			{% if item.language %}
-			<li><div><i>Language(s)</i></div> </li>
-			<li><div>{{ item.language }}</div> </li>
-			{% endif %}
-			<li><div><i>Tagged as</i></div></li>
-			<li><div>{% for t in tags %} <span class="badge badge_projects_fill">{{ t }}</span>{% endfor %}</div></li>
+        
+        <li><div><h4>Project Director: {{ item.director|safe|urlizetrunc:25 }}</h4></div></li>
+        {% if item.language %}<li><div><i>Language(s): <a href="/languages/{{ item.language }}">{{ item.language }}</a></i></div> </li>{% endif %}
+        
+			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
+            
+			<li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
 		{% elif item.classname == 'stories' %}
 			<li><div><i>Tags</i></div></li>
 					
 		{% endif %}
 
-   
-    		
- </ul>
- 			{% if item.is_oer %}
-            <div style="margin: 5px 0px;"><img src="{{ MEDIA_URL }}img/logos/oer-logo.png" style="width:50%;"/></div> 
+</ul>
+ 
+
+		<table style="margin:10px 0px 20px 0px;"> <tr>
+    		{% if item.is_oer %}
+            <td style="padding-right:10px; vertical-align:middle;">
+            <img src="{{ MEDIA_URL }}img/logos/oer-logo.png" style="width:100px; margin: 5px 0px;"/>
+            </td>
             {% endif %} 
 
            {% if item.oclc_url %}
-			 <div style="margin: 5px 0px;"><a href="{{ item.oclc_url }}" target="_blank"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png" style="width: 50%"/></a></div>
-			
+           <td style="padding-right:10px; vertical-align:middle;">
+             <div class="btn-toolbar">
+              <div class="btn-group">
+                <a href="{{ item.oclc_url }}" class="static_a_display"><button class="btn btn-default"><img src="{{ MEDIA_URL }}img/logos/oclc-logo.png" style="width:50px;"></button></a>
+              </div>
+   			</div>
+			</td>
 			{% endif %}
 			{% if item.url %}
-			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-default" style="width:50%;"> View </button></a>
-			
+            
+            <td style="padding-right:10px; vertical-align:middle;">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <a href="{{ item.url }}" class="static_a_display"><button class="btn btn-default">View </button></a>
+              </div>
+   			</div>
+
+			</td>
 			{% endif %}
 
 			{% if item.ext_url %}
-			<a href="{{ item.url }}" target="_blank"><button type="submit" class="btn btn-default"  style="width:50%;" onclick="{{ item.ext_url }}"> View </button></a>
+            <td style="padding-right:10px; vertical-align:middle;">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <a href="{{ item.ext_url }}" class="static_a_display" target="_blank"><button class="btn btn-default">View Item</button></a>
+               
+              </div>
+   			</div>
+     		</td>
 			{% endif %}
-			
-			
-            
-            
-            
-{% endblock item-meta %}
-
+			<tr>
+			</table>
+ {% endblock item-meta %}       
+  
+  
+        
+         
 {% block item-content %}
 
-<h4><small>
-		<a href="/{{ item.displayname|lower }}/">{{ item.displayname | title}}</a>
-		
-		{% if shortcut %}
-		<i class="fa fa-angle-double-right"></i>
-		<a href="/{{ item.displayname|lower }}/{{ shortcut }}">{{ shortcut | title }}</a>
-		{% endif %}
-        </small>
-</h4>
 	
-	<h1>{{ item.title | safe }}</h1>
+	
 	
 	
 	<div id="item-content" >{{ item.description | safe }}</div>
+    
+    
 
 {% endblock item-content %}
 
