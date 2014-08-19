@@ -120,6 +120,7 @@ def workshop_conf(request):
 def prodevview(request, item):
     try:
         displayitem = Prodev.objects.get(pk=item)
+        language_list = displayitem.language.split(',')
     except ObjectDoesNotExist:
         raise Http404
     except ValueError:
@@ -127,7 +128,8 @@ def prodevview(request, item):
 
     return render_to_response('item-display.html', {
         'item': displayitem,
-        'shortcuts': ITEM_TYPE_SHORTCUTS
+        'shortcuts': ITEM_TYPE_SHORTCUTS,
+        'language_list': language_list
     }, context_instance=RequestContext(request))
 
 
@@ -174,8 +176,11 @@ def projects(request, tag):
 def projectview(request, item):
     # listing = Project.objects.filter(project_number=item)
     # people = PersonProject.objects.filter(project_number=tag).select_related('contact_id')
+
+
     try:
         displayitem = Project.objects.get(project_number=item)
+        language_list = displayitem.language.split(',')
     except ObjectDoesNotExist:
         raise Http404
     except ValueError:
@@ -184,7 +189,8 @@ def projectview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
         'shortcuts': ITEM_TYPE_SHORTCUTS,
-        'tags': displayitem.tags.all()
+        'tags': displayitem.tags.all(),
+        'language_list': language_list
     }, context_instance=RequestContext(request))
 
 
@@ -230,6 +236,7 @@ def pubview(request, item):
 
     try:
         displayitem = Publication.objects.get(item_number=item)
+        language_list = displayitem.language.split(',')
     except ObjectDoesNotExist:
         raise Http404
     except ValueError:
@@ -237,7 +244,8 @@ def pubview(request, item):
 
     return render_to_response('item-display.html', {
         'item': displayitem,
-        'shortcut': ITEM_TYPE_SHORTCUTS[displayitem.category]
+        'shortcut': ITEM_TYPE_SHORTCUTS[displayitem.category],
+        'language_list': language_list
     }, context_instance=RequestContext(request))
 
 
