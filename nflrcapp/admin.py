@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 from django.contrib.contenttypes import generic
 from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage, ItemTag, TaggedItem
 
@@ -7,6 +8,13 @@ class ExtraMedia:
         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/js/tinymce_setup.js',
     ]
+
+class ProjectAdminForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        widgets = {
+            'director': forms.TextInput(attrs={'class': 'vTextField'})
+        }
 
 class TaggedItemInline(generic.GenericTabularInline):
     model = TaggedItem
@@ -30,7 +38,8 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
 class ProjectAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'project_number', 'title', 'featured', 'featured_rank', 'headline', 'image', 'tags')
+	form = ProjectAdminForm
+	list_display = ('getuid', 'project_number', 'title', 'language', 'featured', 'featured_rank', 'headline', 'image', 'tags')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
@@ -41,7 +50,7 @@ class ProjectAdmin(admin.ModelAdmin):
     ]
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'item_number', 'category', 'title', 'featured', 'featured_rank', 'image',)
+	list_display = ('getuid', 'item_number', 'category', 'title', 'language', 'featured', 'featured_rank', 'image',)
 	list_filter = ['featured', 'category']
 	list_editable = ['featured', 'featured_rank', 'image']
 	list_per_page = 200
@@ -52,7 +61,7 @@ class PublicationAdmin(admin.ModelAdmin):
     ]
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
+	list_display = ('getuid', 'id', 'title', 'language', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
 	list_filter = ['featured', 'headline', 'pdtype']
 	list_editable = ['featured', 'featured_rank', 'headline', 'pdtype']
 	list_per_page = 200
