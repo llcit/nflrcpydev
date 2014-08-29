@@ -69,6 +69,16 @@ class ItemsManager(models.Manager):
         
         return featured_items
 
+    def get_tagged_items(self, **kwargs):
+        tag = kwargs.pop('tag')
+        item_type = kwargs.pop('item_type')
+        taggeditems = TaggedItem.objects.filter(item_tag__tag=tag).filter(content_type__name=item_type)
+        items = []
+        for i in taggeditems:
+            items.append(i.content_object)
+
+        return items 
+
 class ItemTag(models.Model):
     tag = models.CharField(max_length=140, unique=True)
 

@@ -197,6 +197,7 @@ def projectview(request, item):
 def publications(request, tag):
     featured = Publication.objects.filter(featured=1)
 
+    
     # Prebuilt queries on publication categories
     if tag == 'digital-archives':
         listing = Publication.objects.filter(
@@ -217,13 +218,16 @@ def publications(request, tag):
     elif tag == 'media':
         listing = Publication.objects.filter(
             Q(category='DVD') | Q(category='Videotape') | Q(category='CD'))
+    ## First test of tag search
+    elif tag == 'heritage':
+        listing = Publication.objects.get_tagged_items(tag=tag, item_type='publication')
     elif tag == 'listing':
         listing = Publication.objects.all()
     else:
         tag = 'featured'
         listing = featured
 
-    listing = listing.order_by('category', '-year')
+    # listing = listing.order_by('category', '-year')
 
     return render_to_response('l2-publications.html', {
         'items': listing,
