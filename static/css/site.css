@@ -276,9 +276,9 @@ a:active {color: #1aa1e1; text-decoration: none;}
     background-color: white;    
 }
 
-.enchilada object, iframe {
+/*.enchilada object, iframe {
     display: none;
-}
+}*/
 
 .item-thumbnail {
     width: 150px;
