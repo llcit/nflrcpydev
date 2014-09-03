@@ -11,7 +11,6 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=849311455108932&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-like" data-href="http://nflrc.hawaii.edu" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>	
 {% endblock socialplugs %}
 
 {% block item-breadcrumbs %}
@@ -51,9 +50,6 @@
     <h1>{{ item.title | safe }}</h1>
 
 	<ul id="meta-list" class="nav nav-stacked">
-		<li>
-					
-		</li>
 		
 		{% if item.classname == 'publications' %}
 			
@@ -139,9 +135,15 @@
               </div>
    			</div>
      		</td>
+			<td style="padding-right:10px; vertical-align:middle;">
+				<div class="fb-like" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+			</td>
 			{% endif %}
-			<tr>
+			<td><div class="fb-like" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div></td>
+			</tr>
+				
 			</table>
+
  {% endblock item-meta %}       
   
   
