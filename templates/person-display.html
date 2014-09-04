@@ -6,7 +6,7 @@
 {% block item-image %}
 
 <div class="listing shadowboxed" style="margin-top:28px;">
-<img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{% if item.thehuman.image %}{{ thehuman.image }}{% else %}icon.png{% endif %}">
+<img class="item-thumbnail" src="{{MEDIA_URL}}img/people/{% if thehuman.image %}{{ thehuman.image }}{% else %}icon.png{% endif %}">
 </div>
 
 {% endblock %}
@@ -29,8 +29,7 @@
     </ul>
 {% endblock item-meta %}
 
-{% block item-content %}
-	
+{% block item-content %}	
 	
 		<div style="margin-top:15px;">{{ thehuman.bio | safe }}</div>
 
