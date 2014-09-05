@@ -24,6 +24,9 @@
 				<li><div>{{ thehuman.get_role_display }}</div></li>
 				<li><div>{{ thehuman.staff_role }} </div></li>
                 <li><div>{{ thehuman.university }} </div></li>
+                <li><div><i class="fa fa-phone fa-6"></i> {{ thehuman.phone }} </div></li>
+                <li><div><i class="fa fa-envelope-o fa-6"></i> <a href="mailto:{{ thehuman.email }}" class="static_a_display">{{ thehuman.email }}</a> </div></li>
+                <li><div><i class="fa fa-globe fa-6"></i> <a href="{{ thehuman.url }}" class="static_a_display">{{ thehuman.url }}</a> </div></li>
 		  	</li>
 		
     </ul>
