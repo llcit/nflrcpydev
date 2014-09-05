@@ -264,7 +264,10 @@ def search(request):
         prodevs = Prodev.objects.filter(
             skeywords__icontains=query).order_by('-id')
         contacts = Contact.objects.filter(
-            last_name__icontains=query).order_by('last_name')
+              Q(last_name__icontains=query)
+            | Q(first_name__icontains=query)
+            | Q(email__icontains=query)
+            ).order_by('last_name')
 
         return render_to_response('search-results.html', {
             'query': query,

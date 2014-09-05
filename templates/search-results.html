@@ -12,7 +12,7 @@
   <li class="red"><a href="#">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li>
   <li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li>
   <li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
-  <li class="gray"><a href="#people">People</a></li>
+  <li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li>
 </ul>
 
 </div>
@@ -83,11 +83,11 @@
 	<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 
 	<h1>People</h1>
-	<div class="container">
+	<div id="subsection3">
 	{% for p in people %}
 		<a href="{{ p.get_absolute_url }}">
-			<div class="listing shadowboxed">
-				<p> <img src="{{MEDIA_URL}}img/icon.png"> </p>
+			<div class="listing shadowboxed"> 
+				<p> <img src="{{MEDIA_URL}}img/{% if p.image %}{{ p.image }}{% else %}icon.png{% endif %}"> </p>
 				<h4>{{ p.first_name }} {{ p.last_name }}</h4>
 				<h5></h5>	
 			</div>
@@ -102,7 +102,7 @@
 
 jQuery(window).on('load', function(){
 	var $ = jQuery;
-	var containers = ['#subsection0', '#subsection1', '#subsection2'];	
+	var containers = ['#subsection0', '#subsection1', '#subsection2', '#subsection3'];	
 	for (i in containers) {
 		containers[i] = document.querySelector(containers[i]);
 		if(containers[i]) {			
