@@ -61,7 +61,7 @@
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
+					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					<h5>{{ i.staff_role }}</h5>
 				</div>
