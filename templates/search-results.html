@@ -8,11 +8,14 @@
 <div class="submenu" style="float:left; margin-left:0px;">
 
 <ul class="nav nav-pills-flex">
+	<li class="red"><a href="#">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li> 
   
-  <li class="red"><a href="#">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li>
-  <li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li>
-  <li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
-  <li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li>
+	<li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li> 
+  
+	<li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
+  
+	<li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li>  
+  
 </ul>
 
 </div>
@@ -29,7 +32,7 @@
 {% block stories %}
 <div id="item-listing" class="col-md-12">
 
-
+{%if projects %}
 	<span id="projects" class="adjusted-anchor"></span>
 	
 	<h1>Project{{ projects|length|pluralize }}</h1>
@@ -44,8 +47,8 @@
 			</a>
 		{% endfor %}
 	</div>
-    
-    
+{% endif %}
+{%if publications %}
 	<span id="publications" class="adjusted-anchor"></span>
     <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 	<p><h1>Publication{{ publications|length|pluralize }}</h1></p>
@@ -60,9 +63,8 @@
 		</a>
 	{% endfor %}
 	</div>
-
-	
-
+{% endif %}	
+{%if prodevs %}
 	<span id="prodev" class="adjusted-anchor"></span>
 	<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 
@@ -78,7 +80,8 @@
 			</a>
 		{% endfor %}
 	</div>
-	
+{% endif %}
+{%if people %}
 	<span id="people" class="adjusted-anchor"></span>
 	<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 
@@ -94,6 +97,7 @@
 		</a>
 	{% endfor %}
 	</div>
+{% endif %}
 	
 </div>
 {% endblock %}
