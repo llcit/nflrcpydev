@@ -49,8 +49,11 @@ def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by(
         'last_name').order_by('staff_role__list_rank')
+    advboard = Contact.objects.filter(role='ADVBOARD').order_by('listing_rank')
     return render_to_response('l2-contact.html', {
-        'staff': staff, 'collabs': collabs
+        'staff': staff, 
+        'collabs': collabs,
+        'advboard': advboard
     }, context_instance=RequestContext(request))
 
 
