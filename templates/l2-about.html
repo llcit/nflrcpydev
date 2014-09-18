@@ -62,7 +62,7 @@
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/people/{{ i.image }}"> </p>
+					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					<h5>{{ i.staff_role }}</h5>
 				</div>
@@ -76,7 +76,7 @@
 		{% for i in collabs %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
+					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
@@ -90,7 +90,7 @@
 		{% for i in advboard %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/people/icon.png"> </p>
+					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
