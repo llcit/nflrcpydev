@@ -2,16 +2,15 @@
 {% load staticfiles %}
 
 {% block pageheading %}
-<div class="row">
-		<div class="col-md-6">
+
+<div class="col-md-6">
     <h1>About the NFLRC</h1>
     <p>The goal of National Foreign Language Resource Center (NFLRC) is to expand the nation’s capacity to teach and learn foreign languages effectively through research and materials development projects. The primary audience for most NFLRC endeavors is language instructors and applied linguists involved in these languages. However, NFLRC projects are intended to have implications for the teaching and learning of all languages, with results being disseminated to the larger educational community through <a href="/publications">publications</a>, <a href="/events/institute">summer institutes</a>, <a href="/events/conference">conferences</a>, <a href="/events/workshop">workshops</a>, <a href="/events/symposium">symposia</a>, <a href="/events/online">online learning events</a>, etc. The NFLRC also conducts outreach to governmental agencies, language and area studies centers, and others concerned with strengthening the nation’s capacity in this field. Visit the sections below for more details.</p>
  </div>
  
  <div class="col-md-6">
     <h1>Using the site</h1>
-    <p>This site constitutes a collection of stories organized according to categories relevant to the NFLRC. There are two main ways to find content in this site: (1) type in a search term in the search box and press enter or (2) click on <strong>Explore</strong> (top of every page) to open the site map. Use the search function if you are not familiar with the NFLRC activities. The search will retrieve information in four main categories: projects, publications, events and people. To use the site map, click on "Explore" at the top of the page and select the category or item. When you visit one of the entries in this menu, you will be presented with a choice of subpages. Whenever you are in an category with subpages, you will see a menu that makes the structure visible. Numbers in this menu indicate the number of stories related to a particular topic. For example, "Home >> Events >> (4) Symposia" means there are four stories associated with "symposia." To return to the main page of the site, click on the NFLRC logo at the top of every page.
- </p>
+    <p>This site constitutes a collection of stories organized according to categories relevant to the NFLRC. There are two main ways to find content in this site: (1) type in a search term in the search box and press enter or (2) click on <strong>Explore</strong> (top of every page) to open the site map. Use the search function if you are not familiar with the NFLRC activities. The search will retrieve information in four main categories: projects, publications, events and people. To use the site map, click on "Explore" at the top of the page and select the category or item. When you visit one of the entries in this menu, you will be presented with a choice of subpages. Whenever you are in an category with subpages, you will see a menu that makes the structure visible. Numbers in this menu indicate the number of stories related to a particular topic. For example, "Home >> Events >> (4) Symposia" means there are four stories associated with "symposia." To return to the main page of the site, click on the NFLRC logo at the top of every page.</p>
  </div>
  
  
@@ -35,40 +34,38 @@
 
 {% endblock pageheading %}
 
-{% block subheadlines %}
 
-{% endblock subheadlines %}
 
 {% block stories %}
 
-	<div id="dyno-menu" class="container">
-	{% for i in menu_items %}
-		<a href="{{ i.get_absolute_url }}">
-			<div class="listing shadowboxed col-md-6">
-            
-				<img src="{{MEDIA_URL}}img/{{ i.image }}" style="margin-top:10px;">
-           
-				<h4>{{ i.title | safe | truncatewords:8 }}</h4>
-				<h5>{{ i.thumbnail_desc | safe }}</h5>	
-			</div>
-		</a>
-	{% endfor %}
+<div id="dyno-menu" class="container">
+{% for i in menu_items %}
+	<a href="{{ i.get_absolute_url }}">
+		<div class="listing shadowboxed col-md-6">
+        
+			<img src="{{MEDIA_URL}}img/{{ i.image }}" style="margin-top:10px;">
+       
+			<h4>{{ i.title | safe | truncatewords:8 }}</h4>
+			<h5>{{ i.thumbnail_desc | safe }}</h5>	
+		</div>
+	</a>
+{% endfor %}
 </div>
 
 
-	<h1 id="staff">Core Staff</h1>
-	<div id="dyno0" class="container">
-    
-		{% for i in staff %}	
-			<a href="{{ i.get_absolute_url }}">
-				<div class="listing shadowboxed">
-					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
-					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
-					<h5>{{ i.staff_role }}</h5>
-				</div>
-			</a>
-		{% endfor %}		
-	</div>
+<h1 id="staff">Core Staff</h1>
+<div id="dyno0" class="container">
+
+	{% for i in staff %}	
+		<a href="{{ i.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
+				<h4>{{ i.first_name }} {{ i.last_name }} </h4>
+				<h5>{{ i.staff_role }}</h5>
+			</div>
+		</a>
+	{% endfor %}		
+</div>
 
 <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 <h1 id="collaborators">Collaborator{{ collabs|length|pluralize }}</h1>

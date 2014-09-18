@@ -38,15 +38,14 @@
             </ul>
             
             </div>
-    </div>
+</div>
     
     
 {% endblock subheadlines %}
 
 
 {% block stories %}
-
-<h1 id="staff">Core Staff</h1>
+	<h1 id="staff">Core Staff</h1>
 	<div id="dyno1" class="container">
 		{% for i in staff %}	
 			<a href="{{ i.get_absolute_url }}">
@@ -75,7 +74,7 @@
     
     <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 <h1 id="advboard">Advisory Board</h1>
-	<div id="dyno2" class="container">
+	<div id="dyno3" class="container">
 		{% for i in advboard %}	
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
@@ -86,28 +85,24 @@
 			</a>
 		{% endfor %}			
 	</div>
-    
+ 
 {% endblock stories%}
 
 {% block customjavascript %}
-jQuery(window).on('load', function(){ 
+jQuery(window).on('load', function(){
 	var $ = jQuery;
-	var container1 = document.querySelector('#dyno1');
-	var msnry = new Masonry( container1, {
-	  // options
-	  columnWidth: 230,
-	  itemSelector: '.listing',
-	  gutter: 10,
-	  isFitWidth: 'true'
-	});
-
-	var container2 = document.querySelector('#dyno2');
-	var msnry = new Masonry( container2, {
-	  // options
-	  //columnWidth: 115,
-	  itemSelector: '.listing',
-	  gutter: 40,
-	  isFitWidth: 'true'
-	});
+	var containers = ['#dyno1', '#dyno2', '#dyno3'];	
+	for (i in containers) {
+		containers[i] = document.querySelector(containers[i]);
+		if(containers[i]) {			
+			msnry = new Masonry( containers[i], {
+			  // options
+			  columnWidth: 230,
+			  itemSelector: '.listing',
+			  gutter: 40,
+			  isFitWidth: 'true'
+			});
+		}
+	}
 })
 {% endblock customjavascript %}
