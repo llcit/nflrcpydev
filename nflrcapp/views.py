@@ -264,11 +264,15 @@ def search(request):
     # Q(category='Research Note') | Q(category='Network')
     if query:
         publications = Publication.objects.filter(
-            skeywords__icontains=query).order_by('-year')
+            Q(author__icontains=query) | Q(description__icontains=query) | Q(skeywords__icontains=query)
+            ).order_by('-year')
+        
         projects = Project.objects.filter(
-            skeywords__icontains=query).order_by('-id')
+            Q(description__icontains=query) | Q(skeywords__icontains=query)
+            ).order_by('-id')
         prodevs = Prodev.objects.filter(
-            skeywords__icontains=query).order_by('-id')
+            Q(description__icontains=query) | Q(skeywords__icontains=query)
+            ).order_by('-id')
         contacts = Contact.objects.filter(
               Q(last_name__icontains=query)
             | Q(first_name__icontains=query)
