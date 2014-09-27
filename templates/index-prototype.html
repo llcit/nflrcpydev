@@ -1,0 +1,75 @@
+<!-- index-prototype.html -->
+{% extends "wrap-content.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+
+
+{% block header_row %}
+	{{ block.super }}
+
+{% endblock header_row %}
+
+{% block subheadlines %}
+<div class="submenu"> 
+	<ul class="nav nav-pills-flex">		
+    <li class="navy"><a href="/about" class="static_a_display">About</a></li>
+		
+		<li class="red"><a href="/projects" class="static_a_display">Projects</a></li>
+        <li class="blue"><a href="/publications" class="static_a_display">Publications</a></li>
+		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
+		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+		<li class="blue"><a href="/publications/teaching-materials" class="static_a_display">Materials </a></li>
+	</ul>
+</div>
+{% endblock subheadlines %}
+
+
+
+{% block stories %}
+<div id="dyno" class="container-fluid">
+	<!-- Special Feature -->
+	<a href="#">
+		<div class="listing shadowboxed listing-large">
+			<p> <img src="{{MEDIA_URL}}img/icon.png"> </p>
+			<h4>Special Feature</h4>
+			<h5>Check this out!</h5>
+            <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+			{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+		</div>
+	</a>	
+
+
+
+	{% for feature in featured %}
+	
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+			</div>
+		</a>
+	
+	{% endfor %}
+</div>
+
+
+
+{% endblock stories%}
+
+{% block customjavascript %}
+jQuery(window).on('load', function(){ 
+	var $ = jQuery;
+	var container = document.querySelector('#dyno');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.listing',
+	  gutter: 40,
+	  isFitWidth: 'true'
+	});
+})
+{% endblock customjavascript %}
