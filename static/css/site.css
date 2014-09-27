@@ -247,12 +247,31 @@ a:active {color: #1aa1e1; text-decoration: none;}
     width: 100%;
 }
 
+.listing object {
+    display: none;
+}
+
 .listing h4, h5 {
     padding: 0px 10px 5px 10px;
 }
 
-.listing object {
-    display: none;
+.listing h4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size:20px;
+    font-weight:400;
+    color:#222;
+}
+
+
+.listing h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-size:14px;
+    font-weight:400;
+    color:#222;
+}
+
+.listing-large {
+    width: 460px;
 }
 
 .l2_crumbs  {
@@ -418,21 +437,6 @@ a:active {color: #1aa1e1; text-decoration: none;}
 }
 /*NFLRC STYLE ENDS*/
 
-.listing h4 {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size:20px;
-    font-weight:400;
-    color:#222;
-}
-
-
-.listing h5 {
-    font-family: 'Open Sans', sans-serif;
-    font-size:14px;
-    font-weight:400;
-    color:#222;
-
-}
 
 @media print {
     /*body, p, h3, span, div, i, b,  {

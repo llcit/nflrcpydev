@@ -39,6 +39,9 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^story/(.*)$', 'storyview', name='story'),
     
     
+    # Prototype index -- temporary --
+    url(r'^prototype/$', 'home_prototype', name='proto'),
+
     # LEVEL 1 (root)
     url(r'^$', 'home'),
     

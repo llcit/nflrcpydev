@@ -24,6 +24,15 @@ def home(request):
 
     return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
+def home_prototype(request):
+    featured1 = Publication.objects.filter(featured=True)
+    featured2 = Project.objects.filter(featured=True)
+    featured3 = Prodev.objects.filter(featured=True)
+    featured4 = StoryPage.objects.filter(featured=True)
+    featured = sorted(
+        chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
+
+    return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))    
 
 def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
