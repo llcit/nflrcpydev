@@ -78,16 +78,15 @@
             <div class="navbar-collapse collapse navpanel">
                 
                 <ul  id="searchnav" class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="input-group">
+                            <button id="sitemap_btn" class="btn btn-default" style="margin-top: 8px"> Menu <i id="sitemap_btn_toggle" class="fa fa-bars"></i></button>
+                        </div>
+                    </li>
                     <li id="searchform">
-                        <form method="get" action="/find" class="navbar-form navbar-left" role="search">
-                            
-                            
+                        <form method="get" action="/find" class="navbar-form navbar-left" role="search">            
                             <div class="input-group">
-                            
-                              <input type="text" class="form-control" placeholder="Search" name="q">
-
-
-                            </button>
+                                <input type="text" class="form-control" placeholder="Search" name="q">                                
                             </div>
                         </form>
                     </li> 
@@ -96,18 +95,15 @@
         </div>
     </div> <!-- end row 2 -->
 
-    <div id="sitemap_btn_panel" class="row" style="text-align: center">
-        <div class="col-md-12">
-            <div id="sitemap_btn" class="btn btn-default"> Explore <i id="sitemap_btn_toggle" class="fa fa-caret-right"></i></div>
-        </div>
-
     <div id="sitemap_panel" class="row shadowboxed" style="display: none">
         <div class="col-md-1"></div>
         <div class="col-md-2">
             <h4 class="badge_container badge_about"><a href="/about">About</a></h4>
+            <p><a href="/contact">Contact</a></p>
             <p><a href="/story/1">History</a></p>
             <p><a href="/story/2">Kuleana (mission)</a></p>
-            <p><a href="/languages">Languages</a></p>
+            <p><a href="/contact">People</a></p>
+            <p><a href="mailto:nflrc@hawaii.edu">Web Admin</a></p>
         </div>
         <div class="col-md-2">
             <h4 class="badge_container badge_projects"><a href="/projects">Projects</a></h4>
@@ -118,8 +114,9 @@
         </div>
         <div class="col-md-2">
             <h4 class="badge_container badge_publications"><a href="/publications">Publications</a></h4>
-            <p><a href="/publications/digital-archives">Digital Archives</a></p>
+            <p><a href="/publications/digital-archives">Archives</a></p>
             <p><a href="/publications/journals">Journals</a></p>
+            <p><a href="/publications/materials">Materials</a></p>
             <p><a href="/publications/media">Media</a></p>
             <p><a href="/publications/monographs">Monographs</a></p>
             <p><a href="/publications/pragmatics">Pragmatics</a></p>
@@ -127,15 +124,19 @@
         <div class="col-md-2">
             <h4 class="badge_container badge_prodev"><a href="/events">Events</a></h4>
             <p><a href="/events/conference">Conferences</a></p>
-            <p><a href="/events/institute">Summer Institutes</a></p>
-            <p><a href="/events/symposium">Symposiums</a></p>
+            <p><a href="/events/institute">Institutes</a></p>
+            <p><a href="/events/symposium">Online</a></p>
+            <p><a href="/events/symposium">Symposia</a></p>
             <p><a href="/events/workshop">Workshops</a></p>
         </div>
         <div class="col-md-2">
-            <h4 class="badge_container badge_contact"><a href="/contact">Contact</a></h4>
-            <p><a href="{{MEDIA_URL}}img/NFLRCmapWEB-small.jpg" target="_blank">Map</a></p>
-            <p><a href="/contact">People</a></p>
-            <p><a href="mailto:nflrc@hawaii.edu">Web Admin</a></p>
+            <h4 class="badge_container badge_contact"><a href="/languages">Languages</a></h4>
+            <p><a href="/languages/chinese">Chinese</a></p>
+            <p><a href="/languages/filipino">Filipino</a></p>
+            <p><a href="/languages/japanese">Japanese</a></p>
+            <p><a href="/languages/khmer">Khmer</a></p>
+            <p><a href="/languages/korean">Korean</a></p>
+            <p><a href="/languages/samoan">Samoan</a></p>            
         </div>
         <div class="col-md-1"></div>
     </div>
