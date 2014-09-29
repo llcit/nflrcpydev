@@ -39,9 +39,9 @@ class ContactAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
 	form = ProjectAdminForm
-	list_display = ('getuid', 'project_number', 'title', 'language', 'featured', 'featured_rank', 'headline', 'image', 'tags')
+	list_display = ('getuid', 'project_number', 'title', 'director', 'language', 'featured', 'featured_rank', 'headline', 'image', 'tags')
 	list_filter = ['featured', 'headline']
-	list_editable = ['featured', 'featured_rank', 'headline']
+	list_editable = ['director','featured', 'featured_rank', 'headline']
 	list_per_page = 200
 	search_fields = ['project_number', 'title']
 	ordering = ['-project_number']
