@@ -27,7 +27,12 @@
 <div id="dyno" class="container-fluid">
 	{% for feature in featured %}
 	
-		<a {% if feature.title == 'Language Resource Centers' %}href="http://www.nflrc.org/index.php" target="_blank"{% else %}href="{{ feature.get_absolute_url}"{% endif %}>
+		<a 
+		{% if feature.title == 'Language Resource Centers' %}
+			href="http://www.nflrc.org/index.php" target="_blank"
+		{% else %}
+			href="{{ feature.get_absolute_url }}"
+		{% endif %}>
 			<div class="listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
 				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
