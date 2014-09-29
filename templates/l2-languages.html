@@ -5,12 +5,12 @@
 
 <div class="submenu"> 
 	<ul class="nav nav-pills-flex">	
-		<li class="{% if language_name == 'chinese' %}gray{% endif %}"><a href="chinese">Chinese</a></li>
-		<li class="{% if language_name == 'filipino' %}gray{% endif %}"><a href="filipino">Filipino</a></li>
-		<li class="{% if language_name == 'japanese' %}gray{% endif %}"><a href="japanese">Japanese</a></li>
-		<li class="{% if language_name == 'khmer' %}gray{% endif %}"><a href="khmer">Khmer</a></li>
-		<li class="{% if language_name == 'korean' %}gray{% endif %}"><a href="korean">Korean</a></li>
-		<li class="{% if language_name == 'samoan' %}gray{% endif %}"><a href="samoan">Samoan</a></li>
+		<li class="{% if language_name == 'chinese' %}orange{% endif %}"><a href="chinese">Chinese</a></li>
+		<li class="{% if language_name == 'filipino' %}orange{% endif %}"><a href="filipino">Filipino</a></li>
+		<li class="{% if language_name == 'japanese' %}orange{% endif %}"><a href="japanese">Japanese</a></li>
+		<li class="{% if language_name == 'khmer' %}orange{% endif %}"><a href="khmer">Khmer</a></li>
+		<li class="{% if language_name == 'korean' %}orange{% endif %}"><a href="korean">Korean</a></li>
+		<li class="{% if language_name == 'samoan' %}orange{% endif %}"><a href="samoan">Samoan</a></li>
 		<li class="gray">
 			<div class="btn-group">
 			  <a class="btn dropdown-toggle static_a_display" data-toggle="dropdown" href="#">
@@ -31,26 +31,17 @@
 
 {% block subheadlines %}
 <div class="l2_crumbs">
-		{% if language_name %} 
-        
-	
-            
-<div class="submenu" style="float:left; margin-left:0px;">
-<h1>{{ language_name }}</h1>
-
-<ul class="nav nav-pills-flex">
-  
-  <li class="red"><a href="#projects">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li>
-  <li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li>
-  <li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
-  <li class="gray"><a href="#people">People</a></li>
-</ul>
-
-</div>
-
-            
-		{% endif %}
-	
+	{% if language_name %} 
+		<div class="submenu" style="float:left; margin-left:0px;">
+			<h1>{{ language_name | title }}</h1>
+			<ul class="nav nav-pills-flex">
+				<li class="red"><a href="#projects">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li>
+				<li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li>
+				<li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
+				<!-- <li class="gray"><a href="#people">People</a></li> -->
+			</ul>
+		</div>
+	{% endif %}
 </div>
 	
 

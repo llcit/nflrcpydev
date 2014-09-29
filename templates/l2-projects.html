@@ -4,37 +4,29 @@
 
 {% block pageheading %}
 
-
 <h4>
-<span class="badge badge_projects_fill">{{ items|length }}</span>	
-	{% if subpage %}			
-				{{ subpage|title }}
-			{% endif %} <a href="/projects" class="badge_projects">Projects</a>	
-
- | 
-
-<div class="btn-group">
-  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-    By grant cycle
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    <li><a class="static_a_display" href="current">2010-2014</a></li>
-    <li><a class="static_a_display" href="2006-2010">2006-2010</a></li>
-    <li><a class="static_a_display" href="1999-2002">1999-2002</a></li>
-	<li><a class="static_a_display" href="1996-1999">1996-1999</a></li>
-	<li><a class="static_a_display" href="1993-1996">1993-1996</a></li>
-  </ul>
-  
-</div>
-
-
+	<span class="badge badge_projects_fill">{{ items|length }}</span>	
+	{% if subpage %} {{ subpage|title }} {% endif %} 
+	<a href="/projects" class="badge_projects">Projects</a>	
+	|
+	<div class="btn-group">
+	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+	    By grant cycle
+	    <span class="caret"></span>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <li><a class="static_a_display" href="current">2010-2014</a></li>
+	    <li><a class="static_a_display" href="2006-2010">2006-2010</a></li>
+	    <li><a class="static_a_display" href="1999-2002">1999-2002</a></li>
+		<li><a class="static_a_display" href="1996-1999">1996-1999</a></li>
+		<li><a class="static_a_display" href="1993-1996">1993-1996</a></li>
+	  </ul>	  
+	</div>
 </h4>
 
 {% endblock pageheading %}
 
 {% block subheadlines %}
-
 
 <div class="submenu"> 
     <ul class="nav nav-pills-flex">
