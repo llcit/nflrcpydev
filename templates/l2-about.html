@@ -96,14 +96,6 @@
 		{% endfor %}			
 	</div>
 
-	<a href="{{ priv_stmnt_item.get_absolute_url }}">
-		<div class="listing listing-small shadowboxed">
-			<p> <img src="{{MEDIA_URL}}img/{{ priv_stmnt_item.image }}"> </p>
-			<h4>{{ priv_stmnt_item.title }} </h4>
-			<h5>{{ priv_stmnt_item.thumbnail_desc }}</h5>
-		</div>
-	</a>
-
 {% endblock stories %}
 
 {% block customjavascript %}
