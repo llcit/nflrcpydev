@@ -38,11 +38,13 @@ def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
     history_item = StoryPage.objects.filter(pk=2)
     lrc_item = StoryPage.objects.filter(pk=3)
+    priv_stmnt_item = StoryPage.objects.filter(pk=5)
     menu_items = []
     try: 
         menu_items.append(history_item[0])
         menu_items.append(kuleana_item[0])
         menu_items.append(lrc_item[0])
+        menu_items.append(priv_stmnt_item[0])
     except:
         pass
 
