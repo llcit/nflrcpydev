@@ -18,7 +18,11 @@ urlpatterns = patterns('django.contrib.flatpages.views',
 urlpatterns += patterns('nflrcapp.views',
     
     # LEVEL 2 PAGES (/level-2-pages)
+
+    
     url(r'^about/$', 'about', name='about'),
+    url(r'^about/(.*)$', 'aboutview', name='aboutview'),
+
     url(r'^contact/$', 'contact', name='contact'),
     url(r'^contact/view/(.*)$', 'contactview', name='contactview'),
 
@@ -35,8 +39,8 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^publications/view/(.*)$', 'pubview', name='pubview'),
     url(r'^publications/(.*)$', 'publications', name='publications'),
 
-    url(r'^stories/$', 'stories', name='stories'),
-    url(r'^story/(.*)$', 'storyview', name='story'),
+    # url(r'^stories/$', 'stories', name='stories'),
+    # url(r'^story/(.*)$', 'storyview', name='story'),
     
     
     # Prototype index -- temporary --

@@ -169,18 +169,18 @@ class StoryPage(models.Model):
     objects = ItemsManager()
 
     def classname(self):
-        name = 'stories'
+        name = 'about'
         return name
 
     def displayname(self):
-        name = 'Stories'
+        name = 'About'
         return name
 
     def getuid(self):
         return 'story%s' % self.id
 
     def get_absolute_url(self):
-        return reverse('story', args=[str(self.id)])
+        return reverse('aboutview', args=[str(self.id)])
 
     def __unicode__(self):
         return self.title
