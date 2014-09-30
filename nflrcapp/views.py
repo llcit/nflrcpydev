@@ -59,6 +59,21 @@ def about(request):
                               context_instance=RequestContext(request))
 
 
+def aboutview(request, item):
+    # listing = Publication.objects.filter(item_number=item)
+    displayitem = StoryPage.objects.get(id=item)
+    # tags = displayitem.tags.all()
+    # try:
+    #
+    # except ObjectDoesNotExist:
+    #   raise Http404
+    # except ValueError:
+    #   raise Http404
+
+    return render_to_response('item-display.html', {
+        'item': displayitem,
+    }, context_instance=RequestContext(request))
+
 def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
     collabs = Contact.objects.filter(role='COLLAB').order_by('last_name')
