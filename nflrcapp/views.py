@@ -38,13 +38,12 @@ def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
     history_item = StoryPage.objects.filter(pk=2)
     lrc_item = StoryPage.objects.filter(pk=3)
-    priv_stmnt_item = StoryPage.objects.filter(pk=5)
+
     menu_items = []
     try: 
         menu_items.append(history_item[0])
         menu_items.append(kuleana_item[0])
         menu_items.append(lrc_item[0])
-        menu_items.append(priv_stmnt_item[0])
     except:
         pass
 
@@ -60,16 +59,8 @@ def about(request):
 
 
 def aboutview(request, item):
-    # listing = Publication.objects.filter(item_number=item)
     displayitem = StoryPage.objects.get(id=item)
-    # tags = displayitem.tags.all()
-    # try:
-    #
-    # except ObjectDoesNotExist:
-    #   raise Http404
-    # except ValueError:
-    #   raise Http404
-
+    
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
