@@ -303,6 +303,9 @@ def search(request):
             | Q(first_name__icontains=query)
             | Q(email__icontains=query)
             ).order_by('last_name')
+        stories = StoryPage.objects.filter(
+            Q(description__icontains=query) | Q(title__icontains=query)
+            ).order_by('title')
 
         return render_to_response('search-results.html', {
             'query': query,
@@ -310,6 +313,7 @@ def search(request):
             'projects': projects,
             'prodevs': prodevs,
             'people': contacts,
+            'stories': stories,
         }, context_instance=RequestContext(request))
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))

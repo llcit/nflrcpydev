@@ -14,7 +14,9 @@
   
 	<li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
   
-	<li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li>  
+	<li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li> 
+
+	<li class="navy"><a href="#about">About <span class="badge">{{ stories|length }} </span></a></li> 
   
 </ul>
 
@@ -93,6 +95,24 @@
 				<p> <img src="{{MEDIA_URL}}img/{% if p.image %}{{ p.image }}{% else %}icon.png{% endif %}"> </p>
 				<h4>{{ p.first_name }} {{ p.last_name }}</h4>
 				<h5></h5>	
+			</div>
+		</a>
+	{% endfor %}
+	</div>
+{% endif %}
+
+{%if stories %}
+	<span id="about" class="adjusted-anchor"></span>
+	<h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+
+	<h1>About</h1>
+	<div id="subsection3">
+	{% for p in stories %}
+		<a href="{{ p.get_absolute_url }}">
+			<div class="listing shadowboxed"> 
+				<p> <img src="{{MEDIA_URL}}img/{% if p.image %}{{ p.image }}{% else %}icon.png{% endif %}"> </p>
+				<h4>{{ p.title }} </h4>
+				<h5>{{ p.thumbnail_desc | safe }}</h5>	
 			</div>
 		</a>
 	{% endfor %}
