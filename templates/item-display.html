@@ -99,11 +99,7 @@
  
 
 		<table style="margin:10px 0px 20px 0px;"> <tr>
-    		{% if item.is_oer %}
-            <td style="padding-right:10px; vertical-align:middle;">
-            <img src="{{ MEDIA_URL }}img/logos/oer-logo.png" style="width:100px; margin: 5px 0px;"/>
-            </td>
-            {% endif %} 
+    		
 
            {% if item.oclc_url %}
            <td style="padding-right:10px; vertical-align:middle;">
@@ -114,23 +110,31 @@
    			</div>
 			</td>
 			{% endif %}
-			{% if item.url %}
+            
+            {% if item.is_oer %}
+            <td style="padding-right:10px; vertical-align:middle;">
+            <img src="{{ MEDIA_URL }}img/logos/oer-logo.png" style="width:100px; margin: 5px 0px;"/>
+            </td>
+            {% endif %} 
 
+            
+			{% if item.url %}
             <td style="padding-right:10px; vertical-align:middle;">
             <div class="btn-toolbar">
               <div class="btn-group">
-                <a href="{{ item.url }}" class="static_a_display" target="_blank"><button class="btn btn-default">View </button></a>
+                <a href="{{ item.url }}" class="static_a_display" target="_blank"><button class="btn btn-default">View <i class="fa fa-external-link"></i></button></a>
               </div>
    			</div>
 
 			</td>
 			{% endif %}
-
+            
+            
 			{% if item.ext_url %}
             <td style="padding-right:10px; vertical-align:middle;">
             <div class="btn-toolbar">
               <div class="btn-group">
-                <a href="{{ item.ext_url }}" class="static_a_display" target="_blank"><button class="btn btn-default">View Item</button></a>
+                <a href="{{ item.ext_url }}" class="static_a_display" target="_blank"><button class="btn btn-default">View <i class="fa fa-external-link"></i></button></a>
                
               </div>
    			</div>
@@ -140,7 +144,7 @@
             <td style="padding-right:10px; vertical-align:middle;">
             <div class="btn-toolbar">
               <div class="btn-group">
-                <a href="{{ item.order_from }}" class="static_a_display" target="_blank"><button class="btn btn-default">Order</button></a>
+                <a href="{{ item.order_from }}" class="static_a_display" target="_blank"><button class="btn btn-default">Buy </button></a>
                
               </div>
    			</div>
