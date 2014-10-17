@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+  <title>NFLRC</title>
+  <link>http://nflrc.hawaii.edu</link>
+  <description>National Foreign Language Resource Center</description>
+  <item>
+    <title>NFLRC Awarded</title>
+    <link>http://nflrc.hawaii.edu/about</link>
+    <description>New funding through 2018</description>
+  </item>
+</channel>
+
+</rss>
