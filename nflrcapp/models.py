@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.syndication.views import Feed
+from django.utils.html import strip_tags
 
 from operator import attrgetter
 
@@ -459,14 +460,14 @@ class NflrcNewsFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.description
+        return strip_tags(item.description)
 
     def get_context_data(self, **kwargs):
         context = super(NflrcNewsFeed, self).get_context_data(**kwargs)
         try:
-            context['news_title'] = kwargs.pop('item')
+            context['blurb'] = kwargs.pop('item').thumbnail_desc
         except:
-            context['news_title'] = 'News Flash'
+            context['blurb'] = 'News Flash'
         return context
 
     # def item_link(self, item):
