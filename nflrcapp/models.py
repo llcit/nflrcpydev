@@ -451,6 +451,7 @@ class NflrcNewsFeed(Feed):
     title = "NFLRC News"
     link = "/"
     description = "The latest and greatest from the National Foreign Language Resource Center."
+    title_template = "feeds/title.html"
     description_template = "feeds/newswire.html"
 
     def items(self):
