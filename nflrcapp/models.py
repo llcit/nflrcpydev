@@ -455,7 +455,12 @@ class NflrcNewsFeed(Feed):
     description_template = "feeds/newswire.html"
 
     def items(self):
-        return StoryPage.objects.get_tagged_items(tag='news', item_type='story page')
+        items = TaggedItem.objects.filter(item_tag__tag='news')
+        newsitems = []
+        for i in items:
+            newsitems.append(i.content_object)
+
+        return newsitems   
 
     def item_title(self, item):
         return item.title
