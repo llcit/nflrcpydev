@@ -27,11 +27,11 @@ class ContactRoleAdmin(admin.ModelAdmin):
 	ordering = ['list_rank']
 
 class ContactAdmin(admin.ModelAdmin):
-	list_display = ('last_name', 'first_name', 'title', 'role', 'staff_role', 'listing_rank', 'image',)
+	list_display = ('last_name', 'first_name', 'title', 'bio', 'role', 'staff_role', 'listing_rank', 'image')
 	list_filter = ['role',]
 	list_editable = ['role', 'staff_role', 'listing_rank','image']	
 	list_per_page = 200
-	search_fields = ['last_name', 'first_name', 'role']
+	search_fields = ['last_name', 'first_name', 'role', 'bio']
 	ordering = ['listing_rank']
 	inlines = [
         TaggedItemInline,
@@ -39,44 +39,44 @@ class ContactAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
 	form = ProjectAdminForm
-	list_display = ('getuid', 'project_number', 'title', 'director', 'language', 'featured', 'featured_rank', 'headline', 'image', 'tags')
+	list_display = ('getuid', 'project_number', 'title', 'director', 'description', 'language', 'featured', 'featured_rank', 'headline', 'image')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
-	search_fields = ['project_number', 'title']
+	search_fields = ['project_number', 'title', 'language', 'thumbnail_desc', 'description']
 	ordering = ['-project_number']
 	inlines = [
         TaggedItemInline,
     ]
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'item_number', 'category', 'title', 'language', 'featured', 'featured_rank', 'image',)
+	list_display = ('getuid', 'item_number', 'category', 'title', 'description', 'language', 'featured', 'featured_rank', 'image')
 	list_filter = ['featured', 'category']
 	list_editable = ['featured', 'featured_rank', 'image']
 	list_per_page = 200
-	search_fields = ['item_number', 'title']
+	search_fields = ['item_number', 'title', 'language', 'thumbnail_desc', 'description']
 	ordering = ['item_number', '-year']
 	inlines = [
         TaggedItemInline,
     ]
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'language', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
+	list_display = ('getuid', 'id', 'title', 'description', 'language', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
 	list_filter = ['featured', 'headline', 'pdtype']
 	list_editable = ['featured', 'featured_rank', 'headline', 'pdtype']
 	list_per_page = 200
-	search_fields = ['id', 'title']
+	search_fields = ['id', 'title','language', 'thumbnail_desc', 'description']
 	ordering = ['-id', 'title']
 	inlines = [
         TaggedItemInline,
     ]
 
 class StoryPageAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image', 'tags')
+	list_display = ('getuid', 'id', 'title', 'description', 'featured', 'featured_rank', 'headline', 'image' )
 	list_filter = ['featured', 'headline',]
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
-	search_fields = ['id', 'title']
+	search_fields = ['id', 'title', 'thumbnail_desc', 'description']
 	ordering = ['id', 'title',]
 	inlines = [
         TaggedItemInline,

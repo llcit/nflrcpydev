@@ -481,6 +481,3 @@ class NflrcNewsFeed(Feed):
             context['blurb'] = 'News Flash'
         return context
 
-    # def item_link(self, item):
-    #     print 'NEWS', item;
-    #     return reverse('news-wire', args=[item.pk])
