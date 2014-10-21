@@ -18,7 +18,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'nflrc_pg',
-        'USER': 'djangodbuser',
+        'USER': 'postgres',
         'PASSWORD': '1',
         'HOST': 'localhost', 
         'PORT': '5432', 

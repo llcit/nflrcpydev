@@ -72,7 +72,7 @@ class ProdevAdmin(admin.ModelAdmin):
     ]
 
 class StoryPageAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image')
+	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image', 'tags')
 	list_filter = ['featured', 'headline',]
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200

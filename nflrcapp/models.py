@@ -5,7 +5,10 @@ from itertools import chain
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.contrib.syndication.views import Feed
+
 from operator import attrgetter
+
 
 HUMAN_PREFIXES = {
     ('DR', 'PhD.'),
@@ -57,6 +60,7 @@ ITEM_TYPE_SHORTCUTS = {
 }
 
 
+
 class ItemsManager(models.Manager):
 
     def allfeatured(self, **kwargs):
@@ -80,7 +84,7 @@ class ItemsManager(models.Manager):
         return items 
 
 class ItemTag(models.Model):
-    tag = models.CharField(max_length=140, unique=True)
+    tag = models.CharField(max_length=180, unique=True)
 
     def __unicode__(self):
         return self.tag
@@ -441,3 +445,30 @@ class Software(models.Model):
 
     def classname(self):
         return self.__class__.__name__
+
+class NflrcNewsFeed(Feed):
+    title = "NFLRC News"
+    link = "/"
+    description = "The latest and greatest from the National Foreign Language Resource Center."
+    description_template = "feeds/newswire.html"
+
+    def items(self):
+        return StoryPage.objects.get_tagged_items(tag='news', item_type='story page')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.description
+
+    def get_context_data(self, **kwargs):
+        context = super(NflrcNewsFeed, self).get_context_data(**kwargs)
+        try:
+            context['news_title'] = kwargs.pop('item')
+        except:
+            context['news_title'] = 'News Flash'
+        return context
+
+    # def item_link(self, item):
+    #     print 'NEWS', item;
+    #     return reverse('news-wire', args=[item.pk])

@@ -1,12 +1,12 @@
-from django.conf.urls import *
-
-from django.conf import settings
+from django.conf.urls import url, patterns, include
 from django.conf.urls.static import static
-
+from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
 from filebrowser.sites import site
+
+from .models import NflrcNewsFeed
 
 urlpatterns = patterns('django.contrib.flatpages.views',
     # FLATPAGES Experiment
@@ -32,6 +32,8 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^find/$', 'search', name='search'),
    
     url(r'^languages/(.*)$', 'languages', name='languages'),
+
+    url(r'^newswire/$', NflrcNewsFeed(), name='news-wire'),
 
     url(r'^projects/view/(.*)$', 'projectview', name='projectview'),
     url(r'^projects/(.*)$', 'projects', name='projects'),
