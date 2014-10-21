@@ -463,15 +463,20 @@ class NflrcNewsFeed(Feed):
         return newsitems   
 
     def item_title(self, item):
-        return item.title
+        return strip_tags(item.title)
 
     def item_description(self, item):
         return strip_tags(item.description)
 
+    def item_thumbnail_description(self, item):
+        return strip_tags(item.thumbnail_desc)
+
     def get_context_data(self, **kwargs):
         context = super(NflrcNewsFeed, self).get_context_data(**kwargs)
         try:
-            context['blurb'] = kwargs.pop('item').thumbnail_desc
+            i = kwargs.pop('item')
+            context['title'] = self.item_title(i)
+            context['blurb'] = self.item_thumbnail_description(i)
         except:
             context['blurb'] = 'News Flash'
         return context
