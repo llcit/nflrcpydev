@@ -48,7 +48,13 @@ urlpatterns += patterns('nflrcapp.views',
     # Prototype index -- temporary --
     url(r'^prototype/$', 'home_prototype', name='proto'),
 
-    url(r'^([-\w]+)/$', 'tagview', name='global_tag'),
+
+    url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+
+    # Filter site objects by tag. Must be last so that previous url patterns are caught first!
+    url(r'^([-\w]+)/$', 'site_filter', name='site_filter'),
 
     # LEVEL 1 (root)
     url(r'^$', 'home'),
@@ -56,11 +62,7 @@ urlpatterns += patterns('nflrcapp.views',
     
     # url(r'^search/', include('haystack.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/filebrowser/', include(site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

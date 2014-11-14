@@ -34,11 +34,23 @@
 		{% endif %}>
 			<div class="listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
-				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
-				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				
+				{% if feature.classname == 'contact' %}
+					<h4>{{ feature.first_name }} {{ feature.last_name }} </h4>
+					<h5>{{ feature.staff_role }}</h5>
+				{% else %}
+					<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+					<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				{% endif %}
+				
+				
 				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
-                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
-				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+                <p><a 
+                	href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" 
+                	class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">
+                	More 
+					{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}
+				</a></p>
 			</div>
 		</a>
 	

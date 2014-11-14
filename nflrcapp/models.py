@@ -134,9 +134,15 @@ class Contact(models.Model):
     listing_rank = models.IntegerField(null=True, blank=True)
     role = models.CharField(
         max_length=30, choices=ROLE_TYPES, null=True, blank=True)
+    featured = models.BooleanField(blank=True, default=False)
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
 
     tags = generic.GenericRelation(TaggedItem)
-    
+
+    def classname(self):
+        name = 'contact'
+        return name
+
     def getuid(self):
         return self.id
 

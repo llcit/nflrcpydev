@@ -24,20 +24,21 @@ def home(request):
 
     return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
-def tagview(request, tag):
-    
+def site_filter(request, tag):
+    """View that filters all objects by querying the TaggedItem table"""
     if tag:
-        print 'TAGGED!', tag
-        # item_type = ContentType.objects.get_for_model(Project)
-        tagged_items = TaggedItem.objects.filter(item_tag__tag=tag).order_by('-object_id')
-        listing = []
-        for i in tagged_items:
-            print i
-            listing.append(i.content_object)
+        tagged_items = TaggedItem.objects.filter(item_tag__tag=tag)
+        listing = [t.content_object for t in tagged_items]
+
+        # sort by featured(True/False) descending then by featured_rank ascending.
+        # Do two sorts in reverse to get the above effect.
+        # https://docs.python.org/2/howto/sorting.html#sortinghowto
+        listing = sorted(listing, key=attrgetter('featured_rank')) # sort by featured_rank
+        listing = sorted(listing, key=attrgetter('featured'), reverse=True) # then by True/False
     else:
         # No tag -- show all projects
         tag = None
-        listing = []
+        listing = None
 
     return render_to_response('index.html', {
         'featured': listing,
