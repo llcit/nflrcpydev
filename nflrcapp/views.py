@@ -196,9 +196,6 @@ def projects(request, tag):
             listing = Project.objects.filter(grant_cycle=prebuilt_filter)
 
         else:
-            
-                
-
             item_type = ContentType.objects.get_for_model(Project)
             tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(
                 item_tag__tag=tag).order_by('-object_id')
