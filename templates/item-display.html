@@ -174,7 +174,11 @@
 	<div id="item-content" >{{ item.description | safe }}</div>
     
     
-
+	<div> Tagged as 
+		{% for t in item.tags.all %}
+			<a href="{% url 'site_filter' t.item_tag %}"><span class="badge"> {{ t.item_tag }} </span></a>
+		{% endfor %}
+	</div>
 {% endblock item-content %}
 
 

@@ -89,7 +89,7 @@ class ItemTag(models.Model):
     tag = models.CharField(max_length=180, unique=True)
 
     def save(self, *args, **kwargs):
-        self.tag = slugify(self.tag)
+        self.tag = slugify(unicode(self.tag))
         super(ItemTag, self).save(*args, **kwargs)
 
     def __unicode__(self):
