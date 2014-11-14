@@ -31,14 +31,14 @@ urlpatterns += patterns('nflrcapp.views',
 
     url(r'^find/$', 'search', name='search'),
    
-    url(r'^languages/(.*)$', 'languages', name='languages'),
+    url(r'^languages/(.*)/$', 'languages', name='languages'),
 
     url(r'^newswire/$', NflrcNewsFeed(), name='news-wire'),
 
-    url(r'^projects/view/(.*)$', 'projectview', name='projectview'),
+    url(r'^projects/view/(.*)/$', 'projectview', name='projectview'),
     url(r'^projects/(.*)$', 'projects', name='projects'),
 
-    url(r'^publications/view/(.*)$', 'pubview', name='pubview'),
+    url(r'^publications/view/(.*)/$', 'pubview', name='pubview'),
     url(r'^publications/(.*)$', 'publications', name='publications'),
 
     # url(r'^stories/$', 'stories', name='stories'),
@@ -47,6 +47,8 @@ urlpatterns += patterns('nflrcapp.views',
     
     # Prototype index -- temporary --
     url(r'^prototype/$', 'home_prototype', name='proto'),
+
+    url(r'^([-\w]+)/$', 'tagview', name='global_tag'),
 
     # LEVEL 1 (root)
     url(r'^$', 'home'),

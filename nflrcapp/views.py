@@ -24,6 +24,26 @@ def home(request):
 
     return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
+def tagview(request, tag):
+    
+    if tag:
+        print 'TAGGED!', tag
+        # item_type = ContentType.objects.get_for_model(Project)
+        tagged_items = TaggedItem.objects.filter(item_tag__tag=tag).order_by('-object_id')
+        listing = []
+        for i in tagged_items:
+            print i
+            listing.append(i.content_object)
+    else:
+        # No tag -- show all projects
+        tag = None
+        listing = []
+
+    return render_to_response('index.html', {
+        'featured': listing,
+        'subpage': tag
+    }, context_instance=RequestContext(request))
+
 def home_prototype(request):
     featured1 = Publication.objects.filter(featured=True)
     featured2 = Project.objects.filter(featured=True)

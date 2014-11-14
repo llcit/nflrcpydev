@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.syndication.views import Feed
 from django.utils.html import strip_tags
+from django.utils.text import slugify
 
 from operator import attrgetter
 
@@ -86,6 +87,10 @@ class ItemsManager(models.Manager):
 
 class ItemTag(models.Model):
     tag = models.CharField(max_length=180, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.tag = slugify(self.tag)
+        super(ItemTag, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.tag
