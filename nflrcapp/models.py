@@ -213,7 +213,7 @@ class Prodev(models.Model):
     thumbnail_desc = models.CharField(
         max_length=160, null=True, blank=True, default='more...')
     related_publication = models.TextField(blank=True)
-    url = models.URLField()
+    url = models.URLField(blank=True)
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
