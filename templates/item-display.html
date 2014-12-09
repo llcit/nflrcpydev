@@ -1,5 +1,13 @@
 {% extends "wrap-item-display.html" %}
 {% load staticfiles %}
+
+{% block meta_block %}
+    <meta property="og:title" content="NFLRC {{ item.displayname }}" /> 
+    <meta property="og:description" content="{{ item.title }}" />  
+    <meta property="og:image" content="{{MEDIA_URL}}img/{{ item.image }}" /> 
+    <meta property="og:url" content="http://nflrc.hawaii.edu{{ request.path }}" />
+{% endblock meta_block %}
+
 <!-- BREADCRUMBS -->
 
 {% block socialplugs %}
@@ -61,8 +69,8 @@
 		{% elif item.classname == 'prodev' %}
 			
 			<li><div>{{ item.date }} {% if item.pdtype %} | Project type: {{ item.pdtype }} {% endif %}</div> </li>
-			<li><div><h4>Project Director: {{ item.director|safe|urlizetrunc:25 }}</h4></div></li>
-            {% if item.facilitator %}<li><div><h4>Facilitator(s): {{ item.facilitator|safe }}</h4></div></li>{% endif %}
+			<li><div><h4>Project Director(s): {{ item.director|safe|urlizetrunc:25 }}</h4></div></li>
+            {% if item.facilitator %}<li><div><h4>Facilitator(s) {{ item.facilitator|safe }}</h4></div></li>{% endif %}
 			{% if item.related_publication %}
 			<li><div>Project Publications: {{ item.related_publication|safe }}</div> </li>
 			{% endif %}
@@ -70,7 +78,6 @@
 			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
             <li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
 
-			<li class="hide_from_printer"><div><a href="{{ item.url }}" target="_blank">Web</a></div> </li>
 		
 
 		{% elif item.classname == 'projects' %}
@@ -167,9 +174,6 @@
          
 {% block item-content %}
 
-	
-	
-	
 	
 	<div id="item-content" >{{ item.description | safe }}</div>
     
