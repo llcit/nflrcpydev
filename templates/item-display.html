@@ -4,7 +4,7 @@
 {% block meta_block %}
     <meta property="og:title" content="NFLRC {{ item.displayname }}" /> 
     <meta property="og:description" content="{{ item.title }}" />  
-    <meta property="og:image" content="{{MEDIA_URL}}img/{{ item.image }}" /> 
+    <meta property="og:image" content="http://nflrc.hawaii.edu{{MEDIA_URL}}img/{{ item.image }}" /> 
     <meta property="og:url" content="http://nflrc.hawaii.edu{{ request.path }}" />
 {% endblock meta_block %}
 
