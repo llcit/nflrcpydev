@@ -138,6 +138,8 @@ def prodev(request, tag=None):
         listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-id')
         if not listing: # Retrieve items by tag
             listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
+        if tag == 'upcoming':
+            tag = ''
     else:
         listing = None
 
