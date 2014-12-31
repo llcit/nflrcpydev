@@ -1,380 +1,266 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'ImageFile'
-        db.create_table(u'nflrcapp_imagefile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
-            ('caption', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['ImageFile'])
+    dependencies = [
+        ('contenttypes', '0001_initial'),
+    ]
 
-        # Adding model 'DocumentFile'
-        db.create_table(u'nflrcapp_documentfile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('document', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
-            ('extrainfo', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['DocumentFile'])
-
-        # Adding model 'Contact'
-        db.create_table(u'nflrcapp_contact', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=50L)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=20L, blank=True)),
-            ('department', self.gf('django.db.models.fields.CharField')(max_length=256L, blank=True)),
-            ('university', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=128L, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=20L, blank=True)),
-            ('state', self.gf('django.db.models.fields.CharField')(max_length=15L, blank=True)),
-            ('zipcode', self.gf('django.db.models.fields.CharField')(max_length=15L, blank=True)),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=40L, blank=True)),
-            ('fax', self.gf('django.db.models.fields.CharField')(max_length=40L, blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('current_project', self.gf('django.db.models.fields.CharField')(max_length=255L, null=True, blank=True)),
-            ('nflrc_staff', self.gf('django.db.models.fields.BooleanField')()),
-            ('listing_rank', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('role', self.gf('django.db.models.fields.CharField')(max_length=30, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Contact'])
-
-        # Adding model 'StoryPage'
-        db.create_table(u'nflrcapp_storypage', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('skeywords', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['StoryPage'])
-
-        # Adding model 'Prodev'
-        db.create_table(u'nflrcapp_prodev', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200L, blank=True)),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('date', self.gf('django.db.models.fields.CharField')(max_length=50L, blank=True)),
-            ('pdtype', self.gf('django.db.models.fields.CharField')(max_length=30L, blank=True)),
-            ('director', self.gf('django.db.models.fields.CharField')(max_length=200L)),
-            ('facilitator', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('related_publication', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('skeywords', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Prodev'])
-
-        # Adding model 'Project'
-        db.create_table(u'nflrcapp_project', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('project_number', self.gf('django.db.models.fields.CharField')(max_length=10L)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=150L, blank=True)),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=80L, blank=True)),
-            ('grant_cycle', self.gf('django.db.models.fields.CharField')(max_length=50L, blank=True)),
-            ('status', self.gf('django.db.models.fields.CharField')(max_length=30L, blank=True)),
-            ('director', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('skeywords', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, null=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Project'])
-
-        # Adding model 'PersonProject'
-        db.create_table(u'nflrcapp_personproject', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('contact_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nflrcapp.Contact'])),
-            ('project_number', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nflrcapp.Project'])),
-            ('status', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['PersonProject'])
-
-        # Adding model 'Publication'
-        db.create_table(u'nflrcapp_publication', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('item_number', self.gf('django.db.models.fields.CharField')(max_length=10L, blank=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200L, blank=True)),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=255L, blank=True)),
-            ('category', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('author', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('year', self.gf('django.db.models.fields.CharField')(max_length=12L, blank=True)),
-            ('price', self.gf('django.db.models.fields.FloatField')(null=True, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('size', self.gf('django.db.models.fields.CharField')(max_length=40L, blank=True)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=250L, blank=True)),
-            ('order_from', self.gf('django.db.models.fields.CharField')(max_length=10L, blank=True)),
-            ('skeywords', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('isbn', self.gf('django.db.models.fields.CharField')(max_length=20L, null=True, blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('headline_tag', self.gf('django.db.models.fields.CharField')(default=u'', max_length=512, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Publication'])
-
-        # Adding model 'PersonPublication'
-        db.create_table(u'nflrcapp_personpublication', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('contact_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nflrcapp.Contact'])),
-            ('publication_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nflrcapp.Publication'])),
-        ))
-        db.send_create_signal(u'nflrcapp', ['PersonPublication'])
-
-        # Adding model 'Resource'
-        db.create_table(u'nflrcapp_resource', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('resource_number', self.gf('django.db.models.fields.IntegerField')()),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=150L, blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
-            ('site_type', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=200L, blank=True)),
-            ('language_group', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('status', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('contact_email', self.gf('django.db.models.fields.CharField')(max_length=60L, null=True, blank=True)),
-            ('site_type1', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('site_type2', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('site_type3', self.gf('django.db.models.fields.CharField')(max_length=60L, blank=True)),
-            ('image', self.gf('django.db.models.fields.CharField')(max_length=50L, blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Resource'])
-
-        # Adding model 'Software'
-        db.create_table(u'nflrcapp_software', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200L)),
-            ('content', self.gf('django.db.models.fields.CharField')(max_length=1000L, blank=True)),
-            ('languages', self.gf('django.db.models.fields.CharField')(max_length=100L)),
-            ('skills', self.gf('django.db.models.fields.CharField')(max_length=200L, blank=True)),
-            ('levels', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('age', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('format', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('platforms', self.gf('django.db.models.fields.CharField')(max_length=300L, blank=True)),
-            ('hardwares', self.gf('django.db.models.fields.CharField')(max_length=1500L, blank=True)),
-            ('distributor', self.gf('django.db.models.fields.CharField')(max_length=600L, blank=True)),
-            ('telephone', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('fax', self.gf('django.db.models.fields.CharField')(max_length=100L, blank=True)),
-            ('infoemail', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
-            ('saleemail', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
-            ('geneemail', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
-            ('www', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
-            ('price', self.gf('django.db.models.fields.CharField')(max_length=200L, blank=True)),
-            ('review', self.gf('django.db.models.fields.CharField')(max_length=1000L, blank=True)),
-            ('featured', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'nflrcapp', ['Software'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'ImageFile'
-        db.delete_table(u'nflrcapp_imagefile')
-
-        # Deleting model 'DocumentFile'
-        db.delete_table(u'nflrcapp_documentfile')
-
-        # Deleting model 'Contact'
-        db.delete_table(u'nflrcapp_contact')
-
-        # Deleting model 'StoryPage'
-        db.delete_table(u'nflrcapp_storypage')
-
-        # Deleting model 'Prodev'
-        db.delete_table(u'nflrcapp_prodev')
-
-        # Deleting model 'Project'
-        db.delete_table(u'nflrcapp_project')
-
-        # Deleting model 'PersonProject'
-        db.delete_table(u'nflrcapp_personproject')
-
-        # Deleting model 'Publication'
-        db.delete_table(u'nflrcapp_publication')
-
-        # Deleting model 'PersonPublication'
-        db.delete_table(u'nflrcapp_personpublication')
-
-        # Deleting model 'Resource'
-        db.delete_table(u'nflrcapp_resource')
-
-        # Deleting model 'Software'
-        db.delete_table(u'nflrcapp_software')
-
-
-    models = {
-        u'nflrcapp.contact': {
-            'Meta': {'object_name': 'Contact'},
-            'address': ('django.db.models.fields.CharField', [], {'max_length': '128L', 'blank': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '20L', 'blank': 'True'}),
-            'current_project': ('django.db.models.fields.CharField', [], {'max_length': '255L', 'null': 'True', 'blank': 'True'}),
-            'department': ('django.db.models.fields.CharField', [], {'max_length': '256L', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'fax': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '50L'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '20L', 'blank': 'True'}),
-            'listing_rank': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'nflrc_staff': ('django.db.models.fields.BooleanField', [], {}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
-            'role': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'university': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '15L', 'blank': 'True'})
-        },
-        u'nflrcapp.documentfile': {
-            'Meta': {'object_name': 'DocumentFile'},
-            'document': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            'extrainfo': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        u'nflrcapp.imagefile': {
-            'Meta': {'object_name': 'ImageFile'},
-            'caption': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'})
-        },
-        u'nflrcapp.personproject': {
-            'Meta': {'object_name': 'PersonProject'},
-            'contact_id': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['nflrcapp.Contact']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'project_number': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['nflrcapp.Project']"}),
-            'status': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        },
-        u'nflrcapp.personpublication': {
-            'Meta': {'object_name': 'PersonPublication'},
-            'contact_id': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['nflrcapp.Contact']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'publication_id': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['nflrcapp.Publication']"})
-        },
-        u'nflrcapp.prodev': {
-            'Meta': {'object_name': 'Prodev'},
-            'date': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'director': ('django.db.models.fields.CharField', [], {'max_length': '200L'}),
-            'facilitator': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'pdtype': ('django.db.models.fields.CharField', [], {'max_length': '30L', 'blank': 'True'}),
-            'related_publication': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
-        },
-        u'nflrcapp.project': {
-            'Meta': {'object_name': 'Project'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'director': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'grant_cycle': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
-            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'null': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '80L', 'blank': 'True'}),
-            'project_number': ('django.db.models.fields.CharField', [], {'max_length': '10L'}),
-            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '30L', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '150L', 'blank': 'True'})
-        },
-        u'nflrcapp.publication': {
-            'Meta': {'object_name': 'Publication'},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'category': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'isbn': ('django.db.models.fields.CharField', [], {'max_length': '20L', 'null': 'True', 'blank': 'True'}),
-            'item_number': ('django.db.models.fields.CharField', [], {'max_length': '10L', 'blank': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '255L', 'blank': 'True'}),
-            'order_from': ('django.db.models.fields.CharField', [], {'max_length': '10L', 'blank': 'True'}),
-            'price': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
-            'size': ('django.db.models.fields.CharField', [], {'max_length': '40L', 'blank': 'True'}),
-            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '250L', 'blank': 'True'}),
-            'year': ('django.db.models.fields.CharField', [], {'max_length': '12L', 'blank': 'True'})
-        },
-        u'nflrcapp.resource': {
-            'Meta': {'object_name': 'Resource'},
-            'contact_email': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'null': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '50L', 'blank': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
-            'language_group': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'resource_number': ('django.db.models.fields.IntegerField', [], {}),
-            'site_type': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'site_type1': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'site_type2': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'site_type3': ('django.db.models.fields.CharField', [], {'max_length': '60L', 'blank': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '150L', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
-        },
-        u'nflrcapp.software': {
-            'Meta': {'object_name': 'Software'},
-            'age': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'content': ('django.db.models.fields.CharField', [], {'max_length': '1000L', 'blank': 'True'}),
-            'distributor': ('django.db.models.fields.CharField', [], {'max_length': '600L', 'blank': 'True'}),
-            'fax': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'format': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'geneemail': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'hardwares': ('django.db.models.fields.CharField', [], {'max_length': '1500L', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'infoemail': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'languages': ('django.db.models.fields.CharField', [], {'max_length': '100L'}),
-            'levels': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'platforms': ('django.db.models.fields.CharField', [], {'max_length': '300L', 'blank': 'True'}),
-            'price': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
-            'review': ('django.db.models.fields.CharField', [], {'max_length': '1000L', 'blank': 'True'}),
-            'saleemail': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'skills': ('django.db.models.fields.CharField', [], {'max_length': '200L', 'blank': 'True'}),
-            'telephone': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200L'}),
-            'www': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
-        },
-        u'nflrcapp.storypage': {
-            'Meta': {'object_name': 'StoryPage'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'headline_tag': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'max_length': '100L', 'blank': 'True'}),
-            'skeywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
-        }
-    }
-
-    complete_apps = ['nflrcapp']
+    operations = [
+        migrations.CreateModel(
+            name='Contact',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('first_name', models.CharField(max_length=50L)),
+                ('last_name', models.CharField(max_length=20L)),
+                ('title', models.CharField(blank=True, max_length=50, null=True, choices=[('MS', 'Ms.'), ('DR', 'PhD.'), ('MR', 'Mr.')])),
+                ('bio', models.TextField(blank=True)),
+                ('department', models.CharField(max_length=256L, blank=True)),
+                ('university', models.CharField(max_length=60L, blank=True)),
+                ('address', models.CharField(max_length=128L, blank=True)),
+                ('city', models.CharField(max_length=20L, blank=True)),
+                ('state', models.CharField(max_length=15L, blank=True)),
+                ('zipcode', models.CharField(max_length=15L, blank=True)),
+                ('phone', models.CharField(max_length=40L, blank=True)),
+                ('fax', models.CharField(max_length=40L, blank=True)),
+                ('email', models.EmailField(max_length=75, blank=True)),
+                ('url', models.URLField(blank=True)),
+                ('image', models.CharField(max_length=100L, blank=True)),
+                ('current_project', models.CharField(max_length=255L, null=True, blank=True)),
+                ('nflrc_staff', models.BooleanField(default=False)),
+                ('listing_rank', models.IntegerField(null=True, blank=True)),
+                ('role', models.CharField(blank=True, max_length=30, null=True, choices=[('STAFF', 'NFLRC Staff'), ('COLLAB', 'Collaborator'), ('ADVBOARD', 'Advisory Board')])),
+                ('featured', models.BooleanField(default=False)),
+                ('featured_rank', models.IntegerField(default=0, help_text='higher the number, lower the rank', blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ContactRole',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=128)),
+                ('list_rank', models.IntegerField(default=1000, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ItemTag',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('tag', models.CharField(unique=True, max_length=180)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='PersonProject',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('status', models.IntegerField(null=True, blank=True)),
+                ('contact_id', models.ForeignKey(to='nflrcapp.Contact')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='PersonPublication',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('contact_id', models.ForeignKey(to='nflrcapp.Contact')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Prodev',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=300L, blank=True)),
+                ('language', models.CharField(max_length=100L, blank=True)),
+                ('date', models.CharField(max_length=50L, blank=True)),
+                ('pdtype', models.CharField(blank=True, max_length=30L, choices=[('conference', 'Conference'), ('online', 'Online Course'), ('institute', 'Summer Institute'), ('symposium', 'Symposium'), ('workshop', 'Workshop'), ('workshop_symposium', 'Workshop/Symposium'), ('other', 'Other')])),
+                ('director', models.CharField(max_length=200L)),
+                ('facilitator', models.TextField(blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('thumbnail_desc', models.CharField(default='more...', max_length=160, null=True, blank=True)),
+                ('related_publication', models.TextField(blank=True)),
+                ('url', models.URLField(blank=True)),
+                ('skeywords', models.TextField(blank=True)),
+                ('image', models.CharField(default='icon.png', max_length=100L, verbose_name='Icon image name (jumbotron images are not specified here.)', blank=True)),
+                ('featured', models.BooleanField(default=False)),
+                ('featured_rank', models.IntegerField(default=0, help_text='higher the number, lower the rank', blank=True)),
+                ('headline', models.BooleanField(default=False)),
+                ('headline_tag', models.CharField(default='', max_length=512, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Project',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('project_number', models.CharField(max_length=10L)),
+                ('title', models.CharField(max_length=150L, blank=True)),
+                ('language', models.CharField(max_length=80L, blank=True)),
+                ('grant_cycle', models.CharField(max_length=50L, blank=True)),
+                ('status', models.CharField(max_length=30L, blank=True)),
+                ('director', models.TextField(blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('thumbnail_desc', models.CharField(default='more...', max_length=160, null=True, blank=True)),
+                ('skeywords', models.TextField(blank=True)),
+                ('image', models.CharField(default='icon.png', max_length=100L, verbose_name='Icon image name (jumbotron images are not specified here.)', blank=True)),
+                ('featured', models.BooleanField(default=False)),
+                ('featured_rank', models.IntegerField(default=0, help_text='higher the number, lower the rank', blank=True)),
+                ('headline', models.BooleanField(default=False)),
+                ('headline_tag', models.CharField(default='', max_length=512, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Publication',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('item_number', models.CharField(help_text='Follows coding/id system in place for other publications. Example: MGnn is a Monograph with id nn.', max_length=10L)),
+                ('title', models.CharField(max_length=200L)),
+                ('author', models.CharField(help_text='Enter one or more authors.', max_length=100L)),
+                ('description', models.TextField(help_text='A description of the resource.')),
+                ('category', models.CharField(help_text='Category for this publication.', max_length=128, choices=[('CD', 'CD'), ('DVD', 'DVD'), ('Journal', 'Journal'), ('Language Teaching Material', 'Language Teaching Material'), ('Network', 'Network'), ('NFLRC Monograph', 'NFLRC Monograph'), ('PragmaticsI', 'PragmaticsI'), ('PragmaticsLL', 'PragmaticsLL'), ('Research Note', 'Research Note'), ('Videotape', 'Videotape')])),
+                ('image', models.CharField(default='icon.png', help_text='Icon for this item. <br>Format = ITEM_NUMBERicon.png . Default is icon.png', max_length=100L, verbose_name='icon')),
+                ('language', models.CharField(help_text='(Optional)', max_length=255L, blank=True)),
+                ('year', models.CharField(max_length=12L, blank=True)),
+                ('thumbnail_desc', models.CharField(default='more...', max_length=160, null=True, help_text='140 characters or less. Appears on the item blocks.', blank=True)),
+                ('is_oer', models.BooleanField(default=False, help_text='Check this ON if the publication is an Open Educational Resource', verbose_name='is this an Open Educational Resource?')),
+                ('url', models.CharField(help_text='(Optional) Specify the address at which the resource can be accessed.', max_length=250L, blank=True)),
+                ('ext_url', models.CharField(help_text='(Optional) Specify the address at which additional information about the resource is located.', max_length=250L, blank=True)),
+                ('oclc_url', models.CharField(help_text='(Optional) Specify the OCLC url if it exists.', max_length=250L, blank=True)),
+                ('order_from', models.CharField(help_text='(Optional) Specify URL where item may be purchased.', max_length=250L, blank=True)),
+                ('size', models.CharField(help_text='(Optional) Number of pages.', max_length=40L, blank=True)),
+                ('skeywords', models.TextField(help_text='(Optional) List keywords for this item separated by commas.', blank=True)),
+                ('featured', models.BooleanField(default=False, help_text='(Optional) Check this ON to force the item to display in featured lists.', verbose_name='feature this item?')),
+                ('featured_rank', models.IntegerField(default=0, help_text='higher the number, lower the rank', blank=True)),
+                ('hidden', models.BooleanField(default=False, help_text='Prevent this item from displaying on the site. Currently not implemented.')),
+                ('isbn', models.CharField(max_length=20L, null=True, editable=False, blank=True)),
+                ('price', models.FloatField(null=True, editable=False, blank=True)),
+                ('headline', models.BooleanField(default=False, help_text='(Optional) Check this ON to force the item to display as headline. Currently not implemented.', editable=False)),
+                ('headline_tag', models.CharField(default='', editable=False, max_length=512, blank=True, help_text='(Optional) Show tagline in headline. Currently not implemented.', null=True)),
+            ],
+            options={
+                'ordering': ['-year', 'item_number'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Resource',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('resource_number', models.IntegerField()),
+                ('title', models.CharField(max_length=150L, blank=True)),
+                ('url', models.URLField(blank=True)),
+                ('site_type', models.CharField(max_length=60L, blank=True)),
+                ('language', models.CharField(max_length=200L, blank=True)),
+                ('language_group', models.CharField(max_length=60L, blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('status', models.IntegerField(null=True, blank=True)),
+                ('contact_email', models.CharField(max_length=60L, null=True, blank=True)),
+                ('site_type1', models.CharField(max_length=60L, blank=True)),
+                ('site_type2', models.CharField(max_length=60L, blank=True)),
+                ('site_type3', models.CharField(max_length=60L, blank=True)),
+                ('image', models.CharField(max_length=50L, blank=True)),
+                ('featured', models.BooleanField(default=False)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Software',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=200L)),
+                ('content', models.CharField(max_length=1000L, blank=True)),
+                ('languages', models.CharField(max_length=100L)),
+                ('skills', models.CharField(max_length=200L, blank=True)),
+                ('levels', models.CharField(max_length=100L, blank=True)),
+                ('age', models.CharField(max_length=100L, blank=True)),
+                ('format', models.CharField(max_length=100L, blank=True)),
+                ('platforms', models.CharField(max_length=300L, blank=True)),
+                ('hardwares', models.CharField(max_length=1500L, blank=True)),
+                ('distributor', models.CharField(max_length=600L, blank=True)),
+                ('telephone', models.CharField(max_length=100L, blank=True)),
+                ('fax', models.CharField(max_length=100L, blank=True)),
+                ('infoemail', models.EmailField(max_length=75, blank=True)),
+                ('saleemail', models.EmailField(max_length=75, blank=True)),
+                ('geneemail', models.EmailField(max_length=75, blank=True)),
+                ('www', models.URLField(blank=True)),
+                ('price', models.CharField(max_length=200L, blank=True)),
+                ('review', models.CharField(max_length=1000L, blank=True)),
+                ('featured', models.BooleanField(default=False)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='StoryPage',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=255, blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('thumbnail_desc', models.CharField(default='more...', max_length=160, null=True, blank=True)),
+                ('skeywords', models.TextField(blank=True)),
+                ('image', models.CharField(default='icon.png', max_length=100L, verbose_name='Icon image name (jumbotron images are not specified here.)', blank=True)),
+                ('featured', models.BooleanField(default=False)),
+                ('featured_rank', models.IntegerField(default=0, help_text='higher the number, lower the rank', blank=True)),
+                ('headline', models.BooleanField(default=False)),
+                ('headline_tag', models.CharField(default='', max_length=512, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='TaggedItem',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('object_id', models.PositiveIntegerField()),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('item_tag', models.ForeignKey(to='nflrcapp.ItemTag')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='personpublication',
+            name='publication_id',
+            field=models.ForeignKey(to='nflrcapp.Publication'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='personproject',
+            name='project_number',
+            field=models.ForeignKey(to='nflrcapp.Project'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='contact',
+            name='staff_role',
+            field=models.ForeignKey(blank=True, to='nflrcapp.ContactRole', null=True),
+            preserve_default=True,
+        ),
+    ]

@@ -8,8 +8,9 @@
         <a href="/events" class="static_a_display">Events</a> </i>
         
        {% if pdtype_tag %}<i class="fa fa-angle-double-right"></i> <span class="badge badge_prodev_fill">{{events|length}}</span> 
-		 {% if events.0.pdtype == 'symposium' %} Symposia
-         	{% else %}
+		 {% if events.0.pdtype == 'symposium' %} 
+		 	Symposia         	
+         {% else %}
          	{{ events.0.pdtype|title }}s
          {% endif %} 
         
@@ -24,11 +25,12 @@
 
 <div class="submenu"> 
     <ul class="nav nav-pills-flex">
-    <li class="{% if pdtype_tag == 'conference' %}green{% endif %}"><a href="conference">Conferences</a></li>
-    <li class="{% if pdtype_tag == 'institute' %}green{% endif %}"><a href="institute">Institutes</a></li>
-    <li class="{% if pdtype_tag == 'online' %}green{% endif %}"><a href="online">Online</a></li>
-    <li class="{% if pdtype_tag == 'symposium' %}green{% endif %}"><a href="symposium">Symposia</a></li>
-    <li class="{% if pdtype_tag == 'workshop' %}green{% endif %}"><a href="workshop">Workshops</a></li>
+    <li class="{% if pdtype_tag == 'upcoming' %}green{% endif %}"><a href="{% url 'events' 'upcoming' %}">Upcoming</a></li>
+    <li class="{% if pdtype_tag == 'conference' %}green{% endif %}"><a href="{% url 'events' 'conference' %}">Conferences</a></li>
+    <li class="{% if pdtype_tag == 'institute' %}green{% endif %}"><a href="{% url 'events' 'institute' %}">Institutes</a></li>
+    <li class="{% if pdtype_tag == 'online' %}green{% endif %}"><a href="{% url 'events' 'online' %}">Online</a></li>
+    <li class="{% if pdtype_tag == 'symposium' %}green{% endif %}"><a href="{% url 'events' 'symposium' %}">Symposia</a></li>
+    <li class="{% if pdtype_tag == 'workshop' %}green{% endif %}"><a href="{% url 'events' 'workshop' %}">Workshops</a></li>
 	</ul>
 </div>
 
@@ -47,7 +49,9 @@
 					<h5>{{ p.thumbnail_desc | safe }}</h5>
                     <p><a href="/events" class="badge_container badge_prodev static_a_display">More Events</a></p>
 				</div>
-			</a>		
+			</a>
+		{% empty %}
+			<h3>There are no featured items at this time.</h3>	
 		{% endfor %}
 		</div>
 	{% else %}
@@ -70,6 +74,8 @@
 				</div>
 			</a>
 			{% if forloop.last %}</div>{% endif %}
+		{% empty %}
+			<h3>There were no {{ pdtype_tag }} events found.</he>	
 		{% endfor %}
 	
 	{% endif %}

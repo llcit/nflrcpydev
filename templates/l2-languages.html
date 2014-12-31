@@ -5,12 +5,12 @@
 
 <div class="submenu"> 
 	<ul class="nav nav-pills-flex">	
-		<li class="{% if language_name == 'chinese' %}orange{% endif %}"><a href="chinese">Chinese</a></li>
-		<li class="{% if language_name == 'filipino' %}orange{% endif %}"><a href="filipino">Filipino</a></li>
-		<li class="{% if language_name == 'japanese' %}orange{% endif %}"><a href="japanese">Japanese</a></li>
-		<li class="{% if language_name == 'khmer' %}orange{% endif %}"><a href="khmer">Khmer</a></li>
-		<li class="{% if language_name == 'korean' %}orange{% endif %}"><a href="korean">Korean</a></li>
-		<li class="{% if language_name == 'samoan' %}orange{% endif %}"><a href="samoan">Samoan</a></li>
+		<li class="{% if language_name == 'chinese' %}orange{% endif %}"><a href="{% url 'languages' 'chinese'%}">Chinese</a></li>
+		<li class="{% if language_name == 'filipino' %}orange{% endif %}"><a href="{% url 'languages' 'filipino'%}">Filipino</a></li>
+		<li class="{% if language_name == 'japanese' %}orange{% endif %}"><a href="{% url 'languages' 'japanese'%}">Japanese</a></li>
+		<li class="{% if language_name == 'khmer' %}orange{% endif %}"><a href="{% url 'languages' 'khmer'%}">Khmer</a></li>
+		<li class="{% if language_name == 'korean' %}orange{% endif %}"><a href="{% url 'languages' 'korean'%}">Korean</a></li>
+		<li class="{% if language_name == 'samoan' %}orange{% endif %}"><a href="{% url 'languages' 'samoan'%}">Samoan</a></li>
 		<li class="gray">
 			<div class="btn-group">
 			  <a class="btn dropdown-toggle static_a_display" data-toggle="dropdown" href="#">
@@ -19,7 +19,9 @@
 			  </a>
 			  <ul class="dropdown-menu">
 				{% for i in language_list %}
-    			<li><a href="{{ i|lower }}" class="static_a_display">{{ i }}</a></li>
+					{% with langslug=i|slugify %}
+	    				<li><a href="{% url 'languages' langslug %}" class="static_a_display">{{ i }}</a></li>
+	    			{% endwith %}
     			{% endfor %}
 			  </ul>			  
 			</div>
@@ -40,6 +42,10 @@
 				<li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
 				<!-- <li class="gray"><a href="#people">People</a></li> -->
 			</ul>
+		</div>
+	{% else %}
+		<div class="submenu" style="float:left; margin-left:0px;">
+			<h1>Featured Languages</h1>
 		</div>
 	{% endif %}
 </div>

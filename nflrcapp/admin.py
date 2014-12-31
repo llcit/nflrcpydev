@@ -9,12 +9,13 @@ class ExtraMedia:
         '/static/js/tinymce_setup.js',
     ]
 
-class ProjectAdminForm(forms.ModelForm):
-    class Meta:
-        model = Project
-        widgets = {
-            'director': forms.TextInput(attrs={'class': 'vTextField'})
-        }
+# class ProjectAdminForm(forms.ModelForm):
+#     class Meta:
+#         model = Project
+
+#         widgets = {
+#             'director': forms.TextInput(attrs={'class': 'vTextField'})
+#         }
 
 class TaggedItemInline(generic.GenericTabularInline):
     model = TaggedItem
@@ -38,7 +39,7 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
 class ProjectAdmin(admin.ModelAdmin):
-	form = ProjectAdminForm
+	# form = ProjectAdminForm
 	list_display = ('getuid', 'project_number', 'title', 'director', 'description', 'language', 'featured', 'featured_rank', 'headline', 'image')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'featured_rank', 'headline']

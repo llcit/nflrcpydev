@@ -97,7 +97,7 @@
 		<li><div>
 			Language(s): 
 			{% for i in language_list %}
-				<a href="/languages/{{ i|lower }}"> {{ i }}{% if not forloop.last %}, {% endif %} </a>
+				<a href="{% url 'languages' i|slugify %}"> {{ i }}{% if not forloop.last %}, {% endif %} </a>
 			{% endfor %}
 		</div></li>
 		{% endif %}

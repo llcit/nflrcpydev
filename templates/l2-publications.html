@@ -9,7 +9,7 @@
 		<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
         <a href="/publications" class="static_a_display">Publications</a> </i>
         
-        {% if subpage %}<i class="fa fa-angle-double-right"></i>	 <span class="badge badge_publications_fill">{{ items|length }}</span> 
+        {% if subpage %}<i class="fa fa-angle-double-right"></i> <span class="badge badge_publications_fill">{{ items|length }}</span> 
 				{{ subpage|title }}
 		{% endif %} 
       
@@ -22,13 +22,13 @@
 
 <div class="submenu"> 
     <ul class="nav nav-pills-flex">
-    <li class="{% if subpage == 'digital-archives' %}blue{% endif %}"><a href="digital-archives">Archives</a></li>
-    <li class="{% if subpage == 'journals' %}blue{% endif %}"><a href="journals">Journals</a></li>
-    <li class="{% if subpage == 'teaching-materials' %}blue{% endif %}"><a href="teaching-materials">Materials</a></li>
-    <li class="{% if subpage == 'media' %}blue{% endif %}"><a href="media">Media</a></li>
-    <li class="{% if subpage == 'monographs' %}blue{% endif %}"><a href="monographs">Monographs</a></li>
-    <li class="{% if subpage == 'pragmatics' %}blue{% endif %}"><a href="pragmatics">Pragmatics</a></li>
-    <li class="{% if subpage == 'listing' %}blue{% endif %}"><a href="listing">Full List</a></li>
+    <li class="{% if subpage == 'digital-archives' %}blue{% endif %}"><a href="{% url 'publications' 'digital-archives'%}">Archives</a></li>
+    <li class="{% if subpage == 'journals' %}blue{% endif %}"><a href="{% url 'publications' 'journals'%}">Journals</a></li>
+    <li class="{% if subpage == 'teaching-materials' %}blue{% endif %}"><a href="{% url 'publications' 'teaching-materials'%}">Materials</a></li>
+    <li class="{% if subpage == 'media' %}blue{% endif %}"><a href="{% url 'publications' 'media'%}">Media</a></li>
+    <li class="{% if subpage == 'monographs' %}blue{% endif %}"><a href="{% url 'publications' 'monographs'%}">Monographs</a></li>
+    <li class="{% if subpage == 'pragmatics' %}blue{% endif %}"><a href="{% url 'publications' 'pragmatics'%}">Pragmatics</a></li>
+    <li class="{% if subpage == 'listing' %}blue{% endif %}"><a href="{% url 'publications' 'listing'%}">Full List</a></li>
 </ul>
 
 

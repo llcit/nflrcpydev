@@ -43,6 +43,7 @@ STATICFILES_FINDERS = (
 
 MEDIA_URL = '/media/nflrc/'
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -99,7 +100,7 @@ INSTALLED_APPS = (
 
     'nflrcapp',
 
-    'south',
+    # 'south',
 )
 
 GRAPPELLI_ADMIN_TITLE = 'NFLRC Site Administration'

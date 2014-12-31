@@ -19,32 +19,31 @@ urlpatterns += patterns('nflrcapp.views',
     
     # LEVEL 2 PAGES (/level-2-pages)
 
-    
-    url(r'^about/$', 'about', name='about'),
-    url(r'^about/(.*)$', 'aboutview', name='aboutview'),
+    url(r'^about/$', 'about', name='about_index'),
+    url(r'^about/(?P<item>\d+)/$', 'aboutview', name='aboutview'),
 
-    url(r'^contact/$', 'contact', name='contact'),
-    url(r'^contact/view/(.*)$', 'contactview', name='contactview'),
+    url(r'^contact/$', 'contact', name='contact_index'),
+    url(r'^contact/view/(?P<person>\d+)/$', 'contactview', name='contactview'),
 
-    url(r'^events/view/(.*)$', 'prodevview', name='prodevview'),
-    url(r'^events/(.*)$', 'prodev', name='confs'),
+    url(r'^events/view/(?P<item>[-\w]+)/$', 'prodevview', name='eventview'),
+    url(r'^events/(?P<tag>[-\w]+)/$', 'prodev', name='events'),
+    url(r'^events/$', 'prodev', name='events_index'),
 
     url(r'^find/$', 'search', name='search'),
    
-    url(r'^languages/(.*)/$', 'languages', name='languages'),
-
+    url(r'^languages/(?P<tag>[-\w]+)/$', 'languages', name='languages'),
+    url(r'^languages/$', 'languages', name='languages_index'),
+    
     url(r'^newswire/$', NflrcNewsFeed(), name='news-wire'),
 
-    url(r'^projects/view/(.*)/$', 'projectview', name='projectview'),
-    url(r'^projects/(.*)$', 'projects', name='projects'),
+    url(r'^projects/view/(?P<item>[-\w]+)/$', 'projectview', name='projectview'),
+    url(r'^projects/(?P<tag>[-\w]+)/$', 'projects', name='projects'),
+    url(r'^projects/$', 'projects', name='projects_index'),
 
-    url(r'^publications/view/(.*)/$', 'pubview', name='pubview'),
-    url(r'^publications/(.*)$', 'publications', name='publications'),
-
-    # url(r'^stories/$', 'stories', name='stories'),
-    # url(r'^story/(.*)$', 'storyview', name='story'),
-    
-    
+    url(r'^publications/view/(?P<item>[-\w]+)/$', 'pubview', name='pubview'),
+    url(r'^publications/(?P<tag>[-\w]+)/$', 'publications', name='publications'),
+    url(r'^publications/$', 'publications', name='publications_index'),
+  
     # Prototype index -- temporary --
     url(r'^prototype/$', 'home_prototype', name='proto'),
 

@@ -66,10 +66,10 @@ ITEM_TYPE_SHORTCUTS = {
 class ItemsManager(models.Manager):
 
     def allfeatured(self, **kwargs):
-        featured_publications = Publication.objects.filter(featured=1)
-        featured_prodevs = Prodev.objects.filter(featured=1)
-        featured_projects = Project.objects.filter(featured=1)
-        featured_stories = StoryPage.objects.filter(featured=1)
+        featured_publications = Publication.objects.filter(featured=True)
+        featured_prodevs = Prodev.objects.filter(featured=True)
+        featured_projects = Project.objects.filter(featured=True)
+        featured_stories = StoryPage.objects.filter(featured=True)
         featured_items = sorted(
             chain(featured_publications, featured_prodevs, featured_projects, featured_stories), key=attrgetter('featured_rank'))
         
@@ -130,7 +130,7 @@ class Contact(models.Model):
     url = models.URLField(blank=True)
     image = models.CharField(max_length=100L, blank=True)
     current_project = models.CharField(max_length=255L, null=True, blank=True)
-    nflrc_staff = models.BooleanField(blank=True)
+    nflrc_staff = models.BooleanField(default=False, blank=True)
     listing_rank = models.IntegerField(null=True, blank=True)
     role = models.CharField(
         max_length=30, choices=ROLE_TYPES, null=True, blank=True)
@@ -256,7 +256,7 @@ class Prodev(models.Model):
         return 'PD%s' % self.id
 
     def get_absolute_url(self):
-        return reverse('prodevview', args=[str(self.id)])
+        return reverse('eventview', args=[str(self.id)])
 
     def __unicode__(self):
         return self.title

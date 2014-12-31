@@ -104,17 +104,15 @@ def contactview(request, person):
     }, context_instance=RequestContext(request))
 
 
-def languages(request, tag):
+def languages(request, tag='featured'):
+    tag = tag.replace('-', ' ')
     language_list = [
         'Austronesian', 'Czech', 'Danish', 'East Asian', 'English', 'French', 'German', 'Hawaiian', 'HCE', 'Hindi', 'Icelandic', 'Ilokano', 'Indonesian', 'Italian', 'Kiswahili',
          'Malay', 'Manchu', 'Maori', 'Middle East', 'Muang', 'Pacific Islands', 'Persian', 'Pingelapese', 'Russian', 'Russian', 'Southeast Asian ', 'Spanish', 'Swahili', 'Tagalog', 'Thai', 'Tongan', 'Vietnamese']
-    if tag:
-        publications = Publication.objects.filter(
-            language__icontains=tag).order_by('-year')
-        projects = Project.objects.filter(
-            language__icontains=tag).order_by('-id')
-        prodevs = Prodev.objects.filter(
-            language__icontains=tag).order_by('-id')
+    if tag != 'featured':
+        publications = Publication.objects.filter(language__icontains=tag).order_by('-year')
+        projects = Project.objects.filter(language__icontains=tag).order_by('-id')
+        prodevs = Prodev.objects.filter(language__icontains=tag).order_by('-id')
 
         return render_to_response('l2-languages.html', {
             'language_name': tag,
@@ -129,15 +127,17 @@ def languages(request, tag):
     featured = Publication.objects.allfeatured()
 
     # Faster if request is language specific.
-    return render_to_response('l2-languages.html',
-                              {'featured': featured, 'language_list': language_list}, context_instance=RequestContext(request))
+    return render_to_response('l2-languages.html', {
+            'featured': featured, 
+            'language_list': language_list,
+        }, context_instance=RequestContext(request))
 
 
-def prodev(request, tag):
+def prodev(request, tag=None):
     if tag:
         listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-id')
-        if not listing:
-            tag = ''
+        # if not listing:
+        #     tag = ''
     else:
         listing = None
 
@@ -176,11 +176,14 @@ def prodevview(request, item):
     }, context_instance=RequestContext(request))
 
 
-def projects(request, tag):
+def projects(request, tag=None):
     prebuilt_filter = None
+    print 'TAG', tag
     if tag:
-        if tag == 'current':
-            prebuilt_filter = '2010-2014'
+        if tag == 'current' or tag == '2014-2018':
+            prebuilt_filter = '2014-2018'
+        elif tag == '2010-2014':
+            prebuilt_filter = tag
         elif tag == '2006-2010':
             prebuilt_filter = tag
         elif tag == '2002-2006':
@@ -204,7 +207,6 @@ def projects(request, tag):
                 listing.append(i.content_object)
     else:
         # No tag -- show all projects
-        tag = None
         listing = Project.objects.all().order_by('-grant_cycle')
 
     return render_to_response('l2-projects.html', {
@@ -234,7 +236,7 @@ def projectview(request, item):
     }, context_instance=RequestContext(request))
 
 
-def publications(request, tag):
+def publications(request, tag='featured'):
     featured = Publication.objects.filter(featured=1)
 
     
@@ -264,7 +266,6 @@ def publications(request, tag):
     elif tag == 'listing':
         listing = Publication.objects.all()
     else:
-        tag = 'featured'
         listing = featured
 
     # listing = listing.order_by('category', '-year')
