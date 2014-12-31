@@ -140,8 +140,8 @@ def prodev(request, tag=None):
         if not listing: # Retrieve items by tag
             listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
         
-        if tag == 'upcoming':
-            tag = ''
+        # if tag == 'upcoming':
+        #     tag = ''
     else:
         listing = None
         featured = Prodev.objects.filter(featured=True).order_by('featured_rank')
