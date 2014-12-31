@@ -136,8 +136,8 @@ def languages(request, tag='featured'):
 def prodev(request, tag=None):
     if tag:
         listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-id')
-        # if not listing:
-        #     tag = ''
+        if not listing: # Retrieve items by tag
+            listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
     else:
         listing = None
 
