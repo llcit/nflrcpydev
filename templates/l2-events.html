@@ -56,17 +56,8 @@
 		</div>
 	
 	{% else %}
-	
+		<div id="dyno_1" class="container dyno">
 		{% for p in events %}
-			{% ifchanged p.pdtype %}
-				{% if not forloop.first %}</div>{% endif %}
-				{% if not pdtype_tag %}
-					<h3><span id="{{ p.pdtype }}" class="adjusted-anchor"></span></h3>
-					<p><h3>{% if p.pdtype == 'Symposium' %}Symposia{% else %}{{ p.pdtype }}s{% endif %}</h3></p>
-				{% endif %}
-				<div id="dyno_{{ forloop.counter0 }}" class="container dyno">				
-			{% endifchanged %}
-			
 			<a href="{{ p.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
@@ -75,12 +66,14 @@
                     <p><a href="/events" class="badge_container badge_prodev static_a_display">More Events</a></p>
 				</div>
 			</a>
-			{% if forloop.last %}</div>{% endif %}
+			
+			
 		
 		{% empty %}
 			<h3>There were no {{ pdtype_tag }} events found.</he>	
 		
 		{% endfor %}
+		</div>
 	
 	{% endif %}
 {% endblock stories %}
