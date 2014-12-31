@@ -180,8 +180,8 @@ def projects(request, tag=None):
     prebuilt_filter = None
     print 'TAG', tag
     if tag:
-        if tag == 'current' or tag == '2014-2018':
-            prebuilt_filter = '2014-2018'
+        if tag == 'current' : #or tag == '2014-2018'
+            prebuilt_filter = '2010-2014'
         elif tag == '2010-2014':
             prebuilt_filter = tag
         elif tag == '2006-2010':
