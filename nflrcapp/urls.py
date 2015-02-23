@@ -52,14 +52,17 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^search/', include('haystack.urls')),
+
     # Filter site objects by tag. Must be last so that previous url patterns are caught first!
     url(r'^([-\w]+)/$', 'site_filter', name='site_filter'),
+
 
     # LEVEL 1 (root)
     url(r'^$', 'home'),
     
     
-    # url(r'^search/', include('haystack.urls')),
+    
 
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

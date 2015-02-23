@@ -1,4 +1,8 @@
+{{ object.author }}: 
 {{ object.title }}
+{{ object.item_number }}
 {{ object.description }}
-{{ object.author }}
-{{ object.skeywords }}
+{{ object.language }}
+{{ object.year }}
+
+

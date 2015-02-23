@@ -12,17 +12,17 @@ from django.utils.text import slugify
 from operator import attrgetter
 
 
-HUMAN_PREFIXES = {
+HUMAN_PREFIXES = (
     ('DR', 'PhD.'),
     ('MR', 'Mr.'),
     ('MS', 'Ms.'),
-}
+)
 
-ROLE_TYPES = {
+ROLE_TYPES = (
     ('STAFF', 'NFLRC Staff'),
     ('ADVBOARD', 'Advisory Board'),
     ('COLLAB', 'Collaborator'),
-}
+)
 
 PRODEV_TYPES = (
     ('conference', 'Conference'),

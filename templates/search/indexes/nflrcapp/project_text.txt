@@ -1,0 +1,5 @@
+{{ object.title }}
+{{ object.project_number }}
+{{ object.director }}
+{{ object.language }}
+{{ object.description }}

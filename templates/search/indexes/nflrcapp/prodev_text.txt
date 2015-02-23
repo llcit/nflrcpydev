@@ -1,0 +1,6 @@
+{{ object.title }}
+{{ object.description }}
+{{ object.pdtype }}
+{{ object.director }}
+{{ object.language }}
+{{ object.facilitator }}
