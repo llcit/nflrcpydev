@@ -97,7 +97,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
 	'haystack',
-
+    
     'nflrcapp',
 
     # 'south',
