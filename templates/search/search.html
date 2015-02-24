@@ -1,9 +1,24 @@
-<!-- search.html -->
-{% extends 'wrap.html' %}
+{% extends "wrap-content.html" %}
+{% load staticfiles %}
 
-{% block content %}
-    <h2>Search</h2>
+{% block pageheading %}
 
+ 
+<h2>{{ paginator.count }} result{{ paginator.count|pluralize }} found. Searched for <em>{{ query }}</em> </h2></div>
+<div class="submenu" style="float:left; margin-left:0px;">
+
+<ul class="nav nav-pills-flex">
+    <li class="red"><a href="#">Project{{ projects|length|pluralize }} <span class="badge">{{projects|length}} </span></a></li> 
+  
+    <li class="blue"><a href="#publications">Publications <span class="badge">{{publications|length}} </span></a></li> 
+  
+    <li class="green"><a href="#prodev">Event{{ prodevs|length|pluralize }} <span class="badge">{{prodevs|length}} </span></a></li>
+  
+    <li class="gray"><a href="#people">People <span class="badge">{{ people|length }} </span></a></li> 
+
+    <li class="navy"><a href="#about">About <span class="badge">{{ stories|length }} </span></a></li> 
+  
+</ul>
     <form method="get" action=".">
         <table>
             {{ form.as_table }}
@@ -14,27 +29,119 @@
                 </td>
             </tr>
         </table>
-
-        {% if query %}
-            <h3>{{ paginator.count }} results on {{ paginator.num_pages }} page{{ paginator.num_pages|pluralize }} </h3>
-
-            {% for result in page.object_list %}
-                <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object | safe }} </a>
-                </p>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
-
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                </div>
-            {% endif %}
-        {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
-        {% endif %}
     </form>
+
+</div>
+
+{% endblock pageheading %}
+
+{% block stories %}
+<div id="item-listing" class="col-md-12" style="text-align: left">
+
+{%if projects %}
+    <span id="projects" class="adjusted-anchor"></span>
+    
+    <h1>Project{{ projects|length|pluralize }}</h1>
+    <div id="subsection1" class="align-left">
+        {% for p in projects %}
+            <a href="{{ p.object.get_absolute_url }}">
+            <div class="listing shadowboxed">
+                <p> {{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+                <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
+                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
+{%if publications %}
+    <span id="publications" class="adjusted-anchor"></span>
+    <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+    <p><h1>Publication{{ publications|length|pluralize }}</h1></p>
+    <div id="subsection0" class="align-left">
+    {% for p in publications %}
+        <a href="{{ p.object.get_absolute_url }}">
+        <div class="listing shadowboxed">
+            <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+            <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
+            <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+        </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endif %} 
+{%if prodevs %}
+    <span id="prodev" class="adjusted-anchor"></span>
+    <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+
+    <p><h1>Events</h1></p>
+    <div id="subsection2" class="align-left">
+        {% for p in prodevs %}
+            <a href="{{ p.get_absolute_url }}">
+            <div class="listing shadowboxed">
+                <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+                <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
+                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
+{%if people %}
+    <span id="people" class="adjusted-anchor"></span>
+    <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+
+    <h1>People</h1>
+    <div id="subsection3">
+    {% for p in people %}
+        <a href="{{ p.object.get_absolute_url }}">
+            <div class="listing shadowboxed"> 
+                <p> {{ p.score }}<img src="{{MEDIA_URL}}img/{% if p.object.image %}{{ p.object.image }}{% else %}icon.png{% endif %}"> </p>
+                <h4>{{ p.object.first_name }} {{ p.object.last_name }}</h4>
+                <h5></h5>   
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endif %}
+
+{%if stories %}
+    <span id="about" class="adjusted-anchor"></span>
+    <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
+
+    <h1>About</h1>
+    <div id="subsection3">
+    {% for p in stories %}
+        <a href="{{ p.object.get_absolute_url }}">
+            <div class="listing shadowboxed"> 
+                <p> <img src="{{MEDIA_URL}}img/{% if p.object.image %}{{ p.object.image }}{% else %}icon.png{% endif %}"> </p>
+                <h4>{{ p.object.title }} </h4>
+                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endif %}
+    
+</div>
 {% endblock %}
+
+{% block customjavascript %}
+
+jQuery(window).on('load', function(){
+    var $ = jQuery;
+    var containers = ['#subsection0', '#subsection1', '#subsection2', '#subsection3'];  
+    for (i in containers) {
+        containers[i] = document.querySelector(containers[i]);
+        if(containers[i]) {         
+            msnry = new Masonry( containers[i], {
+              // options
+              columnWidth: 230,
+              itemSelector: '.listing',
+              gutter: 40,
+              isFitWidth: 'true'
+            });
+        }
+    }
+})
+{% endblock customjavascript %}

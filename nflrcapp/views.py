@@ -1,15 +1,15 @@
 # views.py
 from __future__ import unicode_literals
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
-from collections import OrderedDict
 from itertools import chain
 from operator import attrgetter
-
+from datetime import date
 from django.db.models import Q
-from django.utils.html import strip_tags
+
+from haystack.generic_views import SearchView
 
 from nflrcapp.models import *
 
@@ -353,3 +353,23 @@ def storyview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
+
+
+class SearchHaystackView(SearchView):   
+    def get_queryset(self):
+        queryset = super(SearchHaystackView, self).get_queryset()      
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
+        results = context['object_list']       
+        
+        context['people'] =  [r for r in results if r.model_name=='contact']
+        context['stories'] = [r for r in results if r.model_name=='storypage']
+        context['publications'] = [r for r in results if r.model_name=='publication']
+        context['projects'] = [r for r in results if r.model_name=='project']
+        context['prodevs'] = [r for r in results if r.model_name=='prodev']
+
+        return context
+
+

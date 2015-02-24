@@ -6,6 +6,7 @@ admin.autodiscover()
 
 from filebrowser.sites import site
 
+from .views import SearchHaystackView
 from .models import NflrcNewsFeed
 
 urlpatterns = patterns('django.contrib.flatpages.views',
@@ -52,7 +53,7 @@ urlpatterns += patterns('nflrcapp.views',
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-	url(r'^search/', include('haystack.urls')),
+	url(r'^search/', SearchHaystackView.as_view(), name='search_haystack'),
 
     # Filter site objects by tag. Must be last so that previous url patterns are caught first!
     url(r'^([-\w]+)/$', 'site_filter', name='site_filter'),

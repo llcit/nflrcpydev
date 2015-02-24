@@ -115,6 +115,8 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1000
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
