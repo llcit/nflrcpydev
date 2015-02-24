@@ -48,7 +48,7 @@
             <div class="listing shadowboxed">
                 <p> {{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
                 <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
-                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+                <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
             </div>
             </a>
         {% endfor %}
@@ -64,7 +64,7 @@
         <div class="listing shadowboxed">
             <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
             <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
-            <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+            <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
         </div>
         </a>
     {% endfor %}
@@ -81,7 +81,7 @@
             <div class="listing shadowboxed">
                 <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
                 <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
-                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+                <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
             </div>
             </a>
         {% endfor %}
@@ -116,7 +116,7 @@
             <div class="listing shadowboxed"> 
                 <p> <img src="{{MEDIA_URL}}img/{% if p.object.image %}{{ p.object.image }}{% else %}icon.png{% endif %}"> </p>
                 <h4>{{ p.object.title }} </h4>
-                <h5>{{ p.object.thumbnail_desc | safe }}</h5>  
+                <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
             </div>
         </a>
     {% endfor %}
