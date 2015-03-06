@@ -178,7 +178,7 @@ def prodevview(request, item):
 
 def projects(request, tag=None):
     prebuilt_filter = None
-    print 'TAG', tag
+    
     if tag:
         if tag == 'current' : #or tag == '2014-2018'
             prebuilt_filter = '2010-2014'

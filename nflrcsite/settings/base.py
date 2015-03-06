@@ -111,11 +111,13 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
+        'INDEX_NAME': 'nflrc_stack',
     },
 }
 
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1000
+
+# local dev -> /usr/local/bin/elasticsearch
 
 
 # A sample logging configuration. The only tangible logging
