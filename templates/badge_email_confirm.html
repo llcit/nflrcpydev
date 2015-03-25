@@ -3,5 +3,5 @@
 {% load staticfiles %}
 
 {% block content %}
-	Email was sent to {{ award.firstname }} {{ award.lastname }} at {{ award.email }}. <a href="">Back to awards.</a>
+	Email was sent to {{ award.firstname }} {{ award.lastname }} at {{ award.email }}. <a href="{% url 'create_award_by_badge' award.badge.id %}">Back to awards.</a>
 {% endblock content %}
