@@ -71,14 +71,13 @@ LOGOUT_URL = '/logout'
 
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_HOST = 'smtp.host.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'email user address'
-# used to authenticate to the SMTP server
-EMAIL_HOST_PASSWORD = 'secret scent'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 
-EMAIL_USE_TLS = True
-# EMAIL_USE_SSL
+SITE_HOST = os.environ['SITE_HOST']
 
 
 

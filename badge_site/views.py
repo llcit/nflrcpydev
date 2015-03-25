@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 
-
 # from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
@@ -67,7 +66,7 @@ class SendAwardNotificationView(StaffuserRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(
             SendAwardNotificationView, self).get_context_data(**kwargs)
-
+        
         award = self.get_object()
         claim_url = award.getClaimUrl()
         subject = award.badge.notify_email_subject

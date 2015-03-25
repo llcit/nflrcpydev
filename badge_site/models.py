@@ -179,7 +179,7 @@ class Award(models.Model):
         return os.path.join(self.badge.issuer.doc_path, settings.AWARDS_REPO, self.getJsonFilename())
 
     def getClaimUrl(self):
-        return reverse_lazy('claim_badge_with_code', args=[self.claimCode])
+        return settings.SITE_HOST + str(reverse_lazy('claim_badge_with_code', args=[self.claimCode]))
 
     def writeAssertionFile(self):
         data = json.dumps(self.serialize())
