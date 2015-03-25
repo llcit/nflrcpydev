@@ -9,58 +9,84 @@ from filebrowser.sites import site
 from .views import SearchHaystackView
 from .models import NflrcNewsFeed
 
-urlpatterns = patterns('django.contrib.flatpages.views',
-    # FLATPAGES Experiment
-    url(r'^publications/khmer/$', 'flatpage', {'url': '/publications/khmer/'}, name='Khmer'),
-    url(r'^publications/filipino/$', 'flatpage', {'url': '/publications/filipino/'}, name='Filipino'),
-    url(r'^publications/aozora/$', 'flatpage', {'url': '/publications/aozora/'}, name='Aozora'),
+from badge_site.views import (
+    IndexView, BadgeClaimView, BadgeClaimCodeView,
+    IssuerCreateView, IssuerUpdateView, IssuerListView,
+    BadgeCreateView, BadgeUpdateView, BadgeListView,
+    AwardCreateView, AwardUpdateView, AwardListView
 )
 
-urlpatterns += patterns('nflrcapp.views',
+
+urlpatterns = patterns('',
+
+    # BADGE SERVER 
+    url(r'^badge-server/$', IndexView.as_view(), name='badge_home'),
+
     
+    url(r'^badge-server/issuer/add/$', IssuerCreateView.as_view(), name='create_issuer'),
+    url(r'^badge-server/issuer/edit/(?P<pk>\d+)/$', IssuerUpdateView.as_view(), name='edit_issuer'),
+    url(r'^badge-server/issuers/$', IssuerListView.as_view(), name='list_issuers'),
+    
+    url(r'^badge-server/badge/add/(?P<issuer>\d+)/$', BadgeCreateView.as_view(), name='create_badge_by_issuer'),
+    url(r'^badge-server/badge/edit/(?P<pk>\d+)/$', BadgeUpdateView.as_view(), name='edit_badge'),
+    url(r'^badge-server/badges/$', BadgeListView.as_view(), name='list_badges'),
+    
+    url(r'^badge-server/award/add/(?P<badge>\d+)/$', AwardCreateView.as_view(), name='create_award_by_badge'),
+    url(r'^badge-server/award/edit/(?P<pk>\d+)/$', AwardUpdateView.as_view(), name='edit_award'),
+    # url(r'^award/delete/(?P<pk>\d+)/$', DeleteAwardView.as_view(), name='delete_award'),
+    # url(r'^award/revoke/(?P<award_to_revoke>\d+)/$', RevokeAwardView.as_view(), name='revoke_award'),
+    url(r'^badge-server/awards/$', AwardListView.as_view(), name='list_awards'),
+    url(r'^badge-server/awards/(?P<pk>\d+)/$', AwardListView.as_view(), name='list_awards_by_badge'),
+    
+    url(r'^badge-server/claim/$', BadgeClaimView.as_view(), name='claim_badge'),
+    url(r'^badge-server/claim/(?P<claim_code>\w+)/$', BadgeClaimCodeView.as_view(), name='claim_badge_with_code'),
+
+
     # LEVEL 2 PAGES (/level-2-pages)
 
-    url(r'^about/$', 'about', name='about_index'),
-    url(r'^about/(?P<item>\d+)/$', 'aboutview', name='aboutview'),
+    url(r'^about/$', 'nflrcapp.views.about', name='about_index'),
+    url(r'^about/(?P<item>\d+)/$', 'nflrcapp.views.aboutview', name='aboutview'),
 
-    url(r'^contact/$', 'contact', name='contact_index'),
-    url(r'^contact/view/(?P<person>\d+)/$', 'contactview', name='contactview'),
+    url(r'^contact/$', 'nflrcapp.views.contact', name='contact_index'),
+    url(r'^contact/view/(?P<person>\d+)/$', 'nflrcapp.views.contactview', name='contactview'),
 
-    url(r'^events/view/(?P<item>[-\w]+)/$', 'prodevview', name='eventview'),
-    url(r'^events/(?P<tag>[-\w]+)/$', 'prodev', name='events'),
-    url(r'^events/$', 'prodev', name='events_index'),
+    url(r'^events/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.prodevview', name='eventview'),
+    url(r'^events/(?P<tag>[-\w]+)/$', 'nflrcapp.views.prodev', name='events'),
+    url(r'^events/$', 'nflrcapp.views.prodev', name='events_index'),
 
     url(r'^find/$', 'search', name='search'),
    
-    url(r'^languages/(?P<tag>[-\w]+)/$', 'languages', name='languages'),
-    url(r'^languages/$', 'languages', name='languages_index'),
+    url(r'^languages/(?P<tag>[-\w]+)/$', 'nflrcapp.views.languages', name='languages'),
+    url(r'^languages/$', 'nflrcapp.views.languages', name='languages_index'),
     
     url(r'^newswire/$', NflrcNewsFeed(), name='news-wire'),
 
-    url(r'^projects/view/(?P<item>[-\w]+)/$', 'projectview', name='projectview'),
-    url(r'^projects/(?P<tag>[-\w]+)/$', 'projects', name='projects'),
-    url(r'^projects/$', 'projects', name='projects_index'),
+    url(r'^projects/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.projectview', name='projectview'),
+    url(r'^projects/(?P<tag>[-\w]+)/$', 'nflrcapp.views.projects', name='projects'),
+    url(r'^projects/$', 'nflrcapp.views.projects', name='projects_index'),
 
-    url(r'^publications/view/(?P<item>[-\w]+)/$', 'pubview', name='pubview'),
-    url(r'^publications/(?P<tag>[-\w]+)/$', 'publications', name='publications'),
-    url(r'^publications/$', 'publications', name='publications_index'),
+    url(r'^publications/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.pubview', name='pubview'),
+    url(r'^publications/(?P<tag>[-\w]+)/$', 'nflrcapp.views.publications', name='publications'),
+    url(r'^publications/$', 'nflrcapp.views.publications', name='publications_index'),
   
     # Prototype index -- temporary --
-    url(r'^prototype/$', 'home_prototype', name='proto'),
+    url(r'^prototype/$', 'nflrcapp.views.home_prototype', name='proto'),
 
 
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
 
 	url(r'^search/', SearchHaystackView.as_view(), name='search_haystack'),
 
     # Filter site objects by tag. Must be last so that previous url patterns are caught first!
-    url(r'^([-\w]+)/$', 'site_filter', name='site_filter'),
+    url(r'^([-\w]+)/$', 'nflrcapp.views.site_filter', name='site_filter'),
 
 
     # LEVEL 1 (root)
-    url(r'^$', 'home'),
+    url(r'^$', 'nflrcapp.views.home'),
     
     
     

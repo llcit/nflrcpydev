@@ -82,6 +82,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -93,11 +94,12 @@ INSTALLED_APPS = (
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
-    'django.contrib.admin',
-    # 'django.contrib.admindocs',
-
-	'haystack',
     
+	'haystack',
+    'braces',
+    'crispy_forms',
+
+    'badge_site',
     'nflrcapp',
 
     # 'south',
@@ -148,5 +150,12 @@ LOGGING = {
         },
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+ISSUER_REPO = 'badge-docs/issuer'
+BADGES_REPO = 'badge-docs/badges'
+AWARDS_REPO = 'badge-docs/earned'
+REVOKE_REPO = 'badge-docs/revoke'
 
 
