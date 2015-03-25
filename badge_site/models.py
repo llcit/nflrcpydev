@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files import File
 from django.conf import settings
+from django.core.urlresolvers import reverse_lazy
 
 from .utils import hashEmailAddress, genGuid
 
@@ -85,6 +86,9 @@ class Badge(models.Model):
     issuer = models.ForeignKey(Issuer, related_name='badges')
     created = models.DateField(auto_now=True, blank=False)
     jsonfile = models.URLField(max_length=1024, blank=True)
+    notify_email_message = models.TextField(blank=True, default='')
+    notify_email_subject = models.CharField(max_length=256, blank=True, default='')
+
 
     def getJsonFilename(self):
         return 'badge-assert-' + self.guid + '.json'
@@ -160,6 +164,7 @@ class Award(models.Model):
     jsonfile = models.URLField(max_length=1024, blank=True,
                                help_text="This is auto generated but is fully qualified url for the award assertion.")
     expires  = models.DateField(null=True, blank=True)
+    notification_status = models.DateField(null=True, default=None)
 
     class Meta:
         unique_together = ('email', 'badge')
@@ -172,6 +177,9 @@ class Award(models.Model):
 
     def getAssertionPath(self):
         return os.path.join(self.badge.issuer.doc_path, settings.AWARDS_REPO, self.getJsonFilename())
+
+    def getClaimUrl(self):
+        return reverse_lazy('claim_badge_with_code', args=[self.claimCode])
 
     def writeAssertionFile(self):
         data = json.dumps(self.serialize())

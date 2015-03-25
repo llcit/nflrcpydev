@@ -1,0 +1,7 @@
+<!-- badge_email_confirm.html -->
+{% extends 'wrap.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	Email was sent to {{ award.firstname }} {{ award.lastname }} at {{ award.email }}. <a href="">Back to awards.</a>
+{% endblock content %}

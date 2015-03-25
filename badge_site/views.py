@@ -1,10 +1,14 @@
+# badge_site/views.py
+import datetime
 
-
-from django import forms
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, FormView
+from django.views.generic import TemplateView, DetailView, ListView, CreateView, UpdateView, FormView
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+
+
+# from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 
 from braces.views import StaffuserRequiredMixin
 
@@ -35,25 +39,62 @@ class BadgeClaimView(FormView):
         If the form is valid, redirect to the supplied URL.
         """
         self.claim_code = form.cleaned_data['claim_code'].strip()
-        
+
         return HttpResponseRedirect(self.get_success_url())
 
-        def get_context_data(self, **kwargs):
-            context = super(BadgeClaimView, self).get_context_data(**kwargs)
-            return context
+    def get_context_data(self, **kwargs):
+        context = super(BadgeClaimView, self).get_context_data(**kwargs)
+        return context
+
 
 class BadgeClaimCodeView(TemplateView):
     template_name = 'badge_claim_view.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super(BadgeClaimCodeView, self).get_context_data(**kwargs)
         code = self.kwargs['claim_code']
-        try: 
-            context['award'] = Award.objects.get(claimCode = code)
+        try:
+            context['award'] = Award.objects.get(claimCode=code)
         except:
             context['bad_code'] = 'Code was not found. Try again'
         return context
 
+
+class SendAwardNotificationView(StaffuserRequiredMixin, DetailView):
+    model = Award
+    template_name = 'badge_email_confirm.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            SendAwardNotificationView, self).get_context_data(**kwargs)
+
+        award = self.get_object()
+        claim_url = award.getClaimUrl()
+        subject = award.badge.notify_email_subject
+        text_message = 'Hi %s, You have been awarded the -- %s -- badge by the NFLRC. Please visit \r\r %s \r\r to claim your badge!' % (
+            award.firstname, award.badge.name, claim_url)
+
+        html_message = '<p>Hi %s,</p> <p>You have been awarded the <strong>%s</strong> badge by the NFLRC. Please visit the following link to claim your badge!</p><p><a href="%s">%s</a></p>' % (award.firstname, award.badge.name, claim_url, claim_url)
+
+        text_message += '\r\rSincerely, \rThe %s' % award.badge.issuer.name
+        html_message += '<p>Sincerely,</p> <p>The %s</p>' % award.badge.issuer.name
+
+        text_message
+        sender = '(NFLRC Technology Office) llcit@hawaii.edu'
+        recipient = award.email
+
+        try:
+            msg = EmailMultiAlternatives(
+                subject, text_message, sender, [recipient])
+            msg.attach_alternative(html_message, "text/html")
+            msg.send()
+            award.notification_status = datetime.datetime.now()
+            award.save()
+        except:
+            pass
+
+        context['award'] = award
+        return context
 
 
 class IssuerListView(StaffuserRequiredMixin, ClassNameMixin, ListView):
@@ -114,10 +155,12 @@ class BadgeUpdateView(StaffuserRequiredMixin, ClassNameMixin, UpdateView):
     model = Badge
     template_name = 'badge_update_view.html'
     class_name = 'Badge'
-    fields = ['name', 'image', 'description', 'criteria', 'issuer']
-    
+    fields = ['name', 'image', 'description', 'criteria',
+              'issuer', 'notify_email_subject', 'notify_email_message']
+
     def get_success_url(self):
         return reverse_lazy('create_badge_by_issuer', args=[self.get_object().issuer.id])
+
 
 class AwardListView(StaffuserRequiredMixin, ClassNameMixin, ListView):
     model = Award
@@ -173,9 +216,10 @@ class AwardUpdateView(StaffuserRequiredMixin, ClassNameMixin, UpdateView):
     class_name = 'Award'
     fields = ['email', 'firstname', 'lastname',
               'badge', 'creator', 'evidence', 'expires']
-    
+
     def get_success_url(self):
         return reverse_lazy('create_award_by_badge', args=[self.get_object().badge.id])
+
 
 class RevokeAwardView(StaffuserRequiredMixin, ClassNameMixin, CreateView):
     model = Revocation
@@ -184,12 +228,12 @@ class RevokeAwardView(StaffuserRequiredMixin, ClassNameMixin, CreateView):
     form_class = RevokeAwardForm
     class_name = 'Revocation'
 
-
     def get_success_url(self):
         return reverse_lazy('revoke_award', args=[self.award_to_revoke.id])
 
     def get_initial(self):
-        self.award_to_revoke = get_object_or_404(Award, pk=self.kwargs['award_to_revoke'])
+        self.award_to_revoke = get_object_or_404(
+            Award, pk=self.kwargs['award_to_revoke'])
         initial = self.initial.copy()
         initial['issuer'] = self.award_to_revoke.badge.issuer
         initial['award'] = self.award_to_revoke
@@ -198,15 +242,9 @@ class RevokeAwardView(StaffuserRequiredMixin, ClassNameMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(RevokeAwardView, self).get_context_data(**kwargs)
-        context['form'].fields['award'].label = '%s -- %s' % (self.award_to_revoke.badge, self.award_to_revoke)
-        context['current_objects'] = Revocation.objects.all().order_by('issuer')
+        context['form'].fields[
+            'award'].label = '%s -- %s' % (self.award_to_revoke.badge, self.award_to_revoke)
+        context['current_objects'] = Revocation.objects.all().order_by(
+            'issuer')
         context['parent_object'] = 'Revocation'
-        return context 
-
-
-
-
-
-
-
-
+        return context

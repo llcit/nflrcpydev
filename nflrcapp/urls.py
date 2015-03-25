@@ -10,7 +10,7 @@ from .views import SearchHaystackView
 from .models import NflrcNewsFeed
 
 from badge_site.views import (
-    IndexView, BadgeClaimView, BadgeClaimCodeView,
+    IndexView, BadgeClaimView, BadgeClaimCodeView, SendAwardNotificationView,
     IssuerCreateView, IssuerUpdateView, IssuerListView,
     BadgeCreateView, BadgeUpdateView, BadgeListView,
     AwardCreateView, AwardUpdateView, AwardListView
@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     
     url(r'^badgefarm/claim/$', BadgeClaimView.as_view(), name='claim_badge'),
     url(r'^badgefarm/claim/(?P<claim_code>\w+)/$', BadgeClaimCodeView.as_view(), name='claim_badge_with_code'),
+    url(r'^badgefarm/notify/(?P<pk>\d+)/$', SendAwardNotificationView.as_view(), name='send_award_email'),
 
 
     # LEVEL 2 PAGES (/level-2-pages)

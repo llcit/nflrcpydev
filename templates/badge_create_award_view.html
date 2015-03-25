@@ -18,6 +18,11 @@
 				
 				<span>{{ i.issuedOn|date:"d M Y" }}</span>
 				<span><a class="btn btn-xs btn-default" href="{% url 'edit_award' i.id %}">Edit</a></span>
+				<span>
+					{% if not i.notification_status %}
+						<a class="btn btn-xs btn-success" href="{% url 'send_award_email' i.id %}">Send Email</a>
+					{% endif %}
+				</span>
 				
 				<span>
 					<a class="btn btn-xs btn-default" data-toggle="collapse" href="#detail_{{ i.id }}" aria-expanded="false" aria-controls="detail_{{ i.id }}">Detail</a>
@@ -31,6 +36,10 @@
 					<li class="list-group-item"><strong>assertion: </strong><a href="{{ i.jsonfile }}"
 					 target="_blank">{{ i.jsonfile }}</a></li>
 					<li class="list-group-item"><strong>claim code: </strong> {{ i.claimCode }}</li>
+					<li class="list-group-item"><strong>
+						notication sent: </strong> {{ i.notification_status }} 
+						<a class="btn btn-xs btn-success" href="{% url 'send_award_email' i.id %}">Send Email</a>
+					</li>
 					<li class="list-group-item text-right">
 						{% comment %}<span class=""><a class="btn btn-xs btn-warning" href="{% url 'revoke_award' i.id %}">Revoke</a></span>{% endcomment %}
 					</li>

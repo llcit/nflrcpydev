@@ -71,3 +71,14 @@ LOGOUT_URL = '/logout'
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_HOST = 'smtp.host.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'email user address'
+# used to authenticate to the SMTP server
+EMAIL_HOST_PASSWORD = 'secret scent'
+
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL
+
+
+
