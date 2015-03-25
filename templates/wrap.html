@@ -105,6 +105,10 @@
             <p><a href="/about/2">Kuleana (mission)</a></p>
             <p><a href="/contact">People</a></p>
             <p><a href="mailto:nflrc@hawaii.edu">Web Admin</a></p>
+            {% if user.is_authenticated %}
+                <p><a href="{% url 'badge_home' %}">Badge Farm</a></p>
+                <p><a href="/admin">Site Admin</a></p>
+            {% endif %}
         </div>
         <div class="col-md-2">
             <h4 class="badge_container badge_projects"><a href="/projects">Projects</a></h4>
@@ -159,8 +163,18 @@
     <div class="row">
         <div class="socialnav col-md-12">
             <div style="font-size: 150%; padding-top:5px; text-align:center;"> 
-             	   <small style="font-size: 0.2em; float: right"> &copy; 1994 - 2015</small>         
-                   <small><a href="/contact" class="static_a_display separator" target="_self">Contact</a> </small>
+                    <small>
+
+                        {% if not user.is_authenticated %}
+                          <a href="{% url 'login' %}"> <i class="fa fa-sign-in"></i> </a>
+                        {% else %}            
+                          <a href="{% url 'logout' %}">{{ user }}</a>
+                        {% endif %}
+
+                    </small>
+
+             	    <small style="font-size: 0.2em; float: right"> &copy; 1994 - 2015</small>         
+                    <small><a href="/contact" class="static_a_display separator" target="_self">Contact</a> </small>
                     <a href="https://www.facebook.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-facebook fa-6"></i></a>
                 
                     <a href="https://www.linkedin.com/company/national-foreign-language-resource-center-nflrc-" class="static_a_display separator" target="_blank"><i class="fa fa-linkedin fa-6"></i></a>
@@ -169,6 +183,7 @@
                     <a href="/newswire" class="static_a_display separator"><i class="fa fa-rss fa-6"></i></a>   
                     <a href="https://sites.google.com/a/hawaii.edu/nflrc-administration/" class="static_a_display separator" target="_blank"><i class="fa fa-lock fa-6"></i></a>   
                     <small><a href="/about/5" class="static_a_display separator" target="_blank">Privacy</a></small>
+
                    
                           
             </div>

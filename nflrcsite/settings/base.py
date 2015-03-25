@@ -82,8 +82,12 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    'grappelli.dashboard',
+    'grappelli',
+    'filebrowser',
+
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -91,9 +95,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'django.contrib.webdesign',
-    'grappelli.dashboard',
-    'grappelli',
-    'filebrowser',
+
+    
     
 	'haystack',
     'braces',
