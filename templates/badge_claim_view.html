@@ -22,8 +22,10 @@
 		</div>
 	</div>
 
+	{% elif bad_code %}
+	<div> {{ bad _code }} </div>
 	{% else %}
-	
+		
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<p class="lead text-center">Congratulations {{ award.firstname }} {{ award.lastname }}!</p>

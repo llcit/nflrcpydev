@@ -48,7 +48,10 @@ class BadgeClaimCodeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(BadgeClaimCodeView, self).get_context_data(**kwargs)
         code = self.kwargs['claim_code']
-        context['award'] = Award.objects.get(claimCode = code)
+        try: 
+            context['award'] = Award.objects.get(claimCode = code)
+        except:
+            context['bad_code'] = 'Code was not found. Try again'
         return context
 
 
