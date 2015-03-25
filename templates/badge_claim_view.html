@@ -76,13 +76,11 @@
 
 {% endblock content %}
 
-{% block js_script %} 
-<script type="text/javascript">
-	$(document).ready(function(){
-	    $("#downloader").click(function(){
-	        $("#downloader").css("display", "none");
-	        $("#download_done").css("display", "inline-block");
-	    });
-	});
-</script>
-{% endblock js_script %}
+{% block customjavascript %}
+$(document).ready(function(){
+    $("#downloader").click(function(){
+        $("#downloader").css("display", "none");
+        $("#download_done").css("display", "inline-block");
+    });
+});
+{% endblock customjavascript %}
