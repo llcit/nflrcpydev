@@ -294,9 +294,53 @@ def pubview(request, item):
     }, context_instance=RequestContext(request))
 
 
+def stories(request):
+    listing = StoryPage.objects.all().order_by('title')
+    featured = listing.filter(featured=1)
+
+    return render_to_response('l2-stories.html', {
+        'items': listing,
+        'featured': featured,
+    }, context_instance=RequestContext(request))
+
+
+def storyview(request, item):
+    # listing = Publication.objects.filter(item_number=item)
+    displayitem = StoryPage.objects.get(id=item)
+    # tags = displayitem.tags.all()
+    # try:
+    #
+    # except ObjectDoesNotExist:
+    #   raise Http404
+    # except ValueError:
+    #   raise Http404
+
+    return render_to_response('item-display.html', {
+        'item': displayitem,
+    }, context_instance=RequestContext(request))
+
+# See production settings file for additional info on setup.
+class SearchHaystackView(SearchView):   
+    def get_queryset(self):
+        queryset = super(SearchHaystackView, self).get_queryset()      
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
+        results = context['object_list']       
+        
+        context['people'] =  [r for r in results if r.model_name=='contact']
+        context['stories'] = [r for r in results if r.model_name=='storypage']
+        context['publications'] = [r for r in results if r.model_name=='publication']
+        context['projects'] = [r for r in results if r.model_name=='project']
+        context['prodevs'] = [r for r in results if r.model_name=='prodev']
+
+        return context
+
+# This brute force search view was deprecated in favor of the Haystack implementation for more comprehensive indexing.
 def search(request):
     query = request.GET['q']
-    # Q(category='Research Note') | Q(category='Network')
+    
     if query:
         publications = Publication.objects.filter(
             Q(author__icontains=query) | Q(description__icontains=query) | Q(skeywords__icontains=query)
@@ -327,49 +371,3 @@ def search(request):
         }, context_instance=RequestContext(request))
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
-
-
-def stories(request):
-    listing = StoryPage.objects.all().order_by('title')
-    featured = listing.filter(featured=1)
-
-    return render_to_response('l2-stories.html', {
-        'items': listing,
-        'featured': featured,
-    }, context_instance=RequestContext(request))
-
-
-def storyview(request, item):
-    # listing = Publication.objects.filter(item_number=item)
-    displayitem = StoryPage.objects.get(id=item)
-    # tags = displayitem.tags.all()
-    # try:
-    #
-    # except ObjectDoesNotExist:
-    #   raise Http404
-    # except ValueError:
-    #   raise Http404
-
-    return render_to_response('item-display.html', {
-        'item': displayitem,
-    }, context_instance=RequestContext(request))
-
-
-class SearchHaystackView(SearchView):   
-    def get_queryset(self):
-        queryset = super(SearchHaystackView, self).get_queryset()      
-        return queryset
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
-        results = context['object_list']       
-        
-        context['people'] =  [r for r in results if r.model_name=='contact']
-        context['stories'] = [r for r in results if r.model_name=='storypage']
-        context['publications'] = [r for r in results if r.model_name=='publication']
-        context['projects'] = [r for r in results if r.model_name=='project']
-        context['prodevs'] = [r for r in results if r.model_name=='prodev']
-
-        return context
-
-

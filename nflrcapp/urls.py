@@ -55,8 +55,7 @@ urlpatterns = patterns('',
     url(r'^events/(?P<tag>[-\w]+)/$', 'nflrcapp.views.prodev', name='events'),
     url(r'^events/$', 'nflrcapp.views.prodev', name='events_index'),
 
-    url(r'^find/$', 'search', name='search'),
-   
+       
     url(r'^languages/(?P<tag>[-\w]+)/$', 'nflrcapp.views.languages', name='languages'),
     url(r'^languages/$', 'nflrcapp.views.languages', name='languages_index'),
     
@@ -81,7 +80,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
 
 	url(r'^search/', SearchHaystackView.as_view(), name='search_haystack'),
-
+    # deprecated in favor of haystack indexing: 
+    # url(r'^find/$', 'nflrcapp.views.search', name='search'),
+    
     # Filter site objects by tag. Must be last so that previous url patterns are caught first!
     url(r'^([-\w]+)/$', 'nflrcapp.views.site_filter', name='site_filter'),
 
