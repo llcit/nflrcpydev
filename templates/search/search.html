@@ -55,7 +55,7 @@
         {% for p in projects %}
             <a href="{{ p.object.get_absolute_url }}">
             <div class="listing shadowboxed">
-                <p> {{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+                <p> <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
                 <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
                 <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
             </div>
@@ -71,7 +71,7 @@
     {% for p in publications %}
         <a href="{{ p.object.get_absolute_url }}">
         <div class="listing shadowboxed">
-            <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+            <p> <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
             <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
             <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
         </div>
@@ -88,7 +88,7 @@
         {% for p in prodevs %}
             <a href="{{ p.object.get_absolute_url }}">
             <div class="listing shadowboxed">
-                <p>{{ p.score }} <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
+                <p> <img src="{{MEDIA_URL}}img/{{ p.object.image }}"> </p>
                 <h4>{{ p.object.title | safe | truncatewords:8 }}</h4>
                 <h5>{{ p.object.thumbnail_desc | safe | truncatewords_html:140 }}</h5>  
             </div>
@@ -105,7 +105,7 @@
     {% for p in people %}
         <a href="{{ p.object.get_absolute_url }}">
             <div class="listing shadowboxed"> 
-                <p> {{ p.score }}<img src="{{MEDIA_URL}}img/{% if p.object.image %}{{ p.object.image }}{% else %}icon.png{% endif %}"> </p>
+                <p> <img src="{{MEDIA_URL}}img/{% if p.object.image %}{{ p.object.image }}{% else %}icon.png{% endif %}"> </p>
                 <h4>{{ p.object.first_name }} {{ p.object.last_name }}</h4>
                 <h5></h5>   
             </div>
