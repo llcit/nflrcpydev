@@ -1,6 +1,7 @@
 # views.py
 from __future__ import unicode_literals
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
@@ -53,7 +54,13 @@ def home_prototype(request):
     featured = sorted(
         chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
 
-    return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))    
+    return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))
+
+@login_required
+def staffdocs(request):
+    return render_to_response('l2-staffdocs.html',
+                              {},
+                              context_instance=RequestContext(request))
 
 def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
@@ -61,7 +68,7 @@ def about(request):
     lrc_item = StoryPage.objects.filter(pk=3)
 
     menu_items = []
-    try: 
+    try:
         menu_items.append(history_item[0])
         menu_items.append(kuleana_item[0])
         menu_items.append(lrc_item[0])
@@ -81,7 +88,7 @@ def about(request):
 
 def aboutview(request, item):
     displayitem = StoryPage.objects.get(id=item)
-    
+
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
@@ -91,7 +98,7 @@ def contact(request):
     collabs = Contact.objects.filter(role='COLLAB').order_by('last_name')
     advboard = Contact.objects.filter(role='ADVBOARD').order_by('last_name')
     return render_to_response('l2-contact.html', {
-        'staff': staff, 
+        'staff': staff,
         'collabs': collabs,
         'advboard': advboard
     }, context_instance=RequestContext(request))
@@ -128,7 +135,7 @@ def languages(request, tag='featured'):
 
     # Faster if request is language specific.
     return render_to_response('l2-languages.html', {
-            'featured': featured, 
+            'featured': featured,
             'language_list': language_list,
         }, context_instance=RequestContext(request))
 
@@ -178,7 +185,7 @@ def prodevview(request, item):
 
 def projects(request, tag=None):
     prebuilt_filter = None
-    
+
     if tag:
         if tag == 'current' : #or tag == '2014-2018'
             prebuilt_filter = '2010-2014'
@@ -239,7 +246,7 @@ def projectview(request, item):
 def publications(request, tag='featured'):
     featured = Publication.objects.filter(featured=1)
 
-    
+
     # Prebuilt queries on publication categories
     if tag == 'digital-archives':
         listing = Publication.objects.filter(
@@ -320,15 +327,15 @@ def storyview(request, item):
     }, context_instance=RequestContext(request))
 
 # See production settings file for additional info on setup.
-class SearchHaystackView(SearchView):   
+class SearchHaystackView(SearchView):
     def get_queryset(self):
-        queryset = super(SearchHaystackView, self).get_queryset()      
+        queryset = super(SearchHaystackView, self).get_queryset()
         return queryset
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
-        results = context['object_list']       
-        
+        results = context['object_list']
+
         context['people'] =  [r for r in results if r.model_name=='contact']
         context['stories'] = [r for r in results if r.model_name=='storypage']
         context['publications'] = [r for r in results if r.model_name=='publication']
@@ -340,12 +347,12 @@ class SearchHaystackView(SearchView):
 # This brute force search view was deprecated in favor of the Haystack implementation for more comprehensive indexing.
 def search(request):
     query = request.GET['q']
-    
+
     if query:
         publications = Publication.objects.filter(
             Q(author__icontains=query) | Q(description__icontains=query) | Q(skeywords__icontains=query)
             ).order_by('-year')
-        
+
         projects = Project.objects.filter(
             Q(description__icontains=query) | Q(skeywords__icontains=query)
             ).order_by('-id')

@@ -72,7 +72,7 @@ class ItemsManager(models.Manager):
         featured_stories = StoryPage.objects.filter(featured=True)
         featured_items = sorted(
             chain(featured_publications, featured_prodevs, featured_projects, featured_stories), key=attrgetter('featured_rank'))
-        
+
         return featured_items
 
     def get_tagged_items(self, **kwargs):
@@ -83,7 +83,7 @@ class ItemsManager(models.Manager):
         for i in taggeditems:
             items.append(i.content_object)
 
-        return items 
+        return items
 
 class ItemTag(models.Model):
     tag = models.CharField(max_length=180, unique=True)
@@ -109,7 +109,7 @@ class ContactRole(models.Model):
     list_rank = models.IntegerField(blank=True, default=1000)
 
     def __unicode__(self):
-        return self.title  
+        return self.title
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
@@ -179,8 +179,8 @@ class StoryPage(models.Model):
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
-    
     tags = generic.GenericRelation(TaggedItem)
+    private = models.BooleanField(default=False, blank=True, help_text='checking this ON will require a user to login to view this story')
 
     objects = ItemsManager()
 
@@ -224,7 +224,7 @@ class Prodev(models.Model):
         max_length=512, blank=True, null=True, default='')
 
     tags = generic.GenericRelation(TaggedItem)
-    
+
     objects = ItemsManager()
 
     def classname(self):
@@ -359,7 +359,7 @@ class Publication(models.Model):
     headline_tag = models.CharField(editable=False, max_length=512, blank=True, null=True, default='', help_text='(Optional) Show tagline in headline. Currently not implemented.')
 
     tags = generic.GenericRelation(TaggedItem)
-    
+
     objects = ItemsManager()
 
     class Meta:
@@ -471,7 +471,7 @@ class NflrcNewsFeed(Feed):
         for i in items:
             newsitems.append(i.content_object)
 
-        return newsitems   
+        return newsitems
 
     def item_title(self, item):
         return strip_tags(item.title)

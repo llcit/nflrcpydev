@@ -1,0 +1,45 @@
+<!-- l2-staffdocs.html -->
+{% extends "wrap-content.html" %}
+{% load staticfiles %}
+
+{% block pageheading %}
+
+<div class="col-md-6">
+    <h1>Column 1</h1>
+    <p>Lorem ipsum...</p>
+ </div>
+
+ <div class="col-md-6">
+    <h1>Column 2</h1>
+    <p>Lorem ipsum...</p>
+ </div>
+
+
+ <div class="col-md-12">
+    <div class="l2_crumbs">
+        <div class="submenu" style="float:left; margin-left:-10px;">
+            <h1></h1>
+
+            <ul class="nav nav-pills-flex">
+
+              <li class="navy"><a href="#">agendas <span class="badge">{{staff|length}}</span></a></li>
+              <li class="navy"><a href="#">supporting docs <span class="badge">{{collabs|length}}</span></a></li>
+              <li class="navy"><a href="#">projects <span class="badge">{{advboard|length}}</span></a></li>
+              <li class="navy"><a href="#">publications <span class="badge">1</span></a></li>
+              <li class="navy"><a href="#">professional development <span class="badge">1</span></a></li>
+              <li class="navy"><a href="#">contact us <span class="badge">1</span></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock pageheading %}
+
+
+
+{% block stories %}
+{% endblock stories %}
+
+{% block customjavascript %}
+{% endblock customjavascript %}

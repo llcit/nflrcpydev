@@ -45,6 +45,8 @@ urlpatterns = patterns('',
 
     # LEVEL 2 PAGES (/level-2-pages)
 
+    url(r'^staffdocs/$', 'nflrcapp.views.staffdocs', name='staffdocs_index'),
+
     url(r'^about/$', 'nflrcapp.views.about', name='about_index'),
     url(r'^about/(?P<item>\d+)/$', 'nflrcapp.views.aboutview', name='aboutview'),
 
