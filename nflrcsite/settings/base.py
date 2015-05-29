@@ -96,8 +96,8 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.webdesign',
 
-    
-    
+
+
 	'haystack',
     'braces',
     'crispy_forms',
