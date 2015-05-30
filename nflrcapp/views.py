@@ -26,7 +26,7 @@ from django.conf import settings
 @login_required
 def nflrcprivate(request, f):
     priv_path = os.path.join(settings.SENDFILE_ROOT, f)
-    # print 'REQUESTING ARG==> %s from %s ' % (priv_path, f)
+    print 'REQUESTING ARG==> %s from %s ' % (priv_path, f)
     return sendfile(request, priv_path)
 
 def auth_download(request):
