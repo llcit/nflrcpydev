@@ -22,9 +22,9 @@
 
             <ul class="nav nav-pills-flex">
 
-              <li class="navy"><a href="#">agendas <span class="badge">{{staff|length}}</span></a></li>
-              <li class="navy"><a href="#">supporting docs <span class="badge">{{collabs|length}}</span></a></li>
-              <li class="navy"><a href="#">projects <span class="badge">{{advboard|length}}</span></a></li>
+              <li class="navy"><a href="#agendas">agendas <span class="badge">{{staff|length}}</span></a></li>
+              <li class="navy"><a href="#supportingdocs">supporting docs <span class="badge">{{collabs|length}}</span></a></li>
+              <li class="navy"><a href="#section">projects <span class="badge">{{advboard|length}}</span></a></li>
               <li class="navy"><a href="#">publications <span class="badge">1</span></a></li>
               <li class="navy"><a href="#">professional development <span class="badge">1</span></a></li>
               <li class="navy"><a href="#">contact us <span class="badge">1</span></a></li>
@@ -39,6 +39,75 @@
 
 
 {% block stories %}
+<h1 id="agendas">Agendas</h1>
+<div id="dyno0" class="container">
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> June 18, 2015 </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> June 18, 2016 </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> June 18, 2017 </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+</div>
+
+<h1 id="supportingdocs">Supporting Internal Documents</h1>
+<div id="dyno0" class="container">
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> Private document here... </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+</div>
+
+<h1 id="section">Section</h1>
+<div id="dyno0" class="container">
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> main </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+</div>
+
+
+<h1 id="section">Section</h1>
+<div id="dyno0" class="container">
+
+        <a href="#">
+            <div class="listing shadowboxed">
+                <p> main </p>
+                <h4>text a</h4>
+                <h5>text b</h5>
+            </div>
+        </a>
+
+</div>
+
 {% endblock stories %}
 
 {% block customjavascript %}

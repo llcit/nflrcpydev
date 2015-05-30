@@ -1,6 +1,9 @@
 # views.py
 from __future__ import unicode_literals
-from django.shortcuts import render_to_response
+
+import os
+
+from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import Http404
@@ -11,8 +14,26 @@ from datetime import date
 from django.db.models import Q
 
 from haystack.generic_views import SearchView
+from sendfile import sendfile
 
 from nflrcapp.models import *
+
+from django.conf import settings
+
+
+
+
+@login_required
+def nflrcprivate(request, f):
+    priv_path = os.path.join(settings.SENDFILE_ROOT, f)
+    # print 'REQUESTING ARG==> %s from %s ' % (priv_path, f)
+    return sendfile(request, priv_path)
+
+def auth_download(request):
+    if not download.is_user_allowed(request.user):
+        return HttpResponseForbidden('Sorry, you cannot access this file')
+    return sendfile(request, download.file.path)
+
 
 
 def home(request):
@@ -88,10 +109,22 @@ def about(request):
 
 def aboutview(request, item):
     displayitem = StoryPage.objects.get(id=item)
+    if displayitem.private:
+        return redirect('staffdocsview', item=displayitem.id)
 
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def privateview(request, item):
+    displayitem = StoryPage.objects.get(id=item)
+
+    return render_to_response('item-display.html', {
+        'item': displayitem,
+    }, context_instance=RequestContext(request))
+
 
 def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')

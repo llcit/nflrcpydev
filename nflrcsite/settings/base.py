@@ -101,6 +101,7 @@ INSTALLED_APPS = (
 	'haystack',
     'braces',
     'crispy_forms',
+    'sendfile',
 
     'badge_site',
     'nflrcapp',

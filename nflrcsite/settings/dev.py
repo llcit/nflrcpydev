@@ -16,12 +16,12 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nflrc_pg',
         'USER': 'postgres',
         'PASSWORD': '1',
-        'HOST': 'localhost', 
-        'PORT': '5432', 
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -79,5 +79,10 @@ EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 
 SITE_HOST = os.environ['SITE_HOST']
 
-
+# SENDFILE settings
+SENDFILE_BACKEND = 'sendfile.backends.development'
+#SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
+#SENDFILE_BACKEND = 'sendfile.backends.nginx'
+SENDFILE_ROOT = os.path.join(PROJECT_DIR, 'protected-dev')
+SENDFILE_URL = '/protected-dev'
 

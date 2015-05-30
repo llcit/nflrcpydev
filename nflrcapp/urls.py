@@ -1,3 +1,4 @@
+
 from django.conf.urls import url, patterns, include
 from django.conf.urls.static import static
 from django.conf import settings
@@ -18,6 +19,8 @@ from badge_site.views import (
 
 
 urlpatterns = patterns('',
+
+    url(r'^privatetime/(?P<f>.*)/$', 'nflrcapp.views.nflrcprivate', name='download'),
 
     # BADGE SERVER
     url(r'^badgefarm/$', IndexView.as_view(), name='badge_home'),
@@ -46,6 +49,7 @@ urlpatterns = patterns('',
     # LEVEL 2 PAGES (/level-2-pages)
 
     url(r'^staffdocs/$', 'nflrcapp.views.staffdocs', name='staffdocs_index'),
+    url(r'^staffdocs/view/(?P<item>\d+)/$', 'nflrcapp.views.privateview', name='staffdocsview'),
 
     url(r'^about/$', 'nflrcapp.views.about', name='about_index'),
     url(r'^about/(?P<item>\d+)/$', 'nflrcapp.views.aboutview', name='aboutview'),
