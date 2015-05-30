@@ -20,7 +20,7 @@ from badge_site.views import (
 
 urlpatterns = patterns('',
 
-    url(r'^privatetime/(?P<f>.*)/$', 'nflrcapp.views.nflrcprivate', name='download'),
+    url(r'^nflrcPRIVATE/(?P<f>.*)/$', 'nflrcapp.views.nflrcprivate', name='download'),
 
     # BADGE SERVER
     url(r'^badgefarm/$', IndexView.as_view(), name='badge_home'),
