@@ -79,7 +79,7 @@ def home_prototype(request):
 
 @login_required
 def staffdocs(request):
-    return redirect('staffdocsview', item=9)  # Story page id for staffdocs index
+    return redirect('staffdocsview', item=8)  # Story page id for staffdocs index
 
 
 def about(request):
