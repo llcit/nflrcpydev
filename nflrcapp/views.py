@@ -21,19 +21,16 @@ from nflrcapp.models import *
 from django.conf import settings
 
 
-
-
 @login_required
 def nflrcprivate(request, f):
     priv_path = os.path.join(settings.SENDFILE_ROOT, f)
-    print 'REQUESTING ARG==> %s from %s ' % (priv_path, f)
     return sendfile(request, priv_path)
+
 
 def auth_download(request):
     if not download.is_user_allowed(request.user):
         return HttpResponseForbidden('Sorry, you cannot access this file')
     return sendfile(request, download.file.path)
-
 
 
 def home(request):
@@ -46,6 +43,7 @@ def home(request):
 
     return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
+
 def site_filter(request, tag):
     """View that filters all objects by querying the TaggedItem table"""
     if tag:
@@ -55,8 +53,8 @@ def site_filter(request, tag):
         # sort by featured(True/False) descending then by featured_rank ascending.
         # Do two sorts in reverse to get the above effect.
         # https://docs.python.org/2/howto/sorting.html#sortinghowto
-        listing = sorted(listing, key=attrgetter('featured_rank')) # sort by featured_rank
-        listing = sorted(listing, key=attrgetter('featured'), reverse=True) # then by True/False
+        listing = sorted(listing, key=attrgetter('featured_rank'))  # sort by featured_rank
+        listing = sorted(listing, key=attrgetter('featured'), reverse=True)  # then by True/False
     else:
         # No tag -- show all projects
         tag = None
@@ -66,6 +64,7 @@ def site_filter(request, tag):
         'featured': listing,
         'subpage': tag
     }, context_instance=RequestContext(request))
+
 
 def home_prototype(request):
     featured1 = Publication.objects.filter(featured=True)
@@ -77,11 +76,11 @@ def home_prototype(request):
 
     return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))
 
+
 @login_required
 def staffdocs(request):
-    return render_to_response('l2-staffdocs.html',
-                              {},
-                              context_instance=RequestContext(request))
+    return redirect('staffdocsview', item=9)  # Story page id for staffdocs index
+
 
 def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
