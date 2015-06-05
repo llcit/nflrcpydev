@@ -19,7 +19,14 @@ from badge_site.views import (
 
 
 urlpatterns = patterns('',
+    # Handle cfm requests from the wild.
+    url(r'^get_publication\.cfm$', 'nflrcapp.views.cfm_publication_handler', name='cfm_publication_handler'),
 
+    url(r'^searchsite_pub\.cfm$', 'nflrcapp.views.cfm_searchsite_handler', name='cfm_searchsite_handler'),
+
+    url(r'^get_project\.cfm$', 'nflrcapp.views.cfm_project_handler', name='cfm_project_handler'),
+
+    # SECURE FILE HANDLER
     url(r'^nflrcPRIVATE/(?P<f>.*)$', 'nflrcapp.views.nflrcprivate', name='download'),
 
     # BADGE SERVER

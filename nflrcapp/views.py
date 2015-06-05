@@ -19,6 +19,52 @@ from sendfile import sendfile
 from nflrcapp.models import *
 
 from django.conf import settings
+from urllib import urlencode
+
+
+def cfm_publication_handler(request):
+    item_key = request.GET.get('keyword', None)
+    if item_key:
+        #  First to retrieve object from keyword (e.g. MG09)
+        try:
+            Publication.objects.get(item_number=item_key)
+            return redirect('pubview', item=item_key)
+
+        #   Object does not exist force a search using keyword as query
+        except ObjectDoesNotExist:
+            urlstr = urlencode({'q': item_key})
+            return redirect('/search/?'+urlstr)
+
+        #   Any other problems just show the search page.
+        except:
+            pass
+    """ TODO: write a message about this to display in template """
+    return redirect('search_haystack')
+
+
+def cfm_searchsite_handler(request):
+    item_key = request.GET.get('keyword', None)
+    if item_key:
+        try:
+            urlstr = urlencode({'q': item_key})
+            return redirect('/search/?'+urlstr)
+
+        except:
+            pass
+    """ TODO: write a message about this to display in template """
+    return redirect('search_haystack')
+
+
+def cfm_project_handler(request):
+    try:
+
+        item_key = request.GET.get('project_number', None)
+
+        return redirect('projectview', item=item_key)  # Story page id for staffdocs index
+    except:
+        pass
+
+    return render_to_response('index.html', {'featured': []}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -357,6 +403,7 @@ def storyview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
+
 
 # See production settings file for additional info on setup.
 class SearchHaystackView(SearchView):
