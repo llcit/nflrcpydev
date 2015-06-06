@@ -2,24 +2,23 @@
 from __future__ import unicode_literals
 
 import os
+from itertools import chain
+from urllib import urlencode
+from operator import attrgetter
 
+from django.conf import settings
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
-from itertools import chain
-from operator import attrgetter
-from datetime import date
 from django.db.models import Q
+from django.contrib import messages
 
 from haystack.generic_views import SearchView
 from sendfile import sendfile
 
 from nflrcapp.models import *
-
-from django.conf import settings
-from urllib import urlencode
 
 
 def cfm_publication_handler(request):
@@ -39,6 +38,8 @@ def cfm_publication_handler(request):
         except:
             pass
     """ TODO: write a message about this to display in template """
+    # msg = 'Sorry, but we could not find the resource you were requesting. Please try our search index!'
+    # messages.add_message(request, messages.INFO, msg)
     return redirect('search_haystack')
 
 
@@ -415,11 +416,16 @@ class SearchHaystackView(SearchView):
         context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
         results = context['object_list']
 
-        context['people'] =  [r for r in results if r.model_name=='contact']
-        context['stories'] = [r for r in results if r.model_name=='storypage']
-        context['publications'] = [r for r in results if r.model_name=='publication']
-        context['projects'] = [r for r in results if r.model_name=='project']
-        context['prodevs'] = [r for r in results if r.model_name=='prodev']
+        storage = messages.get_messages(self.request)
+        context['searchmessages'] = []
+        for message in storage:
+            context['searchmessages'].append(message)
+
+        context['people'] = [r for r in results if r.model_name == 'contact']
+        context['stories'] = [r for r in results if r.model_name == 'storypage']
+        context['publications'] = [r for r in results if r.model_name == 'publication']
+        context['projects'] = [r for r in results if r.model_name == 'project']
+        context['prodevs'] = [r for r in results if r.model_name == 'prodev']
 
         return context
 
