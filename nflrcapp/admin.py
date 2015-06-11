@@ -27,14 +27,14 @@ class TaggedItemInline(generic.GenericTabularInline):
 class ContactRoleAdmin(admin.ModelAdmin):
 	list_display = ('id', 'list_rank', 'title')
 	list_filter = ['title',]
-	list_editable = ['list_rank','title']	
-	list_per_page = 200	
+	list_editable = ['list_rank','title']
+	list_per_page = 200
 	ordering = ['list_rank']
 
 class ContactAdmin(admin.ModelAdmin):
 	list_display = ('last_name', 'first_name', 'title', 'bio', 'role', 'staff_role', 'listing_rank', 'image')
 	list_filter = ['role',]
-	list_editable = ['role', 'staff_role', 'listing_rank','image']	
+	list_editable = ['role', 'staff_role', 'listing_rank','image']
 	list_per_page = 200
 	search_fields = ['last_name', 'first_name', 'role', 'bio']
 	ordering = ['listing_rank']
@@ -44,7 +44,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
 	# form = ProjectAdminForm
-	list_display = ('getuid', 'project_number', 'title', 'director', 'description', 'language', 'featured', 'featured_rank', 'headline', 'image')
+	list_display = ('getuid', 'project_number', 'grant_cycle', 'title', 'director', 'language', 'featured', 'featured_rank', 'headline', 'image')
 	list_filter = ['featured', 'headline']
 	list_editable = ['featured', 'featured_rank', 'headline']
 	list_per_page = 200
@@ -94,7 +94,7 @@ class IssuerAdmin(admin.ModelAdmin):
 	readonly_fields = ('guid', 'jsonfile')
 
 	# Override: Save the object, then over/write json file.
-	def save_model(self, request, obj, form, change):		
+	def save_model(self, request, obj, form, change):
 		if not change:
 			# Set a one-time unique id
 			obj.guid = genGuid()
@@ -118,7 +118,7 @@ class BadgeAdmin(admin.ModelAdmin):
 			obj.jsonfile = obj.getBadgeUrl()
 
 		obj.save()
-		obj.writeBadgeFile()				
+		obj.writeBadgeFile()
 
 class AwardAdmin(admin.ModelAdmin):
 	list_display = ('email', 'lastname', 'firstname', 'guid', 'badge', 'issuedOn', 'claimCode', 'jsonfile')

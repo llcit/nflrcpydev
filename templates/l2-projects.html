@@ -5,9 +5,9 @@
 {% block pageheading %}
 
 <h4>
-	<span class="badge badge_projects_fill">{{ items|length }}</span>	
-	{% if subpage %} {{ subpage|title }} {% endif %} 
-	<a href="/projects" class="badge_projects">Projects</a>	
+	<span class="badge badge_projects_fill">{{ items|length }}</span>
+	{% if subpage %} {{ subpage|title }} {% endif %}
+	<a href="/projects" class="badge_projects">Projects</a>
 	|
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -15,13 +15,13 @@
 	    <span class="caret"></span>
 	  </a>
 	  <ul class="dropdown-menu">
-	    <!-- <li><a class="static_a_display" href="{% url 'projects' '2014-2018' %}">2014-2018</a></li> -->
+	    <li><a class="static_a_display" href="{% url 'projects' '2014-2018' %}">2014-2018</a></li>
 	    <li><a class="static_a_display" href="{% url 'projects' '2010-2014' %}">2010-2014</a></li>
 	    <li><a class="static_a_display" href="{% url 'projects' '2006-2010' %}">2006-2010</a></li>
 	    <li><a class="static_a_display" href="{% url 'projects' '1999-2002' %}">1999-2002</a></li>
 		<li><a class="static_a_display" href="{% url 'projects' '1996-1999' %}">1996-1999</a></li>
 		<li><a class="static_a_display" href="{% url 'projects' '1993-1996' %}">1993-1996</a></li>
-	  </ul>	  
+	  </ul>
 	</div>
 </h4>
 
@@ -29,7 +29,7 @@
 
 {% block subheadlines %}
 
-<div class="submenu"> 
+<div class="submenu">
     <ul class="nav nav-pills-flex">
     <li class="{% if not subpage %}red{% endif %}"><a href="{% url 'projects_index'%}">All Projects</a></li>
     <li class="{% if subpage == 'current' %}red{% endif %}"><a href="{% url 'projects' 'current' %}">Current</a></li>
@@ -44,15 +44,15 @@
 
 {% block stories %}
 	<div id="dyno" class="container">
-	{% for p in items %}		
+	{% for p in items %}
 		<a href="{{ p.get_absolute_url }}">
-			<div class="listing shadowboxed">				
+			<div class="listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>
 				<p><a href="/projects" class="badge_container badge_project static_a_display">More Projects</a></p>
-			</div>		
-		</a>		
+			</div>
+		</a>
 	{% endfor %}
 	</div>
 {% endblock stories %}
@@ -60,7 +60,7 @@
 {% block local_js %}{% endblock local_js %}
 
 {% block customjavascript %}
-jQuery(window).on('load', function(){ 
+jQuery(window).on('load', function(){
 	var $ = jQuery;
 	var container = document.querySelector('#dyno');
 	var msnry = new Masonry( container, {

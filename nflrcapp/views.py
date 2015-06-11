@@ -263,11 +263,17 @@ def prodevview(request, item):
 
 
 def projects(request, tag=None):
+    """ This query may filter on grant cycle. Currently grant cycle is a model property. It is
+        also specified as a tag on projects. We can filter on this tag but it may pull various other such
+        tagged items.
+    """
     prebuilt_filter = None
 
     if tag:
-        if tag == 'current' : #or tag == '2014-2018'
-            prebuilt_filter = '2010-2014'
+        if tag == 'current':
+            prebuilt_filter = '2014-2018'
+        elif tag == '2014-2018':
+            prebuilt_filter = tag
         elif tag == '2010-2014':
             prebuilt_filter = tag
         elif tag == '2006-2010':
