@@ -63,7 +63,7 @@
 
 			<li><div>{{ item.author }} {% if item.year == 'ongoing' %} | Ongoing Project{% elif item.year != '' %} ({{ item.year }}){% endif %}</div></li>
             {% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
-			<li><div>{% for t in tags %} <span class="label"><a href="/publications/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
+			<li><div>{% for t in item.tags.all %} <span class="label"><a href="/publications/{{ t }}">{{ t.item_tag }}</a></span>{% endfor %}</div></li>
 
 
 		{% elif item.classname == 'prodev' or item.classname == 'events' %}
@@ -76,7 +76,7 @@
 			{% endif %}
 
 			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
-            <li><div>{% for t in tags %} <span class="label"><a href="/events/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
+            <li><div>{% for t in item.tags.all %} <span class="label"><a href="/events/{{ t }}">{{ t.item_tag }}</a></span>{% endfor %}</div></li>
 
 
 
@@ -84,7 +84,7 @@
 
         	<li><div><h4>Project Director: {{ item.director|safe|urlizetrunc:25 }}</h4></div></li>
 			{% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
-			<li><div>{% for t in tags %} <span class="label"><a href="/projects/{{ t }}">{{ t }}</a></span>{% endfor %}</div></li>
+			<li><div>{% for t in item.tags.all %} <span class="label"><a href="/projects/{{ t }}">{{ t.item_tag }}</a></span>{% endfor %}</div></li>
 
 
 		{% elif item.classname == 'stories' %}
