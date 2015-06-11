@@ -34,7 +34,7 @@ class ContactRoleAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
 	list_display = ('last_name', 'first_name', 'title', 'role', 'staff_role', 'listing_rank', 'image')
 	list_filter = ['role',]
-	list_editable = ['role', 'staff_role', 'listing_rank','image']
+	list_editable = ['role', 'staff_role', 'listing_rank', 'image']
 	list_per_page = 200
 	search_fields = ['last_name', 'first_name', 'role', 'bio']
 	ordering = ['listing_rank']
