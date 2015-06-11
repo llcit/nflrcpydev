@@ -1,4 +1,4 @@
-body { 
+body {
     padding: 0 15px;
     padding-top: 135px;
     padding-bottom: 100px;
@@ -61,12 +61,13 @@ a:active {color: #1aa1e1; text-decoration: none;}
     font-family:"Roboto Condensed", sans-serif;
     text-transform:uppercase;
     background-color: #c7c7e4;
-    color: #fff;
+    color: #000;
+    /*font-size: 1em;*/
 }
-.label a:link {color: #fff; text-decoration: none;}
-.label a:visited {color: #fff; text-decoration: none;}
-.label a:hover {color: #000; text-decoration: none;}
-.label a:active {color: #fff; text-decoration: none;}
+.label a:link {color: #000; text-decoration: none;}
+.label a:visited {color: #000; text-decoration: none;}
+.label a:hover {color: #808080; text-decoration: none; }
+.label a:active {color: #000; text-decoration: none;}
 
 .badge {
    background-color: #fff;
@@ -129,7 +130,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
     -webkit-backface-visibility: hidden;
 }
 
-.buttonbox  {    
+.buttonbox  {
     width: 110px;
     height: 50px;
     color:#ffff;
@@ -138,7 +139,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
     text-decoration: none;
     padding-top: 15px;
     border:1px solid #ccc;
-    
+
 }
 
 
@@ -148,7 +149,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 }
 
 
- 
+
 /*Sitemap component*/
 
 #sitemap_btn {
@@ -206,17 +207,17 @@ a:active {color: #1aa1e1; text-decoration: none;}
     margin-bottom:30px;
     width: 100%;
     text-align:center;
-  
+
 }
 
 .submenu li {
     display: inline-block;
     padding-left: 10px;
     padding-bottom: 15px;
-    
+
 }
 
-.category {    
+.category {
     width: 110px;
     height: 50px;
     font-size: 1em;
@@ -229,7 +230,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 
 .category.active {
     font-weight: 600;
-    
+
 }
 
 /* Item blocks */
@@ -284,17 +285,17 @@ a:active {color: #1aa1e1; text-decoration: none;}
 
 }
 .l2_crumbs a:link, a:visited, a:hover, a:active {
-    
+
     color: #666;
-    
-    
+
+
 }
 
 .shade {
     background-color: #d1d1e0;
 }
 .noshade {
-    background-color: white;    
+    background-color: white;
 }
 
 /*.enchilada object, iframe {
@@ -346,7 +347,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 .badge_contact_fill { background-color: #8b71bf; }
 .badge_languages_fill { background-color: #fb8521; }
 .badge_other_fill { background-color: #3f5ca9; color: #fff;}
-    
+
 
 
 
@@ -395,7 +396,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 .nav-pills-flex {
     font-family: 'Open Sans', sans-serif;
     font-size:14px;
-    
+
 
 }
 
@@ -444,7 +445,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 .socialnav {
         background-color:#CEC8C9;
         }
-        
+
 /*NFLRC STYLE ENDS*/
 
 

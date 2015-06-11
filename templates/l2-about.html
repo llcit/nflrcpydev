@@ -83,7 +83,7 @@
 					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
-                    <p>{% for tag in i.tags.all %} <span class="btn btn-xs btn-default disable" style="margin: 2px">{{ tag.item_tag }}</span> {% endfor %}</p>
+                    <p>{% for tag in i.tags.all %} <span class="label" style="padding: 2px">{{ tag.item_tag }}</span> {% endfor %}</p>
 				</div>
 			</a>
 		{% endfor %}
