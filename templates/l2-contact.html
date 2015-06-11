@@ -3,18 +3,18 @@
 
 {% block pageheading %}
 
-   <h1>Contact the NFLRC</h1>   
-   
+   <h1>Contact the NFLRC</h1>
+
    <address>
 		<div><strong>National Foreign Language Resource Center</strong></div>
 		<div>University of Hawaiʻi at Mānoa</div>
 		<div>1859 East-West Road #106</div>
 		<div>Honolulu HI 96822-2322 </div>
-	
-         <a href="tel:808-956-9424" class="static_a_display"><i class="fa fa-phone fa-6"></i> 808-956-9424</a> |  
-        
-        Fax: 808.956.5983 | 
-        
+
+         <a href="tel:808-956-9424" class="static_a_display"><i class="fa fa-phone fa-6"></i> 808-956-9424</a> |
+
+        Fax: 808.956.5983 |
+
         <a href="mailto:nflrc@hawaii.edu?Subject=From%20NFLRC%20Website" class="static_a_display"><i class="fa fa-envelope-o fa-6"></i> nflrc@hawaii.edu</a>  | <a href="{{MEDIA_URL}}img/NFLRCmapWEB-small.jpg" class="static_a_display"><i class="fa fa-map-marker fa-6"></i> Map</a>
 	</address>
 
@@ -22,32 +22,32 @@
 
 {% block subheadlines %}
 
-	
- 
+
+
 <div class="l2_crumbs">
-    
+
             <div class="submenu" style="float:left;">
-          
-            
+
+
             <ul class="nav nav-pills-flex">
-              
+
               <li class="navy"><a href="#staff">Core Staff <span class="badge">{{staff|length}}</span></a></li>
               <li class="navy"><a href="#collaborators">Collaborators <span class="badge">{{collabs|length}}</span></a></li>
               <li class="navy"><a href="#advboard">Advisory Board <span class="badge">{{advboard|length}}</span></a></li>
-              
+
             </ul>
-            
+
             </div>
 </div>
-    
-    
+
+
 {% endblock subheadlines %}
 
 
 {% block stories %}
 	<h1 id="staff">Core Staff</h1>
 	<div id="dyno1" class="container">
-		{% for i in staff %}	
+		{% for i in staff %}
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
@@ -55,27 +55,28 @@
 					<h5>{{ i.staff_role }}</h5>
 				</div>
 			</a>
-		{% endfor %}		
+		{% endfor %}
 	</div>
 
 <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 <h1 id="collaborators">Collaborator{{ collabs|length|pluralize }}</h1>
 	<div id="dyno2" class="container">
-		{% for i in collabs %}	
+		{% for i in collabs %}
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
 					<h4>{{ i.first_name }} {{ i.last_name }} </h4>
 					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
+                    <p>{% for tag in i.tags.all %} <span class="label" style="padding: 2px">{{ tag.item_tag }}</span> {% endfor %}</p>
 				</div>
 			</a>
-		{% endfor %}		
+		{% endfor %}
 	</div>
-    
+
     <h2><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></h2>
 <h1 id="advboard">Advisory Board</h1>
 	<div id="dyno3" class="container">
-		{% for i in advboard %}	
+		{% for i in advboard %}
 			<a href="{{ i.get_absolute_url }}">
 				<div class="listing listing-small shadowboxed">
 					<p> <img src="{{MEDIA_URL}}img/{{ i.image }}"> </p>
@@ -83,18 +84,18 @@
 					{% if i.staff_role %}<h5>{{ i.staff_role }}</h5>{% endif %}
 				</div>
 			</a>
-		{% endfor %}			
+		{% endfor %}
 	</div>
- 
+
 {% endblock stories%}
 
 {% block customjavascript %}
 jQuery(window).on('load', function(){
 	var $ = jQuery;
-	var containers = ['#dyno1', '#dyno2', '#dyno3'];	
+	var containers = ['#dyno1', '#dyno2', '#dyno3'];
 	for (i in containers) {
 		containers[i] = document.querySelector(containers[i]);
-		if(containers[i]) {			
+		if(containers[i]) {
 			msnry = new Masonry( containers[i], {
 			  // options
 			  columnWidth: 230,
