@@ -32,7 +32,7 @@ class ContactRoleAdmin(admin.ModelAdmin):
 	ordering = ['list_rank']
 
 class ContactAdmin(admin.ModelAdmin):
-	list_display = ('last_name', 'first_name', 'title', 'bio', 'role', 'staff_role', 'listing_rank', 'image')
+	list_display = ('last_name', 'first_name', 'title', 'role', 'staff_role', 'listing_rank', 'image')
 	list_filter = ['role',]
 	list_editable = ['role', 'staff_role', 'listing_rank','image']
 	list_per_page = 200
