@@ -111,6 +111,7 @@
             {% if user.is_authenticated %}
                 <p><a href="{% url 'badge_home' %}">Badge Farm</a></p>
                 <p><a href="/admin">Site Admin</a></p>
+                <p><a href="/admin">Staff Docs</a></p>
             {% else %}
                 <p><a href="{% url 'login' %}"> <i class="fa fa-sign-in"></i> Staff Login </a></p>
             {% endif %}
