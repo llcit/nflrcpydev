@@ -7,13 +7,15 @@ from urllib import urlencode
 from operator import attrgetter
 
 from django.conf import settings
-from django.shortcuts import render_to_response, redirect
+
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.contrib import messages
+from django.shortcuts import render_to_response, redirect
 
 from haystack.generic_views import SearchView
 from sendfile import sendfile
@@ -102,6 +104,11 @@ def site_filter(request, tag):
         # https://docs.python.org/2/howto/sorting.html#sortinghowto
         listing = sorted(listing, key=attrgetter('featured_rank'))  # sort by featured_rank
         listing = sorted(listing, key=attrgetter('featured'), reverse=True)  # then by True/False
+
+        if not listing:
+            queryparams = '?q='+tag
+            search_url = reverse('search_haystack')+queryparams
+            return redirect(search_url)
     else:
         # No tag -- show all projects
         tag = None
