@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     {% block meta_block %}{% endblock meta_block %}
-    
+
 
     <title>{% block page_title %}NFLRC{% endblock page_title %}</title>
     <!-- favicon -->
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-            </div>    
+            </div>
         </div>
     </div> <!-- end row 1 -->
 
@@ -72,25 +72,28 @@
                 <div id="logo">
                     <a href="/"><img src="{{MEDIA_URL}}img/logos/NFLRC_name_UH_banner.png"></a>
                 </div>
-            </div>   
+            </div>
         </div>
 
         <div class="col-sm-8 col-md-4">
             <div class="navbar-collapse collapse navpanel">
-                
+
                 <ul  id="searchnav" class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">logout {{ user.username }}!</a></li>
+                    {% endif %}
                     <li>
                         <div class="input-group">
                             <button id="sitemap_btn" class="btn btn-default" style="margin-top: 8px"> Menu <i id="sitemap_btn_toggle" class="fa fa-bars"></i></button>
                         </div>
                     </li>
                     <li id="searchform">
-                        <form method="get" action="/search" class="navbar-form navbar-left" role="search">            
+                        <form method="get" action="/search" class="navbar-form navbar-left" role="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" name="q">                              
+                                <input type="text" class="form-control" placeholder="Search" name="q">
                             </div>
                         </form>
-                    </li> 
+                    </li>
                 </ul>
             </div><!-- .nav-collapse -->
         </div>
@@ -104,10 +107,12 @@
             <p><a href="/about/1">History</a></p>
             <p><a href="/about/2">Kuleana (mission)</a></p>
             <p><a href="/contact">People</a></p>
-            <p><a href="mailto:nflrc@hawaii.edu">Web Admin</a></p>
+            <p><a href="mailto:nflrc@hawaii.edu">Contact Web Admin</a></p>
             {% if user.is_authenticated %}
                 <p><a href="{% url 'badge_home' %}">Badge Farm</a></p>
                 <p><a href="/admin">Site Admin</a></p>
+            {% else %}
+                <p><a href="{% url 'login' %}"> <i class="fa fa-sign-in"></i> Staff Login </a></p>
             {% endif %}
         </div>
         <div class="col-md-2">
@@ -115,7 +120,7 @@
             <p><a href="/projects/current">Current Projects</a></p>
             <p><a href="/projects/assessment">Assessment</a></p>
             <p><a href="/projects/online-learning">Online Learning</a></p>
-            
+
         </div>
         <div class="col-md-2">
             <h4 class="badge_container badge_publications"><a href="/publications">Publications</a></h4>
@@ -141,13 +146,13 @@
             <p><a href="/languages/japanese">Japanese</a></p>
             <p><a href="/languages/khmer">Khmer</a></p>
             <p><a href="/languages/korean">Korean</a></p>
-            <p><a href="/languages/samoan">Samoan</a></p>            
+            <p><a href="/languages/samoan">Samoan</a></p>
         </div>
         <div class="col-md-1"></div>
     </div>
 
     </div> <!-- end row 3 -->
-  
+
   </div> <!-- end .container-fluid -->
 {% endblock header_row %}
 </div> <!-- end .navbar -->
@@ -162,33 +167,23 @@
   <div class="container-fluid">
     <div class="row">
         <div class="socialnav col-md-12">
-            <div style="font-size: 150%; padding-top:5px; text-align:center;"> 
-                    <small>
-
-                        {% if not user.is_authenticated %}
-                          <a href="{% url 'login' %}"> <i class="fa fa-sign-in"></i> </a>
-                        {% else %}            
-                          <a href="{% url 'logout' %}">{{ user }}</a>
-                        {% endif %}
-
-                    </small>
-
-             	    <small style="font-size: 0.2em; float: right"> &copy; 1994 - 2015</small>         
+            <div style="font-size: 150%; padding-top:5px; text-align:center;">
+             	    <small style="font-size: 0.2em; float: right"> &copy; 1994 - 2015</small>
                     <small><a href="/contact" class="static_a_display separator" target="_self">Contact</a> </small>
                     <a href="https://www.facebook.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-facebook fa-6"></i></a>
-                
+
                     <a href="https://www.linkedin.com/company/national-foreign-language-resource-center-nflrc-" class="static_a_display separator" target="_blank"><i class="fa fa-linkedin fa-6"></i></a>
                     <a href="http://www.youtube.com/user/nflrchawaii" class="static_a_display separator" target="_blank"><i class="fa fa-youtube fa-6"></i></a>
                     <a href="http://www.twitter.com/NFLRC" class="static_a_display separator" target="_blank"><i class="fa fa-twitter fa-6"></i></a>
-                    <a href="/newswire" class="static_a_display separator"><i class="fa fa-rss fa-6"></i></a>   
-                    <a href="https://sites.google.com/a/hawaii.edu/nflrc-administration/" class="static_a_display separator" target="_blank"><i class="fa fa-lock fa-6"></i></a>   
+                    <a href="/newswire" class="static_a_display separator"><i class="fa fa-rss fa-6"></i></a>
+                    <a href="https://sites.google.com/a/hawaii.edu/nflrc-administration/" class="static_a_display separator" target="_blank"><i class="fa fa-lock fa-6"></i></a>
                     <small><a href="/about/5" class="static_a_display separator" target="_blank">Privacy</a></small>
 
-                   
-                          
+
+
             </div>
         </div>
-    </div>   
+    </div>
   </div>
 </div>
 
