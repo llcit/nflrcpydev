@@ -103,14 +103,13 @@
         <div class="col-md-1"></div>
         <div class="col-md-2">
             <h4 class="badge_container badge_about"><a href="/about">About</a></h4>
-            <p><a href="/contact">Contact</a> <a href="/admin">(Email Site Admin)</a></p>
+            <p><a href="/contact">Contact</a> (<a href="mailto:nflrc@hawaii.edu">Contact Web Admin</a>)</p>
             <p><a href="/about/1">History</a></p>
             <p><a href="/about/2">Kuleana (mission)</a></p>
             <p><a href="/contact">People</a></p>
-            <p><a href="mailto:nflrc@hawaii.edu">Contact Web Admin</a></p>
             {% if user.is_authenticated %}
                 <p><a href="{% url 'badge_home' %}">Badge Farm</a></p>
-
+                <p><a href="/admin">Site Admin</a></p>
                 <p><a href="{% url 'staffdocs_index' %}"><i class="fa fa-lock fa-6"></i> Secure Docs</a></p>
                 <p><a href="{% url 'logout' %}">Logout</a></p>
             {% else %}
