@@ -26,6 +26,8 @@ urlpatterns = patterns('',
 
     url(r'^get_project\.cfm$', 'nflrcapp.views.cfm_project_handler', name='cfm_project_handler'),
 
+    url(r'^(?P<cfmtoken>.*)\.cfm/$', 'nflrcapp.views.cfm_global_handler', name='cfm_global_handler'),
+
     # SECURE FILE HANDLER
     url(r'^nflrcPRIVATE/(?P<f>.*)$', 'nflrcapp.views.nflrcprivate', name='download'),
 

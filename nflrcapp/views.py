@@ -23,7 +23,45 @@ from sendfile import sendfile
 from nflrcapp.models import *
 
 
+def generate_search_query_url(qstring):
+    queryparams = '?'+urlencode({'q': qstring})
+    search_url = reverse('search_haystack')+queryparams
+    return search_url
+
+
+def cfm_global_handler(request, cfmtoken):
+    """
+        This view handles requests for older coldfusion request urls.
+        E.g., /nnnn.cfm. Some requests are manually rerouted to their equivalent page
+        on this site. Anything else is sent as a query to the search index.
+    """
+
+    if cfmtoken == 'aboutus':
+        return redirect('about_index')
+
+    elif cfmtoken == 'oj':
+        return redirect(reverse('publications', args=['journals']))
+
+    elif cfmtoken == 'projects':
+        return redirect('projects_index')
+
+    elif cfmtoken == 'publications':
+        return redirect('publications_index')
+
+    elif cfmtoken == 'prodev':
+        return redirect('events_index')
+
+    return redirect(generate_search_query_url(cfmtoken))
+
+
 def cfm_publication_handler(request):
+    """
+        Handles requests from old coldfusion url queries.
+        Example case:
+        /get_publication.cfm?id=303&amp;scriptname=searchsite_pub&amp;keyword=MG09&amp;display_order=alphabetic
+        will reroute to publications/view/MG09
+    """
+
     item_key = request.GET.get('keyword', None)
     if item_key:
         #  First to retrieve object from keyword (e.g. MG09)
@@ -33,8 +71,7 @@ def cfm_publication_handler(request):
 
         #   Object does not exist force a search using keyword as query
         except ObjectDoesNotExist:
-            urlstr = urlencode({'q': item_key})
-            return redirect('/search/?'+urlstr)
+            return redirect(generate_search_query_url(item_key))
 
         #   Any other problems just show the search page.
         except:
@@ -46,12 +83,16 @@ def cfm_publication_handler(request):
 
 
 def cfm_searchsite_handler(request):
+    """
+        Handles requests from old coldfusion url queries.
+        Example case:
+        /searchsite_pub.cfm?display_order=author&keyword=rshrp
+        will reroute to search index for querying
+    """
     item_key = request.GET.get('keyword', None)
     if item_key:
         try:
-            urlstr = urlencode({'q': item_key})
-            return redirect('/search/?'+urlstr)
-
+            return redirect(generate_search_query_url(item_key))
         except:
             pass
     """ TODO: write a message about this to display in template """
@@ -106,9 +147,7 @@ def site_filter(request, tag):
         listing = sorted(listing, key=attrgetter('featured'), reverse=True)  # then by True/False
 
         if not listing:
-            queryparams = '?q='+tag
-            search_url = reverse('search_haystack')+queryparams
-            return redirect(search_url)
+            return redirect(generate_search_query_url(tag))
     else:
         # No tag -- show all projects
         tag = None
