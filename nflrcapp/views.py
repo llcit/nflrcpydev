@@ -481,6 +481,7 @@ class SearchHaystackView(SearchView):
 
         return context
 
+
 # This brute force search view was deprecated in favor of the Haystack implementation for more comprehensive indexing.
 def search(request):
     query = request.GET['q']
