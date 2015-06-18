@@ -234,17 +234,6 @@ a:active {color: #1aa1e1; text-decoration: none;}
 }
 
 /* Item blocks */
-.item-img {
-    width: 215px;
-    margin-bottom: 20px;
-    background: white;
-    text-decoration: none;
-    color: black;
-}
-
-.item-img img {
-    width: 100%;
-}
 
 .listing {
     width: 215px;
