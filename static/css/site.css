@@ -236,7 +236,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 /* Item blocks */
 .item-img {
     /*width: 230px;*/
-    width: 200px;
+    /*width: 100%;*/
     margin-bottom: 20px;
     background: white;
     text-decoration: none;
@@ -244,7 +244,7 @@ a:active {color: #1aa1e1; text-decoration: none;}
 }
 
 .item-img img {
-    width: 100%;
+    width: 200px;
 }
 
 .listing {
