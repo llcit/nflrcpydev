@@ -38,16 +38,15 @@
 
 {% block item-image %}
 	<!-- Image -->
-    <div class="listing" style="margin-top:28px;">
-	<img src="{{MEDIA_URL}}img/{{ item.image }}" class="shadowboxed">
+    <div class="listing shadowboxed" style="margin-top:28px;">
+	<img src="{{MEDIA_URL}}img/{{ item.image }}" class="">
     </div>
 
     <div class="listing shadowboxed" style="margin-top:10px;">
 	   <!-- Dynamic menu -->
-	<ul class="nav nav-stacked">
-    	<div id="toc">
 
-        </div>
+    <ul class="nav nav-stacked">
+    	<div id="toc"></div>
     </ul>
     </div>
 {% endblock item-image %}
