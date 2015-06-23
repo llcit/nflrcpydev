@@ -44,9 +44,9 @@ class ContactAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
 	# form = ProjectAdminForm
-	list_display = ('getuid', 'project_number', 'grant_cycle', 'title', 'director', 'language', 'featured', 'featured_rank', 'headline', 'image')
+	list_display = ('getuid', 'project_number', 'grant_cycle', 'title', 'director', 'language', 'featured', 'featured_rank', 'listing_rank', 'image')
 	list_filter = ['featured', 'headline']
-	list_editable = ['featured', 'featured_rank', 'headline']
+	list_editable = ['featured', 'featured_rank', 'listing_rank']
 	list_per_page = 200
 	search_fields = ['project_number', 'title', 'language', 'thumbnail_desc', 'description']
 	ordering = ['-project_number']
@@ -55,9 +55,9 @@ class ProjectAdmin(admin.ModelAdmin):
     ]
 
 class PublicationAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'item_number', 'category', 'title', 'description', 'language', 'featured', 'featured_rank', 'image')
+	list_display = ('getuid', 'item_number', 'category', 'title', 'description', 'language', 'featured', 'featured_rank', 'listing_rank', 'image')
 	list_filter = ['featured', 'category']
-	list_editable = ['featured', 'featured_rank', 'image']
+	list_editable = ['featured', 'featured_rank', 'listing_rank', 'image']
 	list_per_page = 200
 	search_fields = ['item_number', 'title', 'language', 'thumbnail_desc', 'description']
 	ordering = ['item_number', '-year']
@@ -66,9 +66,9 @@ class PublicationAdmin(admin.ModelAdmin):
     ]
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'description', 'language', 'featured', 'featured_rank', 'headline', 'pdtype', 'image',)
-	list_filter = ['featured', 'headline', 'pdtype']
-	list_editable = ['featured', 'featured_rank', 'headline', 'pdtype']
+	list_display = ('getuid', 'id', 'title', 'description', 'language', 'featured', 'featured_rank', 'listing_rank', 'pdtype', 'image',)
+	list_filter = ['featured', 'pdtype']
+	list_editable = ['featured', 'featured_rank', 'listing_rank', 'pdtype']
 	list_per_page = 200
 	search_fields = ['id', 'title','language', 'thumbnail_desc', 'description']
 	ordering = ['-id', 'title']
@@ -77,9 +77,9 @@ class ProdevAdmin(admin.ModelAdmin):
     ]
 
 class StoryPageAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'headline', 'image' )
-	list_filter = ['featured', 'headline',]
-	list_editable = ['featured', 'featured_rank', 'headline']
+	list_display = ('getuid', 'id', 'title', 'featured', 'featured_rank', 'listing_rank', 'image' )
+	list_filter = ['featured']
+	list_editable = ['featured', 'featured_rank', 'listing_rank']
 	list_per_page = 200
 	search_fields = ['id', 'title', 'thumbnail_desc', 'description']
 	ordering = ['id', 'title',]

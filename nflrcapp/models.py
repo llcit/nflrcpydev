@@ -174,6 +174,7 @@ class StoryPage(models.Model):
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
+    listing_rank = models.IntegerField(blank=True, default=0, help_text='default rank. higher the number, lower the rank')
     featured = models.BooleanField(blank=True, default=False)
     featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
@@ -217,8 +218,9 @@ class Prodev(models.Model):
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
+    listing_rank = models.IntegerField(blank=True, default=0, help_text='default rank. higher the number, lower the rank')
     featured = models.BooleanField(blank=True, default=False)
-    featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
+    featured_rank = models.IntegerField(blank=True, default=0, help_text='rank among other featured items. Higher the number, lower the rank')
     headline = models.BooleanField(default=False)
     headline_tag = models.CharField(
         max_length=512, blank=True, null=True, default='')
@@ -275,6 +277,7 @@ class Project(models.Model):
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
+    listing_rank = models.IntegerField(blank=True, default=0, help_text='default rank. higher the number, lower the rank')
     featured = models.BooleanField(blank=True, default=False)
     featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
@@ -350,6 +353,7 @@ class Publication(models.Model):
         max_length=40L, blank=True, help_text='(Optional) Number of pages.')
     skeywords = models.TextField(
         blank=True, help_text='(Optional) List keywords for this item separated by commas.')
+    listing_rank = models.IntegerField(blank=True, default=0, help_text='default rank. higher the number, lower the rank')
     featured = models.BooleanField('feature this item?', blank=True, default=False, help_text='(Optional) Check this ON to force the item to display in featured lists.')
     featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     hidden = models.BooleanField(default=False, help_text='Prevent this item from displaying on the site. Currently not implemented.')

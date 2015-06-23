@@ -268,7 +268,7 @@ def languages(request, tag='featured'):
 def prodev(request, tag=None):
     featured = None
     if tag:
-        listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-id')
+        listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('featured_rank', 'listing_rank')
         if not listing: # Retrieve items by tag
             listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
     else:
@@ -334,7 +334,7 @@ def projects(request, tag=None):
             prebuilt_filter = tag
 
         if prebuilt_filter:
-            listing = Project.objects.filter(grant_cycle=prebuilt_filter)
+            listing = Project.objects.filter(grant_cycle=prebuilt_filter).order_by('featured_rank', 'listing_rank')
 
         else:
             item_type = ContentType.objects.get_for_model(Project)
@@ -345,7 +345,7 @@ def projects(request, tag=None):
                 listing.append(i.content_object)
     else:
         # No tag -- show all projects
-        listing = Project.objects.all().order_by('-grant_cycle')
+        listing = Project.objects.all().order_by('-grant_cycle', 'featured_rank', 'listing_rank')
 
     return render_to_response('l2-projects.html', {
         'items': listing,
