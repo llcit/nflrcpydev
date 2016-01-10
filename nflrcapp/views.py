@@ -15,7 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.contrib import messages
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 
 from haystack.generic_views import SearchView
 from sendfile import sendfile
@@ -230,7 +230,9 @@ def contact(request):
 
 
 def contactview(request, person):
-    thehuman = Contact.objects.get(pk=person)
+    # thehuman = Contact.objects.get(pk=person)
+    thehuman = get_object_or_404(User, pk=person)
+    
     return render_to_response('person-display.html', {
         'thehuman': thehuman
     }, context_instance=RequestContext(request))
