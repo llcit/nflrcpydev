@@ -231,8 +231,8 @@ def contact(request):
 
 def contactview(request, person):
     # thehuman = Contact.objects.get(pk=person)
-    thehuman = get_object_or_404(User, pk=person)
-    
+    thehuman = get_object_or_404(Contact, pk=person)
+
     return render_to_response('person-display.html', {
         'thehuman': thehuman
     }, context_instance=RequestContext(request))
