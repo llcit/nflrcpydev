@@ -66,11 +66,11 @@ class PublicationAdmin(admin.ModelAdmin):
     ]
 
 class ProdevAdmin(admin.ModelAdmin):
-	list_display = ('getuid', 'id', 'title', 'description', 'language', 'featured', 'featured_rank', 'listing_rank', 'pdtype', 'image',)
+	list_display = ('getuid', 'id', 'title', 'language', 'featured', 'featured_rank', 'listing_rank', 'pdtype', 'image',)
 	list_filter = ['featured', 'pdtype']
 	list_editable = ['featured', 'featured_rank', 'listing_rank', 'pdtype']
 	list_per_page = 200
-	search_fields = ['id', 'title','language', 'thumbnail_desc', 'description']
+	search_fields = ['id', 'title','language', 'thumbnail_desc']
 	ordering = ['-id', 'title']
 	inlines = [
         TaggedItemInline,
