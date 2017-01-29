@@ -1,0 +1,6 @@
+{{ object.title }}: 
+{{ object.description }}
+{{ object.thumbnail_desc }}
+{{ object.skeywords }}
+
+

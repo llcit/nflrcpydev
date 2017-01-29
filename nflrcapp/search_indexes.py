@@ -3,7 +3,7 @@
 	information about this setup.
 """
 from haystack import indexes
-from .models import Contact, Project, Prodev, Publication
+from .models import Contact, Project, Prodev, Publication, StoryPage
 
 
 class PublicationIndex(indexes.SearchIndex, indexes.Indexable):
@@ -64,6 +64,20 @@ class ContactIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return Contact
+
+    def index_queryset(self, using=None):
+        """Used when the entire index for model is updated."""
+        return self.get_model().objects.all()
+
+class StoryIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
+    description = indexes.CharField(model_attr='description')
+    thumbnail_desc = indexes.CharField(model_attr='thumbnail_desc')
+    skeywords = indexes.CharField(model_attr='skeywords')
+
+    def get_model(self):
+        return StoryPage
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
