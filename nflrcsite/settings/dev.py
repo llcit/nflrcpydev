@@ -26,9 +26,6 @@ DATABASES = {
 }
 
 # Append apps used in development not production.
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
 
 MEDIA_ROOT = PROJECT_DIR.child('media', 'nflrc')
 
