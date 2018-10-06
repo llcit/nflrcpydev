@@ -94,7 +94,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
 
-    url(r'^search/', SearchHaystackView.as_view(), name='search_haystack'),
+    ## url(r'^search/', SearchHaystackView.as_view(), name='search_haystack'),
     # deprecated in favor of haystack indexing:
     # url(r'^find/$', 'nflrcapp.views.search', name='search'),
 
