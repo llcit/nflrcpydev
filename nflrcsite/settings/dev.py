@@ -83,5 +83,14 @@ SENDFILE_BACKEND = 'sendfile.backends.development'
 SENDFILE_ROOT = os.path.join(PROJECT_DIR, 'protected-dev')
 SENDFILE_URL = '/protected-dev'
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': '',
+    },
+}
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1000
+
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 

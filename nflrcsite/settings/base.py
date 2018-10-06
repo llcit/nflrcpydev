@@ -113,6 +113,7 @@ GRAPPELLI_ADMIN_TITLE = 'NFLRC Site Administration'
 GRAPPELLI_INDEX_DASHBOARD = 'nflrcsite.dashboard.CustomIndexDashboard'
 
 
+# HAYSTACK SETUP MOVED TO SECONDARY SETTINGS FILE.
 # HAYSTACK_CONNECTIONS = {
 #     'default': {
 #         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -121,23 +122,8 @@ GRAPPELLI_INDEX_DASHBOARD = 'nflrcsite.dashboard.CustomIndexDashboard'
 #     },
 # }
 
-# HAYSTACK_CONNECTIONS = {
-#     'default': {
-#         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-#         'URL': 'http://127.0.0.1:8983/solr/nflrccore'
-#         # ...or for multicore...
-#         # 'URL': 'http://127.0.0.1:8983/solr/mysite',
-#     },
-# }
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': '/Users/rmedina/pythonindex/whoosh_index',
-    },
-}
 
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1000
 
 # local dev -> /usr/local/bin/elasticsearch
 
