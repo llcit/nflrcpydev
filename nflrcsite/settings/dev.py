@@ -86,7 +86,7 @@ SENDFILE_URL = '/protected-dev'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': '',
+        'PATH': os.environ['WHOOSH_PATH'],
     },
 }
 
