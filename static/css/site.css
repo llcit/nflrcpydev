@@ -322,7 +322,8 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 }
 
 .listing-large {
-    width: 460px;
+    width: 500px;
+    background: rgb(255, 228, 196);
 }
 
 .l2_crumbs  {
@@ -518,5 +519,10 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
     .hide_from_printer {
         display:none;
     }
+}
+
+
+.stamp {
+     
 }
 

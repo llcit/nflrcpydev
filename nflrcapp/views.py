@@ -156,8 +156,13 @@ def home_prototype(request):
     featured4 = StoryPage.objects.filter(featured=True)
     featured = sorted(
         chain(featured3, featured4, featured2, featured1), key=attrgetter('featured_rank'))
+    feature_flash = featured[0]
+    featured = featured[1:]
+    feature_sticky = featured[-3:] # last three ranked
+    featured = featured[:-3] # all but last three
 
-    return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))
+
+    return render_to_response('index-prototype.html', {'featured': featured, 'feature_flash': feature_flash, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
 
 @login_required
 def staffdocs(request):
@@ -490,3 +495,15 @@ def search(request):
         }, context_instance=RequestContext(request))
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
+
+
+
+def aggit():
+    featured1 = Publication.objects.filter(featured=True)
+    featured2 = Project.objects.filter(featured=True)
+    featured3 = Prodev.objects.filter(featured=True)
+    featured4 = StoryPage.objects.filter(featured=True)
+    featured = sorted(
+        chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
+    
+    return featured

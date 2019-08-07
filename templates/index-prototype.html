@@ -23,21 +23,20 @@
 {% endblock subheadlines %}
 
 {% block stories %}
-<div id="dyno" class="container-fluid">
+<div class="dyno container-fluid">	
 	<!-- Special Feature -->
-	<a href="#">
-		<div class="listing shadowboxed listing-large">
-			<p> <img src="{{MEDIA_URL}}img/icon.png"> </p>
-			<h4>Special Feature</h4>
-			<h5>Check this out!</h5>
-            <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
-			{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+	<a href="{{ feature_flash.get_absolute_url }}">
+		<div class="brick listing shadowboxed listing-large">
+			<p> <img src="{{MEDIA_URL}}img/{{feature_flash.image}}"> </p>
+			<h4>{{ feature_flash.title | safe | truncatewords:8 }}</h4>
+			<h5>{{ feature_flash.thumbnail_desc | safe | truncatewords_html:140}}</h5>
+            <p><a href="/{% if feature_flash.classname == 'prodev' %}events{% else %}{{ feature_flash.classname }}{% endif %}" class="badge_container badge_{{ feature_flash.classname }} static_a_display" style="text-transform:capitalize;">More 
+			{% if feature_flash.classname == 'prodev' %}Events{% else %}{{ feature_flash.classname }}{% endif %}</a></p>
 		</div>
 	</a>
-	{% for feature in featured %}
-	
+	{% for feature in featured %}	
 		<a href="{{ feature.get_absolute_url }}">
-			<div class="listing shadowboxed">
+			<div class="brick listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
 				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
@@ -46,24 +45,37 @@
 				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
 			</div>
 		</a>
-	
+	{% endfor %}	
+</div>
+{% endblock stories%}
+{% block misc %} 
+<!-- Sticky Featured -->
+<hr>
+<div class="container-fluid">
+	{% for feature in feature_sticky %}
+		<a href="{{ feature.get_absolute_url }}">
+				<div class="listing col-md-3">
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140}}</h5>
+				<p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+			</div>
+		</a>
 	{% endfor %}
 </div>
-
-
-
-{% endblock stories%}
-
+{% endblock misc %}
 {% block customjavascript %}
 jQuery(window).on('load', function(){ 
 	var $ = jQuery;
-	var container = document.querySelector('#dyno');
+	var container = document.querySelector('.dyno');
 	var msnry = new Masonry( container, {
 	  // options
 	  columnWidth: 230,
-	  itemSelector: '.listing',
+	  itemSelector: '.brick',
 	  gutter: 40,
-	  isFitWidth: 'true'
+	  isFitWidth: 'true',
+	  
 	});
 })
 {% endblock customjavascript %}
