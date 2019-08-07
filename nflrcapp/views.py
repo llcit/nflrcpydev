@@ -28,7 +28,6 @@ def generate_search_query_url(qstring):
     search_url = reverse('search_haystack')+queryparams
     return search_url
 
-
 def cfm_global_handler(request, cfmtoken):
     """
         This view handles requests for older coldfusion request urls.
@@ -52,7 +51,6 @@ def cfm_global_handler(request, cfmtoken):
         return redirect('events_index')
 
     return redirect(generate_search_query_url(cfmtoken))
-
 
 def cfm_publication_handler(request):
     """
@@ -81,7 +79,6 @@ def cfm_publication_handler(request):
     # messages.add_message(request, messages.INFO, msg)
     return redirect('search_haystack')
 
-
 def cfm_searchsite_handler(request):
     """
         Handles requests from old coldfusion url queries.
@@ -98,7 +95,6 @@ def cfm_searchsite_handler(request):
     """ TODO: write a message about this to display in template """
     return redirect('search_haystack')
 
-
 def cfm_project_handler(request):
     try:
 
@@ -110,18 +106,15 @@ def cfm_project_handler(request):
 
     return render_to_response('index.html', {'featured': []}, context_instance=RequestContext(request))
 
-
 @login_required
 def nflrcprivate(request, f):
     priv_path = os.path.join(settings.SENDFILE_ROOT, f)
     return sendfile(request, priv_path)
 
-
 def auth_download(request):
     if not download.is_user_allowed(request.user):
         return HttpResponseForbidden('Sorry, you cannot access this file')
     return sendfile(request, download.file.path)
-
 
 def home(request):
     featured1 = Publication.objects.filter(featured=True)
@@ -133,13 +126,11 @@ def home(request):
 
     return render_to_response('index.html', {'featured': featured}, context_instance=RequestContext(request))
 
-
 def site_filter(request, tag):
     """View that filters all objects by querying the TaggedItem table"""
     if tag:
         tagged_items = TaggedItem.objects.filter(item_tag__tag=tag)
         listing = [t.content_object for t in tagged_items]
-
         # sort by featured(True/False) descending then by featured_rank ascending.
         # Do two sorts in reverse to get the above effect.
         # https://docs.python.org/2/howto/sorting.html#sortinghowto
@@ -158,22 +149,19 @@ def site_filter(request, tag):
         'subpage': tag
     }, context_instance=RequestContext(request))
 
-
 def home_prototype(request):
     featured1 = Publication.objects.filter(featured=True)
     featured2 = Project.objects.filter(featured=True)
     featured3 = Prodev.objects.filter(featured=True)
     featured4 = StoryPage.objects.filter(featured=True)
     featured = sorted(
-        chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
+        chain(featured3, featured4, featured2, featured1), key=attrgetter('featured_rank'))
 
     return render_to_response('index-prototype.html', {'featured': featured}, context_instance=RequestContext(request))
-
 
 @login_required
 def staffdocs(request):
     return redirect('staffdocsview', item=8)  # Story page id for staffdocs index
-
 
 def about(request):
     kuleana_item = StoryPage.objects.filter(pk=1)
@@ -198,7 +186,6 @@ def about(request):
                               'menu_items': menu_items},
                               context_instance=RequestContext(request))
 
-
 def aboutview(request, item):
     displayitem = StoryPage.objects.get(id=item)
     if displayitem.private:
@@ -208,7 +195,6 @@ def aboutview(request, item):
         'item': displayitem,
     }, context_instance=RequestContext(request))
 
-
 @login_required
 def privateview(request, item):
     displayitem = StoryPage.objects.get(id=item)
@@ -216,7 +202,6 @@ def privateview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
-
 
 def contact(request):
     staff = Contact.objects.filter(role='STAFF').order_by('listing_rank')
@@ -228,7 +213,6 @@ def contact(request):
         'advboard': advboard
     }, context_instance=RequestContext(request))
 
-
 def contactview(request, person):
     # thehuman = Contact.objects.get(pk=person)
     thehuman = get_object_or_404(Contact, pk=person)
@@ -236,7 +220,6 @@ def contactview(request, person):
     return render_to_response('person-display.html', {
         'thehuman': thehuman
     }, context_instance=RequestContext(request))
-
 
 def languages(request, tag='featured'):
     tag = tag.replace('-', ' ')
@@ -266,7 +249,6 @@ def languages(request, tag='featured'):
             'language_list': language_list,
         }, context_instance=RequestContext(request))
 
-
 def prodev(request, tag=None):
     featured = None
     if tag:
@@ -284,7 +266,6 @@ def prodev(request, tag=None):
         'pdtype_tag': tag
     }, context_instance=RequestContext(request))
 
-
 def workshop_conf(request):
     listing = Prodev.objects.filter().order_by('-id', 'pdtype')
     featured = listing.filter(featured=True)
@@ -292,7 +273,6 @@ def workshop_conf(request):
         'events': listing,
         'featured': featured
     }, context_instance=RequestContext(request))
-
 
 def prodevview(request, item):
     try:
@@ -309,7 +289,6 @@ def prodevview(request, item):
         'language_list': language_list
     }, context_instance=RequestContext(request))
 
-
 def projects(request, tag=None):
     """ This query may filter on grant cycle. Currently grant cycle is a model property. It is
         also specified as a tag on projects. We can filter on this tag but it may pull various other such
@@ -319,7 +298,7 @@ def projects(request, tag=None):
 
     if tag:
         if tag == 'current':
-            prebuilt_filter = '2014-2018'
+            prebuilt_filter = '2018-2022'
         elif tag == '2014-2018':
             prebuilt_filter = tag
         elif tag == '2010-2014':
@@ -336,7 +315,7 @@ def projects(request, tag=None):
             prebuilt_filter = tag
 
         if prebuilt_filter:
-            listing = Project.objects.filter(grant_cycle=prebuilt_filter).order_by('featured_rank', 'listing_rank')
+            listing = Project.objects.filter(grant_cycle__contains=prebuilt_filter).order_by('featured_rank', 'listing_rank')
 
         else:
             item_type = ContentType.objects.get_for_model(Project)
@@ -353,7 +332,6 @@ def projects(request, tag=None):
         'items': listing,
         'subpage': tag
     }, context_instance=RequestContext(request))
-
 
 def projectview(request, item):
     # listing = Project.objects.filter(project_number=item)
@@ -374,7 +352,6 @@ def projectview(request, item):
         'tags': displayitem.tags.all(),
         'language_list': language_list
     }, context_instance=RequestContext(request))
-
 
 def publications(request, tag='featured'):
     featured = Publication.objects.filter(featured=1)
@@ -416,7 +393,6 @@ def publications(request, tag='featured'):
         'subpage': tag
     }, context_instance=RequestContext(request))
 
-
 def pubview(request, item):
 
     try:
@@ -433,7 +409,6 @@ def pubview(request, item):
         'language_list': language_list
     }, context_instance=RequestContext(request))
 
-
 def stories(request):
     listing = StoryPage.objects.all().order_by('title')
     featured = listing.filter(featured=1)
@@ -442,7 +417,6 @@ def stories(request):
         'items': listing,
         'featured': featured,
     }, context_instance=RequestContext(request))
-
 
 def storyview(request, item):
     # listing = Publication.objects.filter(item_number=item)
@@ -458,7 +432,6 @@ def storyview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
-
 
 # See production settings file for additional info on setup.
 class SearchHaystackView(SearchView):
@@ -482,7 +455,6 @@ class SearchHaystackView(SearchView):
         context['prodevs'] = [r for r in results if r.model_name == 'prodev']
 
         return context
-
 
 # This brute force search view was deprecated in favor of the Haystack implementation for more comprehensive indexing.
 def search(request):

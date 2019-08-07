@@ -85,6 +85,7 @@ class ItemsManager(models.Manager):
 
         return items
 
+
 class ItemTag(models.Model):
     tag = models.CharField(max_length=180, unique=True)
 
@@ -95,6 +96,7 @@ class ItemTag(models.Model):
     def __unicode__(self):
         return self.tag
 
+
 class TaggedItem(models.Model):
     item_tag = models.ForeignKey(ItemTag)
     content_type = models.ForeignKey(ContentType)
@@ -104,12 +106,14 @@ class TaggedItem(models.Model):
     def __unicode__(self):
         return self.item_tag.tag
 
+
 class ContactRole(models.Model):
     title = models.CharField(max_length=128)
     list_rank = models.IntegerField(blank=True, default=1000)
 
     def __unicode__(self):
         return self.title
+
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50L)
@@ -166,6 +170,7 @@ class Contact(models.Model):
     def __unicode__(self):
         return self.last_name
 
+        
 class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)

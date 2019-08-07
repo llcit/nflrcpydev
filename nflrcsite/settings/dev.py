@@ -28,6 +28,7 @@ DATABASES = {
 # Append apps used in development not production.
 
 MEDIA_ROOT = PROJECT_DIR.child('media', 'nflrc')
+MEDIA_URL = 'http://localhost/media/nflrc/'
 
 # FILEBROWSER SETTINGS
 from django.conf import settings
