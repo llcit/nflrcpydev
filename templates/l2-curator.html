@@ -7,23 +7,34 @@
 
 
 {% block stories %}
-<div id="spin" class="col-md-2 col-md-offset-5 text-center loader" hidden></div>
-<div class="col-md-8 col-md-offset-2">
+<div id="modalwait" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+            <p id="spinwait"><i class="fa fa-spinner fa-4x fa-spin"></i></p> 
+            <p>Updating layouts, hold tight!</p>
+        </div>
+      </div>
+    </div>
+</div>
 
 <p class="">Flash feature = <strong>top ranked item</strong> | Sticky features = <strong>3 bottom ranked items</strong> <i>Click update rankings to save changes.</i></p>
+
 <form id="ranker" method='post' action="{% url 'curator_update_rank' %}">{% csrf_token %}
     <p><input type="submit" value="update ranking" class="btn btn-lg btn-success"></p>
-    <ul id="sortable" class="list-unstyled">
-        {% for item in featured %}
-            <li class="text-larger" style="cursor:ns-resize;"><p>
-                <input type='hidden' name="{{item.classname}}.{{item.pk}}" class="featured" data-type="{{item.classname}}" data-rank="{{item.featured_rank}}" data-id="{{item.pk}}" value="{{forloop.counter0}}"/>
-                <span class="btn btn-default btn-sm">{{forloop.counter0}}. {{item.title}}</span> <span class="badge badge-sm">{{item.displayname}}</span> <span class="label label-success label-sm">{{item.grant_cycle}}</span>
-            </p></li>
-        {% endfor %}
-    </ul>
-    
+    <div class="gridrow">    
+        <ul id="sortable" class="list-unstyled">            
+            {% for item in featured %}
+                <li class="gridcolumn" style="cursor:move;">                
+                    <p>{{forloop.counter0}}</p>
+                    <input type='hidden' name="{{item.classname}}.{{item.pk}}" class="featured" value="{{forloop.counter0}}"/>     
+                    <p><img src="{{MEDIA_URL}}img/{{item.image}}"> </p>
+                    <p>{{ item.title | safe | truncatewords:8 }}</p>               
+                </li>
+            {% endfor %}            
+        </ul>
+    </div>
 </form>
-</div>
 
 
 		
@@ -41,7 +52,7 @@
 
     document.addEventListener('submit', e => {
         e.preventDefault();
-        document.getElementById('spin').toggleAttribute("hidden");
+        $(document.getElementById('modalwait')).modal("toggle");
         var form = e.target;
         var featured = $(".featured");
         
@@ -49,19 +60,7 @@
             // Update rank value for each item
             featured[i].setAttribute("value", i);
         }
-        
-        form.submit();      
-        // fetch(form.action, {
-        //     method: form.method,            
-        //     body: new FormData(form)
-        // })
-        // .then(function(response) {
-        //     return response.json();
-        // })
-        // .then(function(json_data) {
-        //     console.log(JSON.stringify(json_data));
-        //     document.getElementById('spin').setAttributeNS("hidden");
-        // });      
+        form.submit();
       });
 
 {% endblock customjavascript %}
