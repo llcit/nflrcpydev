@@ -87,6 +87,10 @@ urlpatterns = patterns('',
     # Prototype index -- temporary --
     url(r'^prototype/$', 'nflrcapp.views.home_prototype', name='proto'),
 
+    # Prototype admin (curator) ui -- temporary --
+    
+    url(r'^admin/curator/$', 'nflrcapp.views.curator_view', name='curator'),
+    url(r'^admin/curator/update_rank/$', 'nflrcapp.views.curator_update_rank_view', name='curator_update_rank'),
 
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),

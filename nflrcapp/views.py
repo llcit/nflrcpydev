@@ -10,7 +10,7 @@ from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -496,7 +496,39 @@ def search(request):
 
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
 
+@login_required
+def curator_view(request):        
+    return render_to_response(
+        'l2-curator.html', 
+        {'featured': aggit(), }, 
+        context_instance=RequestContext(request))
 
+@login_required
+def curator_update_rank_view(request):
+    if request.method == 'POST':
+        data = request.POST
+        for key, rank in data.items():
+            if key != 'csrfmiddlewaretoken':
+                d = key.split('.')
+                obj_nm = d[0]
+                obj_pk = d[1]
+
+                if obj_nm == 'projects':
+                    obj = Project.objects.get(pk=obj_pk)
+                elif obj_nm == 'prodev':
+                    obj = Prodev.objects.get(pk=obj_pk)
+                elif obj_nm == 'about':
+                    obj = StoryPage.objects.get(pk=obj_pk)
+                else:
+                    obj = Publication.objects.get(pk=obj_pk)
+                obj.featured_rank = rank
+                obj.save()
+    # return JsonResponse({'foo': 'bar'})
+    # return render_to_response(
+    #     'l2-curator.html', 
+    #     {'featured': aggit(), }, 
+    #     context_instance=RequestContext(request))
+    return HttpResponseRedirect(reverse('curator'))
 
 def aggit():
     featured1 = Publication.objects.filter(featured=True)

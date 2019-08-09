@@ -59,14 +59,23 @@
 
 {% block item-meta %}
 	<!-- Metadata items -->
-    <h1>{{ item.title | safe }}</h1>
+	<h1>{{ item.title | safe }} </h1>
+	<table><tr>
+		<td>
+			<!-- Go to www.addthis.com/dashboard to customize your tools -->
+			<div class="addthis_sharing_toolbox"></div>
+		</td>
+	</tr></table>
 
+	<p><button id="admin-detail-btn" class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#item-admin-details"><i class="fa fa-info" aria-hidden="true"></i> info <i id="carrot" class="fa fa-caret-down" aria-hidden="true"></i></button></p>
+	
+	<div id="item-admin-details" class="collapse">
 	<ul id="meta-list" class="nav nav-stacked">
 
 		{% if item.classname == 'publications' %}
 
 			<li><div>{{ item.author }} {% if item.year == 'ongoing' %} | Ongoing Project{% elif item.year != '' %} ({{ item.year }}){% endif %}</div></li>
-            {% if item.grant_cycle %}<li><div>Grant Period: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
+            {% if item.grant_cycle %}<li><div>Grant Periods: <a href="/projects/{{ item.grant_cycle }}">{{ item.grant_cycle }}</a></div> </li>{% endif %}
 			<li><div>{% for t in item.tags.all %} <span class="label"><a href="/publications/{{ t }}">{{ t.item_tag }}</a></span>{% endfor %}</div></li>
 
 
@@ -161,15 +170,9 @@
    			</div>
      		</td>
 			{% endif %}
-			<td>
-				<!-- Go to www.addthis.com/dashboard to customize your tools -->
-				<div class="addthis_sharing_toolbox"></div>
-			</td>
+		</tr></table>
+	</div>
 
-
-			</tr>
-
-		</table>
 
         {% endif %}
  {% endblock item-meta %}
