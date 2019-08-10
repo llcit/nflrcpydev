@@ -4,6 +4,15 @@
 
 
 {% block pageheading %}
+<div class="submenu"> 
+	<ul class="nav nav-pills-flex">		
+		<li class="navy"><a href="/about" class="static_a_display">About</a></li>
+		<li class="red"><a href="/projects" class="static_a_display">Projects</a></li>
+		<li class=""><a href="/publications" class="static_a_display">Publications</a></li>
+		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
+		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+	</ul>
+</div>
 
 <h4>
 		<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
@@ -48,8 +57,6 @@
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>
-				<!--<p><span class="badge_container badge_{{ p.classname }}"> {{ p.displayname }} <small>({{ subpage }})</small> </span> </p>-->
-                <p><a href="/publications" class="badge_container badge_publications static_a_display">More Publications</a></p>
 			</div>
 			</a>
 			

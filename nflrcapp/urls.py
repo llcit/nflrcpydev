@@ -21,11 +21,8 @@ from badge_site.views import (
 urlpatterns = patterns('',
     # Handle cfm requests from the wild.
     url(r'^get_publication\.cfm$', 'nflrcapp.views.cfm_publication_handler', name='cfm_publication_handler'),
-
     url(r'^searchsite_pub\.cfm$', 'nflrcapp.views.cfm_searchsite_handler', name='cfm_searchsite_handler'),
-
     url(r'^get_project\.cfm$', 'nflrcapp.views.cfm_project_handler', name='cfm_project_handler'),
-
     url(r'^(?P<cfmtoken>.*)\.cfm/$', 'nflrcapp.views.cfm_global_handler', name='cfm_global_handler'),
 
     # SECURE FILE HANDLER
@@ -33,7 +30,6 @@ urlpatterns = patterns('',
 
     # BADGE SERVER
     url(r'^badgefarm/$', IndexView.as_view(), name='badge_home'),
-
 
     url(r'^badgefarm/issuer/add/$', IssuerCreateView.as_view(), name='create_issuer'),
     url(r'^badgefarm/issuer/edit/(?P<pk>\d+)/$', IssuerUpdateView.as_view(), name='edit_issuer'),
@@ -70,7 +66,6 @@ urlpatterns = patterns('',
     url(r'^events/(?P<tag>[-\w]+)/$', 'nflrcapp.views.prodev', name='events'),
     url(r'^events/$', 'nflrcapp.views.prodev', name='events_index'),
 
-
     url(r'^languages/(?P<tag>[-\w]+)/$', 'nflrcapp.views.languages', name='languages'),
     url(r'^languages/$', 'nflrcapp.views.languages', name='languages_index'),
 
@@ -87,8 +82,7 @@ urlpatterns = patterns('',
     # Prototype index -- temporary --
     url(r'^prototype/$', 'nflrcapp.views.home_prototype', name='proto'),
 
-    # Prototype admin (curator) ui -- temporary --
-    
+    # Prototype admin (curator) ui -- temporary --  
     url(r'^admin/curator/$', 'nflrcapp.views.curator_view', name='curator'),
     url(r'^admin/curator/update_rank/$', 'nflrcapp.views.curator_update_rank_view', name='curator_update_rank'),
 
@@ -108,10 +102,6 @@ urlpatterns = patterns('',
 
     # LEVEL 1 (root)
     url(r'^$', 'nflrcapp.views.home'),
-
-
-
-
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

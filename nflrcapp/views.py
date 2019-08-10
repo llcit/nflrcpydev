@@ -22,6 +22,7 @@ from sendfile import sendfile
 
 from nflrcapp.models import *
 
+grant_cycle_map = {'current':'2018-2022','2018-2022':'2018-2022', '2014-2018':'2014-2018', '2010-2014':'2010-2014','2006-2010':'2006-2010','2002-2006':'2002-2006','1999-2002':'1999-2002','1996-1999':'1996-1999','1993-1996':'1993-1996'}
 
 def generate_search_query_url(qstring):
     queryparams = '?'+urlencode({'q': qstring})
@@ -295,54 +296,29 @@ def prodevview(request, item):
     }, context_instance=RequestContext(request))
 
 def projects(request, tag=None):
-    """ This query may filter on grant cycle. Currently grant cycle is a model property. It is
-        also specified as a tag on projects. We can filter on this tag but it may pull various other such
-        tagged items.
+    """This view will accept a parameter (tag) that will filter on grant cycle or a any given tag.
     """
-    prebuilt_filter = None
+    
+    if tag: # A tag is provided in the request url
+        grant_cycle_tag = grant_cycle_map.get(tag)
+        if grant_cycle_tag:
+            listing = Project.objects.filter(grant_cycle__contains=grant_cycle_tag).order_by('featured_rank', 'listing_rank', '-grant_cycle')
 
-    if tag:
-        if tag == 'current':
-            prebuilt_filter = '2018-2022'
-        elif tag == '2014-2018':
-            prebuilt_filter = tag
-        elif tag == '2010-2014':
-            prebuilt_filter = tag
-        elif tag == '2006-2010':
-            prebuilt_filter = tag
-        elif tag == '2002-2006':
-            prebuilt_filter = tag
-        elif tag == '1999-2002':
-            prebuilt_filter = tag
-        elif tag == '1996-1999':
-            prebuilt_filter = tag
-        elif tag == '1993-1996':
-            prebuilt_filter = tag
-
-        if prebuilt_filter:
-            listing = Project.objects.filter(grant_cycle__contains=prebuilt_filter).order_by('featured_rank', 'listing_rank')
-
-        else:
+        else: # Some other tag was submitted - query over tagged items for this type of content.
             item_type = ContentType.objects.get_for_model(Project)
-            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(
-                item_tag__tag=tag).order_by('-object_id')
-            listing = []
-            for i in tagged_items:
-                listing.append(i.content_object)
+            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(item_tag__tag=tag).order_by('-object_id')
+            listing = [i.content_object for i in tagged_items]
     else:
         # No tag -- show all projects
-        listing = Project.objects.all().order_by('-grant_cycle', 'featured_rank', 'listing_rank')
-
+        listing = Project.objects.all().order_by('-grant_cycle', 'listing_rank')
+    
+    
     return render_to_response('l2-projects.html', {
         'items': listing,
         'subpage': tag
     }, context_instance=RequestContext(request))
 
 def projectview(request, item):
-    # listing = Project.objects.filter(project_number=item)
-    # people = PersonProject.objects.filter(project_number=tag).select_related('contact_id')
-
-
     try:
         displayitem = Project.objects.get(project_number=item)
         language_list = displayitem.language.split(',')
@@ -523,11 +499,6 @@ def curator_update_rank_view(request):
                     obj = Publication.objects.get(pk=obj_pk)
                 obj.featured_rank = rank
                 obj.save()
-    # return JsonResponse({'foo': 'bar'})
-    # return render_to_response(
-    #     'l2-curator.html', 
-    #     {'featured': aggit(), }, 
-    #     context_instance=RequestContext(request))
     return HttpResponseRedirect(reverse('curator'))
 
 def aggit():

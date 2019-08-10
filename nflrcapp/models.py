@@ -286,8 +286,7 @@ class Project(models.Model):
     featured = models.BooleanField(blank=True, default=False)
     featured_rank = models.IntegerField(blank=True, default=0, help_text='higher the number, lower the rank')
     headline = models.BooleanField(default=False)
-    headline_tag = models.CharField(
-        max_length=512, blank=True, null=True, default='')
+    headline_tag = models.CharField(max_length=512, blank=True, null=True, default='')
     tags = generic.GenericRelation(TaggedItem)
 
     objects = ItemsManager()
@@ -301,8 +300,7 @@ class Project(models.Model):
         return name
 
     def properties(self):
-        properties = [(field.name, field.value_to_string(self))
-                      for field in Project._meta.fields]
+        properties = [(field.name, field.value_to_string(self)) for field in Project._meta.fields]
         return properties
 
     # method to return dictionary with meta information to display

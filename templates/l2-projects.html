@@ -4,6 +4,16 @@
 
 {% block pageheading %}
 
+<div class="submenu"> 
+	<ul class="nav nav-pills-flex">		
+		<li class="navy"><a href="/about" class="static_a_display">About</a></li>
+		<li class=""><a href="/projects" class="static_a_display">Projects</a></li>
+		<li class="blue"><a href="/publications" class="static_a_display">Publications</a></li>
+		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
+		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+	</ul>
+</div>
+
 <h4>
 	<span class="badge badge_projects_fill">{{ items|length }}</span>
 	{% if subpage %} {{ subpage|title }} {% endif %}
@@ -29,7 +39,6 @@
 {% endblock pageheading %}
 
 {% block subheadlines %}
-
 <div class="submenu">
     <ul class="nav nav-pills-flex">
     <li class="{% if not subpage %}red{% endif %}"><a href="{% url 'projects_index'%}">All Projects</a></li>
@@ -48,10 +57,12 @@
 	{% for p in items %}
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
+				{% if user.is_authenticated %}
+					<p>{{ p.grant_cycle }}</br>{{ p.featured_rank }}.{{ p.listing_rank }}</p>
+				{% endif %}
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>
-				<p><a href="/projects" class="badge_container badge_project static_a_display">More Projects</a></p>
 			</div>
 		</a>
 	{% endfor %}
