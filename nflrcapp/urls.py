@@ -7,7 +7,7 @@ admin.autodiscover()
 
 from filebrowser.sites import site
 
-from .views import SearchHaystackView
+from .views import SearchHaystackView, prodev_update_view, pub_update_view, project_update_view
 from .models import NflrcNewsFeed
 
 from badge_site.views import (
@@ -57,14 +57,18 @@ urlpatterns = patterns('',
     url(r'^staffdocs/view/(?P<item>\d+)/$', 'nflrcapp.views.privateview', name='staffdocsview'),
 
     url(r'^about/$', 'nflrcapp.views.about', name='about_index'),
+    url(r'^about/update/(?P<pk>\d+)/$', 'nflrcapp.views.story_update_view', name='story_update_view'),
     url(r'^about/(?P<item>\d+)/$', 'nflrcapp.views.aboutview', name='aboutview'),
+
 
     url(r'^contact/$', 'nflrcapp.views.contact', name='contact_index'),
     url(r'^contact/view/(?P<person>\d+)/$', 'nflrcapp.views.contactview', name='contactview'),
 
     url(r'^events/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.prodevview', name='eventview'),
+    url(r'^events/update/(?P<pk>\d+)/$', prodev_update_view.as_view(), name='event_update_view'),
     url(r'^events/(?P<tag>[-\w]+)/$', 'nflrcapp.views.prodev', name='events'),
     url(r'^events/$', 'nflrcapp.views.prodev', name='events_index'),
+    
 
     url(r'^languages/(?P<tag>[-\w]+)/$', 'nflrcapp.views.languages', name='languages'),
     url(r'^languages/$', 'nflrcapp.views.languages', name='languages_index'),
@@ -72,10 +76,12 @@ urlpatterns = patterns('',
     url(r'^newswire/$', NflrcNewsFeed(), name='news-wire'),
 
     url(r'^projects/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.projectview', name='projectview'),
+    url(r'^projects/update/(?P<pk>\d+)/$', project_update_view.as_view(), name='project_update_view'),
     url(r'^projects/(?P<tag>[-\w]+)/$', 'nflrcapp.views.projects', name='projects'),
     url(r'^projects/$', 'nflrcapp.views.projects', name='projects_index'),
 
     url(r'^publications/view/(?P<item>[-\w]+)/$', 'nflrcapp.views.pubview', name='pubview'),
+    url(r'^publications/update/(?P<pk>\d+)/$', pub_update_view.as_view(), name='pub_update_view'),
     url(r'^publications/(?P<tag>[-\w]+)/$', 'nflrcapp.views.publications', name='publications'),
     url(r'^publications/$', 'nflrcapp.views.publications', name='publications_index'),
 
@@ -85,6 +91,7 @@ urlpatterns = patterns('',
     # Prototype admin (curator) ui -- temporary --  
     url(r'^admin/curator/$', 'nflrcapp.views.curator_view', name='curator'),
     url(r'^admin/curator/update_rank/$', 'nflrcapp.views.curator_update_rank_view', name='curator_update_rank'),
+    url(r'^admin/curator/update_feature_rank/$', 'nflrcapp.views.curator_update_featured_rank_view', name='curator_update_feature_rank'),
 
     url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
@@ -101,7 +108,7 @@ urlpatterns = patterns('',
 
 
     # LEVEL 1 (root)
-    url(r'^$', 'nflrcapp.views.home'),
+    url(r'^$', 'nflrcapp.views.home', name='homestead'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

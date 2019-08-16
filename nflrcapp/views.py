@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import os
 from itertools import chain
 from urllib import urlencode
-from operator import attrgetter
+from operator import attrgetter, itemgetter
 
 from django.conf import settings
 
@@ -15,12 +15,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.contrib import messages
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import render_to_response, redirect, get_object_or_404, render
+from django.views.generic.edit import UpdateView
 
 from haystack.generic_views import SearchView
 from sendfile import sendfile
 
 from nflrcapp.models import *
+from nflrcapp.forms import ProdevForm, PublicationForm, ProjectForm, StoryPageForm
+
 
 grant_cycle_map = {'current':'2018-2022','2018-2022':'2018-2022', '2014-2018':'2014-2018', '2010-2014':'2010-2014','2006-2010':'2006-2010','2002-2006':'2002-2006','1999-2002':'1999-2002','1996-1999':'1996-1999','1993-1996':'1993-1996'}
 
@@ -159,8 +162,8 @@ def home_prototype(request):
         chain(featured3, featured4, featured2, featured1), key=attrgetter('featured_rank'))
     feature_flash = featured[0]
     featured = featured[1:]
-    feature_sticky = featured[-3:] # last three ranked
-    featured = featured[:-3] # all but last three
+    feature_sticky = featured[-5:] # last three ranked
+    featured = featured[:-5] # all but last three
 
 
     return render_to_response('index-prototype.html', {'featured': featured, 'feature_flash': feature_flash, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
@@ -258,19 +261,26 @@ def languages(request, tag='featured'):
 def prodev(request, tag=None):
     featured = None
     if tag:
-        listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('featured_rank', 'listing_rank')
+        listing = Prodev.objects.filter(pdtype__icontains=tag).order_by('-featured', '-datestamp', 'listing_rank')
         if not listing: # Retrieve items by tag
             listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
+            # sort by 'featured', 'datestamp', 'listing_rank'
+            listing = sorted(listing,key=attrgetter('listing_rank'))
+            listing = sorted(listing,key=attrgetter('datestamp'), reverse=True)
+            listing = sorted(listing,key=attrgetter('featured'), reverse=True)
     else:
-        tag = 'upcoming'
+        tag = 'upcoming' # default tag is to filter on upcoming
         listing = Prodev.objects.get_tagged_items(tag=tag, item_type='prodev')
-        # featured = Prodev.objects.filter(featured=True).order_by('featured_rank')
-
+        listing = sorted(listing,key=attrgetter('listing_rank'))
+        listing = sorted(listing,key=attrgetter('datestamp'), reverse=True)
+        listing = sorted(listing,key=attrgetter('featured'), reverse=True)
+     
     return render_to_response('l2-events.html', {
         'events': listing,
         # 'featured': featured,
         'pdtype_tag': tag
     }, context_instance=RequestContext(request))
+
 
 def workshop_conf(request):
     listing = Prodev.objects.filter().order_by('-id', 'pdtype')
@@ -295,6 +305,13 @@ def prodevview(request, item):
         'language_list': language_list
     }, context_instance=RequestContext(request))
 
+
+class prodev_update_view(UpdateView):
+    model = Prodev
+    template_name = 'l2-item_update.html'
+    form_class = ProdevForm
+
+
 def projects(request, tag=None):
     """This view will accept a parameter (tag) that will filter on grant cycle or a any given tag.
     """
@@ -302,15 +319,19 @@ def projects(request, tag=None):
     if tag: # A tag is provided in the request url
         grant_cycle_tag = grant_cycle_map.get(tag)
         if grant_cycle_tag:
-            listing = Project.objects.filter(grant_cycle__contains=grant_cycle_tag).order_by('featured_rank', 'listing_rank', '-grant_cycle')
+            listing = Project.objects.filter(grant_cycle__contains=grant_cycle_tag).order_by('-featured', 'listing_rank', '-grant_cycle')
 
         else: # Some other tag was submitted - query over tagged items for this type of content.
             item_type = ContentType.objects.get_for_model(Project)
-            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(item_tag__tag=tag).order_by('-object_id')
+            tagged_items = TaggedItem.objects.filter(content_type=item_type).filter(item_tag__tag=tag)
             listing = [i.content_object for i in tagged_items]
+            # sort by featured, listing_rank then grant cycle descending
+            listing = sorted(listing, key=attrgetter('grant_cycle'), reverse=True)
+            listing = sorted(listing, key=attrgetter('listing_rank'))
+            listing = sorted(listing, key=attrgetter('featured'), reverse=True)
     else:
         # No tag -- show all projects
-        listing = Project.objects.all().order_by('-grant_cycle', 'listing_rank')
+        listing = Project.objects.all().order_by('-featured', 'listing_rank', '-grant_cycle')
     
     
     return render_to_response('l2-projects.html', {
@@ -334,8 +355,15 @@ def projectview(request, item):
         'language_list': language_list
     }, context_instance=RequestContext(request))
 
+
+class project_update_view(UpdateView):
+    model = Project
+    template_name = 'l2-item_update.html'
+    form_class = ProjectForm
+
+
 def publications(request, tag='featured'):
-    featured = Publication.objects.filter(featured=1)
+    featured = Publication.objects.filter(featured=True)
 
 
     # Prebuilt queries on publication categories
@@ -366,7 +394,7 @@ def publications(request, tag='featured'):
     else:
         listing = featured
 
-    # listing = listing.order_by('category', '-year')
+    listing = listing.order_by('-featured', '-year')
 
     return render_to_response('l2-publications.html', {
         'items': listing,
@@ -389,6 +417,12 @@ def pubview(request, item):
         'shortcut': ITEM_TYPE_SHORTCUTS[displayitem.category],
         'language_list': language_list
     }, context_instance=RequestContext(request))
+
+
+class pub_update_view(UpdateView):
+    model = Publication
+    template_name = 'l2-item_update.html'
+    form_class = PublicationForm
 
 def stories(request):
     listing = StoryPage.objects.all().order_by('title')
@@ -413,6 +447,13 @@ def storyview(request, item):
     return render_to_response('item-display.html', {
         'item': displayitem,
     }, context_instance=RequestContext(request))
+
+
+class story_update_view(UpdateView):
+    model = StoryPage
+    template_name = 'l2-item_update.html'
+    form_class = StoryPageForm
+
 
 # See production settings file for additional info on setup.
 class SearchHaystackView(SearchView):
@@ -473,16 +514,23 @@ def search(request):
     return render_to_response('search-results.html', {}, context_instance=RequestContext(request))
 
 @login_required
-def curator_view(request):        
+def curator_view(request):
+    obj_nm = request.GET.get('content')
+    items = aggit(obj_type=obj_nm)
+
+
     return render_to_response(
         'l2-curator.html', 
-        {'featured': aggit(), }, 
+        {'items': items, 'obj_type': obj_nm}, 
         context_instance=RequestContext(request))
 
 @login_required
-def curator_update_rank_view(request):
+def curator_update_featured_rank_view(request):
     if request.method == 'POST':
-        data = request.POST
+        data = request.POST.copy()
+        data.pop('csrfmiddlewaretoken')
+        obj_type = data.pop('obj_type')
+
         for key, rank in data.items():
             if key != 'csrfmiddlewaretoken':
                 d = key.split('.')
@@ -499,14 +547,49 @@ def curator_update_rank_view(request):
                     obj = Publication.objects.get(pk=obj_pk)
                 obj.featured_rank = rank
                 obj.save()
-    return HttpResponseRedirect(reverse('curator'))
+    return HttpResponseRedirect(reverse('curator')+'?content=home')
 
-def aggit():
-    featured1 = Publication.objects.filter(featured=True)
-    featured2 = Project.objects.filter(featured=True)
-    featured3 = Prodev.objects.filter(featured=True)
-    featured4 = StoryPage.objects.filter(featured=True)
-    featured = sorted(
-        chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
-    
-    return featured
+@login_required
+def curator_update_rank_view(request):
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data.pop('csrfmiddlewaretoken')
+        obj_type = data.pop('obj_type')[0]
+        
+        for key, rank in data.items():
+            if key != 'csrfmiddlewaretoken':
+                d = key.split('.')
+                obj_nm = d[0]
+                obj_pk = d[1]
+
+                if obj_nm == 'projects':
+                    obj = Project.objects.get(pk=obj_pk)
+                elif obj_nm == 'prodev':
+                    obj = Prodev.objects.get(pk=obj_pk)
+                elif obj_nm == 'about':
+                    obj = StoryPage.objects.get(pk=obj_pk)
+                else:
+                    obj = Publication.objects.get(pk=obj_pk)
+                obj.listing_rank = rank
+                obj.save()
+    return HttpResponseRedirect(reverse('curator')+'?content='+obj_type)
+
+def aggit(obj_type='home'):
+    if obj_type == 'home':
+        featured1 = Publication.objects.filter(featured=True)
+        featured2 = Project.objects.filter(featured=True)
+        featured3 = Prodev.objects.filter(featured=True)
+        featured4 = StoryPage.objects.filter(featured=True)
+        items = sorted(
+            chain(featured1, featured2, featured3, featured4), key=attrgetter('featured_rank'))
+    elif obj_type == 'projects':
+        items = Project.objects.all().order_by('-featured', 'listing_rank', '-grant_cycle')
+    elif obj_type == 'events':
+        items = Prodev.objects.all().order_by('-featured', '-datestamp', 'listing_rank')
+    elif obj_type == 'stories':
+        items = StoryPage.objects.all().order_by('-featured', 'listing_rank')
+    elif obj_type == 'publications':
+        items = Publication.objects.all().order_by('-featured', '-year')
+    else:
+        items = []
+    return items

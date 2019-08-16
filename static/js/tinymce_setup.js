@@ -62,8 +62,8 @@ tinyMCE.init({
     remove_script_host: true,
 
     // Layout
-    width: 758,
-    height: 300,
+    width: "100%",
+    height: 980,
     indentation: '10px',
     
     // Content CSS
@@ -80,7 +80,7 @@ tinyMCE.init({
     theme_advanced_path: false,
     theme_advanced_blockformats: 'p,h1,h2,h3,h4,pre',
     theme_advanced_resizing: true,
-    theme_advanced_resize_horizontal: false,
+    theme_advanced_resize_horizontal: true,
     theme_advanced_resizing_use_cookie: true,
     
     // Templates

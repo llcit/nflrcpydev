@@ -59,7 +59,7 @@
 
 {% block item-meta %}
 	<!-- Metadata items -->
-	<h1>{{ item.title | safe }} </h1>
+	<h1>{{ item.title | safe }} {% if user.is_staff %} <a href="{% url item.get_edit_url item.pk %}" class="btn btn-sm"><i class="fa fa-pencil fa-pencil-2x"></i></a> {% endif %}</h1>
 	<table><tr>
 		<td>
 			<!-- Go to www.addthis.com/dashboard to customize your tools -->

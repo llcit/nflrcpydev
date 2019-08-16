@@ -11,6 +11,7 @@
 		<li class=""><a href="/publications" class="static_a_display">Publications</a></li>
 		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
 		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+		{% if user.is_authenticated %}<li><a href="{% url 'curator' %}?content=publications"> <i class="fa fa-gear"></i> curate</a></li>{% endif %}
 	</ul>
 </div>
 
@@ -54,6 +55,9 @@
 
 			<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
+				{% if user.is_superuser %}
+					<p class="small">{{forloop.counter0}} {{ p.grant_cycle }}</br>featured: {{ p.featured }}/{{p.featured_rank}} listing: {{ p.listing_rank }} pub: {{p.year}}</p>
+				{% endif %}
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ p.thumbnail_desc | safe }}</h5>

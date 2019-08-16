@@ -1,0 +1,39 @@
+<!-- update_view.html -->
+{% extends 'wrap.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- ROW 1 -->
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 block-center">
+			<div class="lead text-center">Updating {{ object.displayname }} </div>
+			<p class="text-center">{{ object.title }}</p>
+			<div>
+				<form method="post" action=".">{% csrf_token %}
+					{{ form|crispy }}
+					<button type="submit">Update {{ object.title }}</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block local_js %} 
+<script src="https://cdn.tiny.cloud/1/5431g7p0i2nn12nzr0mlla12g0huf55mnofuoelfzshiiuhz/tinymce/5/tinymce.min.js"></script>
+
+<script>
+	tinymce.init({
+		selector: 'textarea',
+		content_css_cors: true,
+		content_css: ['https://fonts.googleapis.com/css?family=Open+Sans:400,300', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700', 'https://fonts.googleapis.com/css?family=Roboto+Condensed', '{% static "css/bootstrap/dist/css/bootstrap.min.css" %}','{% static "css/site-2019.css" %}', ],
+		plugins: ['code', 'visualblocks', 'fullscreen'],
+		height: 900,
+		menubar: false,
+  		toolbar: 'undo redo | code visualblocks fullscreen',
+	});
+</script>
+{% endblock local_js %}

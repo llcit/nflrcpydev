@@ -18,18 +18,42 @@
     </div>
 </div>
 
-<p class="">Flash feature = <strong>top ranked item</strong> | Sticky features = <strong>3 bottom ranked items</strong> <i>Click update rankings to save changes.</i></p>
+{% if obj_type == 'home' %}
+    <h3>Editing <a class="btn btn-md btn-primary" href="{% url 'homestead' %}"><i class="fa fa-angle-double-left"></i> home page</a> Layout </h3> 
+    <p><i>Display ordering</i>: featured rank property of each item marked as "featured."</p>
+    <p>Sorting this page affects the ordering of featured items on the home page. This ordering is also used to determine the structure of the home page layout as follows:</p>
+    <p>Flash feature = <strong>top ranked item</strong> | Sticky features = <strong>5 bottom ranked items</strong> <i>Click update order to save changes.</i></p>
 
-<form id="ranker" method='post' action="{% url 'curator_update_rank' %}">{% csrf_token %}
-    <p><input type="submit" value="update ranking" class="btn btn-lg btn-success"></p>
+{% elif obj_type == 'projects' %}
+    <h3>Editing <a class="btn btn-md btn-primary" href="{% url 'projects_index' %}"><i class="fa fa-angle-double-left"></i> projects</a> Layout </h3> 
+    <p><i>Display ordering</i>: featured ==> then by default item listing ==> then by grant cycle (descending)</p>
+    <p>Changing the order on this page updates the default item listing. <i>Click update order to save changes.</i></p>    
+
+{% elif obj_type == 'events' %}
+    <h3>Editing <a class="btn btn-md btn-primary" href="{% url 'events_index' %}"><i class="fa fa-angle-double-left"></i> events</a> Layout </h3> 
+    <p><i>Display ordering</i>: featured ==> then date (descending) ==> then by default item listing</p>
+    <p>Changing the order on this page updates the default item listing. Consider making an event story "featured" to make it appear before all others. <i>Click update order to save changes.</i></p>    
+
+{% elif obj_type == 'publications' %}
+    <h3>Editing <a class="btn btn-md btn-primary" href="{% url 'publications_index' %}"><i class="fa fa-angle-double-left"></i> publications</a> Layout </h3> 
+    <p><i>Display ordering</i>: featured ==> then by publication year (descending) ==> then by default item listing</p>
+    <p>Changing the order on this page updates the default item listing. Consider making a publication story "featured" to make it appear before all others. <i>Click update order to save changes.</i></p>
+{% endif %}
+
+<form id="ranker" method='post' action="{% if obj_type == 'home'%}{% url 'curator_update_feature_rank' %}{% else %}{% url 'curator_update_rank' %}{% endif %}">{% csrf_token %}
+    <input type='hidden' name="obj_type" value="{{ obj_type }}"/> 
+    <p><input type="submit" value="update order" class="btn btn-md btn-success"></p>
     <div class="gridrow">    
         <ul id="sortable" class="list-unstyled">            
-            {% for item in featured %}
-                <li class="gridcolumn" style="cursor:move;">                
-                    <p>{{forloop.counter0}}</p>
-                    <input type='hidden' name="{{item.classname}}.{{item.pk}}" class="featured" value="{{forloop.counter0}}"/>     
+            {% for item in items %}
+                <li class="gridcolumn {% if item.featured %} bg-success {% endif %}" style="cursor:move;">            
+                    <a href="{% url item.get_edit_url item.pk %}" class="btn btn-sm"><i class="fa fa-gear fa-gear-2x"></i></a>
+                    {% if user.is_superuser %}
+					<p class="small">{{forloop.counter0}} {{ item.grant_cycle }}</br>featured: {{ item.featured }}/{{item.featured_rank}} listing: {{ item.listing_rank }} pub: {{item.year}} date: {{item.datestamp}}</p>
+				    {% endif %}
+                    <input type='hidden' name="{{item.classname}}.{{item.pk}}" class="item_pos" value="{{forloop.counter0}}"/>     
                     <p><img src="{{MEDIA_URL}}img/{{item.image}}"> </p>
-                    <p>{{ item.title | safe | truncatewords:8 }}</p>               
+                    <p>{{ item.title | safe | truncatewords:8 }}</p>
                 </li>
             {% endfor %}            
         </ul>
@@ -54,11 +78,11 @@
         e.preventDefault();
         $(document.getElementById('modalwait')).modal("toggle");
         var form = e.target;
-        var featured = $(".featured");
+        var item_objs = $(".item_pos");
         
-        for( var i = 0; i < featured.length; i++) {
+        for( var i = 0; i < item_objs.length; i++) {
             // Update rank value for each item
-            featured[i].setAttribute("value", i);
+            item_objs[i].setAttribute("value", i);
         }
         form.submit();
       });

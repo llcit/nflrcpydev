@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+from datetime import datetime
 from collections import OrderedDict
 from django.core.urlresolvers import reverse
 from itertools import chain
@@ -60,8 +62,6 @@ ITEM_TYPE_SHORTCUTS = {
     'Research Note': 'research-notes',
     'Workshop & Conferences': 'prodev',
 }
-
-
 
 class ItemsManager(models.Manager):
 
@@ -204,6 +204,9 @@ class StoryPage(models.Model):
     def get_absolute_url(self):
         return reverse('aboutview', args=[str(self.id)])
 
+    def get_edit_url(self):
+        return 'story_update_view'
+
     def __unicode__(self):
         return self.title
 
@@ -211,7 +214,8 @@ class StoryPage(models.Model):
 class Prodev(models.Model):
     title = models.CharField(max_length=200L, blank=True)
     language = models.CharField(max_length=100L, blank=True)
-    date = models.CharField(max_length=50L, blank=True)
+    date = models.CharField(max_length=50L, blank=True, help_text='specifies date range of event or other information.')
+    datestamp = models.DateField(editable=True, help_text='this must strictly be a date in format yyyy-mm-dd')
     pdtype = models.CharField(max_length=30L, blank=True, choices=PRODEV_TYPES)
     director = models.CharField(max_length=200L)
     facilitator = models.TextField(blank=True)
@@ -265,6 +269,9 @@ class Prodev(models.Model):
     def get_absolute_url(self):
         return reverse('eventview', args=[str(self.id)])
 
+    def get_edit_url(self):
+        return 'event_update_view'
+
     def __unicode__(self):
         return self.title
 
@@ -316,6 +323,9 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('projectview', args=[str(self.project_number)])
+
+    def get_edit_url(self):
+        return 'project_update_view'
 
     def __unicode__(self):
         return self.title
@@ -412,6 +422,9 @@ class Publication(models.Model):
     def get_absolute_url(self):
         return reverse('pubview', args=[str(self.item_number)])
 
+    def get_edit_url(self):
+        return 'pub_update_view'
+
     def __unicode__(self):
         return self.title
 
@@ -464,6 +477,7 @@ class Software(models.Model):
 
     def classname(self):
         return self.__class__.__name__
+
 
 class NflrcNewsFeed(Feed):
     title = "NFLRC News"

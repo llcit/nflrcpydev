@@ -11,14 +11,18 @@
 		<li class="blue"><a href="/publications" class="static_a_display">Publications</a></li>
 		<li class="green"><a href="/events" class="static_a_display">Events </a></li>
 		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
+		{% if user.is_authenticated %}<li><a href="{% url 'curator' %}?content=projects"> <i class="fa fa-gear"></i> curate</a></li>{% endif %}
 	</ul>
 </div>
 
 <h4>
-	<span class="badge badge_projects_fill">{{ items|length }}</span>
-	{% if subpage %} {{ subpage|title }} {% endif %}
+	<a href="/" class="static_a_display">Home</a> <i class="fa fa-angle-double-right"></i>
+	
+	
 	<a href="/projects" class="badge_projects">Projects</a>
-	|
+	{% if subpage %} <i class="fa fa-angle-double-right"></i> <span class="badge badge_projects_fill">{{ items|length }}</span> {{ subpage|title }} 
+	{% endif %}
+	<i class="fa fa-angle-double-right"></i>
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 	    By grant cycle
@@ -57,8 +61,8 @@
 	{% for p in items %}
 		<a href="{{ p.get_absolute_url }}">
 			<div class="listing shadowboxed">
-				{% if user.is_authenticated %}
-					<p>{{ p.grant_cycle }}</br>{{ p.featured_rank }}.{{ p.listing_rank }}</p>
+				{% if user.is_superuser %}
+					<p>{{forloop.counter0}} {{ p.grant_cycle }}</br>featured: {{ p.featured }} listing: {{ p.listing_rank }}</p>
 				{% endif %}
 				<p> <img src="{{MEDIA_URL}}img/{{ p.image }}"> </p>
 				<h4>{{ p.title | safe | truncatewords:8 }}</h4>

@@ -80,7 +80,7 @@
 
                 <ul  id="searchnav" class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'curator' %}"> <i class="fa fa-gear"></i> curate</a></li>
+                        <li><a href="{% url 'proto' %}"> <i class="fa fa-caret-left"></i><i class="fa fa-caret-left"></i> prototype <i class="fa fa-caret-right"></i><i class="fa fa-caret-right"></i></a></li>
                         <li><a href="{% url 'logout' %}"> <i class="fa fa-caret-left"></i><i class="fa fa-caret-left"></i> {{ user.username }} logout <i class="fa fa-caret-right"></i><i class="fa fa-caret-right"></i></a></li>
                     {% endif %}
                     <li>
