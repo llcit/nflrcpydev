@@ -282,6 +282,7 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 
 .listing {
     width: 230px;
+    height: 560px;
     margin-bottom: 20px;
     background: white;
     text-decoration: none;
@@ -294,11 +295,17 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 
 .listing-large {
     width: 500px;
-    background: rgb(255, 228, 196);
+    /*background: rgb(255, 228, 196);*/
 }
 
 .listing img {
     width: 100%;
+}
+
+.listing-large img {
+    width: 230px;
+    /*height: 500px;*/
+    padding: 5px;
 }
 
 .listing object {

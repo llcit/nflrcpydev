@@ -23,19 +23,21 @@
 {% endblock subheadlines %}
 
 {% block stories %}
-<div class="dyno container-fluid">	
-	<!-- Special Feature -->
-	<a href="{{ feature_flash.get_absolute_url }}">
-		<div class="brick listing shadowboxed listing-large">
-			<p> <img src="{{MEDIA_URL}}img/{{feature_flash.image}}"> </p>
-			<h4>{{ feature_flash.title | safe | truncatewords:8 }}</h4>
-			<h5>{{ feature_flash.thumbnail_desc | safe | truncatewords_html:140}}</h5>
-            <p><a href="/{% if feature_flash.classname == 'prodev' %}events{% else %}{{ feature_flash.classname }}{% endif %}" class="badge_container badge_{{ feature_flash.classname }} static_a_display" style="text-transform:capitalize;">More 
-			{% if feature_flash.classname == 'prodev' %}Events{% else %}{{ feature_flash.classname }}{% endif %}</a></p>
-		</div>
-	</a>
-	<!-- Regular Feature -->
-	{% for feature in featured %}	
+{% for k, v in layers.items %}
+	<p class="lead">{{k|title|upper}}</p>
+	<div class="band{{forloop.counter}} container-fluid">
+		
+	{% for feature in v %}
+		{% if forloop.counter == 1 %}
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="brick listing shadowboxed listing-large"><div class="row">
+				<div class="col-md-5"><img src="{{MEDIA_URL}}img/{{feature.image}}"> </div>
+				<div class="col-md-7"><p><h4>{{ feature.title | safe }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords:40 }}</h5></p></div>
+	            
+			</div></div>
+		</a>
+		{% else %}
 		<a href="{{ feature.get_absolute_url }}">
 			<div class="brick listing shadowboxed">
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
@@ -46,8 +48,13 @@
 				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
 			</div>
 		</a>
-	{% endfor %}	
-</div>
+		{% endif %}
+	{% endfor %}
+
+	</div>
+	{% if forloop.counter < 3 %} <a href=""><i class="fa fa-angle-down"></i></a>{% endif %}
+{% endfor %}
+
 {% endblock stories%}
 
 {% block misc %} 
@@ -57,7 +64,7 @@
 <div class="container-fluid">
 	{% for feature in feature_sticky %}
 		<a href="{{ feature.get_absolute_url }}">
-				<div class="listing col-md-3">
+				<div class="brick listing col-md-3">
 				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
 				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
 				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140}}</h5>
@@ -72,14 +79,30 @@
 {% block customjavascript %}
 jQuery(window).on('load', function(){ 
 	var $ = jQuery;
-	var container = document.querySelector('.dyno');
-	var msnry = new Masonry( container, {
+	var band1 = document.querySelector('.band1');
+	var msnry = new Masonry( band1, {
 	  // options
 	  columnWidth: 230,
 	  itemSelector: '.brick',
 	  gutter: 40,
 	  isFitWidth: 'true',
-	  
+	  horizontalOrder: 'false',
+	});
+	var band2 = document.querySelector('.band2');
+	var msnry = new Masonry( band2, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.brick',
+	  gutter: 40,
+	  isFitWidth: 'true',
+	});
+	var band3 = document.querySelector('.band3');
+	var msnry = new Masonry( band3, {
+	  // options
+	  columnWidth: 230,
+	  itemSelector: '.brick',
+	  gutter: 40,
+	  isFitWidth: 'true',
 	});
 })
 {% endblock customjavascript %}

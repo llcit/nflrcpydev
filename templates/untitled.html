@@ -1,0 +1,55 @@
+<div class="band1 container-fluid">
+	<!-- Special Feature -->
+	<a href="{{ feature_flash.get_absolute_url }}">
+		<div class="brick listing shadowboxed listing-large"><div class="row">
+			<div class="col-md-4"><img src="{{MEDIA_URL}}img/{{feature_flash.image}}"> </div>
+			<div class="col-md-8"><p><h4>{{ feature_flash.title | safe }}</h4>
+			<h5>{{ feature_flash.thumbnail_desc | safe | truncatewords:40 }}</h5></p></div>
+            
+		</div></div>
+	</a>
+	<!-- Regular Feature -->
+	{% for feature in featured %}	
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="brick listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+			</div>
+		</a>
+	{% endfor %}
+
+</div>
+<hr style="color: #b4b4b4; border: 4px solid #b4b4b4;">
+<div class="band2 container-fluid">
+	{% for feature in featured %}	
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="brick listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+			</div>
+		</a>
+	{% endfor %}
+</div>
+<hr style="color: #b4b4b4; border: 4px solid #b4b4b4;">
+<div class="band3 container-fluid">
+	{% for feature in featured %}	
+		<a href="{{ feature.get_absolute_url }}">
+			<div class="brick listing shadowboxed">
+				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+			</div>
+		</a>
+	{% endfor %}
+</div>

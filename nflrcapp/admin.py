@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.contenttypes import generic
 
-from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage, ItemTag, TaggedItem
+from nflrcapp.models import Contact, ContactRole, Project, Publication, Prodev, StoryPage, ItemTag, TaggedItem, HomePageLevel
 from badge_site.models import Issuer, Badge, Award, Revocation
 from badge_site.utils import genGuid, getRandomString
 
@@ -88,6 +88,11 @@ class StoryPageAdmin(admin.ModelAdmin):
     ]
 
 
+class HomePageLevelAdmin(admin.ModelAdmin):
+	list_display = ('layer', 'tag')
+	list_editable = ['layer', 'tag']
+
+
 class IssuerAdmin(admin.ModelAdmin):
 	list_display = ('initials', 'name', 'contact', 'jsonfile')
 	list_filter = ['initials']
@@ -151,6 +156,7 @@ admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
 admin.site.register(StoryPage, StoryPageAdmin, Media = ExtraMedia)
 admin.site.register(ItemTag)
 admin.site.register(TaggedItem)
+admin.site.register(HomePageLevel, HomePageLevelAdmin)
 
 admin.site.register(Issuer, IssuerAdmin)
 admin.site.register(Badge, BadgeAdmin)

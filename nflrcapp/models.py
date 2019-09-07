@@ -63,6 +63,7 @@ ITEM_TYPE_SHORTCUTS = {
     'Workshop & Conferences': 'prodev',
 }
 
+
 class ItemsManager(models.Manager):
 
     def allfeatured(self, **kwargs):
@@ -105,6 +106,14 @@ class TaggedItem(models.Model):
 
     def __unicode__(self):
         return self.item_tag.tag
+
+
+class HomePageLevel(models.Model):
+    layer = models.IntegerField()
+    tag = models.ForeignKey(ItemTag)
+
+    def __unicode__(self):
+        return self.tag.tag
 
 
 class ContactRole(models.Model):
@@ -175,7 +184,7 @@ class StoryPage(models.Model):
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     thumbnail_desc = models.CharField(
-        max_length=160, default='more...', null=True, blank=True, )
+        max_length=500, default='more...', null=True, blank=True, )
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
@@ -221,7 +230,7 @@ class Prodev(models.Model):
     facilitator = models.TextField(blank=True)
     description = models.TextField(blank=True)
     thumbnail_desc = models.CharField(
-        max_length=160, null=True, blank=True, default='more...')
+        max_length=500, null=True, blank=True, default='more...')
     related_publication = models.TextField(blank=True)
     url = models.URLField(blank=True)
     skeywords = models.TextField(blank=True)
@@ -285,7 +294,7 @@ class Project(models.Model):
     director = models.TextField(blank=True)
     description = models.TextField(blank=True)
     thumbnail_desc = models.CharField(
-        max_length=160, null=True, blank=True, default='more...')
+        max_length=500, null=True, blank=True, default='more...')
     skeywords = models.TextField(blank=True)
     image = models.CharField(max_length=100L, blank=True, default='icon.png',
                              verbose_name='Icon image name (jumbotron images are not specified here.)')
@@ -349,7 +358,7 @@ class Publication(models.Model):
     language = models.CharField(
         max_length=255L, blank=True, help_text='(Optional)')
     year = models.CharField(max_length=12L, blank=True)
-    thumbnail_desc = models.CharField(max_length=160, null=True, blank=True,
+    thumbnail_desc = models.CharField(max_length=500, null=True, blank=True,
                                       default='more...', help_text='140 characters or less. Appears on the item blocks.')
     is_oer = models.BooleanField(
         'is this an Open Educational Resource?', default=False, blank=True,
