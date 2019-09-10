@@ -282,7 +282,7 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 
 .listing {
     width: 230px;
-    height: 560px;
+    /*height: 560px;*/
     margin-bottom: 20px;
     background: white;
     text-decoration: none;
