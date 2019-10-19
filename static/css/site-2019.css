@@ -295,6 +295,7 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 
 .listing-large {
     width: 500px;
+    height: 500px;
     /*background: rgb(255, 228, 196);*/
 }
 
