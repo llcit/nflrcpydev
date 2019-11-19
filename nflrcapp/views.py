@@ -191,7 +191,7 @@ def home_prototype(request):
     # layers['projects'] = featured2
     # layers['publications'] = featured1
     # layers['events'] = featured3   
-    return render_to_response('index-prototype.html', {'layers': layers, 'featured': featured, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
+    return render_to_response('index-h.html', {'layers': layers, 'featured': featured, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
 
 @login_required
 def staffdocs(request):
