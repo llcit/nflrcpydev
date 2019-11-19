@@ -161,32 +161,37 @@ def home_prototype(request):
     featured4 = StoryPage.objects.filter(featured=True).order_by('featured_rank')
     featured = sorted(
         chain(featured3, featured4, featured2, featured1), key=attrgetter('featured_rank'))
-    feature_flash = featured[0]
-    featured = featured[1:]
-    feature_sticky = featured[-5:] # last three ranked
+    # feature_flash = featured[0]
+    # featured = featured[1:]
+    feature_sticky = featured[-5:] # last five ranked
     featured = featured[:-5] # all but last five
 
     layers = OrderedDict()
     flayers = {}
     
     # TAG IMPLEMENTATION
-    # layer_tags = HomePageLevel.objects.all().order_by('layer')
+    layer_tags = HomePageLevel.objects.all().order_by('layer')
     
-    # for f in featured:
-    #     flayers[f] = [tagged_item.item_tag.tag for tagged_item in f.tags.all()]
+    for f in featured:
+        print f.title
+        flayers[f] = [tagged_item.item_tag.tag for tagged_item in f.tags.all()]
 
-    # for layer in layer_tags:
-    #     for f, tags in flayers.items():
-    #         print layer.tag, tags
-    #         if layer.tag.tag in tags:                
-    #             if not layers.get(layer.tag.tag):
-    #                 layers[layer.tag.tag] = []
-    #             layers[layer.tag.tag].append(f)
+    
+    for layer in layer_tags:
 
-    layers['projects'] = featured2
-    layers['publications'] = featured1
-    layers['events'] = featured3   
-    return render_to_response('index-prototype.html', {'layers': layers, 'featured': featured, 'feature_flash': feature_flash, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
+        for f, tags in flayers.items():
+            print layer.tag.tag, tags
+            if layer.tag.tag in tags:
+
+                if not layers.get(layer.tag.tag):
+                    layers[layer.tag.tag] = []
+                layers[layer.tag.tag].append(f)
+
+    print layer_tags
+    # layers['projects'] = featured2
+    # layers['publications'] = featured1
+    # layers['events'] = featured3   
+    return render_to_response('index-prototype.html', {'layers': layers, 'featured': featured, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
 
 @login_required
 def staffdocs(request):

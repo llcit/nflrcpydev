@@ -148,6 +148,11 @@ class AwardAdmin(admin.ModelAdmin):
 		obj.deleteAssertionFile()
 		obj.delete()
 
+
+class TaggedItemAdmin(admin.ModelAdmin):
+	# list_display = ('item_tag__tag',)
+	list_filter = ['item_tag__tag',]
+
 admin.site.register(Contact, ContactAdmin, Media = ExtraMedia)
 admin.site.register(ContactRole, ContactRoleAdmin)
 admin.site.register(Project, ProjectAdmin, Media = ExtraMedia)
@@ -155,7 +160,7 @@ admin.site.register(Publication, PublicationAdmin, Media = ExtraMedia)
 admin.site.register(Prodev, ProdevAdmin, Media = ExtraMedia)
 admin.site.register(StoryPage, StoryPageAdmin, Media = ExtraMedia)
 admin.site.register(ItemTag)
-admin.site.register(TaggedItem)
+admin.site.register(TaggedItem, TaggedItemAdmin)
 admin.site.register(HomePageLevel, HomePageLevelAdmin)
 
 admin.site.register(Issuer, IssuerAdmin)

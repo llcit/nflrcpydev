@@ -30,10 +30,10 @@
 		selector: 'textarea',
 		content_css_cors: true,
 		content_css: ['https://fonts.googleapis.com/css?family=Open+Sans:400,300', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700', 'https://fonts.googleapis.com/css?family=Roboto+Condensed', '{% static "css/bootstrap/dist/css/bootstrap.min.css" %}','{% static "css/site-2019.css" %}', ],
-		plugins: ['code', 'visualblocks', 'fullscreen'],
+		plugins: ['code', 'link', 'visualblocks', 'fullscreen'],
 		height: 900,
-		menubar: false,
-  		toolbar: 'undo redo | code visualblocks fullscreen',
+		menubar: true,
+  		toolbar: 'undo redo | code link visualblocks fullscreen',
 	});
 </script>
 {% endblock local_js %}

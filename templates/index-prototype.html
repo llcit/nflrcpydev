@@ -23,43 +23,45 @@
 {% endblock subheadlines %}
 
 {% block stories %}
-{% for k, v in layers.items %}
-	<p class="lead">{{k|title|upper}}</p>
-	<div class="container-fluid" style="background-color: ">
-	<div class="row"><div class="col-md-12 band{{forloop.counter}}">	
-		
-	{% for feature in v %}
-		{% if forloop.counter == 1 %}
-		<!-- <img src='{{MEDIA_URL}}img/{{feature.image}}' style="width:100%"> -->
-		<a href="{{ feature.get_absolute_url }}">
-			<div class="brick listing listing-large">
-				<div class="row" style="height: 500px; background-image: url('{{MEDIA_URL}}img/{{feature.image}}')">
-					<div class="col-md-12"  >
-						<!-- style="background-color: black; opacity: .6;" -->
-							<h1 style="color: white">{{ feature.title }}</h1>
-							<h3 style="color: white">{{ feature.thumbnail_desc | safe  }}</h3>
-						
-					</div>	            
-				</div>
-			</div>
-		</a>
-		{% else %}
-		<a href="{{ feature.get_absolute_url }}">
-			<div class="brick listing shadowboxed">
-				<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
-				<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
-				<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
-				<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
-                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
-				{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
-			</div>
-		</a>
-		{% endif %}
-	{% endfor %}
-</div></div>
 
-	</div>
-	{% if forloop.counter < 3 %} <a href=""><i class="fa fa-angle-down"></i></a>{% endif %}
+{% for layer, featured_items in layers.items %}
+	<p class="lead">{{layer|title|upper}}</p>
+	<!-- <div class="container-fluid" style=" "> -->
+		<div class="row">
+			<div class="col-md-12 band{{forloop.counter}}">				
+				{% for feature in featured_items %}
+					{% if forloop.first == 1 %}
+					
+					<!-- style="background-image: url('{{MEDIA_URL}}img/{{feature.image}}'); background-repeat: no-repeat; background-size: cover;" -->
+					<a href="{{ feature.get_absolute_url }}">
+						<div class="brick listing listing-large" >
+							<div class="row">
+								<div class="col-md-12" style="" >
+									<img src='{{MEDIA_URL}}img/{{feature.image}}' >
+									<!-- style="background-color: black; opacity: .6;" -->
+									<h1 style="color: black">{{ feature.title }}</h1>
+									<h3 style="color: black">{{ feature.thumbnail_desc | safe  }}</h3>
+								</div>	            
+							</div>
+						</div>
+					</a>
+					{% else %}
+					<a href="{{ feature.get_absolute_url }}">
+						<div class="brick listing shadowboxed">
+							<p> <img src="{{MEDIA_URL}}img/{{feature.image}}"> </p>
+							<h4>{{ feature.title | safe | truncatewords:8 }}</h4>
+							<h5>{{ feature.thumbnail_desc | safe | truncatewords_html:140 }}</h5>
+							<!--<p><span class="badge_container badge_{{ feature.classname }}">{{ feature.displayname }}</span></p>-->
+			                <p><a href="/{% if feature.classname == 'prodev' %}events{% else %}{{ feature.classname }}{% endif %}" class="badge_container badge_{{ feature.classname }} static_a_display" style="text-transform:capitalize;">More 
+							{% if feature.classname == 'prodev' %}Events{% else %}{{ feature.classname }}{% endif %}</a></p>
+						</div>
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	<!-- </div> -->
+{% if forloop.counter < 3 %} <a href=""><i class="fa fa-angle-down"></i></a>{% endif %}
 {% endfor %}
 
 {% endblock stories%}
