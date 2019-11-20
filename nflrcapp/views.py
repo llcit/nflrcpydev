@@ -173,14 +173,14 @@ def home_prototype(request):
     layer_tags = HomePageLevel.objects.all().order_by('layer')
     
     for f in featured:
-        print f.title
+        # print f.title
         flayers[f] = [tagged_item.item_tag.tag for tagged_item in f.tags.all()]
 
     
     for layer in layer_tags:
 
         for f, tags in flayers.items():
-            print layer.tag.tag, tags
+            # print layer.tag.tag, tags
             if layer.tag.tag in tags:
 
                 if not layers.get(layer.tag.tag):
@@ -191,7 +191,7 @@ def home_prototype(request):
     # layers['projects'] = featured2
     # layers['publications'] = featured1
     # layers['events'] = featured3   
-    return render_to_response('index-h.html', {'layers': layers, 'featured': featured, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
+    return render_to_response('index-prototype.html', {'layers': layers, 'featured': featured, 'feature_sticky': feature_sticky}, context_instance=RequestContext(request))
 
 @login_required
 def staffdocs(request):

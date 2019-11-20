@@ -282,7 +282,7 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 
 .listing {
     width: 230px;
-    /*height: 560px;*/
+    height: 380px;*/
     margin-bottom: 20px;
     background: white;
     text-decoration: none;
@@ -300,7 +300,9 @@ a:active {color: #1aa1e1; text-decoration: none;}*/
 }
 
 .listing img {
-    width: 100%;
+    max-width: 230px;
+    max-height: 160px;
+    /*height: 144px;*/
 }
 
 .listing-large img {
