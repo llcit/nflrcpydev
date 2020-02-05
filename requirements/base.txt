@@ -18,5 +18,5 @@ South==0.8.4
 sqlparse==0.1.14
 Unidecode==0.4.17
 Unipath==1.0
-urllib3==1.10.1
+urllib3==1.24.2
 Whoosh==2.7.4
