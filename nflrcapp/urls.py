@@ -7,7 +7,7 @@ admin.autodiscover()
 
 from filebrowser.sites import site
 
-from .views import SearchHaystackView, prodev_update_view, pub_update_view, project_update_view
+from .views import SearchHaystackView, prodev_update_view, pub_update_view, project_update_view, story_update_view
 from .models import NflrcNewsFeed
 
 from badge_site.views import (
@@ -57,7 +57,7 @@ urlpatterns = patterns('',
     url(r'^staffdocs/view/(?P<item>\d+)/$', 'nflrcapp.views.privateview', name='staffdocsview'),
 
     url(r'^about/$', 'nflrcapp.views.about', name='about_index'),
-    url(r'^about/update/(?P<pk>\d+)/$', 'nflrcapp.views.story_update_view', name='story_update_view'),
+    url(r'^about/update/(?P<pk>\d+)/$', story_update_view.as_view(), name='story_update_view'),
     url(r'^about/(?P<item>\d+)/$', 'nflrcapp.views.aboutview', name='aboutview'),
 
 
