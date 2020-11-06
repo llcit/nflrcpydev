@@ -18,7 +18,7 @@
 		<li class="orange"><a href="/languages" class="static_a_display">Languages </a></li>
 		{% if user.is_authenticated %}<li><a href="{% url 'curator' %}?content=home"> <i class="fa fa-gear"></i> curate</a></li>{% endif %}
 	</ul>
-	<ul class="nav nav-pills-flex"><li style="width: 230px; padding: 5px;background-color:#F4D03F;"><h4>NFLRC Site maintenance is scheduled for <br><b>November 4 & 5</b>. Disruption of service is possible.</h4></<li></ul>
+	<ul class="nav nav-pills-flex"><li style="display: none; width: 230px; padding: 5px;background-color:#F4D03F;"><h4>NFLRC Site maintenance is scheduled for <br><b>November 4 & 5</b>. Disruption of service is possible.</h4></<li></ul>
 </div>
 {% endblock subheadlines %}
 
